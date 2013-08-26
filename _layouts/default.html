@@ -8,55 +8,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+
     <title>{{ page.title }}</title>
+
     <link rel="stylesheet" href="/css/normalize.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
-
     <!-- syntax highlighting CSS -->
     <link rel="stylesheet" href="/css/syntax.css">
-
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
 
     <script src="/js/modernizr-2.6.2.min.js"></script>
+
 </head>
 <body>
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span4">
-            <aside class="aside">
-                <div class="aside-img" style="background-image: url('{{ page.image }}')"></div>
-                <div class="aside-body">
-                    <div class="aside-body-inner">
-                        <h1 class="aside-title">{{ site.name }}</h1>
-                        <p class="aside-description">{{ site.description }}.</p>
-                        <p class="aside-description"><a href="#" title="MyLinkedIn">My LinkedIn</a></p>
-                        <div class="aside-hr">
 
-                        </div>
-                    </div>
-                </div>
-            </aside>
-        </div>
-        <div class="span8">
-            <div class="row">
-                <div class="content-body">
-                    {{ content }}
-                </div>
-            </div>
-        </div>
+    <div class="col1 col-sm-4 col-lg-6">
+        <h1>{{ site.name }}</h1>
     </div>
-</div>
-<script src="/js/jquery-2.0.0.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-<script>
-    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-        g.src='//www.google-analytics.com/ga.js';
-        s.parentNode.insertBefore(g,s)}(document,'script'));
-</script>
+
+    <div class="col1 col-sm-8 col-lg-6">
+        {{ content }}
+    </div>
+
+    <script src="/js/jquery-2.0.0.min.js"></script>
+    <script src="/js/jquery-2.0.0.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <script>
+        var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src='//www.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script>
 </body>
 </html>
 
