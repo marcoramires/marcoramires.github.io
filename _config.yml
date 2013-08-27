@@ -1,3 +1,6 @@
 name: Site Name
 description: Site Description
 pygments: true
+
+root: /
+permalink: /:year/:month/:day/:title/
