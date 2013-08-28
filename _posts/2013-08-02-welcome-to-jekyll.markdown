@@ -3,7 +3,7 @@ layout: post
 title:  "Welcome to Jekyll!"
 date:   2013-08-02 15:30:23
 categories: jekyll update
-image: /img/desertTwo.jpg
+image: /img/backgroundTwo.jpg
 ---
 
 You'll find this post in your `_posts` directory - edit this post and re-build (or run with the `-w` switch) to see your changes!
