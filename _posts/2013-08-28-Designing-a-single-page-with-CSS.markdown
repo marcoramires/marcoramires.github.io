@@ -24,12 +24,20 @@ To add new posts, simply add a file in the `_posts` directory that follows the c
 
 Jekyll also offers powerful support for code snippets:
 
-{% highlight ruby %}
-def print_hi(name)
-puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
+{% highlight c# %}
+public class Hello3
+{
+   public static void Main(string[] args)
+   {
+      Console.WriteLine("Hello, World!");
+      Console.WriteLine("You entered the following {0} command line arguments:",
+         args.Length );
+      for (int i=0; i < args.Length; i++)
+      {
+         Console.WriteLine("{0}", args[i]);
+      }
+   }
+}
 {% endhighlight %}
 
 You'll find this post in your `_posts` directory - edit this post and re-build (or run with the `-w` switch) to see your changes!
