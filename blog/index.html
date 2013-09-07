@@ -1,0 +1,15 @@
+---
+layout: two-columns
+title:  Blog
+nav: blog
+image: /img/backgroundThree.jpg
+---
+{% for post in site.posts %}
+<section class="post {{ post.category | downcase }}">
+    <time class="post-date">{{ post.date | date_to_string }}</time>
+    <strong class="post-category"><span>-</span> {{ post.categories }}</strong>
+    <h3>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </h3>
+</section>
+{% endfor %}
