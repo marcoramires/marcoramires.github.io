@@ -2,7 +2,7 @@
 layout: post
 title:  "Designing a single page with CSS animations, keyframes and a full-size background cover"
 date:   2013-08-28 16:09:16
-categories: jekyll update
+category: css
 image: /img/backgroundOne.jpg
 ---
 

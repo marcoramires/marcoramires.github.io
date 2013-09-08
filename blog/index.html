@@ -5,11 +5,17 @@ nav: blog
 image: /img/backgroundThree.jpg
 ---
 {% for post in site.posts %}
-<section class="post {{ post.category | downcase }}">
-    <time class="post-date">{{ post.date | date_to_string }}</time>
-    <strong class="post-category"><span>-</span> {{ post.categories }}</strong>
-    <h3>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </h3>
+<section class="post panel panel-default {{ post.category | downcase }}">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+        <strong>{{ post.category | upcase }}</strong> -
+        <time>{{ post.date | date_to_string }}</time><br />
+        <!-- TODO - Tags Plugin-->
+        <span class="label label-default">Jekyll</span> <span class="label label-default">Bootstrap</span> <span class="label label-default">Javascript</span>
+    </div>
+    <div class="panel-body">
+        <h4><a href="{{ post.url }}">{{ post.title }}</a></h4>
+    </div>
 </section>
 {% endfor %}
+

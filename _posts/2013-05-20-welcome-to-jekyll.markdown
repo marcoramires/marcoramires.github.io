@@ -2,7 +2,7 @@
 layout: post
 title:  "Welcome to Jekyll!"
 date:   2013-05-20 16:09:16
-categories: jekyll update
+category: Jekyll
 image: /img/backgroundOne.jpg
 ---
 

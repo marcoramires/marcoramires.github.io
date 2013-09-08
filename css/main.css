@@ -4,6 +4,16 @@
 /*
 /*****************************************************************************/
 
+a {
+    color: #333;
+    text-decoration: none;
+}
+
+a:hover,
+a:focus {
+    color: #333;
+    text-decoration: underline;
+}
 
 /*****************************************************************************/
 /*
@@ -73,6 +83,7 @@ html,body { height: 100%; margin: 0px; padding: 0px; }
 
 #Main{
     height: 100%;
+    padding-top: 20px;
     overflow: scroll;
 }
 
