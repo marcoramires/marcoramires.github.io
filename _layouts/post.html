@@ -5,9 +5,10 @@ layout: two-columns
 <p class="lead">{{ page.date | date_to_string }} - <a href="https://plus.google.com/104134544059399238057?rel=author">By Marco Ramires</a></p>
 <div id="post">
     {{ content }}
+    <hr />
     <div class="g-comments"
-         data-href="{{ site.host }}{{ page.url }}"
-         data-width="300"
+         data-href="{{ site.url }}{{ page.url }}"
+         data-width="400"
          data-first_party_property="BLOGGER"
          data-view_type="FILTERED_POSTMOD">
     </div>
