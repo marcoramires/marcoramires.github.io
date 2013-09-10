@@ -1,6 +1,6 @@
 
 $( document ).ready(function() {
     var src = $('.page-image').attr('src');
-    $("#Home").backstretch(src);
+    $("#HomeBackground").backstretch(src);
     $("#Side").backstretch(src);
 });

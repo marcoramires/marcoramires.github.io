@@ -28,10 +28,16 @@ html,body { height: 100%; margin: 0px; padding: 0px; }
 /* Home
 /*
 /*****************************************************************************/
+#HomeBackground {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+}
 
 #Home{
     height: 100%;
     padding-top: 20px;
+    overflow: scroll;
 }
 
 #Home .vertical-align{
@@ -93,6 +99,11 @@ html,body { height: 100%; margin: 0px; padding: 0px; }
 
     #Side{
         height: 80%;
+    }
+
+    #Home{
+        overflow: scroll;
+        height: 100%;
     }
 }
 
