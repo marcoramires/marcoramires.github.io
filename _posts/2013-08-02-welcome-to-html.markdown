@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Welcome to Jekyll!"
+title:  "Welcome to HTML!"
 date:   2013-08-02 15:30:23
-category: jekyll
+category: HTML
 image: /img/backgroundTwo.jpg
 ---
 

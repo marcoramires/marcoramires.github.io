@@ -10,25 +10,7 @@ image: /img/backgroundThree.jpg
             <div id="Logo"><h1>MR</h1></div>
         </div>
         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8">
-            <nav class="navbar navbar-default" role="navigation">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li {% if page.nav == 'home' %} class="active"{% endif %}><a href="/">Home</a></li>
-                        <li {% if page.nav == 'about' %} class="active"{% endif %}><a href="/about.html">About</a></li>
-                        <li {% if page.nav == 'blog' %} class="active"{% endif %}><a href="/blog/">Blog</a></li>
-                    </ul>
-                </div><!-- /.navbar-collapse -->
-            </nav>
+            {% include navigation.html %}
         </div>
     </div>
     <img src="{{ page.image }}" alt="" class="page-image hidden" />
@@ -38,10 +20,7 @@ image: /img/backgroundThree.jpg
             I’m a .NET Developer, Sitecore Certified Professional, Musician, living in Sydney - Australia.
         </h2>
     </div>
-    <footer class="text-center">
-        <p>Marco Ramires - All Rights Reserved © 2013 - Git V.1.0 - marcoramires.com</p>
-        <p>Developer .NET/C# ASP.NET C# SQL Javascript JQuery AJAX JSON HTML5 CSS Bootstrap MongoDB Sitecore</p>
-    </footer>
+    {% include footer.html param="home" %}
 </div>
 
 
