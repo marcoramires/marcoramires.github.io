@@ -1,6 +1,7 @@
 name: Marco Ramires
 description: Site Description
 pygments: true
+host: http://marcoramires.github.io
 
 root: /
 permalink: /:year/:month/:day/:title/
