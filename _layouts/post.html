@@ -2,7 +2,15 @@
 layout: two-columns
 ---
 <h2>{{ page.title }}</h2>
-<p class="lead">{{ page.date | date_to_string }} - <a href="https://plus.google.com/104134544059399238057?rel=author">By Marco Ramires</a></p>
+<p class="lead">
+    {{ page.date | date_to_string }} -
+    <a href="https://plus.google.com/104134544059399238057?rel=author">By Marco Ramires</a>
+    <!-- Place this tag where you want the +1 button to render. -->
+    <div class="g-plusone" data-href="{{ site.url }}{{ page.url }}"></div>
+    <!-- Place this tag where you want the share button to render. -->
+    <div class="g-plus" data-action="share" data-annotation="bubble" data-height="24" data-href="{{ site.url }}{{ page.url }}"></div>
+</p>
+<hr />
 <div id="post">
     {{ content }}
     <hr />
