@@ -6,11 +6,13 @@ layout: two-columns
     <p class="lead">
         {{ page.date | date_to_string }} -
         <a href="https://plus.google.com/104134544059399238057?rel=author">By Marco Ramires</a>
-        <!-- Place this tag where you want the +1 button to render. -->
-    <div class="g-plusone" data-href="{{ site.url }}{{ page.url }}"></div>
+    </p>
     <!-- Place this tag where you want the share button to render. -->
     <div class="g-plus" data-action="share" data-annotation="bubble" data-height="24" data-href="{{ site.url }}{{ page.url }}"></div>
-    </p>
+    <!-- Place this tag where you want the +1 button to render. -->
+    <div class="g-plusone" data-href="{{ site.url }}{{ page.url }}"></div>
+    <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{ site.url }}{{ page.url }}" data-via="marcoramires" data-size="large">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
     <hr />
     <div id="post">
         {{ content }}

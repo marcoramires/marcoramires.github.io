@@ -114,6 +114,10 @@ footer{ padding-bottom: 20px;}
 /*
 /*****************************************************************************/
 
+article{
+    padding: 0 10px;
+}
+
 /* standard */
 #post pre {
   border: 1px solid #ddd;
@@ -146,6 +150,7 @@ footer{ padding-bottom: 20px;}
   background-color: #333;
 }
 
+/* Google Comments API Responsive */
 div[id^='___comments_'], div[id^='___comments_'] iframe {
     width: 100% !important;
 }
