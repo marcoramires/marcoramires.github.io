@@ -4,4 +4,4 @@ pygments: true
 url: http://marcoramires.github.io
 
 root: /
-permalink: /:year/:month/:day/:title/
+permalink: /article/:title/
