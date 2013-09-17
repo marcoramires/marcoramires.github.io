@@ -36,16 +36,16 @@ footer{ padding-bottom: 20px;}
 }
 
 #Home{
-    height: 100%;
+    height: 80%;
     padding-top: 20px;
 }
 
-#Home .vertical-align{
+#Home .hero{
     height: 50%;
     display: table;
 }
 
-#Home h2{
+#Home .hero h2{
     color: #262626;
     display: table-cell;
     vertical-align: middle;
@@ -102,8 +102,7 @@ footer{ padding-bottom: 20px;}
     }
 
     #Home{
-        overflow: scroll;
-        height: 100%;
+        height: 80%;
     }
 }
 
