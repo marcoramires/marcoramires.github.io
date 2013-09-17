@@ -38,6 +38,7 @@ footer{ padding-bottom: 20px;}
 #Home{
     height: 100%;
     padding-top: 20px;
+    overflow: scroll;
 }
 
 #Home .vertical-align{
