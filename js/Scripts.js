@@ -6,8 +6,16 @@ $( document ).ready(function() {
 });
 
 function LoadComments(){
-    var comments = document.getElementById('comments');
+
+    var mainContainerWidth = document.getElementById('Main').offsetWidth - 50;
     var button = document.getElementById('commentsButton');
-    $(comments).removeClass('hidden');
+
+    gapi.comments.render('comments', {
+        href: window.location,
+        width: mainContainerWidth,
+        first_party_property: 'BLOGGER',
+        view_type: 'FILTERED_POSTMOD'
+    });
+
     $(button).addClass('hidden');
 }

@@ -18,13 +18,6 @@ layout: two-columns
         {{ content }}
         <hr />
         <button id="commentsButton" type="button" class="btn btn-default btn-block" onclick="LoadComments();">Load Comments</button>
-        <div id="comments" class="hidden">
-            <div class="g-comments"
-                 data-href="{{ site.url }}{{ page.url }}"
-                 data-width="240"
-                 data-first_party_property="BLOGGER"
-                 data-view_type="FILTERED_POSTMOD">
-            </div>
-        </div>
+        <div id="comments"></div>
     </div>
 </article>
