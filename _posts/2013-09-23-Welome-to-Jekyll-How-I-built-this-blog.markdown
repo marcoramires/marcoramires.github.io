@@ -27,6 +27,6 @@ I will be implementing more features soon, so feel free to clone and use it.
 *   [Bootswatch Readable](http://bootswatch.com/readable/)
 *   [Backstretch](http://srobbin.com/jquery-plugins/backstretch/)
 
-__Inspiration Links:__
+**Inspiration Links:**
 
 *   [Medium](https://medium.com/)
