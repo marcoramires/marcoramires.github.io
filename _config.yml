@@ -2,5 +2,7 @@ name: Marco Ramires
 description: Site Description
 pygments: true
 
+url: http://marcoramires.com
+
 root: /
 permalink: /article/:title/
