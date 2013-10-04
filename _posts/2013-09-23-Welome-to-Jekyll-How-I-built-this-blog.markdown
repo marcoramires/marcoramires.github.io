@@ -25,6 +25,7 @@ I will be implementing more features soon, so feel free to clone and use it.
 *   [Jekyll](http://jekyllrb.com/)
 *   [Twitter Bootstrap 3.0](http://getbootstrap.com/)
 *   [Bootswatch Readable](http://bootswatch.com/readable/)
+*   [Backstretch](http://srobbin.com/jquery-plugins/backstretch/)
 
 __Inspiration Links:__
 

@@ -1,0 +1,34 @@
+h1. marcoramires.github.io
+
+h2. Purpose
+# Build a simple static using Jekyll and GiHub Pages
+
+h2. Objectives
+* It should work in all modern browsers including tablets
+* Normalizes many little CSS annoyances
+* Lightweight Browser Output
+* Customizable
+* Best UX practices for your application
+* Decrease of cross-browser testing time
+* Improves development time
+
+h2. Solution
+* Jekyll (http://jekyllrb.com/)
+* Pygments Python Sintax Highlighter (http://pygments.org/)
+* Normalize (http://necolas.github.com/normalize.css)
+* Modernizr (http://modernizr.com/)
+* Twitter Bootstrap 3.0 (http://getbootstrap.com)
+* JQuery (http://jquery.com)
+* Backstretch (http://srobbin.com/jquery-plugins/backstretch/)
+
+
+h2. //TODO
+* Add Category List
+* Add Related Articles plug-in
+* Add a simple breadcrumb
+
+* Setup 403 response for multiple domain names
+
+h2. Issues
+* Mobile Horizontal view
+* Force mobile to go full-screen
