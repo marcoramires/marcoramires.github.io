@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Accessing an Item in Sitecore"
-date:   2013-10-08 01:00:00
+date:   2013-10-08 23:25:00
 category: sitecore
 image: /img/3755454491_5b5aee8af7_o.jpg
 image-author: Peter Rosbjerg
@@ -48,3 +48,4 @@ protected void Page_Load(object sender, EventArgs e)
 **Tech Links:**
 
 *   [Sitecore](http://www.sitecore.net/)
+*   [Sitecore CMS API](http://sdn.sitecore.net/reference/sitecore%206/sitecore_6_api_reference.aspx)
