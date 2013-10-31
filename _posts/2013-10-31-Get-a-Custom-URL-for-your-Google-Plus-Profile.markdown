@@ -32,6 +32,7 @@ The Process:
 * On the Page's Dashboard - Add your website.
 * On the Page's About section click on "Link Website" button.
 * This will give you the html tags to add in your website:
+
   {% highlight %}
     <a href="https://plus.google.com/11223344556677889900" rel="publisher">Google+</a>
     <!-- This can be a link tag in the header -->
