@@ -3,9 +3,9 @@ layout: post
 title:  "Get a Custom URL for your Google Plus Profile"
 date:   2013-10-31 21:00:00
 category: Web Development
-image: /img/2667190038_1cf5185ff6_o.jpg
+image: /img/5870695181_dbaa57908e_o.jpg
 image-author: Bill Selak
-image-license: http://www.flickr.com/photos/billselak/2667190038
+image-license: http://www.flickr.com/photos/7852394@N04/5870695181/
 ---
 
 Google started testing custom URLs about a year ago, August 2012 ti me more precise. Although, it became available for Google Staff member only which was quite frustrating for us users/publishers
@@ -29,9 +29,8 @@ The Process:
 * Create a Page on your Google Plus Profile with the desired name.
 * On the Page's Dashboard - Add your website.
 * On the Page's About section click on "Link Website" button.
-* This will give you the html tags to add in your website.
-
-  {% highlight php %}
+* This will give you the html tags to add in your website:
+  {% highlight %}
     <a href="https://plus.google.com/11223344556677889900" rel="publisher">Google+</a>
     <!-- This can be a link tag in the header -->
     <link href=”https://plus.google.com/11223344556677889900” rel=”publisher”>
