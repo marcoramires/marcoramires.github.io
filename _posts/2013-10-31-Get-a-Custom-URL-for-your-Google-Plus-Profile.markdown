@@ -33,7 +33,7 @@ The Process:
 * On the Page's About section click on "Link Website" button.
 * This will give you the html tags to add in your website:
 
-  {% highlight %}
+  {% highlight php %}
     <a href="https://plus.google.com/11223344556677889900" rel="publisher">Google+</a>
     <!-- This can be a link tag in the header -->
     <link href=”https://plus.google.com/11223344556677889900” rel=”publisher”>
