@@ -8,7 +8,7 @@ image-author: Borqje
 image-license: http://www.flickr.com/photos/7852394@N04/5870695181/
 ---
 
-Google started testing custom URLs about a year ago, August 2012 ti me more precise. Although, it became available for Google Staff member only which was quite frustrating for us users/publishers
+Google started testing custom URLs about a year ago, August 2012 to be more precise. Although, it became available for Google Staff members only which was quite frustrating for us users/publishers
 to share our non-friendly Google Plus profile URL.
 
 The company started notifying individuals and brands with verified accounts that it could be possible again.
