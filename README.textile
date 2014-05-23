@@ -26,7 +26,13 @@ h2. //TODO
 * Add Category List
 * Add Related Articles plug-in
 * Add a simple breadcrumb
+* Add Bower to manage packages
+* Optionally add Grunt
+* Add http://disqus.com/ instead of +plus for comments
+* Refresh HTML/CSS
+* Update packages and dependencies
 
+[Critical] marcodeveloper.com
 * Setup 403 response for multiple domain names
 
 h2. Issues
