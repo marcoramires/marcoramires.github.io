@@ -2,6 +2,8 @@ name: Marco Ramires
 description: Site Description
 highlight: true
 
+markdown: kramdown
+
 url: http://marcoramires.com
 
 root: /
