@@ -3,6 +3,7 @@ layout: post
 title:  "Accessing an Item in Sitecore"
 date:   2013-10-08 23:25:00
 category: sitecore
+comments: true
 image: /img/3755454491_5b5aee8af7_o.jpg
 image-author: Peter Rosbjerg
 image-license: http://www.flickr.com/photos/peterrosbjerg/3755454491/

@@ -3,6 +3,7 @@ layout: post
 title:  "Get a Custom URL for your Google Plus Profile"
 date:   2013-10-31 21:00:00
 category: Web Development
+comments: true
 image: /img/5870695181_dbaa57908e_o.jpg
 image-author: Borqje
 image-license: http://www.flickr.com/photos/7852394@N04/5870695181/
