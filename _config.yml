@@ -8,3 +8,6 @@ url: http://marcoramires.com
 
 root: /
 permalink: /article/:title/
+
+gems:
+  - jekyll-sitemap
