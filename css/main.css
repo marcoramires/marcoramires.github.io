@@ -60,6 +60,10 @@ footer{ padding-bottom: 20px;}
     color: #999;
 }
 
+#Home footer p a, #Home footer p a:hover, #Home footer p a:focus {
+    color: #999;
+}
+
 /*****************************************************************************/
 /*
 /* Site
