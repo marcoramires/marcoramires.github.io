@@ -1,21 +1,18 @@
-
-$( document ).ready(function() {
+$(document).ready(function () {
     var src = $('.page-image').attr('src');
     $("#HomeBackground").backstretch(src);
     $("#Side").backstretch(src);
-});
 
-function LoadComments(){
+    var $window = $(window);
+    var $image = $('.backstretch');
 
-    var mainContainerWidth = document.getElementById('Main').offsetWidth - 50;
-    var button = document.getElementById('commentsButton');
+    $window.on('scroll', function () {
+        var top = $window.scrollTop();
 
-    gapi.comments.render('comments', {
-        href: window.location,
-        width: mainContainerWidth,
-        first_party_property: 'BLOGGER',
-        view_type: 'FILTERED_POSTMOD'
+        if (top < 0 || top > 1500) return;
+        $image
+            .css('transform', 'translate3d(0px, ' + top / 3 + 'px, 0px)')
+            .css('opacity', 1 - Math.max(top / 500, 0));
     });
-
-    $(button).addClass('hidden');
-}
+    $window.trigger('scroll');
+});
