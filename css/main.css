@@ -24,6 +24,32 @@ a:focus {
 html,body { height: 100%; margin: 0px; padding: 0px; }
 footer{ padding-bottom: 20px;}
 
+.content {
+    height: 100%;
+    display: none;
+}
+
+.transition-background {
+    position: absolute;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(61, 83, 186, 0.5);
+}
+.transition-background .logo {
+    position: absolute;
+    bottom: 50%;
+    left: 38%;
+}
+@media (min-width: 640px) {
+    .transition-background .logo {
+        position: absolute;
+        bottom: 50%;
+        left: 47%;
+    }
+}
+
 /*****************************************************************************/
 /*
 /* Home
@@ -70,7 +96,7 @@ footer{ padding-bottom: 20px;}
 /*
 /*****************************************************************************/
 
-#Logo{
+.logo {
     background-color: #000;
     width: 100px;
     text-align: center;
@@ -79,7 +105,7 @@ footer{ padding-bottom: 20px;}
 
 }
 
-#Logo h1{
+.logo h1{
     color: #fff;
     font-size: 40px;
     margin: 0;

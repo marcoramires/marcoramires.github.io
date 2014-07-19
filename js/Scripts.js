@@ -1,24 +1,82 @@
 $(document).ready(function () {
-    $("body").css("display", "none");
-
-    var src = $('.page-image').attr('src');
-    $("#HomeBackground").backstretch(src);
-    $("#Side").backstretch(src);
-
     var $window = $(window);
+    var src = $('.page-image').attr('src');
     var $image = $('.backstretch');
 
-    $("body").fadeIn(1000);
+    $(".backstrech").backstretch(src);
+    $('.transition-background').fadeIn(100);
+    $('.transition-background .logo').addClass('animated rotateIn infinite');
 
-    function redirectPage(linkLocation) {
-        window.location = linkLocation;
+    setTimeout(function(){
+        $(".backstrech").backstretch(src);
+        $('.content').fadeIn(300,function(){
+            $('.transition-background').fadeOut(100);
+        });
+    },1000);
+
+    function ajaxPageTransition(linkLocation, successfulFunction, failedFunction){
+        $('.transition-background').fadeIn(100, function () {
+            $('.content').fadeOut(300);
+        });
+
+        setTimeout(function(){
+            $.get(linkLocation, function (response) {
+                if(response){
+                    console.log('Success - ' + linkLocation);
+                }
+            }).done(function (response, textStatus, jqXHR) {
+                if(successfulFunction){
+                    successfulFunction(response);
+                    $("a.transition").click(function(event){
+                        var linkLocation = this.href;
+                        addListener(event, linkLocation);
+                    });
+                }
+
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                if(failedFunction) {
+                    failedFunction();
+                }
+            }).always(function () {
+                setTimeout(function(){
+                    src = $('.page-image').attr('src');
+                    $(".backstrech").backstretch(src);
+                    $('.content').fadeIn(300,function(){
+                        $('.transition-background').fadeOut(100);
+                    });
+                },1000);
+            });
+        }, 500);
     }
-    $("a").click(function(event){
+
+    function addListener(event, linkLocation){
         event.preventDefault();
+        var successfulFunc = function (data) {
+            var source = $('<div>' + data + '</div>');
+            var title = source.find('title').html();
+            var image = source.find('.page-image').attr('src');
+
+            $('.content').html(source.find('.content').html());
+            $(document).prop('title', title);
+
+            if (typeof(window.history.pushState) == 'function') {
+                window.history.pushState(null, title, linkLocation);
+            } else {
+                window.location.hash = '#!' + linkLocation;
+            }
+        }
+        var failedFunc = function (data) {
+            //TODO
+        }
+        ajaxPageTransition(linkLocation, successfulFunc, failedFunc);
+    }
+
+    $("a.transition").click(function(event){
         var linkLocation = this.href;
-        $("body").fadeOut(1000, redirectPage(linkLocation));
+        addListener(event, linkLocation);
     });
 
+    /* ========  Nice Scroll on Articles  =======*/
     $window.on('scroll', function () {
         var top = $window.scrollTop();
 
