@@ -1,8 +1,6 @@
 $(document).ready(function () {
     var $window = $(window);
     var src = $('.page-image').attr('src');
-    var $image = $('.backstretch');
-
     $(".backstrech").backstretch(src);
     $('.transition-background').fadeIn(100);
     $('.transition-background .logo').addClass('animated rotateIn infinite');
@@ -15,6 +13,7 @@ $(document).ready(function () {
     },1000);
 
     function ajaxPageTransition(linkLocation, successfulFunction, failedFunction){
+
         $('.transition-background').fadeIn(100, function () {
             $('.content').fadeOut(300);
         });
@@ -77,13 +76,16 @@ $(document).ready(function () {
     });
 
     /* ========  Nice Scroll on Articles  =======*/
+
+
     $window.on('scroll', function () {
         var top = $window.scrollTop();
-
+        var $image = $('.backstrech');
         if (top < 0 || top > 1500) return;
         $image
             .css('transform', 'translate3d(0px, ' + top / 3 + 'px, 0px)')
             .css('opacity', 1 - Math.max(top / 500, 0));
+
     });
     $window.trigger('scroll');
 });
