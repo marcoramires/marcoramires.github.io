@@ -38,8 +38,6 @@ gulp.task('js', function () {
         .pipe(gulp.dest('.tmp/scripts'));
 });
 
-
-// process JS files and return the stream.
 gulp.task('js-preload', function () {
     return gulp.src(['app/js/vendor/pace.min.js'])
         .pipe(concat('preload.js'))
@@ -57,7 +55,6 @@ gulp.task('js-vendor', function () {
         .pipe(concat('vendor.js'))
         .pipe(gulp.dest('.tmp/scripts'));
 });
-
 
 // Compile sass into CSS & auto-inject into browsers
 gulp.task('sass', function() {
