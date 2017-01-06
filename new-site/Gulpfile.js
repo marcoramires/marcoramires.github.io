@@ -55,7 +55,7 @@ gulp.task('js-vendor', function () {
 
 // Compile sass into CSS & auto-inject into browsers
 gulp.task('sass', function() {
-    return gulp.src("app/sass/styles.scss")
+    return gulp.src("app/sass/main.scss")
         .pipe(sourcemaps.init())
         .pipe(sass({
             includePaths: bourbon
