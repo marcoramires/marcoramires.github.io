@@ -6,7 +6,7 @@
 
 function prealoader() {
     Pace.on('done', function () {
-        // $("#contents").fadeIn(1000);
+        $("#contents").fadeIn(1000);
     });
 }
 
