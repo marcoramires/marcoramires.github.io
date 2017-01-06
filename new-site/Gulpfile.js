@@ -12,7 +12,7 @@ var bourbon = require('node-bourbon').includePaths;
 // Static Server + watching scss/html files
 gulp.task('serve', ['sass', 'styles-vendor', 'styles-plugins', 'js', 'js-plugins', 'js-vendor', 'js-preload'], function() {
     browserSync.init({
-        server: ['./', '.tmp']
+        server: ['./', './app', '.tmp']
     });
 
     gulp.watch("app/sass/*.scss", ['sass']);
