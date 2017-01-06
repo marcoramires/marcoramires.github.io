@@ -5,7 +5,9 @@
 var gulp        = require('gulp');
 var browserSync = require('browser-sync').create();
 var sass        = require('gulp-sass');
+var sourcemaps   = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
+var bourbon = require('node-bourbon').includePaths;
 
 // Static Server + watching scss/html files
 gulp.task('serve', ['sass', 'js', 'js-vendor', 'js-preload'], function() {
@@ -13,8 +15,8 @@ gulp.task('serve', ['sass', 'js', 'js-vendor', 'js-preload'], function() {
         server: ['./', '.tmp']
     });
 
-    gulp.watch("app/scss/*.scss", ['sass']);
-    gulp.watch("app/*.html").on('change', browserSync.reload);
+    gulp.watch("app/sass/*.scss", ['sass']);
+    gulp.watch("./*.html").on('change', browserSync.reload);
 
     // add browserSync.reload to the tasks array to make
     // all browsers reload after tasks are complete.
@@ -53,9 +55,13 @@ gulp.task('js-vendor', function () {
 
 // Compile sass into CSS & auto-inject into browsers
 gulp.task('sass', function() {
-    return gulp.src("app/scss/*.scss")
-        .pipe(sass())
-        .pipe(gulp.dest('.tmp/'))
+    return gulp.src("app/sass/styles.scss")
+        .pipe(sourcemaps.init())
+        .pipe(sass({
+            includePaths: bourbon
+        }))
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest('.tmp/styles/'))
         .pipe(browserSync.stream());
 });
 
