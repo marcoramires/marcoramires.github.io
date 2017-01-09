@@ -81,3 +81,20 @@ gulp.task('styles-plugins', function() {
 });
 
 gulp.task('default', ['serve']);
+
+// Prepare Images and fonts
+gulp.task('images', function () {
+    return gulp.src('app/images/**/*')
+        .pipe(gulp.dest('.tmp/images'));
+});
+
+gulp.task('fonts', function () {
+    return gulp.src('app/fonts/**/*')
+        .pipe(gulp.dest('.tmp/fonts'));
+});
+
+// Deployment task
+gulp.task('build-dist', ['sass', 'styles-vendor', 'styles-plugins', 'js', 'js-plugins', 'js-vendor', 'js-preload', 'images', 'fonts'], function() {
+    return gulp.src(['.tmp/**/*'])
+        .pipe(gulp.dest('../dist'));
+});
