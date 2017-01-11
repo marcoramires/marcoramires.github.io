@@ -106,6 +106,7 @@ function mainBanner() {
                 responsiveLevels: [1240, 1024, 778, 480],
                 gridwidth: [800, 640, 480, 480],
                 gridheight: [720, 720, 480, 360],
+                visibilityLevels:[1240, 1024, 778, 480],
                 lazyLoad: 'on',
                 lazyType: 'smart',
                 parallax: {
