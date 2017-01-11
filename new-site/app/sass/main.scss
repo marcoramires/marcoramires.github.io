@@ -1,6 +1,7 @@
 /* Imports */
 
 @import "bourbon";
+@import "../../node_modules/spinkit/scss/spinkit";
 
 /*------------------------------------------------------------------
 [Table of contents]
@@ -460,13 +461,13 @@ header {
 }
 @media (min-width: 1600px) {
   .logo a {
-    width: 184px;
-    height: 66px;
+    width: 40px;
+    height: 40px;
   }
 }
 .home-gallery .logo a,
 .classic-menu .logo a {
-  background-image: url('../images/demo/logo/logo-black.png');
+  background-image: url('../images/site/logo/logo-color.png');
 }
 /*------------------------------------------------------------------
 [4. Footer / #footer]
@@ -478,6 +479,7 @@ header {
   position: absolute;
   width: 100%;
   z-index: 2;
+  opacity: 0.9;
 }
 .left-menu .navbar .navbar-toggle .icon-bar {
   background-color: #000000;
@@ -489,16 +491,16 @@ header {
   overflow: hidden;
   text-align: left;
   direction: ltr;
-  width: 100px;
-  height: 36px;
+  width: 35px;
+  height: 35px;
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: center center;
-  background-image: url("../images/demo/logo/logo-black.png");
+  background-image: url("../images/site/logo/logo-color.png");
   background-size: contain;
   position: absolute;
-  top: 6px;
-  left: 6px;
+  top: 9px;
+  left: 15px;
 }
 @media (min-width: 992px) {
   .left-menu .navbar {
@@ -883,13 +885,13 @@ header {
   display: none;
 }
 .pace .pace-progress {
-  background: #000000;
+  background: #ed380c;
   position: fixed;
   z-index: 2000;
   top: 0;
   right: 100%;
   width: 100%;
-  height: 5px;
+  height: 2px;
 }
 #layer-loade {
   position: fixed;
@@ -925,6 +927,13 @@ header {
   top: 50%;
   transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
+}
+.sk-chasing-dots {
+  top: 40%;
+
+  .sk-child {
+    @include linear-gradient(#ff5400, #cb2000);
+  }
 }
 /*------------------------------------------------------------------
 [6.02 Main Slider]
