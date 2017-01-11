@@ -479,7 +479,7 @@ header {
   position: absolute;
   width: 100%;
   z-index: 2;
-  opacity: 0.9;
+  opacity: 0.95;
 }
 .left-menu .navbar .navbar-toggle .icon-bar {
   background-color: #000000;
@@ -1200,6 +1200,9 @@ header {
   display: none;
 }
 @media (max-width: 768px) {
+  .layer-page {
+    padding-top: 0.5em;
+  }
   .close-layer {
     display: none;
   }
@@ -2288,7 +2291,7 @@ body.comingsoon .primary-title {
   margin: 50px 0;
   margin: 23px 0 50px;
   text-align: center;
-  width: 80%;
+  width: 100%;
   margin: 50px auto 0;
 }
 @media (min-width: 2200px) {
@@ -2375,20 +2378,21 @@ body.comingsoon .primary-title {
   }
 }
 .page-about p {
-  color: #989898;
-  font-size: 13px;
-  line-height: 19px;
+  color: #000000;
+  font-size: 0.8em;
+  line-height: 1.3em;
+  margin: 0.6em 0;
 }
 @media (min-width: 768px) {
   .page-about p {
-    margin: 0 100px 12px;
+    //margin: 0 50px 12px;
   }
 }
 @media (min-width: 1600px) {
   .page-about p {
-    font-size: 18px;
-    line-height: 23px;
-    margin: 0 200px 25px;
+    //font-size: 18px;
+    //line-height: 23px;
+    //margin: 0 200px 25px;
   }
 }
 .page-about .social-links {
