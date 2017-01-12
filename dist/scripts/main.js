@@ -501,7 +501,9 @@ function isotopeGrid() {
         });
 
         // lightbox
-        $('#grid-gallery').lightGallery({
+
+        var $lg = $('#grid-gallery');
+        $lg.lightGallery({
             selector: '.grid-item',
             showThumbByDefault: !1,
             cssEasing: 'cubic-bezier(.77,0,.175,1)',
@@ -510,6 +512,10 @@ function isotopeGrid() {
             download: false,
             zoom: false
             // animateThumb: false
+        });
+
+        $lg.on('onAfterOpen.lg',function(event){
+            imageLayerGallery();
         });
     }
 }
@@ -536,6 +542,25 @@ function setMarkers(map) {
     });
 }
 
+/*----------------------------------------------
+            I M A G E   L A Y E R
+ ------------------------------------------------*/
+
+function imageLayer () {
+    $('.slotholder').each(function() {
+        $(this).after('<div class="img-lr"></div>');
+    });
+    $('.grid-lr').each(function() {
+        $(this).after('<div class="img-lr-grid"></div>');
+    });
+}
+
+function imageLayerGallery () {
+    $('.lg-img-wrap').each(function() {
+        $(this).after('<div class="img-lr"></div>');
+    });
+}
+
 $(window).on('load', function (e) {
     isotopeGrid();
 });
@@ -559,6 +584,7 @@ $(window).on('resize', function (e) {
     menuFull();
     videoPlayer();
     managePages();
+    imageLayer();
 })(jQuery);
 //# sourceMappingURL=main.js.map
 
