@@ -4137,11 +4137,6 @@ body {
         opacity: 1;
 
         img {
-          position: absolute;
-          z-index: 8;
-          transition: opacity 1s ease-in;
-          -moz-transition: opacity 1s ease-in;
-          -webkit-transition: opacity 1s ease-in;
           opacity: 1;
         }
       }
@@ -4164,6 +4159,8 @@ body {
 
     img {
       opacity: 0;
+      position: absolute;
+      z-index: 8;
     }
   }
   .fab {
