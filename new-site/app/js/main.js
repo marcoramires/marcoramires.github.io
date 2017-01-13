@@ -570,8 +570,26 @@ function imageLayerGallery () {
 /*----------------------------------------------
             M O B I L E  F A B
  ------------------------------------------------*/
-$(".fab").on('click', function(){
-    $(this).parent(".card").toggleClass("is-expandend");
+$('.fab').on('click', function() {
+    $(this).parent(".holder").addClass("is-expandend");
+
+    var $dy = $(this);
+    $dy.lightGallery({
+        dynamic: true,
+        dynamicEl: [{
+            "src":  $(this).attr('data-src')
+        }],
+        showThumbByDefault: !1,
+        cssEasing: 'cubic-bezier(.77,0,.175,1)',
+        easing: 'easeOutSine',
+        hideBarsDelay: 99999,
+        download: false,
+        zoom: false
+    });
+
+    $dy.on('onCloseAfter.lg',function(event){
+        $(this).parent(".holder").removeClass("is-expandend");
+    });
 });
 
 $(window).on('load', function (e) {
