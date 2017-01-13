@@ -4330,7 +4330,7 @@ body {
       .card.is-expandend .fab {
         transition: all 1s cubic-bezier(0.215, 0.61, 0.355, 1);
         transition-delay: 200ms;
-        transform: scale(30);
+        transform: scale(60);
         opacity: 1; }
         .card.is-expandend .fab .lg-icon {
           font-size: 1.3em;
