@@ -6,7 +6,13 @@
 
 function prealoader() {
     Pace.on('done', function () {
-        $("#contents").fadeIn(1000);
+        // $("#contents").fadeIn(1000);
+        setTimeout(function() {
+            $('.fab').fadeIn();
+        }, 1000);
+        setTimeout(function() {
+            $('.fab').addClass('animate');
+        }, 1500);
     });
 }
 
@@ -560,6 +566,13 @@ function imageLayerGallery () {
         $(this).after('<div class="img-lr"></div>');
     });
 }
+
+/*----------------------------------------------
+            M O B I L E  F A B
+ ------------------------------------------------*/
+$(".fab").on('click', function(){
+    $(this).parent(".card").toggleClass("is-expandend");
+});
 
 $(window).on('load', function (e) {
     isotopeGrid();
