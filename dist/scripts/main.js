@@ -587,6 +587,10 @@ $('.fab').on('click', function() {
         zoom: false
     });
 
+    $dy.on('onAfterOpen.lg',function(event){
+        imageLayerGallery();
+    });
+
     $dy.on('onCloseAfter.lg',function(event){
         $(this).parent(".holder").removeClass("is-expandend");
     });
