@@ -2054,6 +2054,10 @@ form .form-group.inline {
   z-index: 1;
   display: none; }
 
+@media (max-width: 768px) {
+  .gallery-links.ontop {
+    display: block; } }
+
 @media (min-width: 768px) {
   .gallery-links.ontop {
     display: block; } }
@@ -2073,8 +2077,7 @@ form .form-group.inline {
   padding: 0; }
 
 #grid-gallery {
-  margin: 10px;
-  margin-top: 50px; }
+  margin: 10px; }
 
 .home-gallery #grid-gallery {
   margin-top: 0; }
@@ -2087,7 +2090,7 @@ form .form-group.inline {
     margin-top: 106px; } }
 
 .grid-item {
-  width: 50%;
+  width: 100%;
   padding: 0 10px 20px; }
 
 @media (min-width: 768px) {
