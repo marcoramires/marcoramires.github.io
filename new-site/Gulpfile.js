@@ -21,6 +21,7 @@ gulp.task('serve', ['sass', 'styles-vendor', 'styles-plugins', 'js', 'js-plugins
     // add browserSync.reload to the tasks array to make
     // all browsers reload after tasks are complete.
     gulp.watch("app/js/**/*.js", ['js-watch']);
+    gulp.watch("app/layout/**/*.js", ['js-watch']);
     gulp.watch("app/styles/**/*.css", ['styles-vendor', 'styles-plugins']);
 });
 
@@ -33,7 +34,7 @@ gulp.task('js-watch', ['js'], function (done) {
 
 // process JS files and return the stream.
 gulp.task('js', function () {
-    return gulp.src(['app/js/**/*.js', 'app/layout/*.js', '!app/js/vendor/*.js', '!app/js/plugins/*.js'])
+    return gulp.src(['app/js/**/*.js', 'app/layout/*.controller.js', '!app/js/vendor/*.js', '!app/js/plugins/*.js'])
         .pipe(concat('main.js'))
         .pipe(gulp.dest('.tmp/scripts'));
 });
