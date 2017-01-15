@@ -33,7 +33,7 @@ gulp.task('js-watch', ['js'], function (done) {
 
 // process JS files and return the stream.
 gulp.task('js', function () {
-    return gulp.src(['app/js/**/*.js', '!app/js/vendor/*.js', '!app/js/plugins/*.js'])
+    return gulp.src(['app/js/**/*.js', 'app/layout/*.js', '!app/js/vendor/*.js', '!app/js/plugins/*.js'])
         .pipe(concat('main.js'))
         .pipe(gulp.dest('.tmp/scripts'));
 });

@@ -464,18 +464,18 @@ function managePages() {
     });
 
     // // hast navigation
-    var match = location.hash.match(/^#!\/?(.*)$/)[1];
-    if (match) {
-        var wheight1 = $(window).height();
-        $('.layer-page').removeClass('active');
-            $('.' + match).css({
-            '-webkit-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')',
-            '-moz-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')',
-            '-ms-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')',
-            '-o-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')',
-            'transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')'
-        }).addClass('active');
-    }
+    // var match = location.hash.match(/^#!\/?(.*)$/)[1];
+    // if (match) {
+    //     var wheight1 = $(window).height();
+    //     $('.layer-page').removeClass('active');
+    //         $('.' + match).css({
+    //         '-webkit-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')',
+    //         '-moz-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')',
+    //         '-ms-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')',
+    //         '-o-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')',
+    //         'transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')'
+    //     }).addClass('active');
+    // }
 }
 
 /*---------------------------------------------- 

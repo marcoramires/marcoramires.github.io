@@ -15,43 +15,44 @@
             var homeState = {
                 name: 'home',
                 url: '/',
-                template: '<h3>Home Page</h3>'
+                templateUrl: 'layout/default.html',
+                controller : 'DefaultController'
             };
 
             var contactState = {
                 name: 'page-contact',
                 url: '/page-contact',
-                template: '<h3>Home Page</h3>'
+                templateUrl: '../layout/default.html'
             };
 
             var galleryState = {
                 name: 'page-gallery',
                 url: '/page-gallery',
-                template: '<h3>Home Page</h3>'
+                templateUrl: '../layout/default.html'
             };
 
             var aboutState = {
                 name: 'page-about',
                 url: '/page-gallery',
-                template: '<h3>Home Page</h3>'
+                templateUrl: '../layout/default.html'
             };
 
             var pictureState = {
                 name: 'picture',
                 url: '/picture',
-                template: '<h3>Picture Page</h3>'
+                templateUrl: '../layout/default.html'
             };
 
             var blogState = {
                 name: 'blog',
                 url: '/blog',
-                template: '<h3>Blog Page</h3>'
+                templateUrl: '../layout/default.html'
             };
 
             var postState = {
                 name: 'post',
                 url: '/post',
-                template: '<h3>Post Page</h3>'
+                templateUrl: '../layout/default.html'
             };
 
             $stateProvider.state(homeState);
