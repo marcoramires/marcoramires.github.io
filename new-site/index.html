@@ -17,7 +17,7 @@
     <!-- Preload -->
     <script src="scripts/preload.js"></script>
 </head>
-<body class="left-menu" ng-app="app">
+<body class="left-menu">
 <!--[if lt IE 10]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
@@ -47,12 +47,12 @@
         <div id="navbar" class="navbar-collapse collapse">
             <div class="close-nav"></div>
             <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="#" class="open-home">Home</a></li>
-                <li><a href="#" class="open-layer" data-layer="page-about">About</a></li>
+                <li class="active"><a class="open-home">Home</a></li>
+                <li><a class="open-layer" data-layer="page-about">About</a></li>
                 <!--<li><a href="#" class="open-layer" data-layer="page-albums">Albums</a></li>-->
-                <li><a href="#" class="open-layer" data-layer="page-gallery">Gallery</a></li>
-                <li><a href="#">Blog (soon)</a></li>
-                <li><a href="#" class="open-layer" data-layer="page-contact">Contact</a></li>
+                <li><a class="open-layer" data-layer="page-gallery">Gallery</a></li>
+                <li><a ui-sref="blog" ui-sref-active="active">Blog (soon)</a></li>
+                <li><a class="open-layer" data-layer="page-contact">Contact</a></li>
             </ul>
             <ul class="social-links">
                 <li><a href="https://www.instagram.com/marcoramires/" target="_blank"><i class="fa fa-instagram"></i></a></li>
@@ -246,5 +246,6 @@
 <script src="scripts/plugins.js"></script>
 <!-- Main js -->
 <script src="scripts/main.js"></script>
+<ui-view></ui-view>
 </body>
 </html>
