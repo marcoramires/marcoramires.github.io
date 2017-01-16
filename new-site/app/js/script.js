@@ -11,44 +11,42 @@
             /* Router - Angular UI Router */
             /* -------------------------- */
             $urlRouterProvider.otherwise('/');
-
             var homeState = {
                 name: 'home',
                 url: '/',
                 templateUrl: 'layout/default.html',
                 controller : 'DefaultController'
             };
-
             var contactState = {
                 name: 'page-contact',
                 url: '/page-contact',
-                templateUrl: '../layout/default.html'
+                templateUrl: '../layout/default.html',
+                controller : 'DefaultController'
             };
-
             var galleryState = {
                 name: 'page-gallery',
                 url: '/page-gallery',
-                templateUrl: '../layout/default.html'
+                templateUrl: 'layout/default.html',
+                controller : 'DefaultController'
             };
-
             var aboutState = {
                 name: 'page-about',
-                url: '/page-gallery',
-                templateUrl: '../layout/default.html'
+                url: '/page-about',
+                templateUrl: 'layout/default.html',
+                controller: 'DefaultController'
             };
-
             var pictureState = {
                 name: 'picture',
-                url: '/picture',
-                templateUrl: '../layout/default.html'
+                url: '/picture/:pictureName',
+                templateUrl: 'layout/picture.html',
+                controller: 'PictureController as picture'
             };
-
             var blogState = {
                 name: 'blog',
                 url: '/blog',
-                templateUrl: '../layout/default.html'
+                templateUrl: 'layout/default.html',
+                controller : 'DefaultController'
             };
-
             var postState = {
                 name: 'post',
                 url: '/post',
@@ -56,12 +54,12 @@
             };
 
             $stateProvider.state(homeState);
-            $stateProvider.state(pictureState);
-            $stateProvider.state(postState);
-            $stateProvider.state(blogState);
             $stateProvider.state(contactState);
             $stateProvider.state(galleryState);
             $stateProvider.state(aboutState);
+            $stateProvider.state(pictureState);
+            $stateProvider.state(blogState);
+            $stateProvider.state(postState);
         }]);
 
     angular.element(document).ready(function() {

@@ -2,23 +2,25 @@
  * Created by marcoramires on 1/15/17.
  */
 
+angular
+    .module('app')
+    .controller('DefaultController', DefaultController);
+
+DefaultController.$inject = ['$scope', '$log'];
+
 function DefaultController($scope, $log) {
     $log.log('> Default Controller: ', this);
 
     /* ----------------------------------------------
      P R E L O A D E R - TODO: Move to Service layer
      ------------------------------------------------*/
-    function prealoader() {
+    function preloader() {
         Pace.on('done', function () {
             // $("#contents").fadeIn(1000);
-            setTimeout(function() {
-                $('.fab').fadeIn();
-            }, 1000);
-            setTimeout(function() {
-                $('.fab').addClass('animate');
-            }, 1500);
+            $log.log('* Pre-Loader Done *');
         });
     }
+
     /*----------------------------------------------
      S L I D E R
      ------------------------------------------------*/
@@ -143,8 +145,6 @@ function DefaultController($scope, $log) {
                     }
                 });
             }
-        } else {
-            $log.log('No slider');
         }
         $('#thumbsButton').on('mouseenter', function (e) {
             $('body').toggleClass('showThumbnails');
@@ -152,7 +152,9 @@ function DefaultController($scope, $log) {
         $('.tp-tabs').on('mouseleave', function (e) {
             $('body').removeClass('showThumbnails');
         });
+        $log.log('* Main-Banner Done *');
     }
+
     /*----------------------------------------------
      I M A G E   L A Y E R
      ------------------------------------------------*/
@@ -163,12 +165,15 @@ function DefaultController($scope, $log) {
         $('.grid-lr').each(function () {
             $(this).after('<div class="img-lr-grid"></div>');
         });
+        $log.log('* Image-Layer Done *');
     }
     function imageLayerGallery() {
         $('.lg-img-wrap').each(function () {
             $(this).after('<div class="img-lr"></div>');
         });
+        $log.log('* Image-Layer-Gallery Done *');
     }
+
     /*----------------------------------------------
      N A V I G A T I O N - TODO: Move to Service layer
      ------------------------------------------------*/
@@ -183,9 +188,34 @@ function DefaultController($scope, $log) {
             $(this).parent().addClass('active').siblings().removeClass('active');
             $('#navbar').collapse('hide');
         });
+        $log.log('* Navigation Done *');
     }
+
     /*----------------------------------------------
-     P A G E S
+     M A N A G E  P A G E S
+     ------------------------------------------------*/
+    function managePages() {
+        $('.close-layer').on('click', function (e) {
+            closeLayer();
+        });
+        // hash navigation
+        var match = location.hash.match(/^#!\/?(.*)$/)[1];
+        if (match) {
+            var wheight1 = $(window).height();
+            $('.layer-page').removeClass('active');
+                $('.' + match).css({
+                '-webkit-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')',
+                '-moz-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')',
+                '-ms-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')',
+                '-o-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')',
+                'transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')'
+            }).addClass('active');
+        }
+        $log.log('* Manage-Page Done *');
+    }
+
+    /*----------------------------------------------
+     P A G E S - H E L P E R //TODO: Add to service layer
      ------------------------------------------------*/
     function closeLayer() {
         var $layerPage = $('.layer-page');
@@ -200,6 +230,7 @@ function DefaultController($scope, $log) {
     }
     function closeNavVertical() {
         $('.left-menu .navbar').removeClass('active');
+        $('#navbar').collapse('hide');
     }
     function resizeLayers() {
         var wheight = $(window).height();
@@ -211,48 +242,10 @@ function DefaultController($scope, $log) {
             'transform': 'matrix(1, 0, 0, 1, 0, -' + wheight + ')'
         });
     }
-    function managePages() {
-        $('.open-layer', '#navbar').on('click', function (e) {
-            closeLayer();
-            var wheight = $(window).height();
-            var layerToOpen = $(this).data('layer');
-            $('.layer-page').removeClass('active');
-            $('.' + layerToOpen).css({
-                '-webkit-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight + ')',
-                '-moz-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight + ')',
-                '-ms-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight + ')',
-                '-o-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight + ')',
-                'transform': 'matrix(1, 0, 0, 1, 0, -' + wheight + ')'
-            }).addClass('active');
-            closeNavVertical();
-            return false;
-        });
-        $('.open-home').on('click', function (e) {
-            closeLayer();
-            closeNavVertical();
-            return false;
-        });
-        $('.close-layer').on('click', function (e) {
-            closeLayer();
-        });
-
-        // // hast navigation
-        // var match = location.hash.match(/^#!\/?(.*)$/)[1];
-        // if (match) {
-        //     var wheight1 = $(window).height();
-        //     $('.layer-page').removeClass('active');
-        //         $('.' + match).css({
-        //         '-webkit-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')',
-        //         '-moz-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')',
-        //         '-ms-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')',
-        //         '-o-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')',
-        //         'transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')'
-        //     }).addClass('active');
-        // }
-    }
     $(window).on('resize', function (e) {
         resizeLayers();
         closeNavVertical();
+        $log.log('* Window-Resize Done *');
     });
 
     /*----------------------------------------------
@@ -284,7 +277,6 @@ function DefaultController($scope, $log) {
             });
 
             // lightbox
-
             var $lg = $('#grid-gallery');
             $lg.lightGallery({
                 selector: '.grid-item',
@@ -301,54 +293,60 @@ function DefaultController($scope, $log) {
                 imageLayerGallery();
             });
         }
+        $log.log('* Isotope-Grid Done *');
     }
-    $(window).on('load', function (e) {
-        isotopeGrid();
-    });
 
     /* ---------------------------------------------
     M O B I L E  F A B
     ------------------------------------------------*/
-    $('.fab').on('click', function() {
-        $(this).parent(".holder").addClass("is-expandend");
+    function mobileFab () {
+        $('.fab').on('click', function() {
+            $(this).parent(".holder").addClass("is-expandend");
 
-        var $dy = $(this);
-        $dy.lightGallery({
-            dynamic: true,
-            dynamicEl: [{
-                "src":  $(this).attr('data-src')
-            }],
-            showThumbByDefault: !1,
-            cssEasing: 'cubic-bezier(.77,0,.175,1)',
-            easing: 'easeOutSine',
-            hideBarsDelay: 99999,
-            download: false,
-            zoom: false
+            var $dy = $(this);
+            $dy.lightGallery({
+                dynamic: true,
+                dynamicEl: [{
+                    "src":  $(this).attr('data-src')
+                }],
+                showThumbByDefault: !1,
+                cssEasing: 'cubic-bezier(.77,0,.175,1)',
+                easing: 'easeOutSine',
+                hideBarsDelay: 99999,
+                download: false,
+                zoom: false
+            });
+
+            $dy.on('onAfterOpen.lg',function(event){
+                imageLayerGallery();
+            });
+
+            $dy.on('onCloseAfter.lg',function(event){
+                $(this).parent(".holder").removeClass("is-expandend");
+            });
         });
 
-        $dy.on('onAfterOpen.lg',function(event){
-            imageLayerGallery();
-        });
+        //TODO: Review this
+        setTimeout(function() {
+            $('.fab').fadeIn();
+        }, 1000);
+        setTimeout(function() {
+            $('.fab').addClass('animate');
+        }, 1500);
 
-        $dy.on('onCloseAfter.lg',function(event){
-            $(this).parent(".holder").removeClass("is-expandend");
-        });
-    });
+        $log.log('* Mobile-FAB Done *');
+    }
 
     /*----------------------------------------------
      A N G U L A R  R E A D Y
      ------------------------------------------------*/
     angular.element(document).ready(function() {
-        prealoader();
+        preloader();
         mainBanner();
         navigation();
         managePages();
         imageLayer();
+        isotopeGrid();
+        mobileFab();
     });
 }
-
-DefaultController.$inject = ['$scope', '$log'];
-
-angular
-    .module('app')
-    .controller('DefaultController', DefaultController);
