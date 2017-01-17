@@ -210,11 +210,11 @@ function DefaultController($rootScope, $scope, $log) {
             closeNavVertical();
             return false;
         });
-        // $('.open-home').on('click', function (e) {
-        //     closeLayer();
-        //     closeNavVertical();
-        //     return false;
-        // });
+        $('.open-home').on('click', function (e) {
+            closeLayer();
+            closeNavVertical();
+            return false;
+        });
         $('.close-layer').on('click', function (e) {
             closeLayer();
         });
