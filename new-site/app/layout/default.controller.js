@@ -362,6 +362,7 @@ function DefaultController($rootScope, $scope, $log) {
      A N G U L A R  R E A D Y
      ------------------------------------------------*/
     angular.element(document).ready(function() {
+        $('body').removeClass('page-blog page-picture');
         preloader();
         mainBanner();
         navigation();

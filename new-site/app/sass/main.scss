@@ -3922,11 +3922,27 @@ body.comingsoon .primary-title {
 /* Picture Page */
 .page-picture {
   .blog-post-date {
+    margin: 0;
+    padding: 0 !important;
+
     .icon {
       font-size: 1.2em;
       color: #4e5b6c;
       margin-right: 5px;
     }
+  }
+  .primary-title {
+    display: inline-block;
+    margin: 22px 10px 15px;
+    line-height: 63px;
+  }
+
+  img {
+    margin-bottom: 0;
+  }
+
+  h2 {
+    margin-top: 55px;
   }
 }
 
