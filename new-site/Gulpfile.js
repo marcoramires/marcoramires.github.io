@@ -81,6 +81,11 @@ gulp.task('styles-plugins', function() {
         .pipe(gulp.dest('.tmp/styles/'));
 });
 
+gulp.task('layouts', function() {
+    return gulp.src("app/layout/**/*.html")
+        .pipe(gulp.dest('../dist/layout'));
+});
+
 gulp.task('default', ['serve']);
 
 // Prepare Images and fonts
