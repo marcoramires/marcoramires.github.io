@@ -64,7 +64,6 @@
         .run(function($rootScope, $location) {
             $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
                 console.info('[event] routeChangeStart...');
-                $(".animate-content").fadeOut(300);
                 Pace.restart();
             });
         });

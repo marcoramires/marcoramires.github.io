@@ -16,7 +16,7 @@ function DefaultController($rootScope, $scope, $log) {
      ------------------------------------------------*/
     function preloader() {
         Pace.on('done', function () {
-            $(".animate-content").fadeIn(300);
+            $(".animate-content").addClass('load-finish');
             $log.log('* Pre-Loader Done *');
         });
     }
