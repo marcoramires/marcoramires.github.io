@@ -68,6 +68,7 @@ function PictureController($rootScope, $scope, $log, $stateParams) {
      A N G U L A R  R E A D Y
      ------------------------------------------------*/
     angular.element(document).ready(function() {
+        $('body').addClass('page-blog page-picture');
         preloader();
         navigation();
     });

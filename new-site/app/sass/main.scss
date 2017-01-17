@@ -479,7 +479,7 @@ header {
   position: absolute;
   width: 100%;
   z-index: 2;
-  opacity: 0.95;
+  opacity: 1;
 }
 .left-menu .navbar .navbar-toggle .icon-bar {
   background-color: #000000;
@@ -2514,7 +2514,7 @@ body.comingsoon .primary-title {
 .blog-post-date.block {
   float: none;
   text-align: left;
-  margin-bottom: 42px;
+  margin-bottom: 30px;
 }
 .blog-post:hover .overcard {
   background-color: #000000;
@@ -3210,11 +3210,11 @@ body.comingsoon .primary-title {
   }
 }
 .content-post.post-without-sidebar .blog-post-date {
-  padding-top: 24px;
+  padding-top: 32px;
   margin-top: 0;
 }
 .content-post .primary-title {
-  margin-bottom: 28px;
+  margin-bottom: 15px;
 }
 .content-post h1,
 .content-post h2,
@@ -3227,7 +3227,7 @@ body.comingsoon .primary-title {
 }
 .content-post h1 {
   font-size: 46px;
-  margin: 71px 0px 42px;
+  margin: 50px 0px 42px;
   letter-spacing: 2.5px;
 }
 .content-post h2 {
@@ -3918,6 +3918,18 @@ body.comingsoon .primary-title {
 .ico-share {
   background-image: url('../images/share.png');
 }
+
+/* Picture Page */
+.page-picture {
+  .blog-post-date {
+    .icon {
+      font-size: 1.2em;
+      color: #4e5b6c;
+      margin-right: 5px;
+    }
+  }
+}
+
 /*------------------------------------------------------------------
 [8. Variations]
 */

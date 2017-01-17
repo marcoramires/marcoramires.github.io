@@ -44,13 +44,12 @@
             var blogState = {
                 name: 'blog',
                 url: '/blog',
-                templateUrl: 'layout/default.html',
-                controller : 'DefaultController'
+                templateUrl: 'layout/blog.html'
             };
             var postState = {
                 name: 'post',
                 url: '/post',
-                templateUrl: '../layout/default.html'
+                templateUrl: 'layout/post.html'
             };
 
             $stateProvider.state(homeState);
