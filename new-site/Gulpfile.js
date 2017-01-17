@@ -85,7 +85,7 @@ gulp.task('default', ['serve']);
 
 // Prepare Images and fonts
 gulp.task('images', function () {
-    return gulp.src('app/images/**/*')
+    return gulp.src(['app/images/**/*', '!app/images/demo/**/*'])
         .pipe(gulp.dest('.tmp/images'));
 });
 
@@ -96,6 +96,6 @@ gulp.task('fonts', function () {
 
 // Deployment task
 gulp.task('build-dist', ['sass', 'styles-vendor', 'styles-plugins', 'js', 'js-plugins', 'js-vendor', 'js-preload', 'images', 'fonts'], function() {
-    return gulp.src(['.tmp/**/*'])
+    return gulp.src(['.tmp/**/*', '!.tmp/images/demo/**/*'])
         .pipe(gulp.dest('../dist'));
 });

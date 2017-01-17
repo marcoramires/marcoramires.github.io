@@ -4,8 +4,3036 @@
  * @requires jQuery v1.7 or later (tested on 1.9)
  * @author ThemePunch
 **************************************************************************/
-!function(jQuery,undefined){"use strict";var version={core:"5.3.0.2","revolution.extensions.actions.min.js":"2.0.2","revolution.extensions.carousel.min.js":"1.1.0","revolution.extensions.kenburn.min.js":"1.1.0","revolution.extensions.layeranimation.min.js":"3.0.6","revolution.extensions.navigation.min.js":"1.3.1","revolution.extensions.parallax.min.js":"2.0.1","revolution.extensions.slideanims.min.js":"1.5.0","revolution.extensions.video.min.js":"2.0.1"};jQuery.fn.extend({revolution:function(a){var b={delay:9e3,responsiveLevels:4064,visibilityLevels:[2048,1024,778,480],gridwidth:960,gridheight:500,minHeight:0,autoHeight:"off",sliderType:"standard",sliderLayout:"auto",fullScreenAutoWidth:"off",fullScreenAlignForce:"off",fullScreenOffsetContainer:"",fullScreenOffset:"0",hideCaptionAtLimit:0,hideAllCaptionAtLimit:0,hideSliderAtLimit:0,disableProgressBar:"off",stopAtSlide:-1,stopAfterLoops:-1,shadow:0,dottedOverlay:"none",startDelay:0,lazyType:"smart",spinner:"spinner0",shuffle:"off",viewPort:{enable:!1,outof:"wait",visible_area:"60%",presize:!1},fallbacks:{isJoomla:!1,panZoomDisableOnMobile:"off",simplifyAll:"on",nextSlideOnWindowFocus:"off",disableFocusListener:!0,ignoreHeightChanges:"off",ignoreHeightChangesSize:0},parallax:{type:"off",levels:[10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85],origo:"enterpoint",speed:400,bgparallax:"off",opacity:"on",disable_onmobile:"off",ddd_shadow:"on",ddd_bgfreeze:"off",ddd_overflow:"visible",ddd_layer_overflow:"visible",ddd_z_correction:65,ddd_path:"mouse"},carousel:{horizontal_align:"center",vertical_align:"center",infinity:"on",space:0,maxVisibleItems:3,stretch:"off",fadeout:"on",maxRotation:0,minScale:0,vary_fade:"off",vary_rotation:"on",vary_scale:"off",border_radius:"0px",padding_top:0,padding_bottom:0},navigation:{keyboardNavigation:"off",keyboard_direction:"horizontal",mouseScrollNavigation:"off",onHoverStop:"on",touch:{touchenabled:"off",swipe_treshold:75,swipe_min_touches:1,drag_block_vertical:!1,swipe_direction:"horizontal"},arrows:{style:"",enable:!1,hide_onmobile:!1,hide_onleave:!0,hide_delay:200,hide_delay_mobile:1200,hide_under:0,hide_over:9999,tmp:"",rtl:!1,left:{h_align:"left",v_align:"center",h_offset:20,v_offset:0,container:"slider"},right:{h_align:"right",v_align:"center",h_offset:20,v_offset:0,container:"slider"}},bullets:{container:"slider",rtl:!1,style:"",enable:!1,hide_onmobile:!1,hide_onleave:!0,hide_delay:200,hide_delay_mobile:1200,hide_under:0,hide_over:9999,direction:"horizontal",h_align:"left",v_align:"center",space:0,h_offset:20,v_offset:0,tmp:'<span class="tp-bullet-image"></span><span class="tp-bullet-title"></span>'},thumbnails:{container:"slider",rtl:!1,style:"",enable:!1,width:100,height:50,min_width:100,wrapper_padding:2,wrapper_color:"#f5f5f5",wrapper_opacity:1,tmp:'<span class="tp-thumb-image"></span><span class="tp-thumb-title"></span>',visibleAmount:5,hide_onmobile:!1,hide_onleave:!0,hide_delay:200,hide_delay_mobile:1200,hide_under:0,hide_over:9999,direction:"horizontal",span:!1,position:"inner",space:2,h_align:"left",v_align:"center",h_offset:20,v_offset:0},tabs:{container:"slider",rtl:!1,style:"",enable:!1,width:100,min_width:100,height:50,wrapper_padding:10,wrapper_color:"#f5f5f5",wrapper_opacity:1,tmp:'<span class="tp-tab-image"></span>',visibleAmount:5,hide_onmobile:!1,hide_onleave:!0,hide_delay:200,hide_delay_mobile:1200,hide_under:0,hide_over:9999,direction:"horizontal",span:!1,space:0,position:"inner",h_align:"left",v_align:"center",h_offset:20,v_offset:0}},extensions:"extensions/",extensions_suffix:".min.js",debugMode:!1};return a=jQuery.extend(!0,{},b,a),this.each(function(){var b=jQuery(this);a.minHeight=a.minHeight!=undefined?parseInt(a.minHeight,0):a.minHeight,"hero"==a.sliderType&&b.find(">ul>li").each(function(a){a>0&&jQuery(this).remove()}),a.jsFileLocation=a.jsFileLocation||getScriptLocation("themepunch.revolution.min.js"),a.jsFileLocation=a.jsFileLocation+a.extensions,a.scriptsneeded=getNeededScripts(a,b),a.curWinRange=0,a.rtl=!0,a.navigation!=undefined&&a.navigation.touch!=undefined&&(a.navigation.touch.swipe_min_touches=a.navigation.touch.swipe_min_touches>5?1:a.navigation.touch.swipe_min_touches),jQuery(this).on("scriptsloaded",function(){return a.modulesfailing?(b.html('<div style="margin:auto;line-height:40px;font-size:14px;color:#fff;padding:15px;background:#e74c3c;margin:20px 0px;">!! Error at loading Slider Revolution 5.0 Extrensions.'+a.errorm+"</div>").show(),!1):(_R.migration!=undefined&&(a=_R.migration(b,a)),punchgs.force3D=!0,"on"!==a.simplifyAll&&punchgs.TweenLite.lagSmoothing(1e3,16),prepareOptions(b,a),void initSlider(b,a))}),b[0].opt=a,waitForScripts(b,a)})},revremoveslide:function(a){return this.each(function(){var b=jQuery(this),c=b[0].opt;if(!(a<0||a>c.slideamount)&&b!=undefined&&b.length>0&&jQuery("body").find("#"+b.attr("id")).length>0&&c&&c.li.length>0&&(a>0||a<=c.li.length)){var d=jQuery(c.li[a]),e=d.data("index"),f=!1;c.slideamount=c.slideamount-1,removeNavWithLiref(".tp-bullet",e,c),removeNavWithLiref(".tp-tab",e,c),removeNavWithLiref(".tp-thumb",e,c),d.hasClass("active-revslide")&&(f=!0),d.remove(),c.li=removeArray(c.li,a),c.carousel&&c.carousel.slides&&(c.carousel.slides=removeArray(c.carousel.slides,a)),c.thumbs=removeArray(c.thumbs,a),_R.updateNavIndexes&&_R.updateNavIndexes(c),f&&b.revnext(),punchgs.TweenLite.set(c.li,{minWidth:"99%"}),punchgs.TweenLite.set(c.li,{minWidth:"100%"})}})},revaddcallback:function(a){return this.each(function(){this.opt&&(this.opt.callBackArray===undefined&&(this.opt.callBackArray=new Array),this.opt.callBackArray.push(a))})},revgetparallaxproc:function(){return jQuery(this)[0].opt.scrollproc},revdebugmode:function(){return this.each(function(){var a=jQuery(this);a[0].opt.debugMode=!0,containerResized(a,a[0].opt)})},revscroll:function(a){return this.each(function(){var b=jQuery(this);jQuery("body,html").animate({scrollTop:b.offset().top+b.height()-a+"px"},{duration:400})})},revredraw:function(a){return this.each(function(){var a=jQuery(this);containerResized(a,a[0].opt)})},revkill:function(a){var b=this,c=jQuery(this);if(punchgs.TweenLite.killDelayedCallsTo(_R.showHideNavElements),c!=undefined&&c.length>0&&jQuery("body").find("#"+c.attr("id")).length>0){c.data("conthover",1),c.data("conthover-changed",1),c.trigger("revolution.slide.onpause");var d=c.parent().find(".tp-bannertimer"),e=c[0].opt;e.tonpause=!0,c.trigger("stoptimer"),punchgs.TweenLite.killTweensOf(c.find("*"),!1),punchgs.TweenLite.killTweensOf(c,!1),c.unbind("hover, mouseover, mouseenter,mouseleave, resize");var f="resize.revslider-"+c.attr("id");jQuery(window).off(f),c.find("*").each(function(){var a=jQuery(this);a.unbind("on, hover, mouseenter,mouseleave,mouseover, resize,restarttimer, stoptimer"),a.off("on, hover, mouseenter,mouseleave,mouseover, resize"),a.data("mySplitText",null),a.data("ctl",null),a.data("tween")!=undefined&&a.data("tween").kill(),a.data("kenburn")!=undefined&&a.data("kenburn").kill(),a.data("timeline_out")!=undefined&&a.data("timeline_out").kill(),a.data("timeline")!=undefined&&a.data("timeline").kill(),a.remove(),a.empty(),a=null}),punchgs.TweenLite.killTweensOf(c.find("*"),!1),punchgs.TweenLite.killTweensOf(c,!1),d.remove();try{c.closest(".forcefullwidth_wrapper_tp_banner").remove()}catch(a){}try{c.closest(".rev_slider_wrapper").remove()}catch(a){}try{c.remove()}catch(a){}return c.empty(),c.html(),c=null,e=null,delete b.c,delete b.opt,!0}return!1},revpause:function(){return this.each(function(){var a=jQuery(this);a!=undefined&&a.length>0&&jQuery("body").find("#"+a.attr("id")).length>0&&(a.data("conthover",1),a.data("conthover-changed",1),a.trigger("revolution.slide.onpause"),a[0].opt.tonpause=!0,a.trigger("stoptimer"))})},revresume:function(){return this.each(function(){var a=jQuery(this);a!=undefined&&a.length>0&&jQuery("body").find("#"+a.attr("id")).length>0&&(a.data("conthover",0),a.data("conthover-changed",1),a.trigger("revolution.slide.onresume"),a[0].opt.tonpause=!1,a.trigger("starttimer"))})},revstart:function(){var a=jQuery(this);if(a!=undefined&&a.length>0&&jQuery("body").find("#"+a.attr("id")).length>0&&this.opt)return a[0].opt.sliderisrunning?(console.log("Slider Is Running Already"),!1):(runSlider(a,a[0].opt),!0)},revnext:function(){return this.each(function(){var a=jQuery(this);a!=undefined&&a.length>0&&jQuery("body").find("#"+a.attr("id")).length>0&&_R.callingNewSlide(a,1)})},revprev:function(){return this.each(function(){var a=jQuery(this);a!=undefined&&a.length>0&&jQuery("body").find("#"+a.attr("id")).length>0&&_R.callingNewSlide(a,-1)})},revmaxslide:function(){return jQuery(this).find(".tp-revslider-mainul >li").length},revcurrentslide:function(){var a=jQuery(this);if(a!=undefined&&a.length>0&&jQuery("body").find("#"+a.attr("id")).length>0)return parseInt(a[0].opt.act,0)+1},revlastslide:function(){return jQuery(this).find(".tp-revslider-mainul >li").length},revshowslide:function(a){return this.each(function(){var b=jQuery(this);b!=undefined&&b.length>0&&jQuery("body").find("#"+b.attr("id")).length>0&&_R.callingNewSlide(b,"to"+(a-1))})},revcallslidewithid:function(a){return this.each(function(){var b=jQuery(this);b!=undefined&&b.length>0&&jQuery("body").find("#"+b.attr("id")).length>0&&_R.callingNewSlide(b,a)})}});var _R=jQuery.fn.revolution;jQuery.extend(!0,_R,{getversion:function(){return version},compare_version:function(a){return"stop"!=a.check&&(_R.getversion().core<a.min_core?(a.check===undefined&&(console.log("%cSlider Revolution Warning (Core:"+_R.getversion().core+")","color:#c0392b;font-weight:bold;"),console.log("%c     Core is older than expected ("+a.min_core+") from "+a.alias,"color:#333"),console.log("%c     Please update Slider Revolution to the latest version.","color:#333"),console.log("%c     It might be required to purge and clear Server/Client side Caches.","color:#333")),a.check="stop"):_R.getversion()[a.name]!=undefined&&a.version<_R.getversion()[a.name]&&(a.check===undefined&&(console.log("%cSlider Revolution Warning (Core:"+_R.getversion().core+")","color:#c0392b;font-weight:bold;"),console.log("%c     "+a.alias+" ("+a.version+") is older than requiered ("+_R.getversion()[a.name]+")","color:#333"),console.log("%c     Please update Slider Revolution to the latest version.","color:#333"),console.log("%c     It might be required to purge and clear Server/Client side Caches.","color:#333")),a.check="stop")),a},currentSlideIndex:function(a){var b=a.c.find(".active-revslide").index();return b=b==-1?0:b},simp:function(a,b,c){var d=Math.abs(a)-Math.floor(Math.abs(a/b))*b;return c?d:a<0?-1*d:d},iOSVersion:function(){var a=!1;return navigator.userAgent.match(/iPhone/i)||navigator.userAgent.match(/iPod/i)||navigator.userAgent.match(/iPad/i)?navigator.userAgent.match(/OS 4_\d like Mac OS X/i)&&(a=!0):a=!1,a},isIE:function(a,b){var c=jQuery('<div style="display:none;"/>').appendTo(jQuery("body"));c.html("<!--[if "+(b||"")+" IE "+(a||"")+"]><a>&nbsp;</a><![endif]-->");var d=c.find("a").length;return c.remove(),d},is_mobile:function(){var a=["android","webos","iphone","ipad","blackberry","Android","webos",,"iPod","iPhone","iPad","Blackberry","BlackBerry"],b=!1;for(var c in a)navigator.userAgent.split(a[c]).length>1&&(b=!0);return b},callBackHandling:function(a,b,c){try{a.callBackArray&&jQuery.each(a.callBackArray,function(a,d){d&&d.inmodule&&d.inmodule===b&&d.atposition&&d.atposition===c&&d.callback&&d.callback.call()})}catch(a){console.log("Call Back Failed")}},get_browser:function(){var c,a=navigator.appName,b=navigator.userAgent,d=b.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);return d&&null!=(c=b.match(/version\/([\.\d]+)/i))&&(d[2]=c[1]),d=d?[d[1],d[2]]:[a,navigator.appVersion,"-?"],d[0]},get_browser_version:function(){var c,a=navigator.appName,b=navigator.userAgent,d=b.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);return d&&null!=(c=b.match(/version\/([\.\d]+)/i))&&(d[2]=c[1]),d=d?[d[1],d[2]]:[a,navigator.appVersion,"-?"],d[1]},getHorizontalOffset:function(a,b){var c=gWiderOut(a,".outer-left"),d=gWiderOut(a,".outer-right");switch(b){case"left":return c;case"right":return d;case"both":return c+d}},callingNewSlide:function(a,b){var c=a.find(".next-revslide").length>0?a.find(".next-revslide").index():a.find(".processing-revslide").length>0?a.find(".processing-revslide").index():a.find(".active-revslide").index(),d=0,e=a[0].opt;a.find(".next-revslide").removeClass("next-revslide"),a.find(".active-revslide").hasClass("tp-invisible-slide")&&(c=e.last_shown_slide),b&&jQuery.isNumeric(b)||b.match(/to/g)?(1===b||b===-1?(d=c+b,d=d<0?e.slideamount-1:d>=e.slideamount?0:d):(b=jQuery.isNumeric(b)?b:parseInt(b.split("to")[1],0),d=b<0?0:b>e.slideamount-1?e.slideamount-1:b),a.find(".tp-revslider-slidesli:eq("+d+")").addClass("next-revslide")):b&&a.find(".tp-revslider-slidesli").each(function(){var a=jQuery(this);a.data("index")===b&&a.addClass("next-revslide")}),d=a.find(".next-revslide").index(),a.trigger("revolution.nextslide.waiting"),c===d&&c===e.last_shown_slide||d!==c&&d!=-1?swapSlide(a):a.find(".next-revslide").removeClass("next-revslide")},slotSize:function(a,b){b.slotw=Math.ceil(b.width/b.slots),"fullscreen"==b.sliderLayout?b.sloth=Math.ceil(jQuery(window).height()/b.slots):b.sloth=Math.ceil(b.height/b.slots),"on"==b.autoHeight&&a!==undefined&&""!==a&&(b.sloth=Math.ceil(a.height()/b.slots))},setSize:function(a){var b=(a.top_outer||0)+(a.bottom_outer||0),c=parseInt(a.carousel.padding_top||0,0),d=parseInt(a.carousel.padding_bottom||0,0),e=a.gridheight[a.curWinRange],f=0,g=a.nextSlide===-1||a.nextSlide===undefined?0:a.nextSlide;if(a.paddings=a.paddings===undefined?{top:parseInt(a.c.parent().css("paddingTop"),0)||0,bottom:parseInt(a.c.parent().css("paddingBottom"),0)||0}:a.paddings,a.rowzones&&a.rowzones.length>0)for(var h=0;h<a.rowzones[g].length;h++)f+=a.rowzones[g][h][0].offsetHeight;if(e=e<a.minHeight?a.minHeight:e,e=e<f?f:e,"fullwidth"==a.sliderLayout&&"off"==a.autoHeight&&punchgs.TweenLite.set(a.c,{maxHeight:e+"px"}),a.c.css({marginTop:c,marginBottom:d}),a.width=a.ul.width(),a.height=a.ul.height(),setScale(a),a.height=Math.round(a.gridheight[a.curWinRange]*(a.width/a.gridwidth[a.curWinRange])),a.height>a.gridheight[a.curWinRange]&&"on"!=a.autoHeight&&(a.height=a.gridheight[a.curWinRange]),"fullscreen"==a.sliderLayout||a.infullscreenmode){a.height=a.bw*a.gridheight[a.curWinRange];var j=(a.c.parent().width(),jQuery(window).height());if(a.fullScreenOffsetContainer!=undefined){try{var k=a.fullScreenOffsetContainer.split(",");k&&jQuery.each(k,function(a,b){j=jQuery(b).length>0?j-jQuery(b).outerHeight(!0):j})}catch(a){}try{a.fullScreenOffset.split("%").length>1&&a.fullScreenOffset!=undefined&&a.fullScreenOffset.length>0?j-=jQuery(window).height()*parseInt(a.fullScreenOffset,0)/100:a.fullScreenOffset!=undefined&&a.fullScreenOffset.length>0&&(j-=parseInt(a.fullScreenOffset,0))}catch(a){}}j=j<a.minHeight?a.minHeight:j,j-=b,a.c.parent().height(j),a.c.closest(".rev_slider_wrapper").height(j),a.c.css({height:"100%"}),a.height=j,a.minHeight!=undefined&&a.height<a.minHeight&&(a.height=a.minHeight),a.height=parseInt(f,0)>parseInt(a.height,0)?f:a.height}else a.minHeight!=undefined&&a.height<a.minHeight&&(a.height=a.minHeight),a.height=parseInt(f,0)>parseInt(a.height,0)?f:a.height,a.c.height(a.height);var l={height:c+d+b+a.height+a.paddings.top+a.paddings.bottom};a.c.closest(".forcefullwidth_wrapper_tp_banner").find(".tp-fullwidth-forcer").css(l),a.c.closest(".rev_slider_wrapper").css(l),setScale(a)},enterInViewPort:function(a){a.waitForCountDown&&(countDown(a.c,a),a.waitForCountDown=!1),a.waitForFirstSlide&&(swapSlide(a.c),a.waitForFirstSlide=!1),"playing"!=a.sliderlaststatus&&a.sliderlaststatus!=undefined||a.c.trigger("starttimer"),a.lastplayedvideos!=undefined&&a.lastplayedvideos.length>0&&jQuery.each(a.lastplayedvideos,function(b,c){_R.playVideo(c,a)})},leaveViewPort:function(a){a.sliderlaststatus=a.sliderstatus,a.c.trigger("stoptimer"),a.playingvideos!=undefined&&a.playingvideos.length>0&&(a.lastplayedvideos=jQuery.extend(!0,[],a.playingvideos),a.playingvideos&&jQuery.each(a.playingvideos,function(b,c){a.leaveViewPortBasedStop=!0,_R.stopVideo&&_R.stopVideo(c,a)}))},unToggleState:function(a){a!=undefined&&a.length>0&&jQuery.each(a,function(a,b){b.removeClass("rs-toggle-content-active")})},toggleState:function(a){a!=undefined&&a.length>0&&jQuery.each(a,function(a,b){b.addClass("rs-toggle-content-active")})},swaptoggleState:function(a){a!=undefined&&a.length>0&&jQuery.each(a,function(a,b){b.hasClass("rs-toggle-content-active")?b.removeClass("rs-toggle-content-active"):b.addClass("rs-toggle-content-active")})},lastToggleState:function(a){var b=0;return a!=undefined&&a.length>0&&jQuery.each(a,function(a,c){b=c.hasClass("rs-toggle-content-active")}),b}});var _ISM=_R.is_mobile(),checkIDS=function(a,b){a.anyid=a.anyid===undefined?[]:a.anyid;var c=jQuery.inArray(b.attr("id"),a.anyid);if(c!=-1){var d=b.attr("id")+"_"+Math.round(9999*Math.random());b.attr("id",d)}a.anyid.push(b.attr("id"))},removeArray=function(a,b){var c=[];return jQuery.each(a,function(a,d){a!=b&&c.push(d)}),c},removeNavWithLiref=function(a,b,c){c.c.find(a).each(function(){var a=jQuery(this);a.data("liref")===b&&a.remove()})},lAjax=function(a,b){return!jQuery("body").data(a)&&(b.filesystem?(b.errorm===undefined&&(b.errorm="<br>Local Filesystem Detected !<br>Put this to your header:"),console.warn("Local Filesystem detected !"),b.errorm=b.errorm+'<br>&lt;script type="text/javascript" src="'+b.jsFileLocation+a+b.extensions_suffix+'"&gt;&lt;/script&gt;',console.warn(b.jsFileLocation+a+b.extensions_suffix+" could not be loaded !"),console.warn("Please use a local Server or work online or make sure that you load all needed Libraries manually in your Document."),console.log(" "),b.modulesfailing=!0,!1):(jQuery.ajax({url:b.jsFileLocation+a+b.extensions_suffix,dataType:"script",cache:!0,error:function(c){console.warn("Slider Revolution 5.0 Error !"),console.error("Failure at Loading:"+a+b.extensions_suffix+" on Path:"+b.jsFileLocation),console.info(c)}}),void jQuery("body").data(a,!0)))},getNeededScripts=function(a,b){var c=new Object,d=a.navigation;return c.kenburns=!1,c.parallax=!1,c.carousel=!1,c.navigation=!1,c.videos=!1,c.actions=!1,c.layeranim=!1,c.migration=!1,b.data("version")&&b.data("version").toString().match(/5./gi)?(b.find("img").each(function(){"on"==jQuery(this).data("kenburns")&&(c.kenburns=!0)}),("carousel"==a.sliderType||"on"==d.keyboardNavigation||"on"==d.mouseScrollNavigation||"on"==d.touch.touchenabled||d.arrows.enable||d.bullets.enable||d.thumbnails.enable||d.tabs.enable)&&(c.navigation=!0),b.find(".tp-caption, .tp-static-layer, .rs-background-video-layer").each(function(){var a=jQuery(this);(a.data("ytid")!=undefined||a.find("iframe").length>0&&a.find("iframe").attr("src").toLowerCase().indexOf("youtube")>0)&&(c.videos=!0),(a.data("vimeoid")!=undefined||a.find("iframe").length>0&&a.find("iframe").attr("src").toLowerCase().indexOf("vimeo")>0)&&(c.videos=!0),a.data("actions")!==undefined&&(c.actions=!0),c.layeranim=!0}),b.find("li").each(function(){jQuery(this).data("link")&&jQuery(this).data("link")!=undefined&&(c.layeranim=!0,c.actions=!0)}),!c.videos&&(b.find(".rs-background-video-layer").length>0||b.find(".tp-videolayer").length>0||b.find(".tp-audiolayer").length>0||b.find("iframe").length>0||b.find("video").length>0)&&(c.videos=!0),"carousel"==a.sliderType&&(c.carousel=!0),("off"!==a.parallax.type||a.viewPort.enable||"true"==a.viewPort.enable)&&(c.parallax=!0)):(c.kenburns=!0,c.parallax=!0,c.carousel=!1,c.navigation=!0,c.videos=!0,c.actions=!0,c.layeranim=!0,c.migration=!0),"hero"==a.sliderType&&(c.carousel=!1,c.navigation=!1),window.location.href.match(/file:/gi)&&(c.filesystem=!0,a.filesystem=!0),c.videos&&"undefined"==typeof _R.isVideoPlaying&&lAjax("revolution.extension.video",a),c.carousel&&"undefined"==typeof _R.prepareCarousel&&lAjax("revolution.extension.carousel",a),c.carousel||"undefined"!=typeof _R.animateSlide||lAjax("revolution.extension.slideanims",a),c.actions&&"undefined"==typeof _R.checkActions&&lAjax("revolution.extension.actions",a),c.layeranim&&"undefined"==typeof _R.handleStaticLayers&&lAjax("revolution.extension.layeranimation",a),c.kenburns&&"undefined"==typeof _R.stopKenBurn&&lAjax("revolution.extension.kenburn",a),c.navigation&&"undefined"==typeof _R.createNavigation&&lAjax("revolution.extension.navigation",a),c.migration&&"undefined"==typeof _R.migration&&lAjax("revolution.extension.migration",a),c.parallax&&"undefined"==typeof _R.checkForParallax&&lAjax("revolution.extension.parallax",a),a.addons!=undefined&&a.addons.length>0&&jQuery.each(a.addons,function(b,c){"object"==typeof c&&c.fileprefix!=undefined&&lAjax(c.fileprefix,a)}),c},waitForScripts=function(a,b){var c=!0,d=b.scriptsneeded;b.addons!=undefined&&b.addons.length>0&&jQuery.each(b.addons,function(a,b){"object"==typeof b&&b.init!=undefined&&_R[b.init]===undefined&&(c=!1)}),d.filesystem||"undefined"!=typeof punchgs&&c&&(!d.kenburns||d.kenburns&&"undefined"!=typeof _R.stopKenBurn)&&(!d.navigation||d.navigation&&"undefined"!=typeof _R.createNavigation)&&(!d.carousel||d.carousel&&"undefined"!=typeof _R.prepareCarousel)&&(!d.videos||d.videos&&"undefined"!=typeof _R.resetVideo)&&(!d.actions||d.actions&&"undefined"!=typeof _R.checkActions)&&(!d.layeranim||d.layeranim&&"undefined"!=typeof _R.handleStaticLayers)&&(!d.migration||d.migration&&"undefined"!=typeof _R.migration)&&(!d.parallax||d.parallax&&"undefined"!=typeof _R.checkForParallax)&&(d.carousel||!d.carousel&&"undefined"!=typeof _R.animateSlide)?a.trigger("scriptsloaded"):setTimeout(function(){waitForScripts(a,b)},50)},getScriptLocation=function(a){var b=new RegExp("themepunch.revolution.min.js","gi"),c="";return jQuery("script").each(function(){var a=jQuery(this).attr("src");a&&a.match(b)&&(c=a)}),c=c.replace("jquery.themepunch.revolution.min.js",""),c=c.replace("jquery.themepunch.revolution.js",""),c=c.split("?")[0]},setCurWinRange=function(a,b){var d=9999,e=0,f=0,g=0,h=jQuery(window).width(),i=b&&9999==a.responsiveLevels?a.visibilityLevels:a.responsiveLevels;i&&i.length&&jQuery.each(i,function(a,b){h<b&&(0==e||e>b)&&(d=b,g=a,e=b),h>b&&e<b&&(e=b,f=a)}),e<d&&(g=f),b?a.forcedWinRange=g:a.curWinRange=g},prepareOptions=function(a,b){b.carousel.maxVisibleItems=b.carousel.maxVisibleItems<1?999:b.carousel.maxVisibleItems,b.carousel.vertical_align="top"===b.carousel.vertical_align?"0%":"bottom"===b.carousel.vertical_align?"100%":"50%"},gWiderOut=function(a,b){var c=0;return a.find(b).each(function(){var a=jQuery(this);!a.hasClass("tp-forcenotvisible")&&c<a.outerWidth()&&(c=a.outerWidth())}),c},initSlider=function(container,opt){return container!=undefined&&(container.data("aimg")!=undefined&&("enabled"==container.data("aie8")&&_R.isIE(8)||"enabled"==container.data("amobile")&&_ISM)&&container.html('<img class="tp-slider-alternative-image" src="'+container.data("aimg")+'">'),container.find(">ul").addClass("tp-revslider-mainul"),opt.c=container,opt.ul=container.find(".tp-revslider-mainul"),opt.ul.find(">li").each(function(a){var b=jQuery(this);"on"==b.data("hideslideonmobile")&&_ISM&&b.remove(),(b.data("invisible")||b.data("invisible")===!0)&&(b.addClass("tp-invisible-slide"),b.appendTo(opt.ul))}),opt.addons!=undefined&&opt.addons.length>0&&jQuery.each(opt.addons,function(i,obj){"object"==typeof obj&&obj.init!=undefined&&_R[obj.init](eval(obj.params))}),opt.cid=container.attr("id"),opt.ul.css({visibility:"visible"}),opt.slideamount=opt.ul.find(">li").not(".tp-invisible-slide").length,opt.slayers=container.find(".tp-static-layers"),opt.slayers.data("index","staticlayers"),void(1!=opt.waitForInit&&(container[0].opt=opt,runSlider(container,opt))))},onFullScreenChange=function(){jQuery("body").data("rs-fullScreenMode",!jQuery("body").data("rs-fullScreenMode")),jQuery("body").data("rs-fullScreenMode")&&setTimeout(function(){jQuery(window).trigger("resize")},200)},runSlider=function(a,b){if(b.sliderisrunning=!0,b.ul.find(">li").each(function(a){jQuery(this).data("originalindex",a)}),"on"==b.shuffle){var c=new Object,d=b.ul.find(">li:first-child");c.fstransition=d.data("fstransition"),c.fsmasterspeed=d.data("fsmasterspeed"),c.fsslotamount=d.data("fsslotamount");for(var e=0;e<b.slideamount;e++){var f=Math.round(Math.random()*b.slideamount);b.ul.find(">li:eq("+f+")").prependTo(b.ul)}var g=b.ul.find(">li:first-child");g.data("fstransition",c.fstransition),g.data("fsmasterspeed",c.fsmasterspeed),g.data("fsslotamount",c.fsslotamount),b.li=b.ul.find(">li").not(".tp-invisible-slide")}if(b.allli=b.ul.find(">li"),b.li=b.ul.find(">li").not(".tp-invisible-slide"),b.inli=b.ul.find(">li.tp-invisible-slide"),b.thumbs=new Array,b.slots=4,b.act=-1,b.firststart=1,b.loadqueue=new Array,b.syncload=0,b.conw=a.width(),b.conh=a.height(),b.responsiveLevels.length>1?b.responsiveLevels[0]=9999:b.responsiveLevels=9999,jQuery.each(b.allli,function(a,c){var c=jQuery(c),d=c.find(".rev-slidebg")||c.find("img").first(),e=0;c.addClass("tp-revslider-slidesli"),c.data("index")===undefined&&c.data("index","rs-"+Math.round(999999*Math.random()));var f=new Object;f.params=new Array,f.id=c.data("index"),f.src=c.data("thumb")!==undefined?c.data("thumb"):d.data("lazyload")!==undefined?d.data("lazyload"):d.attr("src"),c.data("title")!==undefined&&f.params.push({from:RegExp("\\{\\{title\\}\\}","g"),to:c.data("title")}),c.data("description")!==undefined&&f.params.push({from:RegExp("\\{\\{description\\}\\}","g"),to:c.data("description")});for(var e=1;e<=10;e++)c.data("param"+e)!==undefined&&f.params.push({from:RegExp("\\{\\{param"+e+"\\}\\}","g"),to:c.data("param"+e)});if(b.thumbs.push(f),c.data("origindex",c.index()),c.data("link")!=undefined){var g=c.data("link"),h=c.data("target")||"_self",i="back"===c.data("slideindex")?0:60,j=c.data("linktoslide"),k=j;j!=undefined&&"next"!=j&&"prev"!=j&&b.allli.each(function(){var a=jQuery(this);a.data("origindex")+1==k&&(j=a.data("index"))}),"slide"!=g&&(j="no");var l='<div class="tp-caption slidelink" style="cursor:pointer;width:100%;height:100%;z-index:'+i+';" data-x="center" data-y="center" data-basealign="slide" ',m="scroll_under"===j?'[{"event":"click","action":"scrollbelow","offset":"100px","delay":"0"}]':"prev"===j?'[{"event":"click","action":"jumptoslide","slide":"prev","delay":"0.2"}]':"next"===j?'[{"event":"click","action":"jumptoslide","slide":"next","delay":"0.2"}]':'[{"event":"click","action":"jumptoslide","slide":"'+j+'","delay":"0.2"}]';l="no"==j?l+' data-start="0">':l+"data-actions='"+m+'\' data-start="0">',l+='<a style="width:100%;height:100%;display:block"',l="slide"!=g?l+' target="'+h+'" href="'+g+'"':l,l+='><span style="width:100%;height:100%;display:block"></span></a></div>',c.append(l)}}),b.rle=b.responsiveLevels.length||1,b.gridwidth=cArray(b.gridwidth,b.rle),b.gridheight=cArray(b.gridheight,b.rle),"on"==b.simplifyAll&&(_R.isIE(8)||_R.iOSVersion())&&(a.find(".tp-caption").each(function(){var a=jQuery(this);a.removeClass("customin customout").addClass("fadein fadeout"),a.data("splitin",""),a.data("speed",400)}),b.allli.each(function(){var a=jQuery(this);a.data("transition","fade"),a.data("masterspeed",500),a.data("slotamount",1);var b=a.find(".rev-slidebg")||a.find(">img").first();b.data("kenburns","off")})),b.desktop=!navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|BB10|mobi|tablet|opera mini|nexus 7)/i),b.autoHeight="fullscreen"==b.sliderLayout?"on":b.autoHeight,"fullwidth"==b.sliderLayout&&"off"==b.autoHeight&&a.css({maxHeight:b.gridheight[b.curWinRange]+"px"}),"auto"!=b.sliderLayout&&0==a.closest(".forcefullwidth_wrapper_tp_banner").length&&("fullscreen"!==b.sliderLayout||"on"!=b.fullScreenAutoWidth)){var h=a.parent(),i=h.css("marginBottom"),j=h.css("marginTop"),k=a.attr("id")+"_forcefullwidth";i=i===undefined?0:i,j=j===undefined?0:j,h.wrap('<div class="forcefullwidth_wrapper_tp_banner" id="'+k+'" style="position:relative;width:100%;height:auto;margin-top:'+j+";margin-bottom:"+i+'"></div>'),a.closest(".forcefullwidth_wrapper_tp_banner").append('<div class="tp-fullwidth-forcer" style="width:100%;height:'+a.height()+'px"></div>'),a.parent().css({marginTop:"0px",marginBottom:"0px"}),a.parent().css({position:"absolute"})}if(b.shadow!==undefined&&b.shadow>0&&(a.parent().addClass("tp-shadow"+b.shadow),a.parent().append('<div class="tp-shadowcover"></div>'),a.parent().find(".tp-shadowcover").css({backgroundColor:a.parent().css("backgroundColor"),backgroundImage:a.parent().css("backgroundImage")})),setCurWinRange(b),setCurWinRange(b,!0),!a.hasClass("revslider-initialised")){a.addClass("revslider-initialised"),a.addClass("tp-simpleresponsive"),a.attr("id")==undefined&&a.attr("id","revslider-"+Math.round(1e3*Math.random()+5)),checkIDS(b,a),b.firefox13=!1,b.ie=!jQuery.support.opacity,b.ie9=9==document.documentMode,b.origcd=b.delay;var l=jQuery.fn.jquery.split("."),m=parseFloat(l[0]),n=parseFloat(l[1]);parseFloat(l[2]||"0");1==m&&n<7&&a.html('<div style="text-align:center; padding:40px 0px; font-size:20px; color:#992222;"> The Current Version of jQuery:'+l+" <br>Please update your jQuery Version to min. 1.7 in Case you wish to use the Revolution Slider Plugin</div>"),m>1&&(b.ie=!1);var p=new Object;p.addedyt=0,p.addedvim=0,p.addedvid=0,a.find(".tp-caption, .rs-background-video-layer").each(function(a){var c=jQuery(this),d=c.data(),e=d.autoplayonlyfirsttime,f=d.autoplay,g=c.hasClass("tp-audiolayer"),h=d.videoloop;c.hasClass("tp-static-layer")&&_R.handleStaticLayers&&_R.handleStaticLayers(c,b);var i=c.data("noposteronmobile")||c.data("noPosterOnMobile")||c.data("posteronmobile")||c.data("posterOnMobile")||c.data("posterOnMObile");c.data("noposteronmobile",i);var j=0;if(c.find("iframe").each(function(){punchgs.TweenLite.set(jQuery(this),{autoAlpha:0}),j++}),j>0&&c.data("iframes",!0),c.hasClass("tp-caption")){var k=c.hasClass("slidelink")?"width:100% !important;height:100% !important;":"",l=c.data(),m=l.type,n="row"===m||"column"===m?"relative":"absolute",o="";"row"===m?(c.addClass("rev_row").removeClass("tp-resizeme"),o="rev_row_wrap"):"column"===m?(o="rev_column",c.addClass("rev_column_inner").removeClass("tp-resizeme"),c.data("width","auto"),punchgs.TweenLite.set(c,{width:"auto"})):"group"===m&&c.removeClass("tp-resizeme");var q="",r="";"row"!==m&&"group"!==m&&"column"!==m&&(q="display:"+c.css("display")+";",c.closest(".rev_column").length>0&&c.addClass("rev_layer_in_column"),c.closest(".rev_group").length>0&&c.addClass("rev_layer_in_group")),l.wrapper_class!==undefined&&(o=o+" "+l.wrapper_class),l.wrapper_id!==undefined&&(r='id="'+l.wrapper_id+'"'),c.wrap('<div class="tp-parallax-wrap '+o+'" style="'+k+"position:"+n+";"+q+';visibility:hidden"><div class="tp-loop-wrap" style="'+k+"position:"+n+";"+q+';"><div class="tp-mask-wrap" style="'+k+"position:"+n+";"+q+';" ></div></div></div>'),"column"===m&&(c.append('<div class="rev_column_bg rev_column_bg_man_sized" style="display:none"></div>'),c.closest(".tp-parallax-wrap").append('<div class="rev_column_bg rev_column_bg_auto_sized"></div>'));var s=["pendulum","rotate","slideloop","pulse","wave"],t=c.closest(".tp-loop-wrap");jQuery.each(s,function(a,b){var d=c.find(".rs-"+b),e=d.data()||"";""!=e&&(t.data(e),t.addClass("rs-"+b),d.children(0).unwrap(),c.data("loopanimation","on"))}),c.attr("id")===undefined&&c.attr("id","layer-"+Math.round(999999999*Math.random())),checkIDS(b,c),punchgs.TweenLite.set(c,{visibility:"hidden"})}var u=c.data("actions");u!==undefined&&_R.checkActions(c,b,u),checkHoverDependencies(c,b),_R.checkVideoApis&&(p=_R.checkVideoApis(c,b,p)),_ISM&&(1!=e&&"true"!=e||(d.autoplayonlyfirsttime=!1,e=!1),1!=f&&"true"!=f&&"on"!=f&&"1sttime"!=f||(d.autoplay="off",f="off")),g||1!=e&&"true"!=e&&"1sttime"!=f||"loopandnoslidestop"==h||c.closest("li.tp-revslider-slidesli").addClass("rs-pause-timer-once"),g||1!=f&&"true"!=f&&"on"!=f&&"no1sttime"!=f||"loopandnoslidestop"==h||c.closest("li.tp-revslider-slidesli").addClass("rs-pause-timer-always")}),a[0].addEventListener("mouseenter",function(){a.trigger("tp-mouseenter"),
-b.overcontainer=!0},{passive:!0}),a[0].addEventListener("mouseover",function(){a.trigger("tp-mouseover"),b.overcontainer=!0},{passive:!0}),a[0].addEventListener("mouseleave",function(){a.trigger("tp-mouseleft"),b.overcontainer=!1},{passive:!0}),a.find(".tp-caption video").each(function(a){var b=jQuery(this);b.removeClass("video-js vjs-default-skin"),b.attr("preload",""),b.css({display:"none"})}),"standard"!==b.sliderType&&(b.lazyType="all"),loadImages(a.find(".tp-static-layers"),b,0,!0),waitForCurrentImages(a.find(".tp-static-layers"),b,function(){a.find(".tp-static-layers img").each(function(){var a=jQuery(this),c=a.data("lazyload")!=undefined?a.data("lazyload"):a.attr("src"),d=getLoadObj(b,c);a.attr("src",d.src)})}),b.rowzones=[],b.allli.each(function(a){var c=jQuery(this);b.rowzones[a]=[],c.find(".rev_row_zone").each(function(){b.rowzones[a].push(jQuery(this))}),"all"!=b.lazyType&&("smart"!=b.lazyType||0!=a&&1!=a&&a!=b.slideamount&&a!=b.slideamount-1)||(loadImages(c,b,a),waitForCurrentImages(c,b,function(){"carousel"==b.sliderType&&punchgs.TweenLite.to(c,1,{autoAlpha:1,ease:punchgs.Power3.easeInOut})}))});var q=getUrlVars("#")[0];if(q.length<9&&q.split("slide").length>1){var r=parseInt(q.split("slide")[1],0);r<1&&(r=1),r>b.slideamount&&(r=b.slideamount),b.startWithSlide=r-1}a.append('<div class="tp-loader '+b.spinner+'"><div class="dot1"></div><div class="dot2"></div><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>'),b.loader=a.find(".tp-loader"),0===a.find(".tp-bannertimer").length&&a.append('<div class="tp-bannertimer" style="visibility:hidden"></div>'),a.find(".tp-bannertimer").css({width:"0%"}),b.ul.css({display:"block"}),prepareSlides(a,b),"off"!==b.parallax.type&&_R.checkForParallax&&_R.checkForParallax(a,b),_R.setSize(b),"hero"!==b.sliderType&&_R.createNavigation&&_R.createNavigation(a,b),_R.resizeThumbsTabs&&_R.resizeThumbsTabs&&_R.resizeThumbsTabs(b),contWidthManager(b);var s=b.viewPort;b.inviewport=!1,s!=undefined&&s.enable&&(jQuery.isNumeric(s.visible_area)||s.visible_area.indexOf("%")!==-1&&(s.visible_area=parseInt(s.visible_area)/100),_R.scrollTicker&&_R.scrollTicker(b,a)),setTimeout(function(){if("carousel"==b.sliderType&&_R.prepareCarousel&&_R.prepareCarousel(b),!s.enable||s.enable&&b.inviewport||s.enable&&!b.inviewport&&"wait"==!s.outof)swapSlide(a);else if(b.waitForFirstSlide=!0,s.presize){var c=jQuery(b.li[0]);loadImages(c,b,0,!0),waitForCurrentImages(c.find(".tp-layers"),b,function(){_R.animateTheCaptions({slide:c,opt:b,preset:!0})})}_R.manageNavigation&&_R.manageNavigation(b),b.slideamount>1&&(!s.enable||s.enable&&b.inviewport?countDown(a,b):b.waitForCountDown=!0),setTimeout(function(){a.trigger("revolution.slide.onloaded")},100)},b.startDelay),b.startDelay=0,jQuery("body").data("rs-fullScreenMode",!1),window.addEventListener("fullscreenchange",onFullScreenChange,{passive:!0}),window.addEventListener("mozfullscreenchange",onFullScreenChange,{passive:!0}),window.addEventListener("webkitfullscreenchange",onFullScreenChange,{passive:!0});var t="resize.revslider-"+a.attr("id");jQuery(window).on(t,function(){if(a==undefined)return!1;0!=jQuery("body").find(a)&&contWidthManager(b);var c=!1;if("fullscreen"==b.sliderLayout){var d=jQuery(window).height();"mobile"==b.fallbacks.ignoreHeightChanges&&_ISM||"always"==b.fallbacks.ignoreHeightChanges?(b.fallbacks.ignoreHeightChangesSize=b.fallbacks.ignoreHeightChangesSize==undefined?0:b.fallbacks.ignoreHeightChangesSize,c=d!=b.lastwindowheight&&Math.abs(d-b.lastwindowheight)>b.fallbacks.ignoreHeightChangesSize):c=d!=b.lastwindowheight}(a.outerWidth(!0)!=b.width||a.is(":hidden")||c)&&(b.lastwindowheight=jQuery(window).height(),containerResized(a,b))}),hideSliderUnder(a,b),contWidthManager(b),b.fallbacks.disableFocusListener||"true"==b.fallbacks.disableFocusListener||b.fallbacks.disableFocusListener===!0||tabBlurringCheck(a,b)}},cArray=function(a,b){if(!jQuery.isArray(a)){var c=a;a=new Array,a.push(c)}if(a.length<b)for(var c=a[a.length-1],d=0;d<b-a.length+2;d++)a.push(c);return a},checkHoverDependencies=function(a,b){var c=a.data(),d="sliderenter"===c.start||c.frames!==undefined&&c.frames[0]!=undefined&&"sliderenter"===c.frames[0].delay;d&&(b.layersonhover===undefined&&(b.c.on("tp-mouseenter",function(){b.layersonhover&&jQuery.each(b.layersonhover,function(a,c){var d=c.data("closestli")||c.closest(".tp-revslider-slidesli"),e=c.data("staticli")||c.closest(".tp-static-layers");c.data("closestli")===undefined&&(c.data("closestli",d),c.data("staticli",e)),(d.length>0&&d.hasClass("active-revslide")||d.hasClass("processing-revslide")||e.length>0)&&(c.data("animdirection","in"),_R.playAnimationFrame&&_R.playAnimationFrame({caption:c,opt:b,frame:"frame_0",triggerdirection:"in",triggerframein:"frame_0",triggerframeout:"frame_999"}),c.data("triggerstate","on"))})}),b.c.on("tp-mouseleft",function(){b.layersonhover&&jQuery.each(b.layersonhover,function(a,c){c.data("animdirection","out"),c.data("triggered",!0),c.data("triggerstate","off"),_R.stopVideo&&_R.stopVideo(c,b),_R.playAnimationFrame&&_R.playAnimationFrame({caption:c,opt:b,frame:"frame_999",triggerdirection:"out",triggerframein:"frame_0",triggerframeout:"frame_999"})})}),b.layersonhover=new Array),b.layersonhover.push(a))},contWidthManager=function(a){var b=_R.getHorizontalOffset(a.c,"left");if("auto"==a.sliderLayout||"fullscreen"===a.sliderLayout&&"on"==a.fullScreenAutoWidth)"fullscreen"==a.sliderLayout&&"on"==a.fullScreenAutoWidth?punchgs.TweenLite.set(a.ul,{left:0,width:a.c.width()}):punchgs.TweenLite.set(a.ul,{left:b,width:a.c.width()-_R.getHorizontalOffset(a.c,"both")});else{var c=Math.ceil(a.c.closest(".forcefullwidth_wrapper_tp_banner").offset().left-b);punchgs.TweenLite.set(a.c.parent(),{left:0-c+"px",width:jQuery(window).width()-_R.getHorizontalOffset(a.c,"both")})}a.slayers&&"fullwidth"!=a.sliderLayout&&"fullscreen"!=a.sliderLayout&&punchgs.TweenLite.set(a.slayers,{left:b})},cv=function(a,b){return a===undefined?b:a},hideSliderUnder=function(a,b,c){var d=a.parent();jQuery(window).width()<b.hideSliderAtLimit?(a.trigger("stoptimer"),"none"!=d.css("display")&&d.data("olddisplay",d.css("display")),d.css({display:"none"})):a.is(":hidden")&&c&&(d.data("olddisplay")!=undefined&&"undefined"!=d.data("olddisplay")&&"none"!=d.data("olddisplay")?d.css({display:d.data("olddisplay")}):d.css({display:"block"}),a.trigger("restarttimer"),setTimeout(function(){containerResized(a,b)},150)),_R.hideUnHideNav&&_R.hideUnHideNav(b)},containerResized=function(a,b){if(a.trigger("revolution.slide.beforeredraw"),1==b.infullscreenmode&&(b.minHeight=jQuery(window).height()),setCurWinRange(b),setCurWinRange(b,!0),!_R.resizeThumbsTabs||_R.resizeThumbsTabs(b)===!0){if(hideSliderUnder(a,b,!0),contWidthManager(b),"carousel"==b.sliderType&&_R.prepareCarousel(b,!0),a===undefined)return!1;_R.setSize(b),b.conw=b.c.width(),b.conh=b.infullscreenmode?b.minHeight:b.c.height();var c=a.find(".active-revslide .slotholder"),d=a.find(".processing-revslide .slotholder");removeSlots(a,b,a,2),"standard"===b.sliderType&&(punchgs.TweenLite.set(d.find(".defaultimg"),{opacity:0}),c.find(".defaultimg").css({opacity:1})),"carousel"==b.sliderType&&b.lastconw!=b.conw&&(clearTimeout(b.pcartimer),b.pcartimer=setTimeout(function(){_R.prepareCarousel(b,!0)},100),b.lastconw=b.conw),_R.manageNavigation&&_R.manageNavigation(b),_R.animateTheCaptions&&a.find(".active-revslide").length>0&&_R.animateTheCaptions({slide:a.find(".active-revslide"),opt:b,recall:!0}),"on"==d.data("kenburns")&&_R.startKenBurn(d,b,d.data("kbtl").progress()),"on"==c.data("kenburns")&&_R.startKenBurn(c,b,c.data("kbtl").progress()),_R.animateTheCaptions&&a.find(".processing-revslide").length>0&&_R.animateTheCaptions({slide:a.find(".processing-revslide"),opt:b,recall:!0}),_R.manageNavigation&&_R.manageNavigation(b)}a.trigger("revolution.slide.afterdraw")},setScale=function(a){a.bw=a.width/a.gridwidth[a.curWinRange],a.bh=a.height/a.gridheight[a.curWinRange],a.bh>a.bw?a.bh=a.bw:a.bw=a.bh,(a.bh>1||a.bw>1)&&(a.bw=1,a.bh=1)},prepareSlides=function(a,b){if(a.find(".tp-caption").each(function(){var a=jQuery(this);a.data("transition")!==undefined&&a.addClass(a.data("transition"))}),b.ul.css({overflow:"hidden",width:"100%",height:"100%",maxHeight:a.parent().css("maxHeight")}),"on"==b.autoHeight&&(b.ul.css({overflow:"hidden",width:"100%",height:"100%",maxHeight:"none"}),a.css({maxHeight:"none"}),a.parent().css({maxHeight:"none"})),b.allli.each(function(a){var c=jQuery(this),d=c.data("originalindex");(b.startWithSlide!=undefined&&d==b.startWithSlide||b.startWithSlide===undefined&&0==a)&&c.addClass("next-revslide"),c.css({width:"100%",height:"100%",overflow:"hidden"})}),"carousel"===b.sliderType){b.ul.css({overflow:"visible"}).wrap('<div class="tp-carousel-wrapper" style="width:100%;height:100%;position:absolute;top:0px;left:0px;overflow:hidden;"></div>');var c='<div style="clear:both;display:block;width:100%;height:1px;position:relative;margin-bottom:-1px"></div>';b.c.parent().prepend(c),b.c.parent().append(c),_R.prepareCarousel(b)}a.parent().css({overflow:"visible"}),b.allli.find(">img").each(function(a){var c=jQuery(this),d=c.closest("li"),e=d.find(".rs-background-video-layer");e.addClass("defaultvid").css({zIndex:30}),c.addClass("defaultimg"),"on"==b.fallbacks.panZoomDisableOnMobile&&_ISM&&(c.data("kenburns","off"),c.data("bgfit","cover"));var f=d.data("mediafilter");f="none"===f||f===undefined?"":f,c.wrap('<div class="slotholder '+f+'" style="position:absolute; top:0px; left:0px; z-index:0;width:100%;height:100%;"></div>'),e.appendTo(d.find(".slotholder"));var g=c.data();c.closest(".slotholder").data(g),e.length>0&&g.bgparallax!=undefined&&e.data("bgparallax",g.bgparallax),"none"!=b.dottedOverlay&&b.dottedOverlay!=undefined&&c.closest(".slotholder").append('<div class="tp-dottedoverlay '+b.dottedOverlay+'"></div>');var h=c.attr("src");g.src=h,g.bgfit=g.bgfit||"cover",g.bgrepeat=g.bgrepeat||"no-repeat",g.bgposition=g.bgposition||"center center";var i=c.closest(".slotholder");c.parent().append('<div class="tp-bgimg defaultimg" style="background-color:'+c.css("backgroundColor")+";background-repeat:"+g.bgrepeat+";background-image:url("+h+");background-size:"+g.bgfit+";background-position:"+g.bgposition+';width:100%;height:100%;"></div>');var j=document.createComment("Runtime Modification - Img tag is Still Available for SEO Goals in Source - "+c.get(0).outerHTML);c.replaceWith(j),c=i.find(".tp-bgimg"),c.data(g),c.attr("src",h),"standard"!==b.sliderType&&"undefined"!==b.sliderType||c.css({opacity:0})})},removeSlots=function(a,b,c,d){b.removePrepare=b.removePrepare+d,c.find(".slot, .slot-circle-wrapper").each(function(){jQuery(this).remove()}),b.transition=0,b.removePrepare=0},cutParams=function(a){var b=a;return a!=undefined&&a.length>0&&(b=a.split("?")[0]),b},relativeRedir=function(a){return location.pathname.replace(/(.*)\/[^\/]*/,"$1/"+a)},abstorel=function(a,b){var c=a.split("/"),d=b.split("/");c.pop();for(var e=0;e<d.length;e++)"."!=d[e]&&(".."==d[e]?c.pop():c.push(d[e]));return c.join("/")},imgLoaded=function(a,b,c){b.syncload--,b.loadqueue&&jQuery.each(b.loadqueue,function(b,d){var e=d.src.replace(/\.\.\/\.\.\//gi,""),f=self.location.href,g=document.location.origin,h=f.substring(0,f.length-1)+"/"+e,i=g+"/"+e,j=abstorel(self.location.href,d.src);f=f.substring(0,f.length-1)+e,g+=e,(cutParams(g)===cutParams(decodeURIComponent(a.src))||cutParams(f)===cutParams(decodeURIComponent(a.src))||cutParams(j)===cutParams(decodeURIComponent(a.src))||cutParams(i)===cutParams(decodeURIComponent(a.src))||cutParams(h)===cutParams(decodeURIComponent(a.src))||cutParams(d.src)===cutParams(decodeURIComponent(a.src))||cutParams(d.src).replace(/^.*\/\/[^\/]+/,"")===cutParams(decodeURIComponent(a.src)).replace(/^.*\/\/[^\/]+/,"")||"file://"===window.location.origin&&cutParams(a.src).match(new RegExp(e)))&&(d.progress=c,d.width=a.width,d.height=a.height)}),progressImageLoad(b)},progressImageLoad=function(a){3!=a.syncload&&a.loadqueue&&jQuery.each(a.loadqueue,function(b,c){if(c.progress.match(/prepared/g)&&a.syncload<=3){if(a.syncload++,"img"==c.type){var d=new Image;d.onload=function(){imgLoaded(this,a,"loaded"),c.error=!1},d.onerror=function(){imgLoaded(this,a,"failed"),c.error=!0},d.src=c.src}else jQuery.get(c.src,function(b){c.innerHTML=(new XMLSerializer).serializeToString(b.documentElement),c.progress="loaded",a.syncload--,progressImageLoad(a)}).fail(function(){c.progress="failed",a.syncload--,progressImageLoad(a)});c.progress="inload"}})},addToLoadQueue=function(a,b,c,d,e){var f=!1;if(b.loadqueue&&jQuery.each(b.loadqueue,function(b,c){c.src===a&&(f=!0)}),!f){var g=new Object;g.src=a,g.starttoload=jQuery.now(),g.type=d||"img",g.prio=c,g.progress="prepared",g.static=e,b.loadqueue.push(g)}},loadImages=function(a,b,c,d){a.find("img,.defaultimg, .tp-svg-layer").each(function(){var a=jQuery(this),e=a.data("lazyload")!==undefined&&"undefined"!==a.data("lazyload")?a.data("lazyload"):a.data("svg_src")!=undefined?a.data("svg_src"):a.attr("src"),f=a.data("svg_src")!=undefined?"svg":"img";a.data("start-to-load",jQuery.now()),addToLoadQueue(e,b,c,f,d)}),progressImageLoad(b)},getLoadObj=function(a,b){var c=new Object;return a.loadqueue&&jQuery.each(a.loadqueue,function(a,d){d.src==b&&(c=d)}),c},waitForCurrentImages=function(a,b,c){var d=!1;a.find("img,.defaultimg, .tp-svg-layer").each(function(){var c=jQuery(this),e=c.data("lazyload")!=undefined?c.data("lazyload"):c.data("svg_src")!=undefined?c.data("svg_src"):c.attr("src"),f=getLoadObj(b,e);if(c.data("loaded")===undefined&&f!==undefined&&f.progress&&f.progress.match(/loaded/g)){if(c.attr("src",f.src),"img"==f.type)if(c.hasClass("defaultimg"))_R.isIE(8)?defimg.attr("src",f.src):c.css({backgroundImage:'url("'+f.src+'")'}),a.data("owidth",f.width),a.data("oheight",f.height),a.find(".slotholder").data("owidth",f.width),a.find(".slotholder").data("oheight",f.height);else{var g=c.data("ww"),h=c.data("hh");c.data("owidth",f.width),c.data("oheight",f.height),g=g==undefined||"auto"==g||""==g?f.width:g,h=h==undefined||"auto"==h||""==h?f.height:h,!jQuery.isNumeric(g)&&g.indexOf("%")>0&&(h=g),c.data("ww",g),c.data("hh",h)}else"svg"==f.type&&"loaded"==f.progress&&(c.append('<div class="tp-svg-innercontainer"></div>'),c.find(".tp-svg-innercontainer").append(f.innerHTML));c.data("loaded",!0)}if(f&&f.progress&&f.progress.match(/inprogress|inload|prepared/g)&&(!f.error&&jQuery.now()-c.data("start-to-load")<5e3?d=!0:(f.progress="failed",f.reported_img||(f.reported_img=!0,console.warn(e+"  Could not be loaded !")))),1==b.youtubeapineeded&&(!window.YT||YT.Player==undefined)&&(d=!0,jQuery.now()-b.youtubestarttime>5e3&&1!=b.youtubewarning)){b.youtubewarning=!0;var i="YouTube Api Could not be loaded !";"https:"===location.protocol&&(i+=" Please Check and Renew SSL Certificate !"),console.error(i),b.c.append('<div style="position:absolute;top:50%;width:100%;color:#e74c3c;  font-size:16px; text-align:center; padding:15px;background:#000; display:block;"><strong>'+i+"</strong></div>")}if(1==b.vimeoapineeded&&!window.Froogaloop&&(d=!0,jQuery.now()-b.vimeostarttime>5e3&&1!=b.vimeowarning)){b.vimeowarning=!0;var i="Vimeo Froogaloop Api Could not be loaded !";"https:"===location.protocol&&(i+=" Please Check and Renew SSL Certificate !"),console.error(i),b.c.append('<div style="position:absolute;top:50%;width:100%;color:#e74c3c;  font-size:16px; text-align:center; padding:15px;background:#000; display:block;"><strong>'+i+"</strong></div>")}}),!_ISM&&b.audioqueue&&b.audioqueue.length>0&&jQuery.each(b.audioqueue,function(a,b){b.status&&"prepared"===b.status&&jQuery.now()-b.start<b.waittime&&(d=!0)}),jQuery.each(b.loadqueue,function(a,b){b.static!==!0||"loaded"==b.progress&&"failed"!==b.progress||("failed"==b.progress?b.reported||(b.reported=!0,console.warn("Static Image "+b.src+"  Could not be loaded in time. Error Exists:"+b.error)):!b.error&&jQuery.now()-b.starttoload<5e3?d=!0:b.reported||(b.reported=!0,console.warn("Static Image "+b.src+"  Could not be loaded within 5s! Error Exists:"+b.error)))}),d?punchgs.TweenLite.delayedCall(.18,waitForCurrentImages,[a,b,c]):punchgs.TweenLite.delayedCall(.18,c)},swapSlide=function(a){var b=a[0].opt;if(clearTimeout(b.waitWithSwapSlide),a.find(".processing-revslide").length>0)return b.waitWithSwapSlide=setTimeout(function(){swapSlide(a)},150),!1;var c=a.find(".active-revslide"),d=a.find(".next-revslide"),e=d.find(".defaultimg");return d.index()===c.index()?(d.removeClass("next-revslide"),!1):(d.removeClass("next-revslide").addClass("processing-revslide"),d.data("slide_on_focus_amount",d.data("slide_on_focus_amount")+1||1),"on"==b.stopLoop&&d.index()==b.lastslidetoshow-1&&(a.find(".tp-bannertimer").css({visibility:"hidden"}),a.trigger("revolution.slide.onstop"),b.noloopanymore=1),d.index()===b.slideamount-1&&(b.looptogo=b.looptogo-1,b.looptogo<=0&&(b.stopLoop="on")),b.tonpause=!0,a.trigger("stoptimer"),b.cd=0,"off"===b.spinner&&(b.loader!==undefined?b.loader.css({display:"none"}):b.loadertimer=setTimeout(function(){b.loader!==undefined&&b.loader.css({display:"block"})},50)),loadImages(d,b,1),_R.preLoadAudio&&_R.preLoadAudio(d,b,1),void waitForCurrentImages(d,b,function(){d.find(".rs-background-video-layer").each(function(){var a=jQuery(this);a.hasClass("HasListener")||(a.data("bgvideo",1),_R.manageVideoLayer&&_R.manageVideoLayer(a,b)),0==a.find(".rs-fullvideo-cover").length&&a.append('<div class="rs-fullvideo-cover"></div>')}),swapSlideProgress(e,a)}))},swapSlideProgress=function(a,b){var c=b.find(".active-revslide"),d=b.find(".processing-revslide"),e=c.find(".slotholder"),f=d.find(".slotholder"),g=b[0].opt;g.tonpause=!1,g.cd=0,clearTimeout(g.loadertimer),g.loader!==undefined&&g.loader.css({display:"none"}),_R.setSize(g),_R.slotSize(a,g),_R.manageNavigation&&_R.manageNavigation(g);var h={};h.nextslide=d,h.currentslide=c,b.trigger("revolution.slide.onbeforeswap",h),g.transition=1,g.videoplaying=!1,d.data("delay")!=undefined?(g.cd=0,g.delay=d.data("delay")):g.delay=g.origcd,"true"==d.data("ssop")||d.data("ssop")===!0?g.ssop=!0:g.ssop=!1,b.trigger("nulltimer");var i=c.index(),j=d.index();g.sdir=j<i?1:0,"arrow"==g.sc_indicator&&(0==i&&j==g.slideamount-1&&(g.sdir=1),i==g.slideamount-1&&0==j&&(g.sdir=0)),g.lsdir=g.lsdir===undefined?g.sdir:g.lsdir,g.dirc=g.lsdir!=g.sdir,g.lsdir=g.sdir,c.index()!=d.index()&&1!=g.firststart&&_R.removeTheCaptions&&_R.removeTheCaptions(c,g),d.hasClass("rs-pause-timer-once")||d.hasClass("rs-pause-timer-always")?g.videoplaying=!0:b.trigger("restarttimer"),d.removeClass("rs-pause-timer-once");var k,m;if(g.currentSlide=c.index(),g.nextSlide=d.index(),"carousel"==g.sliderType)m=new punchgs.TimelineLite,_R.prepareCarousel(g,m),letItFree(b,f,e,d,c,m),g.transition=0,g.firststart=0;else{m=new punchgs.TimelineLite({onComplete:function(){letItFree(b,f,e,d,c,m)}}),m.add(punchgs.TweenLite.set(f.find(".defaultimg"),{opacity:0})),m.pause(),_R.animateTheCaptions&&_R.animateTheCaptions({slide:d,opt:g,maintimeline:m,preset:!0}),1==g.firststart&&(punchgs.TweenLite.set(c,{autoAlpha:0}),g.firststart=0),punchgs.TweenLite.set(c,{zIndex:18}),punchgs.TweenLite.set(d,{autoAlpha:0,zIndex:20}),"prepared"==d.data("differentissplayed")&&(d.data("differentissplayed","done"),d.data("transition",d.data("savedtransition")),d.data("slotamount",d.data("savedslotamount")),d.data("masterspeed",d.data("savedmasterspeed"))),d.data("fstransition")!=undefined&&"done"!=d.data("differentissplayed")&&(d.data("savedtransition",d.data("transition")),d.data("savedslotamount",d.data("slotamount")),d.data("savedmasterspeed",d.data("masterspeed")),d.data("transition",d.data("fstransition")),d.data("slotamount",d.data("fsslotamount")),d.data("masterspeed",d.data("fsmasterspeed")),d.data("differentissplayed","prepared")),d.data("transition")==undefined&&d.data("transition","random"),k=0;var n=d.data("transition")!==undefined?d.data("transition").split(","):"fade",o=d.data("nexttransid")==undefined?-1:d.data("nexttransid");"on"==d.data("randomtransition")?o=Math.round(Math.random()*n.length):o+=1,o==n.length&&(o=0),d.data("nexttransid",o);var p=n[o];g.ie&&("boxfade"==p&&(p="boxslide"),"slotfade-vertical"==p&&(p="slotzoom-vertical"),"slotfade-horizontal"==p&&(p="slotzoom-horizontal")),_R.isIE(8)&&(p=11),m=_R.animateSlide(k,p,b,d,c,f,e,m),"on"==f.data("kenburns")&&(_R.startKenBurn(f,g),m.add(punchgs.TweenLite.set(f,{autoAlpha:0}))),m.pause()}_R.scrollHandling&&(_R.scrollHandling(g,!0),m.eventCallback("onUpdate",function(){_R.scrollHandling(g,!0)})),"off"!=g.parallax.type&&g.parallax.firstgo==undefined&&_R.scrollHandling&&(g.parallax.firstgo=!0,g.lastscrolltop=-999,_R.scrollHandling(g,!0),setTimeout(function(){g.lastscrolltop=-999,_R.scrollHandling(g,!0)},210),setTimeout(function(){g.lastscrolltop=-999,_R.scrollHandling(g,!0)},420)),_R.animateTheCaptions?_R.animateTheCaptions({slide:d,opt:g,maintimeline:m,startslideanimat:0}):m!=undefined&&setTimeout(function(){m.resume()},30),punchgs.TweenLite.to(d,.001,{autoAlpha:1})},letItFree=function(a,b,c,d,e,f){var g=a[0].opt;"carousel"===g.sliderType||(g.removePrepare=0,punchgs.TweenLite.to(b.find(".defaultimg"),.001,{zIndex:20,autoAlpha:1,onComplete:function(){removeSlots(a,g,d,1)}}),d.index()!=e.index()&&punchgs.TweenLite.to(e,.2,{zIndex:18,autoAlpha:0,onComplete:function(){removeSlots(a,g,e,1)}})),a.find(".active-revslide").removeClass("active-revslide"),a.find(".processing-revslide").removeClass("processing-revslide").addClass("active-revslide"),g.act=d.index(),g.c.attr("data-slideactive",a.find(".active-revslide").data("index")),"scroll"!=g.parallax.type&&"scroll+mouse"!=g.parallax.type&&"mouse+scroll"!=g.parallax.type||(g.lastscrolltop=-999,_R.scrollHandling(g)),f.clear(),c.data("kbtl")!=undefined&&(c.data("kbtl").reverse(),c.data("kbtl").timeScale(25)),"on"==b.data("kenburns")&&(b.data("kbtl")!=undefined?(b.data("kbtl").timeScale(1),b.data("kbtl").play()):_R.startKenBurn(b,g)),d.find(".rs-background-video-layer").each(function(a){if(_ISM)return!1;var b=jQuery(this);_R.resetVideo(b,g),punchgs.TweenLite.fromTo(b,1,{autoAlpha:0},{autoAlpha:1,ease:punchgs.Power3.easeInOut,delay:.2,onComplete:function(){_R.animcompleted&&_R.animcompleted(b,g)}})}),e.find(".rs-background-video-layer").each(function(a){if(_ISM)return!1;var b=jQuery(this);_R.stopVideo&&(_R.resetVideo(b,g),_R.stopVideo(b,g)),punchgs.TweenLite.to(b,1,{autoAlpha:0,ease:punchgs.Power3.easeInOut,delay:.2})});var h={};h.slideIndex=d.index()+1,h.slideLIIndex=d.index(),h.slide=d,h.currentslide=d,h.prevslide=e,g.last_shown_slide=e.index(),a.trigger("revolution.slide.onchange",h),a.trigger("revolution.slide.onafterswap",h),g.duringslidechange=!1;var i=e.data("slide_on_focus_amount"),j=e.data("hideafterloop");0!=j&&j<=i&&g.c.revremoveslide(e.index());var k=g.nextSlide===-1||g.nextSlide===undefined?0:g.nextSlide;k=k>g.rowzones.length?g.rowzones.length:k,g.rowzones!=undefined&&g.rowzones.length>0&&g.rowzones[k]!=undefined&&k>=0&&k<=g.rowzones.length&&g.rowzones[k].length>0&&_R.setSize(g)},removeAllListeners=function(a,b){a.children().each(function(){try{jQuery(this).die("click")}catch(a){}try{jQuery(this).die("mouseenter")}catch(a){}try{jQuery(this).die("mouseleave")}catch(a){}try{jQuery(this).unbind("hover")}catch(a){}});try{a.die("click","mouseenter","mouseleave")}catch(a){}clearInterval(b.cdint),a=null},countDown=function(a,b){b.cd=0,b.loop=0,b.stopAfterLoops!=undefined&&b.stopAfterLoops>-1?b.looptogo=b.stopAfterLoops:b.looptogo=9999999,b.stopAtSlide!=undefined&&b.stopAtSlide>-1?b.lastslidetoshow=b.stopAtSlide:b.lastslidetoshow=999,b.stopLoop="off",0==b.looptogo&&(b.stopLoop="on");var c=a.find(".tp-bannertimer");a.on("stoptimer",function(){var a=jQuery(this).find(".tp-bannertimer");a[0].tween.pause(),"on"==b.disableProgressBar&&a.css({visibility:"hidden"}),b.sliderstatus="paused",_R.unToggleState(b.slidertoggledby)}),a.on("starttimer",function(){b.forcepause_viatoggle||(1!=b.conthover&&1!=b.videoplaying&&b.width>b.hideSliderAtLimit&&1!=b.tonpause&&1!=b.overnav&&1!=b.ssop&&(1===b.noloopanymore||b.viewPort.enable&&!b.inviewport||(c.css({visibility:"visible"}),c[0].tween.resume(),b.sliderstatus="playing")),"on"==b.disableProgressBar&&c.css({visibility:"hidden"}),_R.toggleState(b.slidertoggledby))}),a.on("restarttimer",function(){if(!b.forcepause_viatoggle){var a=jQuery(this).find(".tp-bannertimer");if(b.mouseoncontainer&&"on"==b.navigation.onHoverStop&&!_ISM)return!1;1===b.noloopanymore||b.viewPort.enable&&!b.inviewport||1==b.ssop||(a.css({visibility:"visible"}),a[0].tween.kill(),a[0].tween=punchgs.TweenLite.fromTo(a,b.delay/1e3,{width:"0%"},{force3D:"auto",width:"100%",ease:punchgs.Linear.easeNone,onComplete:d,delay:1}),b.sliderstatus="playing"),"on"==b.disableProgressBar&&a.css({visibility:"hidden"}),_R.toggleState(b.slidertoggledby)}}),a.on("nulltimer",function(){c[0].tween.kill(),c[0].tween=punchgs.TweenLite.fromTo(c,b.delay/1e3,{width:"0%"},{force3D:"auto",width:"100%",ease:punchgs.Linear.easeNone,onComplete:d,delay:1}),c[0].tween.pause(0),"on"==b.disableProgressBar&&c.css({visibility:"hidden"}),b.sliderstatus="paused"});var d=function(){0==jQuery("body").find(a).length&&(removeAllListeners(a,b),clearInterval(b.cdint)),a.trigger("revolution.slide.slideatend"),1==a.data("conthover-changed")&&(b.conthover=a.data("conthover"),a.data("conthover-changed",0)),_R.callingNewSlide(a,1)};c[0].tween=punchgs.TweenLite.fromTo(c,b.delay/1e3,{width:"0%"},{force3D:"auto",width:"100%",ease:punchgs.Linear.easeNone,onComplete:d,delay:1}),b.slideamount>1&&(0!=b.stopAfterLoops||1!=b.stopAtSlide)?a.trigger("starttimer"):(b.noloopanymore=1,a.trigger("nulltimer")),a.on("tp-mouseenter",function(){b.mouseoncontainer=!0,"on"!=b.navigation.onHoverStop||_ISM||(a.trigger("stoptimer"),a.trigger("revolution.slide.onpause"))}),a.on("tp-mouseleft",function(){b.mouseoncontainer=!1,1!=a.data("conthover")&&"on"==b.navigation.onHoverStop&&(1==b.viewPort.enable&&b.inviewport||0==b.viewPort.enable)&&(a.trigger("revolution.slide.onresume"),a.trigger("starttimer"))})},vis=function(){var a,b,c={hidden:"visibilitychange",webkitHidden:"webkitvisibilitychange",mozHidden:"mozvisibilitychange",msHidden:"msvisibilitychange"};for(a in c)if(a in document){b=c[a];break}return function(c){return c&&document.addEventListener(b,c,{pasive:!0}),!document[a]}}(),restartOnFocus=function(a){return a!=undefined&&a.c!=undefined&&void(1!=a.windowfocused&&(a.windowfocused=!0,punchgs.TweenLite.delayedCall(.3,function(){"on"==a.fallbacks.nextSlideOnWindowFocus&&a.c.revnext(),a.c.revredraw(),"playing"==a.lastsliderstatus&&a.c.revresume()})))},lastStatBlur=function(a){a.windowfocused=!1,a.lastsliderstatus=a.sliderstatus,a.c.revpause();var b=a.c.find(".active-revslide .slotholder"),c=a.c.find(".processing-revslide .slotholder");"on"==c.data("kenburns")&&_R.stopKenBurn(c,a),"on"==b.data("kenburns")&&_R.stopKenBurn(b,a)},tabBlurringCheck=function(a,b){var c=document.documentMode===undefined,d=window.chrome;c&&!d?jQuery(window).on("focusin",function(){restartOnFocus(b)}).on("focusout",function(){lastStatBlur(b)}):window.addEventListener?(window.addEventListener("focus",function(a){restartOnFocus(b)},{capture:!1,passive:!0}),window.addEventListener("blur",function(a){lastStatBlur(b)},{capture:!1,passive:!0})):(window.attachEvent("focus",function(a){restartOnFocus(b)}),window.attachEvent("blur",function(a){lastStatBlur(b)}))},getUrlVars=function(a){for(var c,b=[],d=window.location.href.slice(window.location.href.indexOf(a)+1).split("_"),e=0;e<d.length;e++)d[e]=d[e].replace("%3D","="),c=d[e].split("="),b.push(c[0]),b[c[0]]=c[1];return b}}(jQuery);
+(function(jQuery,undefined){
+"use strict";
+		
+	var version = {
+					core : "5.3.0.2",
+					"revolution.extensions.actions.min.js":"2.0.2",
+					"revolution.extensions.carousel.min.js":"1.1.0",
+					"revolution.extensions.kenburn.min.js":"1.1.0",
+					"revolution.extensions.layeranimation.min.js":"3.0.6",
+					"revolution.extensions.navigation.min.js":"1.3.1",
+					"revolution.extensions.parallax.min.js":"2.0.1",
+					"revolution.extensions.slideanims.min.js":"1.5.0",
+					"revolution.extensions.video.min.js":"2.0.1"
+				   }
+
+	jQuery.fn.extend({
+
+		revolution: function(options) {
+
+			// SET DEFAULT VALUES OF ITEM //
+			var defaults = {
+				delay:9000,
+				responsiveLevels:4064,					// Single or Array for Responsive Levels i.e.: 4064 or i.e. [2048, 1024, 768, 480]					
+				visibilityLevels:[2048,1024,778,480],	// Single or Array for Responsive Visibility Levels i.e.: 4064 or i.e. [2048, 1024, 768, 480]					
+				gridwidth:960,							// Single or Array i.e. 960 or [960, 840,760,460]
+				gridheight:500,							// Single or Array i.e. 500 or [500, 450,400,350]
+				minHeight:0,
+				autoHeight:"off",					
+				sliderType : "standard",				// standard, carousel, hero					
+				sliderLayout : "auto",					// auto, fullwidth, fullscreen				
+
+				fullScreenAutoWidth:"off",				// Turns the FullScreen Slider to be a FullHeight but auto Width Slider
+				fullScreenAlignForce:"off",
+				fullScreenOffsetContainer:"",			// Size for FullScreen Slider minimising Calculated on the Container sizes
+				fullScreenOffset:"0",					// Size for FullScreen Slider minimising					
+
+				hideCaptionAtLimit:0,					// It Defines if a caption should be shown under a Screen Resolution ( Basod on The Width of Browser)
+				hideAllCaptionAtLimit:0,				// Hide all The Captions if Width of Browser is less then this value
+				hideSliderAtLimit:0,					// Hide the whole slider, and stop also functions if Width of Browser is less than this value										
+				disableProgressBar:"off",				// Hides Progress Bar if is set to "on"
+				stopAtSlide:-1,							// Stop Timer if Slide "x" has been Reached. If stopAfterLoops set to 0, then it stops already in the first Loop at slide X which defined. -1 means do not stop at any slide. stopAfterLoops has no sinn in this case.
+				stopAfterLoops:-1,						// Stop Timer if All slides has been played "x" times. IT will stop at THe slide which is defined via stopAtSlide:x, if set to -1 slide never stop automatic
+				shadow:0,								//0 = no Shadow, 1,2,3 = 3 Different Art of Shadows  (No Shadow in Fullwidth Version !)
+				dottedOverlay:"none",					//twoxtwo, threexthree, twoxtwowhite, threexthreewhite
+				startDelay:0,							// Delay before the first Animation starts.				
+				lazyType : "smart",						//full, smart, single
+				spinner:"spinner0",
+				shuffle:"off",							// Random Order of Slides,
+
+				
+				viewPort:{
+					enable:false,						// if enabled, slider wait with start or wait at first slide.
+					outof:"wait",						// wait,pause						
+					visible_area:"60%",					// Start Animation when 60% of Slider is visible
+					presize:false 						// Presize the Height of the Slider Container for Internal Link Positions
+				},
+
+				fallbacks:{
+					isJoomla:false,
+					panZoomDisableOnMobile:"off",
+					simplifyAll:"on",
+					nextSlideOnWindowFocus:"off",	
+					disableFocusListener:true,
+					ignoreHeightChanges:"off",  // off, mobile, always
+					ignoreHeightChangesSize:0
+
+				},
+				
+				parallax : {
+					type : "off",						// off, mouse, scroll, mouse+scroll
+					levels: [10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85],
+					origo:"enterpoint",				// slidercenter or enterpoint
+					speed:400,
+					bgparallax : "off",
+					opacity:"on",
+					disable_onmobile:"off",
+					ddd_shadow:"on",
+					ddd_bgfreeze:"off",
+					ddd_overflow:"visible",
+					ddd_layer_overflow:"visible",
+					ddd_z_correction:65,
+					ddd_path:"mouse"
+					
+				},
+				
+				carousel : {
+					horizontal_align : "center",
+					vertical_align : "center",
+					infinity : "on",
+					space : 0,
+					maxVisibleItems : 3,						
+					stretch:"off",						
+					fadeout:"on",						
+					maxRotation:0,						
+					minScale:0,
+					vary_fade:"off",
+					vary_rotation:"on",
+					vary_scale:"off",						
+					border_radius:"0px",
+					padding_top:0,
+					padding_bottom:0
+				},
+
+				navigation : {
+					keyboardNavigation:"off",	
+					keyboard_direction:"horizontal",		//	horizontal - left/right arrows,  vertical - top/bottom arrows
+					mouseScrollNavigation:"off",			// on, off, carousel					
+					onHoverStop:"on",						// Stop Banner Timet at Hover on Slide on/off
+
+					touch:{
+						touchenabled:"off",						// Enable Swipe Function : on/off
+						swipe_treshold : 75,					// The number of pixels that the user must move their finger by before it is considered a swipe.
+						swipe_min_touches : 1,					// Min Finger (touch) used for swipe							
+						drag_block_vertical:false,				// Prevent Vertical Scroll during Swipe
+						swipe_direction:"horizontal"
+					},
+					arrows: {
+						style:"",
+						enable:false,
+						hide_onmobile:false,							
+						hide_onleave:true,
+						hide_delay:200,
+						hide_delay_mobile:1200,
+						hide_under:0,
+						hide_over:9999,
+						tmp:'',
+						rtl:false,
+						left : {															
+							h_align:"left",
+							v_align:"center",
+							h_offset:20,
+							v_offset:0,	
+							container:"slider",							
+						},
+						right : {
+							h_align:"right",
+							v_align:"center",
+							h_offset:20,
+							v_offset:0,
+							container:"slider",
+						}
+					},
+					bullets: {
+						container:"slider",
+						rtl:false,
+						style:"",
+						enable:false,
+						hide_onmobile:false,							
+						hide_onleave:true,
+						hide_delay:200,
+						hide_delay_mobile:1200,
+						hide_under:0,
+						hide_over:9999,
+						direction:"horizontal",
+						h_align:"left",
+						v_align:"center",
+						space:0,
+						h_offset:20,
+						v_offset:0,
+						tmp:'<span class="tp-bullet-image"></span><span class="tp-bullet-title"></span>'
+					},
+					thumbnails: {
+						container:"slider",
+						rtl:false,
+						style:"",
+						enable:false,
+						width:100,
+						height:50,
+						min_width:100,
+						wrapper_padding:2,
+						wrapper_color:"#f5f5f5",
+						wrapper_opacity:1,
+						tmp:'<span class="tp-thumb-image"></span><span class="tp-thumb-title"></span>',
+						visibleAmount:5,
+						hide_onmobile:false,							
+						hide_onleave:true,
+						hide_delay:200,
+						hide_delay_mobile:1200,
+						hide_under:0,
+						hide_over:9999,
+						direction:"horizontal",
+						span:false,
+						position:"inner",							
+						space:2,
+						h_align:"left",
+						v_align:"center",
+						h_offset:20,
+						v_offset:0
+					},
+					tabs: {
+						container:"slider",
+						rtl:false,
+						style:"",
+						enable:false,
+						width:100,
+						min_width:100,
+						height:50,
+						wrapper_padding:10,
+						wrapper_color:"#f5f5f5",
+						wrapper_opacity:1,
+						tmp:'<span class="tp-tab-image"></span>',
+						visibleAmount:5,
+						hide_onmobile:false,							
+						hide_onleave:true,
+						hide_delay:200,
+						hide_delay_mobile:1200,
+						hide_under:0,
+						hide_over:9999,
+						direction:"horizontal",
+						span:false,
+						space:0,
+						position:"inner",							
+						h_align:"left",
+						v_align:"center",
+						h_offset:20,
+						v_offset:0
+					}
+				},					
+				extensions:"extensions/",			//example extensions/ or extensions/source/
+				extensions_suffix:".min.js",
+				//addons:[{fileprefix:"revolution.addon.whiteboard",init:"initWhiteBoard",params:"opt",handel:"whiteboard"}],
+				debugMode:false
+			};
+				
+			// Merge of Defaults									
+			options = jQuery.extend(true,{},defaults, options);
+			
+			return this.each(function() {	
+
+				
+				var c = jQuery(this);
+				
+				// Prepare maxHeight
+				options.minHeight = options.minHeight!=undefined ? parseInt(options.minHeight,0) : options.minHeight;
+
+				//REMOVE SLIDES IF SLIDER IS HERO
+				if (options.sliderType=="hero") {
+					c.find('>ul>li').each(function(i) {
+						if (i>0) jQuery(this).remove();
+					})
+				}
+				options.jsFileLocation = options.jsFileLocation || getScriptLocation("themepunch.revolution.min.js");						
+				options.jsFileLocation = options.jsFileLocation + options.extensions;
+				options.scriptsneeded = getNeededScripts(options,c);
+				options.curWinRange = 0;
+
+				options.rtl = true; //jQuery('body').hasClass("rtl"); 	
+
+				  if (options.navigation!=undefined && options.navigation.touch!=undefined) 
+       				 options.navigation.touch.swipe_min_touches = options.navigation.touch.swipe_min_touches >5 ? 1 : options.navigation.touch.swipe_min_touches;
+   
+
+
+				jQuery(this).on("scriptsloaded",function() {
+					if (options.modulesfailing ) {
+						c.html('<div style="margin:auto;line-height:40px;font-size:14px;color:#fff;padding:15px;background:#e74c3c;margin:20px 0px;">!! Error at loading Slider Revolution 5.0 Extrensions.'+options.errorm+'</div>').show();
+						return false;
+					}
+
+					// CHECK FOR MIGRATION
+					if (_R.migration!=undefined) options = _R.migration(c,options);	
+					
+					punchgs.force3D = true;
+					if (options.simplifyAll!=="on") punchgs.TweenLite.lagSmoothing(1000,16);													
+					prepareOptions(c,options);
+					initSlider(c,options);
+				});						
+				
+				c[0].opt = options;
+				waitForScripts(c,options);
+			})
+		},
+
+		
+		// Remove a Slide from the Slider
+		revremoveslide : function(sindex) {
+
+			return this.each(function() {	
+				
+				var container=jQuery(this),
+					opt = container[0].opt;
+
+				if (sindex<0 || sindex>opt.slideamount) return;
+
+				if (container!=undefined && container.length>0 && jQuery('body').find('#'+container.attr('id')).length>0) {
+										
+					if (opt && opt.li.length>0) {
+						if (sindex>0 || sindex<=opt.li.length) {
+							
+							var li = jQuery(opt.li[sindex]),
+								ref = li.data("index"),
+								nextslideafter = false;
+										
+							opt.slideamount = opt.slideamount-1;										
+							removeNavWithLiref('.tp-bullet',ref,opt);
+							removeNavWithLiref('.tp-tab',ref,opt);
+							removeNavWithLiref('.tp-thumb',ref,opt);	
+							if (li.hasClass('active-revslide')) 
+								nextslideafter = true;													
+							li.remove();
+							opt.li = removeArray(opt.li,sindex);	
+							if (opt.carousel && opt.carousel.slides)
+								opt.carousel.slides = removeArray(opt.carousel.slides,sindex)
+							opt.thumbs = removeArray(opt.thumbs,sindex);	
+							if (_R.updateNavIndexes) _R.updateNavIndexes(opt); 
+							if (nextslideafter) container.revnext();
+							punchgs.TweenLite.set(opt.li,{minWidth:"99%"});														
+							punchgs.TweenLite.set(opt.li,{minWidth:"100%"});
+						}
+					}
+				}
+			});
+			
+		},
+
+		// Add a New Call Back to some Module
+		revaddcallback: function(callback) {
+			return this.each(function() {						
+				if (this.opt) {	
+					if (this.opt.callBackArray === undefined)
+						this.opt.callBackArray = new Array();
+					this.opt.callBackArray.push(callback);						
+				}
+			})
+		},
+
+		// Get Current Parallax Proc
+		revgetparallaxproc : function() {
+				return jQuery(this)[0].opt.scrollproc;				
+		},
+
+		// ENABLE DEBUG MODE
+		revdebugmode: function() {
+			return this.each(function() {						
+				var c=jQuery(this);
+				c[0].opt.debugMode = true;
+				containerResized(c,c[0].opt);
+				
+			})
+		},
+
+		// METHODE SCROLL
+		revscroll: function(oy) {
+			return this.each(function() {
+				var c=jQuery(this);				
+				jQuery('body,html').animate({scrollTop:(c.offset().top+(c.height())-oy)+"px"},{duration:400});
+			});
+		},
+
+		// METHODE PAUSE
+		revredraw: function(oy) {
+			return this.each(function() {	
+				var c=jQuery(this);						
+				containerResized(c,c[0].opt);																					
+			})
+		},
+		// METHODE PAUSE
+		revkill: function(oy) {
+
+						var self = this,
+							container=jQuery(this);
+						
+						punchgs.TweenLite.killDelayedCallsTo(_R.showHideNavElements);
+															
+
+						if (container!=undefined && container.length>0 && jQuery('body').find('#'+container.attr('id')).length>0) {
+
+							container.data('conthover',1);
+							container.data('conthover-changed',1);
+							container.trigger('revolution.slide.onpause');
+
+							var bt = container.parent().find('.tp-bannertimer'),
+								opt = container[0].opt;
+							opt.tonpause = true;
+							container.trigger('stoptimer');
+
+							punchgs.TweenLite.killTweensOf(container.find('*'),false);
+							punchgs.TweenLite.killTweensOf(container,false);
+							container.unbind('hover, mouseover, mouseenter,mouseleave, resize');
+							var resizid = "resize.revslider-"+container.attr('id');
+							jQuery(window).off(resizid);
+							container.find('*').each(function() {
+									var el = jQuery(this);
+
+									el.unbind('on, hover, mouseenter,mouseleave,mouseover, resize,restarttimer, stoptimer');
+									el.off('on, hover, mouseenter,mouseleave,mouseover, resize');
+									el.data('mySplitText',null);
+									el.data('ctl',null);
+									if (el.data('tween')!=undefined)
+										el.data('tween').kill();
+									if (el.data('kenburn')!=undefined)
+										el.data('kenburn').kill();
+									if (el.data('timeline_out')!=undefined)											
+										el.data('timeline_out').kill();	
+									if (el.data('timeline')!=undefined)											
+										el.data('timeline').kill();													
+										
+									el.remove();
+									el.empty();
+									el=null;
+							})
+
+
+							punchgs.TweenLite.killTweensOf(container.find('*'),false);
+							punchgs.TweenLite.killTweensOf(container,false);
+							bt.remove();
+							try{container.closest('.forcefullwidth_wrapper_tp_banner').remove();} catch(e) {}
+							try{container.closest('.rev_slider_wrapper').remove()} catch(e) {}
+							try{container.remove();} catch(e) {}
+							container.empty();
+							container.html();
+							container = null;
+
+							opt = null;
+							delete(self.c);
+							delete(self.opt);
+
+							return true;
+						} else {
+							return false;
+						}
+				},
+
+		// METHODE PAUSE
+		revpause: function() {
+			return this.each(function() {
+				var c=jQuery(this);
+				if (c!=undefined && c.length>0 && jQuery('body').find('#'+c.attr('id')).length>0) {					
+					c.data('conthover',1);
+					c.data('conthover-changed',1);
+					c.trigger('revolution.slide.onpause');					
+					c[0].opt.tonpause = true;
+					c.trigger('stoptimer');
+				}
+			})
+		},
+
+		// METHODE RESUME
+		revresume: function() {
+			return this.each(function() {
+				var c=jQuery(this);
+				if (c!=undefined && c.length>0 && jQuery('body').find('#'+c.attr('id')).length>0) {
+					c.data('conthover',0);
+					c.data('conthover-changed',1);
+					c.trigger('revolution.slide.onresume');					
+					c[0].opt.tonpause = false;					
+					c.trigger('starttimer');
+				}
+			})
+		},
+
+		revstart: function() {
+			//return this.each(function() {
+				var c=jQuery(this);				
+				if (c!=undefined && c.length>0 && jQuery('body').find('#'+c.attr('id')).length>0 && this.opt) {		
+					if (!c[0].opt.sliderisrunning) {
+						runSlider(c,c[0].opt);
+						return true;
+					}
+					else {
+						console.log("Slider Is Running Already");
+						return false;
+					}
+
+				}
+			//})
+
+		},
+
+		// METHODE NEXT
+		revnext: function() {
+			return this.each(function() {
+				// CATCH THE CONTAINER
+				var c=jQuery(this);
+				if (c!=undefined && c.length>0 && jQuery('body').find('#'+c.attr('id')).length>0) {					
+					_R.callingNewSlide(c,1);
+				}
+			})
+		},
+
+		// METHODE RESUME
+		revprev: function() {
+			return this.each(function() {
+				// CATCH THE CONTAINER
+				var c=jQuery(this);
+				if (c!=undefined && c.length>0 && jQuery('body').find('#'+c.attr('id')).length>0) {					
+					_R.callingNewSlide(c,-1);
+				}
+			})
+		},
+
+		// METHODE LENGTH
+		revmaxslide: function() {
+			// CATCH THE CONTAINER
+			return jQuery(this).find('.tp-revslider-mainul >li').length;
+		},
+
+
+		// METHODE CURRENT
+		revcurrentslide: function() {
+			// CATCH THE CONTAINER
+			var c=jQuery(this);
+			if (c!=undefined && c.length>0 && jQuery('body').find('#'+c.attr('id')).length>0) {				
+				return parseInt(c[0].opt.act,0)+1;
+			}
+		},
+
+		// METHODE CURRENT
+		revlastslide: function() {
+			// CATCH THE CONTAINER
+			return jQuery(this).find('.tp-revslider-mainul >li').length;
+		},
+
+
+		// METHODE JUMP TO SLIDE
+		revshowslide: function(slide) {
+			return this.each(function() {
+				// CATCH THE CONTAINER
+				var c=jQuery(this);
+				if (c!=undefined && c.length>0 && jQuery('body').find('#'+c.attr('id')).length>0) {					
+					_R.callingNewSlide(c,"to"+(slide-1));
+				}
+			})
+		},
+		revcallslidewithid: function(slide) {
+			return this.each(function() {
+				// CATCH THE CONTAINER
+				var c=jQuery(this);
+				if (c!=undefined && c.length>0 && jQuery('body').find('#'+c.attr('id')).length>0) {					
+					_R.callingNewSlide(c,slide);
+				}
+			})
+		}
+});
+
+
+
+//////////////////////////////////////////////////////////////
+// -	REVOLUTION FUNCTION EXTENSIONS FOR GLOBAL USAGE  -  //	
+//////////////////////////////////////////////////////////////
+var _R = jQuery.fn.revolution;
+
+jQuery.extend(true, _R, {
+	
+	getversion : function() {
+			return version;
+	},
+
+	compare_version : function(extension) {
+		if (extension.check!="stop") {
+			// CHECK FOR CORRECT CORE AND EXTENSION VERSION
+			if (_R.getversion().core<extension.min_core) {			
+				if (extension.check===undefined) {
+					console.log("%c"+"Slider Revolution Warning (Core:"+_R.getversion().core+")",'color:#c0392b;font-weight:bold;');
+					console.log("%c"+"     Core is older than expected ("+extension.min_core+") from "+extension.alias,'color:#333');
+					console.log("%c"+"     Please update Slider Revolution to the latest version.",'color:#333');
+					console.log("%c"+"     It might be required to purge and clear Server/Client side Caches.",'color:#333');
+					
+				}				
+				extension.check="stop";
+			} else 
+
+			if (_R.getversion()[extension.name]!=undefined && extension.version <_R.getversion()[extension.name]) {
+				if (extension.check===undefined) {
+					console.log("%c"+"Slider Revolution Warning (Core:"+_R.getversion().core+")",'color:#c0392b;font-weight:bold;');
+					console.log("%c"+"     "+extension.alias+" ("+extension.version+") is older than requiered ("+_R.getversion()[extension.name]+")",'color:#333');
+					console.log("%c"+"     Please update Slider Revolution to the latest version.",'color:#333');
+					console.log("%c"+"     It might be required to purge and clear Server/Client side Caches.",'color:#333');				
+				}
+				extension.check="stop";
+			}
+		}
+		return extension;
+	},
+	
+	currentSlideIndex : function(opt) {
+	
+		var	ai =  opt.c.find('.active-revslide').index();
+			
+		ai = ai == -1 ? 0 : ai;			
+
+		return ai;
+																
+	},
+
+	simp : function(a,b,basic) {
+		var c = Math.abs(a) - (Math.floor(Math.abs(a / b))*b);																			
+		if (basic)
+			return c;
+		else 
+			return a<0 ? -1*c : c;
+	},
+
+	//	-	IS IOS VERSION OLDER THAN 5 ??	
+ 	iOSVersion : function() {
+		var oldios = false;
+		if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)) || (navigator.userAgent.match(/iPad/i))) {
+	        if (navigator.userAgent.match(/OS 4_\d like Mac OS X/i)) {
+	        	oldios = true;
+			}
+	    } else {
+			   oldios = false;
+	    }
+		return oldios;
+	},
+
+
+	//	-	CHECK IF BROWSER IS IE		-		
+	isIE : function( version, comparison ){
+	    var $div = jQuery('<div style="display:none;"/>').appendTo(jQuery('body'));
+	    $div.html('<!--[if '+(comparison||'')+' IE '+(version||'')+']><a>&nbsp;</a><![endif]-->');
+	    var ieTest = $div.find('a').length;
+	    $div.remove();
+	    return ieTest;
+	},
+
+	// 	-	IS MOBILE ?? 
+	is_mobile : function() {
+	    var agents = ['android', 'webos', 'iphone', 'ipad', 'blackberry','Android', 'webos', ,'iPod', 'iPhone', 'iPad', 'Blackberry', 'BlackBerry'];
+		var ismobile=false;
+	    for(var i in agents) {
+	
+		    if (navigator.userAgent.split(agents[i]).length>1) {
+	            ismobile = true;
+	
+	          }
+	    }
+	    return ismobile;		    
+	},
+
+	// -  CALL BACK HANDLINGS - //
+	 callBackHandling : function(opt,type,position) {
+	 	try{
+			if (opt.callBackArray)
+				jQuery.each(opt.callBackArray,function(i,c) {				
+					if (c) {
+						if (c.inmodule && c.inmodule === type)
+							if (c.atposition && c.atposition === position)
+								if (c.callback) 
+									c.callback.call();											
+					}
+				});
+		} catch(e) {
+			console.log("Call Back Failed");
+		}
+	},
+
+	get_browser : function(){
+	    var N=navigator.appName, ua=navigator.userAgent, tem;
+	    var M=ua.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
+	    if(M && (tem= ua.match(/version\/([\.\d]+)/i))!= null) M[2]= tem[1];
+	    M=M? [M[1], M[2]]: [N, navigator.appVersion, '-?'];
+	    return M[0];
+    },
+
+	get_browser_version  : function(){
+	    var N=navigator.appName, ua=navigator.userAgent, tem;
+	    var M=ua.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
+	    if(M && (tem= ua.match(/version\/([\.\d]+)/i))!= null) M[2]= tem[1];
+	    M=M? [M[1], M[2]]: [N, navigator.appVersion, '-?'];
+	    return M[1];
+    },
+
+    // GET THE HORIZONTAL OFFSET OF SLIDER BASED ON THE THU`MBNAIL AND TABS LEFT AND RIGHT SIDE
+	getHorizontalOffset : function(container,side) {
+		var thumbloff = gWiderOut(container,'.outer-left'),
+			thumbroff = gWiderOut(container,'.outer-right');
+							
+		switch (side) {
+			case "left":
+				return thumbloff;
+			break;
+			case "right":
+				return thumbroff;
+			break;
+			case "both":
+				return thumbloff+thumbroff;
+			break;
+		}
+	},
+
+
+	// 	-	CALLING THE NEW SLIDE 	-	//		
+	callingNewSlide : function(container,direction) {
+		
+		
+		var aindex = container.find('.next-revslide').length>0 ? container.find('.next-revslide').index() : container.find('.processing-revslide').length>0 ? container.find('.processing-revslide').index() : container.find('.active-revslide').index(),
+			nindex = 0,
+			opt = container[0].opt;
+	
+		container.find('.next-revslide').removeClass("next-revslide");
+		
+		// IF WE ARE ON AN INVISIBLE SLIDE CURRENTLY
+		if (container.find('.active-revslide').hasClass("tp-invisible-slide"))
+			aindex = opt.last_shown_slide;
+		
+		// SET NEXT DIRECTION
+		if (direction && jQuery.isNumeric(direction) || direction.match(/to/g)) {			
+			if (direction===1 || direction === -1) {
+				
+				nindex = aindex + direction;
+				nindex = nindex<0 ? opt.slideamount-1 : nindex>=opt.slideamount ? 0 : nindex;						
+			} else {							
+
+				direction=jQuery.isNumeric(direction) ? direction : parseInt(direction.split("to")[1],0);
+				nindex = direction<0 ? 0 : direction>opt.slideamount-1 ? opt.slideamount-1 : direction;						
+			}
+			container.find('.tp-revslider-slidesli:eq('+nindex+')').addClass("next-revslide");
+		} else 		
+		if (direction) {
+			
+			container.find('.tp-revslider-slidesli').each(function() {
+				var li=jQuery(this);				
+				if (li.data('index')===direction) li.addClass("next-revslide");									
+			})			
+		}
+
+		
+		nindex = container.find('.next-revslide').index();				
+		container.trigger("revolution.nextslide.waiting");
+				
+
+		if ((aindex===nindex && aindex === opt.last_shown_slide) || (nindex !== aindex && nindex!=-1))
+			swapSlide(container);	
+		else
+			container.find('.next-revslide').removeClass("next-revslide");
+	},
+
+	slotSize : function(img,opt) {
+		opt.slotw=Math.ceil(opt.width/opt.slots);
+
+		if (opt.sliderLayout=="fullscreen")
+			opt.sloth=Math.ceil(jQuery(window).height()/opt.slots);
+		else
+			opt.sloth=Math.ceil(opt.height/opt.slots);
+
+		if (opt.autoHeight=="on" && img!==undefined && img!=="")
+		 	opt.sloth=Math.ceil(img.height()/opt.slots);
+
+
+	},
+
+	setSize : function(opt) {
+	
+		var ofh = (opt.top_outer || 0) + (opt.bottom_outer || 0),
+			cpt = parseInt((opt.carousel.padding_top||0),0),
+			cpb = parseInt((opt.carousel.padding_bottom||0),0),
+			maxhei = opt.gridheight[opt.curWinRange],
+			__mh = 0,
+			_actli = opt.nextSlide === -1 || opt.nextSlide===undefined ? 0 : opt.nextSlide;			
+			opt.paddings = opt.paddings === undefined ? {top:(parseInt(opt.c.parent().css("paddingTop"),0) || 0), bottom:(parseInt(opt.c.parent().css("paddingBottom"),0) || 0)} : opt.paddings; 
+		
+		if (opt.rowzones && opt.rowzones.length>0)
+			for (var a=0;a<opt.rowzones[_actli].length;a++) {
+				__mh = __mh + opt.rowzones[_actli][a][0].offsetHeight;								
+			}
+		
+
+		maxhei = maxhei<opt.minHeight ? opt.minHeight : maxhei;		
+		maxhei = maxhei<__mh ? __mh : maxhei;
+		
+		
+		if (opt.sliderLayout=="fullwidth" && opt.autoHeight=="off")	punchgs.TweenLite.set(opt.c,{maxHeight:maxhei+"px"});	
+		opt.c.css({marginTop:cpt,marginBottom:cpb});					
+		opt.width=opt.ul.width();
+		opt.height=opt.ul.height();	
+		setScale(opt);
+			
+		opt.height = Math.round(opt.gridheight[opt.curWinRange] * (opt.width/opt.gridwidth[opt.curWinRange]));
+
+		if (opt.height>opt.gridheight[opt.curWinRange] && opt.autoHeight!="on") opt.height=opt.gridheight[opt.curWinRange];
+
+		if (opt.sliderLayout=="fullscreen" || opt.infullscreenmode) {
+			opt.height = opt.bw * opt.gridheight[opt.curWinRange];
+			var cow = opt.c.parent().width();
+			var coh = jQuery(window).height();
+
+			if (opt.fullScreenOffsetContainer!=undefined) {
+				try{
+					var offcontainers = opt.fullScreenOffsetContainer.split(",");
+					if (offcontainers)
+						jQuery.each(offcontainers,function(index,searchedcont) {
+							coh = jQuery(searchedcont).length>0 ? coh - jQuery(searchedcont).outerHeight(true) : coh;										
+						});
+				} catch(e) {}
+				try{
+					if (opt.fullScreenOffset.split("%").length>1 && opt.fullScreenOffset!=undefined && opt.fullScreenOffset.length>0) 
+							coh = coh - (jQuery(window).height()* parseInt(opt.fullScreenOffset,0)/100);
+					else
+					if (opt.fullScreenOffset!=undefined && opt.fullScreenOffset.length>0)
+					 		coh = coh - parseInt(opt.fullScreenOffset,0);								
+				} catch(e) {}
+			}
+
+			coh = coh<opt.minHeight ? opt.minHeight : coh;	
+			coh = coh - ofh;			
+			opt.c.parent().height(coh);
+
+			opt.c.closest('.rev_slider_wrapper').height(coh);
+			opt.c.css({'height':'100%'});
+
+			opt.height=coh;
+			if (opt.minHeight!=undefined && opt.height<opt.minHeight)
+				opt.height = opt.minHeight;
+			opt.height = parseInt(__mh,0)>parseInt(opt.height,0) ? __mh : opt.height;
+			
+		} else {
+			if (opt.minHeight!=undefined && opt.height<opt.minHeight)
+				opt.height = opt.minHeight;					
+			opt.height = parseInt(__mh,0)>parseInt(opt.height,0) ? __mh : opt.height;			
+			opt.c.height(opt.height);
+		}
+		var si = {	height:(cpt+cpb+ofh+opt.height+opt.paddings.top+opt.paddings.bottom)};	
+		
+		opt.c.closest('.forcefullwidth_wrapper_tp_banner').find('.tp-fullwidth-forcer').css(si);
+		opt.c.closest('.rev_slider_wrapper').css(si);		
+		setScale(opt);		
+	},
+
+	enterInViewPort : function(opt) {		
+		
+		// START COUNTER IF VP ENTERED, AND COUNTDOWN WAS NOT ON YET
+		if (opt.waitForCountDown) {
+		
+			countDown(opt.c,opt);		
+			opt.waitForCountDown=false;			
+		}
+		// START FIRST SLIDE IF NOT YET STARTED AND VP ENTERED
+		if (opt.waitForFirstSlide) {
+		
+			swapSlide(opt.c);		
+			opt.waitForFirstSlide=false;			
+		}			
+
+		if (opt.sliderlaststatus == "playing" || opt.sliderlaststatus==undefined) {
+			opt.c.trigger("starttimer");
+		}			
+
+		
+		if (opt.lastplayedvideos != undefined && opt.lastplayedvideos.length>0) {
+			
+			jQuery.each(opt.lastplayedvideos,function(i,_nc) {
+				
+				_R.playVideo(_nc,opt);
+			});
+		}	
+	},
+
+	leaveViewPort : function(opt) {		
+		opt.sliderlaststatus = opt.sliderstatus;
+		opt.c.trigger("stoptimer");		
+		if (opt.playingvideos != undefined && opt.playingvideos.length>0) { 
+			opt.lastplayedvideos = jQuery.extend(true,[],opt.playingvideos);
+			if (opt.playingvideos)
+				jQuery.each(opt.playingvideos,function(i,_nc) {		
+					opt.leaveViewPortBasedStop = true;		
+					if (_R.stopVideo) _R.stopVideo(_nc,opt);
+				});
+		}
+	},
+
+	unToggleState : function(a) {			
+		if (a!=undefined && a.length>0)
+			jQuery.each(a,function(i,layer) {
+				layer.removeClass("rs-toggle-content-active");
+			});		
+	},
+
+	toggleState : function(a) {
+		if (a!=undefined && a.length>0)
+			jQuery.each(a,function(i,layer) {
+				layer.addClass("rs-toggle-content-active");
+			});
+	},
+	swaptoggleState : function(a) {
+		if (a!=undefined && a.length>0)
+			jQuery.each(a,function(i,layer) {
+				if (layer.hasClass("rs-toggle-content-active"))
+					layer.removeClass("rs-toggle-content-active");
+				else
+					layer.addClass("rs-toggle-content-active");
+			});
+	},
+	lastToggleState : function(a) {
+		var state = 0;
+		if (a!=undefined && a.length>0)
+			jQuery.each(a,function(i,layer) {
+				state = layer.hasClass("rs-toggle-content-active");
+			});
+		return state;
+	}
+
+});
+
+
+var	_ISM = _R.is_mobile();
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////		
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+
+
+var checkIDS = function(opt,item) {
+	opt.anyid = opt.anyid === undefined ? [] : opt.anyid;
+	var ind = jQuery.inArray(item.attr('id'),opt.anyid);	
+	if (ind!=-1) {		
+		var newid = item.attr('id')+"_"+Math.round(Math.random()*9999);
+		item.attr('id',newid);		
+	}
+
+	opt.anyid.push(item.attr('id'));
+}
+var removeArray = function(arr,i) {
+				var newarr = [];
+				jQuery.each(arr,function(a,b) {
+					if (a!=i) newarr.push(b);
+				})
+				return newarr;
+			}
+
+var removeNavWithLiref = function(a,ref,opt) {
+	opt.c.find(a).each(function() {
+		var a = jQuery(this);
+		if (a.data('liref')===ref)
+			a.remove();
+	})
+}
+
+
+var lAjax = function(s,o) {
+	if (jQuery('body').data(s)) return false;
+	if (o.filesystem) {
+		if (o.errorm===undefined) 
+			o.errorm = "<br>Local Filesystem Detected !<br>Put this to your header:";
+		console.warn('Local Filesystem detected !');
+		o.errorm = o.errorm+'<br>&lt;script type="text/javascript" src="'+o.jsFileLocation+s+o.extensions_suffix+'"&gt;&lt;/script&gt;';
+		console.warn(o.jsFileLocation+s+o.extensions_suffix+' could not be loaded !');
+		console.warn('Please use a local Server or work online or make sure that you load all needed Libraries manually in your Document.');
+		console.log(" ");
+		o.modulesfailing = true;
+		return false;
+	}
+	jQuery.ajax({
+		url:o.jsFileLocation+s+o.extensions_suffix,
+		'dataType':'script',
+		'cache':true,
+		"error":function(e) {
+			console.warn("Slider Revolution 5.0 Error !")
+			console.error("Failure at Loading:"+s+o.extensions_suffix+" on Path:"+o.jsFileLocation)
+			console.info(e);
+		}			
+	});
+	jQuery('body').data(s,true);
+}
+
+
+
+var getNeededScripts = function(o,c) {	
+	var n = new Object(),
+		_n = o.navigation;
+	
+	n.kenburns = false;
+	n.parallax = false;
+	n.carousel = false;
+	n.navigation = false;
+	n.videos = false;
+	n.actions = false;
+	n.layeranim = false;
+	n.migration = false;
+
+	
+
+
+	// MIGRATION EXTENSION
+	if (!c.data('version') || !c.data('version').toString().match(/5./gi)) {
+		n.kenburns = true;
+		n.parallax = true;
+		n.carousel = false;
+		n.navigation = true;
+		n.videos = true;
+		n.actions = true;
+		n.layeranim = true;
+		n.migration = true;		
+	}
+	else {
+		// KEN BURN MODUL
+		c.find('img').each(function(){			
+			if (jQuery(this).data('kenburns')=="on") n.kenburns = true;
+		});						
+
+		// NAVIGATION EXTENSTION
+		if (o.sliderType =="carousel" || _n.keyboardNavigation=="on" || _n.mouseScrollNavigation=="on" || _n.touch.touchenabled=="on" || _n.arrows.enable || _n.bullets.enable || _n.thumbnails.enable || _n.tabs.enable )
+			n.navigation = true;
+		
+		// LAYERANIM, VIDEOS, ACTIONS EXTENSIONS
+		c.find('.tp-caption, .tp-static-layer, .rs-background-video-layer').each(function(){
+			var _nc = jQuery(this);
+			if ((_nc.data('ytid')!=undefined  || _nc.find('iframe').length>0 && _nc.find('iframe').attr('src').toLowerCase().indexOf('youtube')>0))			
+				n.videos = true;			
+			if ((_nc.data('vimeoid')!=undefined || _nc.find('iframe').length>0 && _nc.find('iframe').attr('src').toLowerCase().indexOf('vimeo')>0))
+				n.videos = true;		
+			if (_nc.data('actions')!==undefined) 
+				n.actions = true;
+			n.layeranim = true;
+		});
+
+
+		c.find('li').each(function() {
+			if (jQuery(this).data('link') && jQuery(this).data('link')!=undefined) {
+				n.layeranim = true;
+				n.actions = true;
+			}
+		})
+
+		// VIDEO EXTENSION
+		if (!n.videos && (c.find('.rs-background-video-layer').length>0 || c.find(".tp-videolayer").length>0 || c.find(".tp-audiolayer").length>0 || c.find('iframe').length>0 || c.find('video').length>0))						
+			n.videos = true;
+		
+
+		// VIDEO EXTENSION
+		if (o.sliderType =="carousel")
+			n.carousel = true;
+
+		
+
+		if (o.parallax.type!=="off" || o.viewPort.enable || o.viewPort.enable=="true")
+			n.parallax = true;
+	}
+	
+	if (o.sliderType=="hero") {
+		n.carousel = false;
+		n.navigation = false;
+	}
+	
+	if (window.location.href.match(/file:/gi)) {
+		n.filesystem = true;
+		o.filesystem = true;
+	}
+
+	
+	// LOAD THE NEEDED LIBRARIES
+	if (n.videos && typeof _R.isVideoPlaying=='undefined') lAjax('revolution.extension.video',o);
+	if (n.carousel && typeof _R.prepareCarousel=='undefined') lAjax('revolution.extension.carousel',o);								
+	if (!n.carousel && typeof _R.animateSlide=='undefined') lAjax('revolution.extension.slideanims',o);								
+	if (n.actions && typeof _R.checkActions=='undefined') lAjax('revolution.extension.actions',o);						
+	if (n.layeranim && typeof _R.handleStaticLayers=='undefined') lAjax('revolution.extension.layeranimation',o);						
+	if (n.kenburns && typeof _R.stopKenBurn=='undefined') lAjax('revolution.extension.kenburn',o); 
+	if (n.navigation && typeof _R.createNavigation=='undefined') lAjax('revolution.extension.navigation',o);					
+	if (n.migration && typeof _R.migration=='undefined') lAjax('revolution.extension.migration',o);					
+	if (n.parallax && typeof _R.checkForParallax=='undefined') lAjax('revolution.extension.parallax',o);					
+	
+	if (o.addons!=undefined && o.addons.length>0) {		
+		jQuery.each(o.addons, function(i,obj) {			
+			if (typeof obj === "object" && obj.fileprefix!=undefined) 
+				lAjax(obj.fileprefix,o);			
+		})
+	}
+	
+
+	return n;
+}
+
+///////////////////////////////////
+//   -  WAIT FOR SCRIPT LOADS  - //
+///////////////////////////////////	
+var waitForScripts = function(c,o) {
+	// CHECK KEN BURN DEPENDENCIES
+	var addonsloaded = true,
+		n = o.scriptsneeded;
+	
+	// CHECK FOR ADDONS
+	if (o.addons!=undefined && o.addons.length>0) {		
+		jQuery.each(o.addons, function(i,obj) {			
+			if (typeof obj === "object" && obj.init!=undefined) {				
+				if (_R[obj.init]===undefined) addonsloaded = false;
+			}
+		})
+	}
+	 
+	if (n.filesystem || 
+		(typeof punchgs !== 'undefined' &&
+		(addonsloaded) &&
+		(!n.kenburns || (n.kenburns && typeof _R.stopKenBurn !== 'undefined')) &&
+		(!n.navigation || (n.navigation && typeof _R.createNavigation !== 'undefined')) &&
+		(!n.carousel || (n.carousel && typeof _R.prepareCarousel !== 'undefined')) &&
+		(!n.videos || (n.videos && typeof _R.resetVideo !== 'undefined')) &&
+		(!n.actions || (n.actions && typeof _R.checkActions !== 'undefined')) &&
+		(!n.layeranim || (n.layeranim && typeof _R.handleStaticLayers !== 'undefined')) &&
+		(!n.migration || (n.migration && typeof _R.migration !== 'undefined')) &&
+		(!n.parallax || (n.parallax && typeof _R.checkForParallax !== 'undefined')) &&
+		(n.carousel || (!n.carousel && typeof _R.animateSlide !== 'undefined'))
+	   ))
+		c.trigger("scriptsloaded");
+	else			
+		setTimeout(function() {
+			waitForScripts(c,o);
+		},50);
+		
+}
+
+//////////////////////////////////
+//	-	GET SCRIPT LOCATION	-	//
+//////////////////////////////////
+var getScriptLocation = function(a) {
+
+	var srcexp = new RegExp("themepunch.revolution.min.js","gi"),
+		ret = "";
+	jQuery("script").each(function() {
+		var src = jQuery(this).attr("src");
+		if (src && src.match(srcexp)) 								
+			ret = src;							
+	});
+	
+	ret = ret.replace('jquery.themepunch.revolution.min.js', ''); 
+	ret = ret.replace('jquery.themepunch.revolution.js', ''); 	
+	ret = ret.split("?")[0];		
+	return ret;
+}
+
+//////////////////////////////////////////
+//	-	ADVANCED RESPONSIVE LEVELS	-	//
+//////////////////////////////////////////
+var setCurWinRange = function(opt,vis) {		
+	var curlevel = 0,
+		curwidth = 9999,
+		lastmaxlevel = 0,
+		lastmaxid = 0,
+		curid = 0,
+		winw = jQuery(window).width(),
+		l = vis && opt.responsiveLevels==9999 ? opt.visibilityLevels : opt.responsiveLevels;
+	
+	 if (l && l.length)
+		jQuery.each(l,function(index,level) {				
+			if (winw<level) {
+				if (lastmaxlevel==0 || lastmaxlevel>level) {					
+					curwidth = level;
+					curid = index;
+					lastmaxlevel = level;
+				}
+			}
+		
+		if (winw>level && lastmaxlevel<level) {
+			lastmaxlevel = level;
+			lastmaxid = index;
+		}
+	});
+
+	if (lastmaxlevel<curwidth) 
+		curid = lastmaxid;		
+
+	
+	if (!vis)
+		opt.curWinRange = curid;				
+	else
+		opt.forcedWinRange = curid;
+
+	
+}
+
+
+
+
+//////////////////////////////////////////
+//	-	INITIALISATION OF OPTIONS 	-	//
+//////////////////////////////////////////
+var prepareOptions = function(container,opt) {		
+	opt.carousel.maxVisibleItems = opt.carousel.maxVisibleItems < 1 ? 999 : opt.carousel.maxVisibleItems; // === 1 ? 2 : opt.carousel.maxVisibleItems;
+	opt.carousel.vertical_align = opt.carousel.vertical_align === "top" ? "0%" : opt.carousel.vertical_align==="bottom" ? "100%" : "50%";
+}
+
+var gWiderOut = function(c,cl) {
+	var r = 0;
+	c.find(cl).each(function() {
+		var a = jQuery(this);
+		if (!a.hasClass("tp-forcenotvisible") && r<a.outerWidth())
+			r = a.outerWidth();			
+	});
+	return r;
+}
+
+
+
+
+//////////////////////////////////////////
+//	-	INITIALISATION OF SLIDER	-	//
+//////////////////////////////////////////
+var initSlider = function (container,opt) {
+	if (container==undefined) return false;
+
+	// CHECK FOR ALTERNATIVE IMAGE, AND IFRAM EXIST, AND WE ARE IN IE8, MOBILE, DRAW IT SIMPLE
+	if (container.data('aimg')!=undefined) 
+		if ((container.data('aie8')=="enabled" && _R.isIE(8)) || (container.data('amobile')=="enabled" && _ISM))
+			container.html('<img class="tp-slider-alternative-image" src="'+container.data("aimg")+'">');
+	
+	// PREPRARE SOME CLASSES AND VARIABLES
+	container.find('>ul').addClass("tp-revslider-mainul");
+
+	
+	// CREATE SOME DEFAULT OPTIONS FOR LATER			
+	opt.c=container;
+	opt.ul = container.find('.tp-revslider-mainul');
+
+	 // Remove Not Needed Slides for Mobile Devices
+    opt.ul.find('>li').each(function(i) {
+    	var li = jQuery(this);    	
+    	if (li.data('hideslideonmobile')=="on" && _ISM) li.remove();
+    	if (li.data('invisible') || li.data('invisible')===true) {
+    		li.addClass("tp-invisible-slide");
+    		li.appendTo(opt.ul);
+    	}
+   	});
+
+
+   	if (opt.addons!=undefined && opt.addons.length>0) {		
+		jQuery.each(opt.addons, function(i,obj) {			
+			if (typeof obj === "object" && obj.init!=undefined) {				
+				_R[obj.init](eval(obj.params));
+			}
+		})
+	}
+
+	
+
+	opt.cid = container.attr('id');
+	opt.ul.css({visibility:"visible"});
+    opt.slideamount = opt.ul.find('>li').not('.tp-invisible-slide').length;
+    opt.slayers = container.find('.tp-static-layers');
+    opt.slayers.data('index','staticlayers');
+
+    if (opt.waitForInit == true) 
+    	return;
+    else {
+    	container[0].opt = opt;    	
+    	runSlider(container,opt);
+    }
+
+ }
+
+ var onFullScreenChange = function() {
+			 jQuery("body").data('rs-fullScreenMode',!jQuery("body").data('rs-fullScreenMode'));
+		     if (jQuery("body").data('rs-fullScreenMode')) {
+			     setTimeout(function() {
+			     	jQuery(window).trigger("resize");
+			     },200);
+		     }
+		}
+
+ var runSlider = function(container,opt) {
+
+
+ 	opt.sliderisrunning = true;
+    // Save Original Index of Slides
+    opt.ul.find('>li').each(function(i) {
+    	jQuery(this).data('originalindex',i);
+    });
+	
+	
+
+
+	// RANDOMIZE THE SLIDER SHUFFLE MODE
+	if (opt.shuffle=="on") {		
+		var fsa = new Object,
+			fli = opt.ul.find('>li:first-child');
+		fsa.fstransition = fli.data('fstransition');
+		fsa.fsmasterspeed = fli.data('fsmasterspeed');
+		fsa.fsslotamount = fli.data('fsslotamount');
+
+		for (var u=0;u<opt.slideamount;u++) {
+			var it = Math.round(Math.random()*opt.slideamount);			
+			opt.ul.find('>li:eq('+it+')').prependTo(opt.ul);			
+		}
+
+		var newfli = opt.ul.find('>li:first-child');
+		newfli.data('fstransition',fsa.fstransition);
+		newfli.data('fsmasterspeed',fsa.fsmasterspeed);
+		newfli.data('fsslotamount',fsa.fsslotamount);
+
+		 // COLLECT ALL LI INTO AN ARRAY
+		opt.li = opt.ul.find('>li').not('.tp-invisible-slide');
+	}
+
+	opt.allli = opt.ul.find('>li');
+	opt.li = opt.ul.find('>li').not('.tp-invisible-slide');
+	opt.inli = opt.ul.find('>li.tp-invisible-slide');
+
+
+	opt.thumbs = new Array();		
+	
+	opt.slots=4;
+	opt.act=-1;					
+	opt.firststart=1;
+	opt.loadqueue = new Array();
+	opt.syncload = 0;
+	opt.conw = container.width();
+	opt.conh = container.height();
+
+	if (opt.responsiveLevels.length>1) 
+		opt.responsiveLevels[0] = 9999;
+	else
+		opt.responsiveLevels = 9999;
+	
+	// RECORD THUMBS AND SET INDEXES
+	jQuery.each(opt.allli,function(index,li) {
+		var li = jQuery(li),
+			img = li.find('.rev-slidebg') || li.find('img').first(),
+			i = 0;		
+		
+	
+		li.addClass("tp-revslider-slidesli");
+		if (li.data('index')===undefined) li.data('index','rs-'+Math.round(Math.random()*999999));
+
+		var obj = new Object;
+		obj.params = new Array();
+		
+		obj.id = li.data('index');
+		obj.src = li.data('thumb')!==undefined ? li.data('thumb') : img.data('lazyload') !== undefined ? img.data('lazyload') : img.attr('src');					
+		if (li.data('title') !== undefined) obj.params.push({from:RegExp("\\{\\{title\\}\\}","g"), to:li.data("title")})		
+		if (li.data('description') !== undefined) obj.params.push({from:RegExp("\\{\\{description\\}\\}","g"), to:li.data("description")})		
+		for (var i=1;i<=10;i++) {
+			if (li.data("param"+i)!==undefined) 
+				obj.params.push({from:RegExp("\\{\\{param"+i+"\\}\\}","g"), to:li.data("param"+i)})
+		}			
+		opt.thumbs.push(obj);	
+
+		li.data('origindex',li.index());
+		
+		// IF LINK ON SLIDE EXISTS, NEED TO CREATE A PROPER LAYER FOR IT.
+		if (li.data('link')!=undefined) {
+			var link = li.data('link'),
+				target= li.data('target') || "_self",
+				zindex= li.data('slideindex')==="back" ? 0 : 60,					
+				linktoslide=li.data('linktoslide'),
+				checksl = linktoslide;	
+			
+			if (linktoslide != undefined) 
+				if (linktoslide!="next" && linktoslide!="prev")
+					opt.allli.each(function() {
+						var t = jQuery(this);
+						if (t.data('origindex')+1==checksl) linktoslide = t.data('index');
+					});
+			
+			
+			if (link!="slide") linktoslide="no";
+			
+			var apptxt = '<div class="tp-caption slidelink" style="cursor:pointer;width:100%;height:100%;z-index:'+zindex+';" data-x="center" data-y="center" data-basealign="slide" ',
+				jts = linktoslide==="scroll_under" ? '[{"event":"click","action":"scrollbelow","offset":"100px","delay":"0"}]' : 
+					 linktoslide==="prev" ? '[{"event":"click","action":"jumptoslide","slide":"prev","delay":"0.2"}]' : 
+					 linktoslide==="next" ? '[{"event":"click","action":"jumptoslide","slide":"next","delay":"0.2"}]' : '[{"event":"click","action":"jumptoslide","slide":"'+linktoslide+'","delay":"0.2"}]'
+			
+			apptxt = linktoslide=="no" ? apptxt +' data-start="0">' : apptxt + 'data-actions='+"'"+jts + "'"+' data-start="0">';
+			apptxt = apptxt + '<a style="width:100%;height:100%;display:block"';					
+			apptxt = link!="slide" ? apptxt + ' target="'+target+'" href="'+link+'"' : apptxt;
+			apptxt = apptxt + '><span style="width:100%;height:100%;display:block"></span></a></div>';
+			li.append(apptxt);
+		}			
+	});
+
+	
+	// CREATE GRID WIDTH AND HEIGHT ARRAYS		
+	opt.rle = opt.responsiveLevels.length || 1;
+	opt.gridwidth = cArray(opt.gridwidth,opt.rle);
+	opt.gridheight = cArray(opt.gridheight,opt.rle);																														
+	// END OF VERSION 5.0 INIT MODIFICATION
+
+
+
+	// SIMPLIFY ANIMATIONS ON OLD IOS AND IE8 IF NEEDED
+	if (opt.simplifyAll=="on" && (_R.isIE(8) || _R.iOSVersion())) {
+		container.find('.tp-caption').each(function() {
+			var tc = jQuery(this);
+			tc.removeClass("customin customout").addClass("fadein fadeout");
+			tc.data('splitin',"");
+			tc.data('speed',400);
+		})
+		opt.allli.each(function() {
+			var li= jQuery(this);				
+			li.data('transition',"fade");
+			li.data('masterspeed',500);
+			li.data('slotamount',1);
+			var img = li.find('.rev-slidebg') || li.find('>img').first();
+			img.data('kenburns',"off");
+		});
+	}
+
+	opt.desktop = !navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|BB10|mobi|tablet|opera mini|nexus 7)/i);
+
+	// SOME OPTIONS WHICH SHOULD CLOSE OUT SOME OTHER SETTINGS		
+	opt.autoHeight = opt.sliderLayout=="fullscreen" ? "on" : opt.autoHeight;		
+
+	if (opt.sliderLayout=="fullwidth" && opt.autoHeight=="off") container.css({maxHeight:opt.gridheight[opt.curWinRange]+"px"});
+	
+	// BUILD A FORCE FULLWIDTH CONTAINER, TO SPAN THE FULL SLIDER TO THE FULL WIDTH OF BROWSER
+	if (opt.sliderLayout!="auto" && container.closest('.forcefullwidth_wrapper_tp_banner').length==0) {
+		if (opt.sliderLayout!=="fullscreen" || opt.fullScreenAutoWidth!="on") {			
+			var cp = container.parent(),				
+				mb = cp.css('marginBottom'),
+				mt = cp.css('marginTop'),
+				cid = container.attr('id')+"_forcefullwidth";
+			mb = mb===undefined ? 0 : mb;
+			mt = mt===undefined ? 0 : mt;
+
+			cp.wrap('<div class="forcefullwidth_wrapper_tp_banner" id="'+cid+'" style="position:relative;width:100%;height:auto;margin-top:'+mt+';margin-bottom:'+mb+'"></div>');
+			container.closest('.forcefullwidth_wrapper_tp_banner').append('<div class="tp-fullwidth-forcer" style="width:100%;height:'+container.height()+'px"></div>');
+			container.parent().css({marginTop:"0px",marginBottom:"0px"});
+			//container.css({'backgroundColor':container.parent().css('backgroundColor'),'backgroundImage':container.parent().css('backgroundImage')});
+			container.parent().css({position:'absolute'});						
+		}
+	}
+
+
+
+	// SHADOW ADD ONS
+	if (opt.shadow!==undefined && opt.shadow>0) {
+		container.parent().addClass('tp-shadow'+opt.shadow);			
+		container.parent().append('<div class="tp-shadowcover"></div>');
+		container.parent().find('.tp-shadowcover').css({'backgroundColor':container.parent().css('backgroundColor'),'backgroundImage':container.parent().css('backgroundImage')});
+	}
+
+	// ESTIMATE THE CURRENT WINDOWS RANGE INDEX
+	setCurWinRange(opt);
+	setCurWinRange(opt,true);
+	
+	// IF THE CONTAINER IS NOT YET INITIALISED, LETS GO FOR IT
+	if (!container.hasClass("revslider-initialised")) {
+		// MARK THAT THE CONTAINER IS INITIALISED WITH SLIDER REVOLUTION ALREADY
+		container.addClass("revslider-initialised");
+
+		// FOR BETTER SELECTION, ADD SOME BASIC CLASS
+		container.addClass("tp-simpleresponsive");		
+		// WE DONT HAVE ANY ID YET ? WE NEED ONE ! LETS GIVE ONE RANDOMLY FOR RUNTIME
+		if (container.attr('id')==undefined) {			
+			container.attr('id',"revslider-"+Math.round(Math.random()*1000+5));			
+		}
+		checkIDS(opt,container);
+		
+		// CHECK IF FIREFOX 13 IS ON WAY.. IT HAS A STRANGE BUG, CSS ANIMATE SHOULD NOT BE USED
+		opt.firefox13 = false;
+		opt.ie = !jQuery.support.opacity;
+		opt.ie9 = (document.documentMode == 9);
+
+		opt.origcd=opt.delay;
+
+
+
+		// CHECK THE jQUERY VERSION
+		var version = jQuery.fn.jquery.split('.'),
+			versionTop = parseFloat(version[0]),
+			versionMinor = parseFloat(version[1]),
+			versionIncrement = parseFloat(version[2] || '0');
+		if (versionTop==1 && versionMinor < 7) 
+			container.html('<div style="text-align:center; padding:40px 0px; font-size:20px; color:#992222;"> The Current Version of jQuery:'+version+' <br>Please update your jQuery Version to min. 1.7 in Case you wish to use the Revolution Slider Plugin</div>');									
+		if (versionTop>1) opt.ie=false;
+		 		
+					
+
+		// PREPARE VIDEO PLAYERS
+		var addedApis = new Object();				
+		addedApis.addedyt=0;
+		addedApis.addedvim=0;
+		addedApis.addedvid=0;
+		
+		container.find('.tp-caption, .rs-background-video-layer').each(function(i) {
+			var _nc = jQuery(this),
+				_ = _nc.data(),
+				an = _.autoplayonlyfirsttime,
+				ap = _.autoplay,
+				al = _nc.hasClass("tp-audiolayer"),
+				loop = _.videoloop;
+
+
+			if (_nc.hasClass("tp-static-layer") && _R.handleStaticLayers)
+				_R.handleStaticLayers(_nc,opt);
+
+			var pom = _nc.data('noposteronmobile') || _nc.data('noPosterOnMobile') ||  _nc.data('posteronmobile') || _nc.data('posterOnMobile') || _nc.data('posterOnMObile');
+			_nc.data('noposteronmobile',pom);
+
+			// FIX VISIBLE IFRAME BUG IN SAFARI
+			var iff = 0;
+			_nc.find('iframe').each(function() {
+				punchgs.TweenLite.set(jQuery(this),{autoAlpha:0});
+				iff++;
+			})
+			if (iff>0)
+				_nc.data('iframes',true)
+			
+			if (_nc.hasClass("tp-caption")) {
+				// PREPARE LAYERS AND WRAP THEM WITH PARALLAX, LOOP, MASK HELP CONTAINERS
+				var ec = _nc.hasClass("slidelink") ? "width:100% !important;height:100% !important;" : "",
+					_ndata = _nc.data(),
+					nctype = _ndata.type,
+					_pos = nctype==="row" || nctype==="column" ? "relative" : "absolute",
+					preclas = "";
+
+				if (nctype==="row") {
+					_nc.addClass("rev_row").removeClass("tp-resizeme");
+					preclas="rev_row_wrap";
+				} else
+				if (nctype==="column") {
+					preclas = "rev_column";
+					_nc.addClass("rev_column_inner").removeClass("tp-resizeme");;
+					_nc.data('width','auto');
+					punchgs.TweenLite.set(_nc,{width:'auto'});					
+				} else
+				if (nctype==="group") {
+					_nc.removeClass("tp-resizeme")
+				}
+				var dmode = "",
+					preid = "";
+				if (nctype!=="row" && nctype!=="group" && nctype!=="column"){
+					dmode = "display:"+_nc.css('display')+";";
+					if (_nc.closest('.rev_column').length>0) _nc.addClass("rev_layer_in_column");
+					if (_nc.closest('.rev_group').length>0) _nc.addClass("rev_layer_in_group");
+				}
+				if (_ndata.wrapper_class!==undefined) preclas = preclas+" "+_ndata.wrapper_class;
+				if (_ndata.wrapper_id!==undefined) preid ='id="'+_ndata.wrapper_id+'"';
+
+				_nc.wrap('<div class="tp-parallax-wrap '+preclas+'" style="'+ec+'position:'+_pos+';'+dmode+';visibility:hidden"><div class="tp-loop-wrap" style="'+ec+'position:'+_pos+';'+dmode+';"><div class="tp-mask-wrap" style="'+ec+'position:'+_pos+';'+dmode+';" ></div></div></div>');
+				// Add BG for Columns
+				if (nctype==="column") {
+					_nc.append('<div class="rev_column_bg rev_column_bg_man_sized" style="display:none"></div>');
+					_nc.closest('.tp-parallax-wrap').append('<div class="rev_column_bg rev_column_bg_auto_sized"></div>');
+				}
+
+				var lar = ['pendulum', 'rotate','slideloop','pulse','wave'],
+					_lc = _nc.closest('.tp-loop-wrap');
+				
+				jQuery.each(lar,function(i,k) {	
+					var lw = _nc.find('.rs-'+k),
+						f = lw.data() || "";
+					if (f!="") {			
+						_lc.data(f);
+						_lc.addClass("rs-"+k);									
+						lw.children(0).unwrap();
+						_nc.data('loopanimation',"on");
+					}
+				});	
+				if (_nc.attr('id')===undefined) 
+					_nc.attr('id','layer-'+Math.round(Math.random()*999999999));
+				checkIDS(opt,_nc);
+				punchgs.TweenLite.set(_nc,{visibility:"hidden"});
+			}
+
+			var as = _nc.data('actions');
+			if (as!==undefined) _R.checkActions(_nc,opt,as);
+
+			checkHoverDependencies(_nc,opt);
+
+			if (_R.checkVideoApis)
+				addedApis = _R.checkVideoApis(_nc,opt,addedApis);
+
+			// REMOVE VIDEO AUTOPLAYS FOR MOBILE DEVICES 
+			if (_ISM) {
+				if (an == true || an=="true") {
+						_.autoplayonlyfirsttime=false;
+						an=false;
+				}
+				if (ap==true || ap=="true" || ap=="on" || ap=="1sttime") {
+					 _.autoplay="off";
+					 ap="off";
+				}
+			}
+
+			//loop =  loop=="none" && _nc.hasClass('rs-background-video-layer') ?  "loopandnoslidestop" : loop;
+
+			
+			
+
+			// PREPARE TIMER BEHAVIOUR BASED ON AUTO PLAYED VIDEOS IN SLIDES
+			if (!al && (an == true || an=="true" || ap == "1sttime") && loop !="loopandnoslidestop") 
+				_nc.closest('li.tp-revslider-slidesli').addClass("rs-pause-timer-once");
+				
+			
+			if (!al && (ap==true || ap=="true" || ap == "on" || ap == "no1sttime") && loop !="loopandnoslidestop")  
+				_nc.closest('li.tp-revslider-slidesli').addClass("rs-pause-timer-always");
+				
+			
+				
+				
+		});
+		
+		container[0].addEventListener('mouseenter',function() {				
+			container.trigger('tp-mouseenter');										
+			opt.overcontainer=true;
+		},{passive:true});
+
+		container[0].addEventListener('mouseover',function() {												
+			container.trigger('tp-mouseover');
+			opt.overcontainer=true;
+		},{passive:true});
+
+		container[0].addEventListener('mouseleave',function() {				
+			container.trigger('tp-mouseleft');												
+			opt.overcontainer=false;
+		},{passive:true});
+
+		// REMOVE ANY VIDEO JS SETTINGS OF THE VIDEO  IF NEEDED  (OLD FALL BACK, AND HELP FOR 3THD PARTY PLUGIN CONFLICTS)
+		container.find('.tp-caption video').each(function(i) {
+			var v = jQuery(this);
+			v.removeClass("video-js vjs-default-skin");
+			v.attr("preload","");
+			v.css({display:"none"});
+		});
+
+		//PREPARE LOADINGS ALL IN SEQUENCE
+		if (opt.sliderType!=="standard") opt.lazyType = "all";
+		
+		
+		// PRELOAD STATIC LAYERS			
+		loadImages(container.find('.tp-static-layers'),opt,0,true);
+
+		waitForCurrentImages(container.find('.tp-static-layers'),opt,function() {
+			container.find('.tp-static-layers img').each(function() {								
+				var e = jQuery(this),
+					src = e.data('lazyload') != undefined ? e.data('lazyload') : e.attr('src'),
+					loadobj = getLoadObj(opt,src);								
+				e.attr('src',loadobj.src)				
+			})
+		});
+
+		opt.rowzones = [];
+
+		// SET ALL LI AN INDEX AND INIT LAZY LOADING
+		opt.allli.each(function(i) {
+			var li = jQuery(this);
+			opt.rowzones[i] = [];
+			li.find('.rev_row_zone').each(function() {
+				opt.rowzones[i].push(jQuery(this));
+			})
+
+			if (opt.lazyType=="all" || (opt.lazyType=="smart" && (i==0 || i == 1 || i == opt.slideamount || i == opt.slideamount-1))) { 								
+				loadImages(li,opt,i);	
+				waitForCurrentImages(li,opt,function() { 
+					if (opt.sliderType=="carousel") 
+						punchgs.TweenLite.to(li,1,{autoAlpha:1,ease:punchgs.Power3.easeInOut});
+				});					
+			}
+
+		});
+
+		
+
+		// IF DEEPLINK HAS BEEN SET
+		var deeplink = getUrlVars("#")[0];
+		if (deeplink.length<9) {
+			if (deeplink.split('slide').length>1) {
+				var dslide=parseInt(deeplink.split('slide')[1],0);
+				if (dslide<1) dslide=1;
+				if (dslide>opt.slideamount) dslide=opt.slideamount;
+				opt.startWithSlide=dslide-1;
+			}
+		}
+		
+		// PREPARE THE SPINNER
+		container.append(	'<div class="tp-loader '+opt.spinner+'">'+
+					  		'<div class="dot1"></div>'+
+					  	    '<div class="dot2"></div>'+
+					  	    '<div class="bounce1"></div>'+
+							'<div class="bounce2"></div>'+
+							'<div class="bounce3"></div>'+
+						 '</div>');
+		opt.loader = container.find('.tp-loader');
+
+		// RESET THE TIMER
+		if (container.find('.tp-bannertimer').length===0) container.append('<div class="tp-bannertimer" style="visibility:hidden"></div>');
+		container.find('.tp-bannertimer').css({'width':'0%'});
+		
+
+		
+		// PREPARE THE SLIDES
+		opt.ul.css({'display':'block'});
+		prepareSlides(container,opt);
+		if (opt.parallax.type!=="off" && _R.checkForParallax) _R.checkForParallax(container,opt);
+
+		
+		// PREPARE SLIDER SIZE			
+		_R.setSize(opt);
+		
+
+		// Call the Navigation Builder
+		if (opt.sliderType!=="hero" && _R.createNavigation) _R.createNavigation(container,opt);
+		if (_R.resizeThumbsTabs && _R.resizeThumbsTabs) _R.resizeThumbsTabs(opt);
+		contWidthManager(opt);
+		var _v = opt.viewPort;
+		opt.inviewport = false;
+		
+		if (_v !=undefined && _v.enable) {
+			if (!jQuery.isNumeric(_v.visible_area))
+			 if (_v.visible_area.indexOf('%')!==-1) 
+				_v.visible_area = parseInt(_v.visible_area)/100;
+				
+			if (_R.scrollTicker) _R.scrollTicker(opt,container);
+		}
+		
+
+
+		// START THE SLIDER
+		setTimeout(function() {
+			if ( opt.sliderType =="carousel" && _R.prepareCarousel) _R.prepareCarousel(opt);				
+			if (!_v.enable || (_v.enable && opt.inviewport) || (_v.enable &&  !opt.inviewport && !_v.outof=="wait")) {
+				swapSlide(container);			
+				
+			}
+			else {
+				opt.waitForFirstSlide = true;
+				if (_v.presize) {
+					var nextli = jQuery(opt.li[0]);
+					// PRELOAD STATIC LAYERS			
+						loadImages(nextli,opt,0,true);
+						waitForCurrentImages(nextli.find('.tp-layers'),opt,function() {							
+							_R.animateTheCaptions({slide:nextli,opt:opt, preset:true});							
+						})
+				}
+					
+				
+			}
+
+			if (_R.manageNavigation) _R.manageNavigation(opt);	
+
+
+			// START COUNTDOWN
+			if (opt.slideamount>1) {
+				if (!_v.enable || (_v.enable && opt.inviewport)) 
+					countDown(container,opt);
+				else
+					opt.waitForCountDown = true;
+			}
+			setTimeout(function() {					
+				container.trigger('revolution.slide.onloaded');					
+			},100);
+		},opt.startDelay);
+		opt.startDelay=0;
+
+		
+
+		/******************************
+			-	FULLSCREEN CHANGE	-
+		********************************/
+		// FULLSCREEN MODE TESTING
+		jQuery("body").data('rs-fullScreenMode',false);
+
+		
+		window.addEventListener('fullscreenchange',onFullScreenChange,{passive:true});
+		window.addEventListener('mozfullscreenchange',onFullScreenChange,{passive:true});
+		window.addEventListener('webkitfullscreenchange',onFullScreenChange,{passive:true});
+
+		
+
+		var resizid = "resize.revslider-"+container.attr('id');
+
+		// IF RESIZED, NEED TO STOP ACTUAL TRANSITION AND RESIZE ACTUAL IMAGES
+		jQuery(window).on(resizid,function() {
+			
+			if (container==undefined) return false;
+			
+			if (jQuery('body').find(container)!=0) 				
+				contWidthManager(opt);							
+				
+				var hchange = false;
+
+				if (opt.sliderLayout=="fullscreen") {
+					var jwh = jQuery(window).height();
+					if ((opt.fallbacks.ignoreHeightChanges=="mobile" && _ISM) || opt.fallbacks.ignoreHeightChanges=="always") {
+						opt.fallbacks.ignoreHeightChangesSize = opt.fallbacks.ignoreHeightChangesSize == undefined ? 0 : opt.fallbacks.ignoreHeightChangesSize;
+						hchange = (jwh!=opt.lastwindowheight) && (Math.abs(jwh-opt.lastwindowheight) > opt.fallbacks.ignoreHeightChangesSize)							
+					} else {
+						hchange = (jwh!=opt.lastwindowheight) 
+					}
+				}
+				
+	
+				if (container.outerWidth(true)!=opt.width || container.is(":hidden") || (hchange)) {
+						opt.lastwindowheight = jQuery(window).height();
+						containerResized(container,opt);
+				}
+
+
+		});
+		
+		hideSliderUnder(container,opt);	
+		contWidthManager(opt);		
+		if (!opt.fallbacks.disableFocusListener && opt.fallbacks.disableFocusListener != "true" && opt.fallbacks.disableFocusListener !== true) tabBlurringCheck(container,opt);
+	}
+}
+
+/*************************************
+	-	 CREATE SIMPLE ARRAYS	-
+**************************************/
+var cArray = function(b,l) {		
+	if (!jQuery.isArray(b)) {
+		var t = b;
+		b = new Array();
+		b.push(t);
+	}		
+	if (b.length<l) {			
+		var t = b[b.length-1];
+		for (var i=0;i<(l-b.length)+2;i++)
+			b.push(t)
+	}		
+	return b;
+}
+
+
+
+var checkHoverDependencies = function(_nc,opt) {	
+	var _ = _nc.data(),
+		senter = _.start==="sliderenter" || (_.frames!==undefined && _.frames[0]!=undefined && _.frames[0].delay==="sliderenter") ? true : false;
+
+	if (senter) {		
+		if (opt.layersonhover===undefined) {				
+			opt.c.on('tp-mouseenter',function() {				
+				if (opt.layersonhover)					
+					jQuery.each(opt.layersonhover,function(i,tnc) {		
+						
+						var cli = tnc.data('closestli') || tnc.closest('.tp-revslider-slidesli'),
+							stl = tnc.data('staticli') || tnc.closest('.tp-static-layers');	
+
+						if (tnc.data('closestli')===undefined) {
+								tnc.data('closestli',cli);
+								tnc.data('staticli',stl);
+						}	
+						
+						if ((cli.length>0 && (cli.hasClass("active-revslide")) || cli.hasClass("processing-revslide")) || (stl.length>0)) {
+							tnc.data('animdirection',"in");
+							
+							if (_R.playAnimationFrame)			
+								_R.playAnimationFrame({caption:tnc,opt:opt,frame:"frame_0", triggerdirection:"in", triggerframein:"frame_0", triggerframeout:"frame_999"});
+							tnc.data('triggerstate',"on");																																						
+						}
+					});
+			});
+			opt.c.on('tp-mouseleft',function() {
+				if (opt.layersonhover)
+					jQuery.each(opt.layersonhover,function(i,tnc) {
+						tnc.data('animdirection',"out");
+						tnc.data('triggered',true);
+						tnc.data('triggerstate',"off");
+						if (_R.stopVideo) _R.stopVideo(tnc,opt);												
+						if (_R.playAnimationFrame) _R.playAnimationFrame({caption:tnc,opt:opt,frame:"frame_999", triggerdirection:"out", triggerframein:"frame_0", triggerframeout:"frame_999"});	
+					});
+			});			
+			opt.layersonhover = new Array;
+		} 				
+		opt.layersonhover.push(_nc);
+	}
+}
+
+
+
+var contWidthManager = function(opt) {	
+
+	var rl = _R.getHorizontalOffset(opt.c,"left");
+
+	if (opt.sliderLayout!="auto" && (opt.sliderLayout!=="fullscreen" || opt.fullScreenAutoWidth!="on")) {		
+		// var loff = Math.ceil(opt.c.closest('.forcefullwidth_wrapper_tp_banner').offset().left - rl);
+		// punchgs.TweenLite.set(opt.c.parent(),{'left':(0-loff)+"px",'width':jQuery(window).width()-_R.getHorizontalOffset(opt.c,"both")});
+	} else {		
+		if (opt.sliderLayout=="fullscreen" && opt.fullScreenAutoWidth=="on"){
+            // punchgs.TweenLite.set(opt.ul,{left:0,width:opt.c.width()});
+		}
+		else {
+            // punchgs.TweenLite.set(opt.ul,{left:rl,width:opt.c.width()-_R.getHorizontalOffset(opt.c,"both")});
+		}
+	}
+
+	// put Static Layer Wrapper in Position	
+	if (opt.slayers && (opt.sliderLayout!="fullwidth" && opt.sliderLayout!="fullscreen")) {
+        // punchgs.TweenLite.set(opt.slayers,{left:rl});
+	}
+}
+
+
+var cv = function(a,d) {
+  	return a===undefined ? d : a;
+}
+
+
+var hideSliderUnder = function(container,opt,resized) {
+	// FIRST TIME STOP/START HIDE / SHOW SLIDER
+	//REMOVE AND SHOW SLIDER ON DEMAND
+	var contpar= container.parent();
+	if (jQuery(window).width()<opt.hideSliderAtLimit) {
+		container.trigger('stoptimer');
+		if (contpar.css('display')!="none")
+			contpar.data('olddisplay',contpar.css('display'));
+		contpar.css({display:"none"});
+	} else {
+		if (container.is(":hidden") && resized) {
+			if (contpar.data('olddisplay')!=undefined && contpar.data('olddisplay')!="undefined" && contpar.data('olddisplay') != "none")
+				contpar.css({display:contpar.data('olddisplay')});
+			else
+				contpar.css({display:"block"});
+			container.trigger('restarttimer');
+			setTimeout(function() {
+				containerResized(container,opt);
+			},150)
+		}
+	}
+	if (_R.hideUnHideNav) _R.hideUnHideNav(opt);	
+}
+
+
+//////////////////////////
+//	CONTAINER RESIZED	//
+/////////////////////////
+var containerResized = function (c,opt) {	
+
+	c.trigger('revolution.slide.beforeredraw');							
+	if (opt.infullscreenmode == true)
+		opt.minHeight = jQuery(window).height();							
+	
+	
+	setCurWinRange(opt);
+	setCurWinRange(opt,true);
+	if (!_R.resizeThumbsTabs || _R.resizeThumbsTabs(opt)===true) {
+		
+		hideSliderUnder(c,opt,true);
+		contWidthManager(opt);
+		
+		if ( opt.sliderType =="carousel") _R.prepareCarousel(opt,true);		
+
+		if (c===undefined) return false;
+								
+		_R.setSize(opt);
+		
+		opt.conw = opt.c.width();
+		opt.conh = opt.infullscreenmode ? opt.minHeight : opt.c.height();
+		
+		
+		var actsh = c.find('.active-revslide .slotholder'),
+			nextsh = c.find('.processing-revslide .slotholder');
+		
+		removeSlots(c,opt,c,2);
+
+		if (opt.sliderType==="standard") {
+			punchgs.TweenLite.set(nextsh.find('.defaultimg'),{opacity:0});		
+			actsh.find('.defaultimg').css({'opacity':1});
+		} 
+
+		
+		if ( opt.sliderType =="carousel" && opt.lastconw != opt.conw)  {
+			clearTimeout(opt.pcartimer);
+			opt.pcartimer = setTimeout(function() {
+				_R.prepareCarousel(opt,true);		
+			},100);
+			opt.lastconw = opt.conw;
+		}
+
+		if (_R.manageNavigation) _R.manageNavigation(opt);
+
+
+		if (_R.animateTheCaptions && c.find('.active-revslide').length>0) _R.animateTheCaptions({slide:c.find('.active-revslide'), opt:opt,recall:true});
+		
+		if (nextsh.data('kenburns')=="on") 				
+			_R.startKenBurn(nextsh,opt,nextsh.data('kbtl').progress());
+
+		if (actsh.data('kenburns')=="on") 				
+			_R.startKenBurn(actsh,opt,actsh.data('kbtl').progress());
+
+		// DOUBLE CALL FOR SOME FUNCTION TO AVOID PORTRAIT/LANDSCAPE ISSUES, AND TO AVOID FULLSCREEN/NORMAL SWAP ISSUES
+		if (_R.animateTheCaptions && c.find('.processing-revslide').length>0)  _R.animateTheCaptions({slide:c.find('.processing-revslide'), opt:opt,recall:true});
+		if (_R.manageNavigation) _R.manageNavigation(opt);
+		
+	}	
+	c.trigger('revolution.slide.afterdraw');
+}
+
+	
+	
+	
+	
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////       PREPARING / REMOVING		////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+var setScale = function(opt) {
+	opt.bw = (opt.width / opt.gridwidth[opt.curWinRange]);
+	opt.bh = (opt.height / opt.gridheight[opt.curWinRange]);
+	
+	
+	if (opt.bh>opt.bw) 
+		opt.bh=opt.bw
+	else
+		opt.bw = opt.bh;
+	
+	if (opt.bh>1 || opt.bw>1) { opt.bw=1; opt.bh=1; }
+}
+
+	
+
+
+
+/////////////////////////////////////////
+//	-	PREPARE THE SLIDES / SLOTS -  //
+///////////////////////////////////////
+var prepareSlides = function(container,opt) {
+
+	container.find('.tp-caption').each(function() { 
+		var c = jQuery(this);
+		if (c.data('transition')!==undefined) c.addClass(c.data('transition')); 
+	});
+
+	// PREPARE THE UL CONTAINER TO HAVEING MAX HEIGHT AND HEIGHT FOR ANY SITUATION
+	opt.ul.css({overflow:'hidden',width:'100%',height:'100%',maxHeight:container.parent().css('maxHeight')})
+	if (opt.autoHeight=="on") {
+	   opt.ul.css({overflow:'hidden',width:'100%',height:'100%',maxHeight:"none"});
+	   container.css({'maxHeight':'none'});
+	   container.parent().css({'maxHeight':'none'});
+	 }
+	//_R.setSize("",opt);
+	opt.allli.each(function(j) {
+		var li=jQuery(this),
+			originalIndex = li.data('originalindex');
+					
+		//START WITH CORRECT SLIDE
+		if ((opt.startWithSlide !=undefined && originalIndex==opt.startWithSlide) || opt.startWithSlide ===undefined && j==0)
+			li.addClass("next-revslide");
+		
+
+		// MAKE LI OVERFLOW HIDDEN FOR FURTHER ISSUES
+		li.css({'width':'100%','height':'100%','overflow':'hidden'});
+					
+	});
+
+	if (opt.sliderType === "carousel") {
+		//SET CAROUSEL				
+		opt.ul.css({overflow:"visible"}).wrap('<div class="tp-carousel-wrapper" style="width:100%;height:100%;position:absolute;top:0px;left:0px;overflow:hidden;"></div>');
+		var apt = '<div style="clear:both;display:block;width:100%;height:1px;position:relative;margin-bottom:-1px"></div>';
+		opt.c.parent().prepend(apt);
+		opt.c.parent().append(apt);
+		_R.prepareCarousel(opt);				
+	}
+
+	// RESOLVE OVERFLOW HIDDEN OF MAIN CONTAINER
+	container.parent().css({'overflow':'visible'});
+    
+	opt.allli.find('>img').each(function(j) {
+
+		var img=jQuery(this),
+			cli = img.closest('li'),
+			bgvid = cli.find('.rs-background-video-layer');
+
+		bgvid.addClass("defaultvid").css({zIndex:30});
+
+		img.addClass('defaultimg');				
+						
+		// TURN OF KEN BURNS IF WE ARE ON MOBILE AND IT IS WISHED SO
+		if (opt.fallbacks.panZoomDisableOnMobile == "on"  && _ISM) {
+			img.data('kenburns',"off");
+			img.data('bgfit',"cover");
+		}
+
+		var mediafilter = cli.data('mediafilter');
+		mediafilter = mediafilter==="none" || mediafilter===undefined ? "" : mediafilter;
+		img.wrap('<div class="slotholder '+mediafilter+'" style="position:absolute; top:0px; left:0px; z-index:0;width:100%;height:100%;"></div>');
+		bgvid.appendTo(cli.find('.slotholder'));
+		var dts = img.data();
+		img.closest('.slotholder').data(dts);
+									
+		if (bgvid.length>0 && dts.bgparallax!=undefined)
+			bgvid.data('bgparallax',dts.bgparallax);
+
+		if (opt.dottedOverlay!="none" && opt.dottedOverlay!=undefined)
+				img.closest('.slotholder').append('<div class="tp-dottedoverlay '+opt.dottedOverlay+'"></div>');
+
+		var src=img.attr('src');		
+		dts.src = src;		
+		dts.bgfit = dts.bgfit || "cover";
+		dts.bgrepeat = dts.bgrepeat || "no-repeat",
+		dts.bgposition = dts.bgposition || "center center";
+
+		var pari = img.closest('.slotholder');
+		img.parent().append('<div class="tp-bgimg defaultimg" style="background-color:'+img.css("backgroundColor")+';background-repeat:'+dts.bgrepeat+';background-image:url('+src+');background-size:'+dts.bgfit+';background-position:'+dts.bgposition+';width:100%;height:100%;"></div>');
+		var comment = document.createComment("Runtime Modification - Img tag is Still Available for SEO Goals in Source - " + img.get(0).outerHTML);
+		img.replaceWith(comment);
+		img = pari.find('.tp-bgimg');			
+		img.data(dts);
+		img.attr("src",src);
+
+		if (opt.sliderType === "standard" || opt.sliderType==="undefined") 				
+			img.css({'opacity':0});
+	
+	})
+
+	
+}
+
+
+//	REMOVE SLOTS	//
+var removeSlots = function(container,opt,where,addon) {
+	opt.removePrepare = opt.removePrepare + addon;
+	where.find('.slot, .slot-circle-wrapper').each(function() {
+		jQuery(this).remove();
+	});	
+	opt.transition = 0;	
+	opt.removePrepare = 0;	
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////       SLIDE SWAPS			////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+
+
+// THE IMAGE IS LOADED, WIDTH, HEIGHT CAN BE SAVED
+var cutParams = function(a) {
+	var b = a;
+	if (a!=undefined && a.length>0)
+		b = a.split("?")[0];
+	return b;
+}
+
+var relativeRedir = function(redir){
+  return location.pathname.replace(/(.*)\/[^/]*/, "$1/"+redir);
+}
+
+var abstorel = function (base, relative) {
+    var stack = base.split("/"),
+        parts = relative.split("/");
+    stack.pop(); // remove current file name (or empty string)
+                 // (omit if "base" is the current folder without trailing slash)
+    for (var i=0; i<parts.length; i++) {
+        if (parts[i] == ".")
+            continue;
+        if (parts[i] == "..")
+            stack.pop();
+        else
+            stack.push(parts[i]);
+    }
+    return stack.join("/");
+}
+
+var imgLoaded = function(img,opt,progress) {
+	opt.syncload--;	
+	if (opt.loadqueue)
+		jQuery.each(opt.loadqueue, function(index,queue) {		
+
+			var mqsrc = queue.src.replace(/\.\.\/\.\.\//gi,""),
+				fullsrc = self.location.href,
+				origin = document.location.origin,
+				fullsrc_b = fullsrc.substring(0,fullsrc.length-1)+"/"+mqsrc,
+				origin_b = origin+"/"+mqsrc,
+				absolute = abstorel(self.location.href,queue.src);
+						
+			fullsrc = fullsrc.substring(0,fullsrc.length-1)+mqsrc;						
+			origin = origin+mqsrc;
+						
+			if (cutParams(origin) === cutParams(decodeURIComponent(img.src)) || 
+				cutParams(fullsrc)=== cutParams(decodeURIComponent(img.src)) || 
+				cutParams(absolute)=== cutParams(decodeURIComponent(img.src)) || 
+				cutParams(origin_b) === cutParams(decodeURIComponent(img.src)) || 
+				cutParams(fullsrc_b)=== cutParams(decodeURIComponent(img.src)) || 
+				cutParams(queue.src) === cutParams(decodeURIComponent(img.src)) || 
+				cutParams(queue.src).replace(/^.*\/\/[^\/]+/, '') === cutParams(decodeURIComponent(img.src)).replace(/^.*\/\/[^\/]+/, '') || 
+				(window.location.origin==="file://" && cutParams(img.src).match(new RegExp(mqsrc)))) {																	
+					queue.progress = progress;
+					queue.width = img.width;
+					queue.height = img.height;
+			} 
+		});		
+	progressImageLoad(opt);
+}
+
+// PRELOAD IMAGES 3 PIECES ON ONE GO, CHECK LOAD PRIORITY
+var progressImageLoad = function(opt) {		
+	if (opt.syncload == 3) return;
+	if (opt.loadqueue)
+		jQuery.each(opt.loadqueue, function(index,queue) {	
+			if (queue.progress.match(/prepared/g)) {				
+			 	 if (opt.syncload<=3) {			 	 	
+					opt.syncload++;	
+					if (queue.type=="img") {				
+						var img = new Image();
+						
+						img.onload = function() {											
+						 	imgLoaded(this,opt,"loaded");
+						 	queue.error = false;				
+						};
+						img.onerror = function() {
+							imgLoaded(this,opt,"failed");					
+							queue.error = true;
+						};		
+						
+						img.src=queue.src;
+					} else {
+						jQuery.get(queue.src, function(data) {						  
+						  queue.innerHTML = new XMLSerializer().serializeToString(data.documentElement);						  
+						  queue.progress="loaded";
+						  opt.syncload--;
+						  progressImageLoad(opt);
+						}).fail(function() {					      
+						  queue.progress="failed";
+						  opt.syncload--;
+						  progressImageLoad(opt);
+						});
+					}
+					queue.progress="inload";
+				}
+			}				
+		});
+}
+
+
+
+// ADD TO QUEUE THE NOT LOADED IMAGES YES
+var addToLoadQueue = function(src,opt,prio,type,staticlayer) {		
+	var alreadyexist = false;	
+	if (opt.loadqueue)	
+		jQuery.each(opt.loadqueue, function(index,queue) {			
+			if (queue.src === src) alreadyexist = true;
+		});
+		
+	if (!alreadyexist) {		
+			var loadobj = new Object();			
+			loadobj.src = src;
+			loadobj.starttoload = jQuery.now();
+			loadobj.type = type || "img";
+			loadobj.prio = prio;
+			loadobj.progress = "prepared";
+			loadobj.static = staticlayer;
+			opt.loadqueue.push(loadobj);		
+	}				
+
+}
+
+// LOAD THE IMAGES OF THE PREDEFINED CONTAINER
+var loadImages = function(container,opt,prio,staticlayer) {	
+	
+	container.find('img,.defaultimg, .tp-svg-layer').each(function() {
+		var element = jQuery(this),
+			src = element.data('lazyload') !== undefined && element.data('lazyload')!=="undefined" ? element.data('lazyload') : element.data('svg_src') !=undefined ? element.data('svg_src')  : element.attr('src'),
+			type = element.data('svg_src') !=undefined ? "svg" : "img";
+		
+		element.data('start-to-load',jQuery.now());
+		addToLoadQueue(src,opt,prio,type,staticlayer);
+	});
+	progressImageLoad(opt);
+}
+
+
+// FIND SEARCHED IMAGE/SRC IN THE LOAD QUEUE
+var getLoadObj = function(opt,src) {	
+	var obj = new Object();
+	if (opt.loadqueue)
+		jQuery.each(opt.loadqueue, function(index,queue) {			
+			if (queue.src == src) obj = queue;
+		});
+	return obj;
+}
+
+// WAIT PROGRESS TILL THE PREDEFINED CONTAINER HAS ALL IMAGES LOADED INSIDE
+var waitForCurrentImages = function(nextli,opt,callback) {
+
+	var waitforload = false;
+	
+
+	// PRELOAD ALL IMAGES
+	nextli.find('img,.defaultimg, .tp-svg-layer').each(function() {
+		var element = jQuery(this),
+			src = element.data('lazyload') != undefined ? element.data('lazyload') : element.data('svg_src') !=undefined ? element.data('svg_src')  : element.attr('src'),
+			loadobj = getLoadObj(opt,src);
+		
+
+
+		// IF ELEMENTS IS NOT LOADED YET, AND IT IS NOW LOADED
+		if (element.data('loaded')===undefined && loadobj !==undefined && loadobj.progress && loadobj.progress.match(/loaded/g)) {
+			
+			element.attr('src',loadobj.src);
+
+			
+			// IF IT IS A DEFAULT IMG, WE NEED TO ASSIGN SOME SPECIAL VALUES TO IT
+			if (loadobj.type=="img") {
+				if (element.hasClass("defaultimg")) {		
+					if (!_R.isIE(8))
+						element.css({backgroundImage:'url("'+loadobj.src+'")'});
+					else {
+						defimg.attr('src',loadobj.src);
+					}			
+					nextli.data('owidth',loadobj.width);
+					nextli.data('oheight',loadobj.height);
+					nextli.find('.slotholder').data('owidth',loadobj.width);
+					nextli.find('.slotholder').data('oheight',loadobj.height);
+				} else { 
+					var w = element.data('ww'),
+						h = element.data('hh');
+					
+					element.data('owidth',loadobj.width);
+					element.data('oheight',loadobj.height);
+
+					w = w==undefined || w =="auto" || w=="" ? loadobj.width : w;
+					h = h==undefined || h =="auto" || h=="" ? loadobj.height : h;
+					
+					if (!jQuery.isNumeric(w) && w.indexOf("%")>0) 
+						h = w;
+					
+					element.data('ww',w);
+					element.data('hh',h); 
+					
+				}
+			} else  
+
+			if (loadobj.type=="svg" && loadobj.progress=="loaded") {				
+
+				element.append('<div class="tp-svg-innercontainer"></div>');
+				element.find('.tp-svg-innercontainer').append(loadobj.innerHTML);
+			}
+			// ELEMENT IS NOW FULLY LOADED
+			element.data('loaded',true);
+		} 		
+
+
+		if (loadobj && loadobj.progress && loadobj.progress.match(/inprogress|inload|prepared/g)) 
+			if (!loadobj.error && jQuery.now()-element.data('start-to-load')<5000) 
+					waitforload = true;			
+			else {
+				loadobj.progress="failed";
+				if (!loadobj.reported_img) {
+					loadobj.reported_img = true;
+					console.warn(src+"  Could not be loaded !");
+				}
+			}
+		
+		// WAIT FOR VIDEO API'S					
+		if (opt.youtubeapineeded == true && (!window['YT'] || YT.Player==undefined)) {		
+			waitforload = true;			
+			if (jQuery.now()-opt.youtubestarttime>5000 && opt.youtubewarning!=true) {
+				opt.youtubewarning = true;
+				var txt = "YouTube Api Could not be loaded !";
+				if (location.protocol === 'https:') txt = txt + " Please Check and Renew SSL Certificate !";
+				console.error(txt); 
+				opt.c.append('<div style="position:absolute;top:50%;width:100%;color:#e74c3c;  font-size:16px; text-align:center; padding:15px;background:#000; display:block;"><strong>'+txt+'</strong></div>')				 				
+			}
+		}
+
+		if (opt.vimeoapineeded == true && !window['Froogaloop']) {
+			waitforload = true;
+			if (jQuery.now()-opt.vimeostarttime>5000 && opt.vimeowarning!=true) {
+				opt.vimeowarning= true;
+				var txt = "Vimeo Froogaloop Api Could not be loaded !";
+				if (location.protocol === 'https:') txt = txt + " Please Check and Renew SSL Certificate !";
+				console.error(txt); 
+				opt.c.append('<div style="position:absolute;top:50%;width:100%;color:#e74c3c;  font-size:16px; text-align:center; padding:15px;background:#000; display:block;"><strong>'+txt+'</strong></div>')				 
+			}
+		}	
+			
+	});
+
+	if (!_ISM && opt.audioqueue && opt.audioqueue.length>0) {		
+		jQuery.each(opt.audioqueue,function(i,obj) {
+			if (obj.status && obj.status==="prepared")
+				if (jQuery.now() - obj.start<obj.waittime)
+					waitforload = true;			
+		});		
+	}
+	
+	jQuery.each(opt.loadqueue,function(i,o) {				
+		if (o.static===true && (o.progress!="loaded" || o.progress==="failed")) {
+			if (o.progress=="failed") {
+				if (!o.reported) {
+					o.reported = true;
+					console.warn("Static Image "+o.src+"  Could not be loaded in time. Error Exists:"+o.error);
+				}
+			}
+			else
+			if (!o.error && jQuery.now()-o.starttoload<5000) {
+				waitforload = true;			
+			}
+			else {
+				if (!o.reported) {
+					o.reported = true;
+					console.warn("Static Image "+o.src+"  Could not be loaded within 5s! Error Exists:"+o.error);
+				}
+			}
+			
+		}
+	});	
+	
+
+	if (waitforload) 
+		punchgs.TweenLite.delayedCall(0.18,waitForCurrentImages,[nextli,opt,callback]);		
+	else 		
+		punchgs.TweenLite.delayedCall(0.18,callback);		
+	
+}
+
+
+
+
+//////////////////////////////////////
+//	-	CALL TO SWAP THE SLIDES -  //
+/////////////////////////////////////
+var swapSlide = function(container) {	
+
+	var opt = container[0].opt;
+	
+	clearTimeout(opt.waitWithSwapSlide);	
+
+	if (container.find('.processing-revslide').length>0) {			
+		opt.waitWithSwapSlide = setTimeout(function() {
+			swapSlide(container);
+			
+		},150);
+		return false;
+	}	
+
+	var actli = container.find('.active-revslide'),
+		nextli = container.find('.next-revslide'),
+		defimg= nextli.find('.defaultimg');
+	
+	
+	if (nextli.index() === actli.index()) {
+		nextli.removeClass("next-revslide");
+		return false;
+	}
+
+	
+
+	nextli.removeClass("next-revslide").addClass("processing-revslide");
+		
+	nextli.data('slide_on_focus_amount',(nextli.data('slide_on_focus_amount')+1) || 1);
+	// CHECK IF WE ARE ALREADY AT LAST ITEM TO PLAY IN REAL LOOP SESSION
+	if (opt.stopLoop=="on" && nextli.index()==opt.lastslidetoshow-1) {
+		container.find('.tp-bannertimer').css({'visibility':'hidden'});
+		container.trigger('revolution.slide.onstop');
+		opt.noloopanymore = 1;
+	} 
+
+	// INCREASE LOOP AMOUNTS
+	if (nextli.index()===opt.slideamount-1) {
+		opt.looptogo=opt.looptogo-1;
+		if (opt.looptogo<=0)
+				opt.stopLoop="on";
+	}	
+   
+	opt.tonpause = true;
+	container.trigger('stoptimer');
+	opt.cd=0;
+	if (opt.spinner==="off")
+		if (opt.loader!==undefined) opt.loader.css({display:"none"});
+	else
+		opt.loadertimer = setTimeout(function() {if (opt.loader!==undefined) opt.loader.css({display:"block"});},50);
+
+	
+	loadImages(nextli,opt,1);	
+	if (_R.preLoadAudio) _R.preLoadAudio(nextli,opt,1);
+
+	
+	// WAIT FOR SWAP SLIDE PROGRESS
+	
+
+	waitForCurrentImages(nextli,opt,function() {				 
+
+		
+		// MANAGE BG VIDEOS
+		nextli.find('.rs-background-video-layer').each(function() {
+			var _nc = jQuery(this);				
+			if (!_nc.hasClass("HasListener")) {
+				_nc.data('bgvideo',1);
+				if (_R.manageVideoLayer) _R.manageVideoLayer(_nc,opt);
+			}
+			if (_nc.find('.rs-fullvideo-cover').length==0)
+				_nc.append('<div class="rs-fullvideo-cover"></div>')
+		});
+		swapSlideProgress(defimg,container)
+	});			
+
+}
+
+//////////////////////////////////////
+//	-	PROGRESS SWAP THE SLIDES -  //
+/////////////////////////////////////
+var swapSlideProgress = function(defimg,container) {
+	
+	var actli = container.find('.active-revslide'),	
+		nextli = container.find('.processing-revslide'),		
+		actsh = actli.find('.slotholder'),
+		nextsh = nextli.find('.slotholder'),
+		opt = container[0].opt;
+	
+	opt.tonpause=false;
+    
+    opt.cd=0;    
+    
+    
+    
+    clearTimeout(opt.loadertimer);
+    if (opt.loader!==undefined) opt.loader.css({display:"none"});
+   // if ( opt.sliderType =="carousel") _R.prepareCarousel(opt);
+	_R.setSize(opt);
+	_R.slotSize(defimg,opt);
+	
+   	if (_R.manageNavigation) _R.manageNavigation(opt);
+   	var data={};
+   	data.nextslide=nextli;
+    data.currentslide=actli;
+	container.trigger('revolution.slide.onbeforeswap',data);
+
+	opt.transition = 1;
+	opt.videoplaying = false;
+
+	// IF DELAY HAS BEEN SET VIA THE SLIDE, WE TAKE THE NEW VALUE, OTHER WAY THE OLD ONE...
+	if (nextli.data('delay')!=undefined) {
+				opt.cd=0;
+				opt.delay=nextli.data('delay');
+	} else 
+		opt.delay=opt.origcd;
+
+	
+	if (nextli.data('ssop')=="true" || nextli.data('ssop')===true)
+		opt.ssop = true
+	else
+		opt.ssop = false;
+
+	
+
+	container.trigger('nulltimer');
+
+	var ai = actli.index(),
+		ni = nextli.index();
+	opt.sdir = ni<ai ? 1 : 0;
+	
+	if (opt.sc_indicator=="arrow") {	
+		if (ai==0 && ni==opt.slideamount-1) opt.sdir = 1;
+		if (ai==opt.slideamount-1 && ni==0) opt.sdir = 0;	
+	}
+
+	opt.lsdir = opt.lsdir === undefined ? opt.sdir : opt.lsdir; 
+	opt.dirc = opt.lsdir != opt.sdir;
+	opt.lsdir = opt.sdir;
+
+	///////////////////////////
+	//	REMOVE THE CAPTIONS //
+	///////////////////////////
+
+
+	
+	if (actli.index() != nextli.index() && opt.firststart!=1) 	
+		if (_R.removeTheCaptions) _R.removeTheCaptions(actli,opt);
+    
+	
+	if (!nextli.hasClass('rs-pause-timer-once') && !nextli.hasClass("rs-pause-timer-always")) 	
+    	container.trigger('restarttimer');		
+    else
+    	opt.videoplaying = true;   
+	
+    nextli.removeClass("rs-pause-timer-once");
+		
+	var nexttrans,
+		direction=-1,
+		mtl;
+
+	opt.currentSlide = actli.index();
+	opt.nextSlide = nextli.index();
+
+		
+	// SELECT SLIDER TYPE
+	if ( opt.sliderType =="carousel") {									
+		mtl = new punchgs.TimelineLite();
+		_R.prepareCarousel(opt,mtl);		
+		letItFree(container,nextsh,actsh,nextli,actli,mtl);
+		opt.transition = 0;
+		opt.firststart = 0;
+	} else {	
+		mtl = new punchgs.TimelineLite({onComplete:function() {				
+			letItFree(container,nextsh,actsh,nextli,actli,mtl);
+		}});	
+		mtl.add(punchgs.TweenLite.set(nextsh.find('.defaultimg'),{opacity:0}));
+		mtl.pause();
+
+		if (_R.animateTheCaptions) 
+			_R.animateTheCaptions({slide:nextli,opt:opt,maintimeline:mtl, preset:true});
+
+		if (opt.firststart==1) {
+			punchgs.TweenLite.set(actli,{autoAlpha:0});			
+			opt.firststart=0;
+		}
+
+		
+		punchgs.TweenLite.set(actli,{zIndex:18});
+		punchgs.TweenLite.set(nextli,{autoAlpha:0,zIndex:20});
+		
+				
+		// IF THERE IS AN OTHER FIRST SLIDE START HAS BEED SELECTED
+		if (nextli.data('differentissplayed') =='prepared') {
+			nextli.data('differentissplayed','done');
+			nextli.data('transition',nextli.data('savedtransition'));
+			nextli.data('slotamount',nextli.data('savedslotamount'));
+			nextli.data('masterspeed',nextli.data('savedmasterspeed'));
+		}
+
+
+		if (nextli.data('fstransition') != undefined && nextli.data('differentissplayed') !="done") {
+
+			nextli.data('savedtransition',nextli.data('transition'));
+			nextli.data('savedslotamount',nextli.data('slotamount'));
+			nextli.data('savedmasterspeed',nextli.data('masterspeed'));
+			nextli.data('transition',nextli.data('fstransition'));
+			nextli.data('slotamount',nextli.data('fsslotamount'));
+			nextli.data('masterspeed',nextli.data('fsmasterspeed'));
+			nextli.data('differentissplayed','prepared');
+		}
+
+		if (nextli.data('transition')==undefined) nextli.data('transition',"random");
+		
+		nexttrans = 0;		
+		var transtext = nextli.data('transition') !== undefined ? nextli.data('transition').split(",") : "fade",
+			curtransid = nextli.data('nexttransid') == undefined ? -1 : nextli.data('nexttransid');		
+		if (nextli.data('randomtransition')=="on")
+			curtransid = Math.round(Math.random()*transtext.length);
+		else
+			curtransid=curtransid+1;
+
+		if (curtransid==transtext.length) curtransid=0;
+		nextli.data('nexttransid',curtransid);
+
+		var comingtransition = transtext[curtransid];
+
+		if (opt.ie) {
+			if (comingtransition=="boxfade") comingtransition = "boxslide";
+			if (comingtransition=="slotfade-vertical") comingtransition = "slotzoom-vertical";
+			if (comingtransition=="slotfade-horizontal") comingtransition = "slotzoom-horizontal";
+		}
+
+		if (_R.isIE(8)) 
+			comingtransition = 11;	
+		
+
+						
+		mtl = _R.animateSlide(nexttrans, comingtransition, container,  nextli, actli, nextsh, actsh,  mtl);	
+		if (nextsh.data('kenburns')=="on") {
+			_R.startKenBurn(nextsh,opt);				
+			mtl.add(punchgs.TweenLite.set(nextsh,{autoAlpha:0}))
+		}
+		
+		// SHOW FIRST LI && ANIMATE THE CAPTIONS
+		mtl.pause();
+	}
+
+	if (_R.scrollHandling) {
+		_R.scrollHandling(opt, true);
+		mtl.eventCallback("onUpdate",function() {
+			_R.scrollHandling(opt, true);
+		});
+	}
+	
+	// START PARALLAX IF NEEDED		
+	if (opt.parallax.type!="off" && opt.parallax.firstgo==undefined && _R.scrollHandling) {
+		opt.parallax.firstgo = true;
+		opt.lastscrolltop = -999;
+		_R.scrollHandling(opt,true);
+		setTimeout(function() {
+			opt.lastscrolltop = -999;
+			_R.scrollHandling(opt,true);
+		},210);
+		setTimeout(function() {
+			opt.lastscrolltop = -999;
+			_R.scrollHandling(opt,true);
+		},420);
+	}
+	
+	
+	if (_R.animateTheCaptions) {		
+		_R.animateTheCaptions({slide:nextli, opt:opt,maintimeline:mtl,startslideanimat:0});	
+	} else {
+		if (mtl != undefined) setTimeout(function() {			
+			mtl.resume();
+		},30);
+	}
+	punchgs.TweenLite.to(nextli,0.001,{autoAlpha:1});
+
+	
+	//if (_R.callStaticDDDParallax) _R.callStaticDDDParallax(container,opt,nextli);	
+	
+}
+
+
+//////////////////////////////////////////
+//	GIVE FREE THE TRANSITIOSN			//
+//////////////////////////////////////////
+var letItFree = function(container,nextsh,actsh,nextli,actli,mtl) {
+	
+
+	var opt = container[0].opt;
+	if (opt.sliderType==="carousel") {
+		// CAROUSEL SLIDER
+	}  else {
+		opt.removePrepare = 0;
+		punchgs.TweenLite.to(nextsh.find('.defaultimg'),0.001,{zIndex:20,autoAlpha:1,onComplete:function() {
+			removeSlots(container,opt,nextli,1);
+
+		}});
+		if (nextli.index()!=actli.index()) {
+			punchgs.TweenLite.to(actli,0.2,{zIndex:18,autoAlpha:0,onComplete:function() {
+				removeSlots(container,opt,actli,1);							
+			}});
+		}
+	}
+
+
+	container.find('.active-revslide').removeClass("active-revslide");	
+	container.find('.processing-revslide').removeClass("processing-revslide").addClass("active-revslide");
+	opt.act=nextli.index();
+	
+	opt.c.attr('data-slideactive',container.find('.active-revslide').data('index'));	
+		
+	if (opt.parallax.type=="scroll" || opt.parallax.type=="scroll+mouse" || opt.parallax.type=="mouse+scroll") {
+		opt.lastscrolltop = -999;
+		_R.scrollHandling(opt);
+	}
+	
+	mtl.clear();		
+	
+	
+	if (actsh.data('kbtl')!=undefined) {
+		actsh.data('kbtl').reverse();
+		actsh.data('kbtl').timeScale(25);
+	}	
+	if (nextsh.data('kenburns')=="on") {		
+		if (nextsh.data('kbtl')!=undefined) {
+			nextsh.data('kbtl').timeScale(1);	
+			nextsh.data('kbtl').play();						
+		}
+		else
+			_R.startKenBurn(nextsh,opt);						
+	}
+
+	nextli.find('.rs-background-video-layer').each(function(i) {		
+		if (_ISM) return false;
+		var _nc = jQuery(this)
+		_R.resetVideo(_nc,opt);								
+		
+		punchgs.TweenLite.fromTo(_nc,1,{autoAlpha:0},{autoAlpha:1,ease:punchgs.Power3.easeInOut,delay:0.2,onComplete:function() {		
+			if (_R.animcompleted) _R.animcompleted(_nc,opt);
+		}});
+	});
+	
+
+	actli.find('.rs-background-video-layer').each(function(i) {		
+		if (_ISM) return false;
+		var _nc = jQuery(this);
+		if (_R.stopVideo) {
+			_R.resetVideo(_nc,opt);
+			_R.stopVideo(_nc,opt);					
+		}
+		punchgs.TweenLite.to(_nc,1,{autoAlpha:0,ease:punchgs.Power3.easeInOut,delay:0.2});
+	});
+	// TIRGGER THE ON CHANGE EVENTS
+	var data={};
+	data.slideIndex=nextli.index()+1;
+	data.slideLIIndex=nextli.index();
+	data.slide = nextli;
+	data.currentslide=nextli;
+	data.prevslide = actli;
+	opt.last_shown_slide = actli.index();
+
+	container.trigger('revolution.slide.onchange',data);
+	container.trigger('revolution.slide.onafterswap',data);	
+
+	opt.duringslidechange = false;
+
+	
+	var lastSlideLoop = actli.data('slide_on_focus_amount'),
+		lastSlideMaxLoop = actli.data('hideafterloop');	
+	if (lastSlideMaxLoop!=0 && lastSlideMaxLoop<=lastSlideLoop) opt.c.revremoveslide(actli.index());
+	
+	
+
+	var _actli = opt.nextSlide === -1 || opt.nextSlide===undefined ? 0 : opt.nextSlide;
+	_actli = _actli>opt.rowzones.length ? opt.rowzones.length : _actli;
+	
+	if (opt.rowzones!=undefined && opt.rowzones.length>0 && opt.rowzones[_actli]!=undefined && _actli>=0 && _actli<=opt.rowzones.length && opt.rowzones[_actli].length>0) _R.setSize(opt);
+	//if (_R.callStaticDDDParallax) _R.callStaticDDDParallax(container,opt,nextli);		
+	
+}
+
+
+
+
+
+///////////////////////////
+//	REMOVE THE LISTENERS //
+///////////////////////////
+var removeAllListeners = function(container,opt) {
+	container.children().each(function() {
+	  try{ jQuery(this).die('click'); } catch(e) {}
+	  try{ jQuery(this).die('mouseenter');} catch(e) {}
+	  try{ jQuery(this).die('mouseleave');} catch(e) {}
+	  try{ jQuery(this).unbind('hover');} catch(e) {}
+	})
+	try{ container.die('click','mouseenter','mouseleave');} catch(e) {}
+	clearInterval(opt.cdint);
+	container=null;
+}
+
+///////////////////////////
+//	-	countDown	-	//
+/////////////////////////
+var countDown = function(container,opt) {
+	opt.cd=0;
+	opt.loop=0;
+	if (opt.stopAfterLoops!=undefined && opt.stopAfterLoops>-1)
+			opt.looptogo=opt.stopAfterLoops;
+	else
+		opt.looptogo=9999999;
+
+	if (opt.stopAtSlide!=undefined && opt.stopAtSlide>-1)
+			opt.lastslidetoshow=opt.stopAtSlide;
+	else
+			opt.lastslidetoshow=999;
+
+	opt.stopLoop="off";
+
+	if (opt.looptogo==0) opt.stopLoop="on";
+
+	
+	var bt=container.find('.tp-bannertimer');
+
+	// LISTENERS  //container.trigger('stoptimer');
+	container.on('stoptimer',function() {		
+	
+		var bt = jQuery(this).find('.tp-bannertimer');
+		bt[0].tween.pause();
+		if (opt.disableProgressBar=="on") bt.css({visibility:"hidden"});
+		opt.sliderstatus = "paused";
+		_R.unToggleState(opt.slidertoggledby);
+	});
+
+
+	container.on('starttimer',function() {			
+		if (opt.forcepause_viatoggle) return;
+		if (opt.conthover!=1 && opt.videoplaying!=true && opt.width>opt.hideSliderAtLimit && opt.tonpause != true && opt.overnav !=true && opt.ssop!=true)
+			if (opt.noloopanymore !== 1 && (!opt.viewPort.enable || opt.inviewport)) {	
+				
+				bt.css({visibility:"visible"});
+				bt[0].tween.resume();
+				opt.sliderstatus = "playing";
+			}
+
+			if (opt.disableProgressBar=="on") bt.css({visibility:"hidden"});
+			_R.toggleState(opt.slidertoggledby);
+	});
+
+
+	container.on('restarttimer',function() {	
+		if (opt.forcepause_viatoggle) return;		
+		var bt = jQuery(this).find('.tp-bannertimer');
+		if (opt.mouseoncontainer && opt.navigation.onHoverStop=="on" && (!_ISM)) return false; 
+		if (opt.noloopanymore !== 1 && (!opt.viewPort.enable || opt.inviewport) && opt.ssop!=true) {
+			bt.css({visibility:"visible"});
+			bt[0].tween.kill();			
+		
+			bt[0].tween=punchgs.TweenLite.fromTo(bt,opt.delay/1000,{width:"0%"},{force3D:"auto",width:"100%",ease:punchgs.Linear.easeNone,onComplete:countDownNext,delay:1});
+			opt.sliderstatus = "playing";
+		}
+		if (opt.disableProgressBar=="on") bt.css({visibility:"hidden"});
+		_R.toggleState(opt.slidertoggledby);
+	});
+
+	container.on('nulltimer',function() {						
+			bt[0].tween.kill();			
+			bt[0].tween=punchgs.TweenLite.fromTo(bt,opt.delay/1000,{width:"0%"},{force3D:"auto",width:"100%",ease:punchgs.Linear.easeNone,onComplete:countDownNext,delay:1});
+			bt[0].tween.pause(0);
+			if (opt.disableProgressBar=="on") bt.css({visibility:"hidden"});
+			opt.sliderstatus = "paused";
+	});
+
+	var countDownNext = function() {
+		if (jQuery('body').find(container).length==0) {
+			removeAllListeners(container,opt);
+			clearInterval(opt.cdint);
+		}
+
+		container.trigger("revolution.slide.slideatend");
+
+		//STATE OF API CHANGED -> MOVE TO AIP BETTER
+		if (container.data('conthover-changed') == 1) {
+			opt.conthover=	container.data('conthover');
+			container.data('conthover-changed',0);
+		}
+
+		_R.callingNewSlide(container,1);												
+	}
+
+	bt[0].tween=punchgs.TweenLite.fromTo(bt,opt.delay/1000,{width:"0%"},{force3D:"auto",width:"100%",ease:punchgs.Linear.easeNone,onComplete:countDownNext,delay:1});
+	
+
+	if (opt.slideamount >1 && !(opt.stopAfterLoops==0 && opt.stopAtSlide==1)) {
+		container.trigger("starttimer");
+	}
+	else {
+		opt.noloopanymore = 1;
+		
+		container.trigger("nulltimer");		
+	}
+
+	container.on('tp-mouseenter',function() {	
+		    opt.mouseoncontainer = true;			
+			if (opt.navigation.onHoverStop=="on" && (!_ISM)) {
+				container.trigger('stoptimer');
+				container.trigger('revolution.slide.onpause');								
+			}
+	});
+	container.on('tp-mouseleft',function() {
+			opt.mouseoncontainer = false;
+			if (container.data('conthover')!=1 && opt.navigation.onHoverStop=="on" && ((opt.viewPort.enable==true && opt.inviewport) || opt.viewPort.enable==false)) {
+				container.trigger('revolution.slide.onresume');
+				container.trigger('starttimer');									
+			}
+	});
+	
+}
+
+
+ 
+
+//////////////////////////////////////////////////////
+// * Revolution Slider - NEEDFULL FUNCTIONS
+// * @version: 1.0 (30.10.2014)
+// * @author ThemePunch
+//////////////////////////////////////////////////////
+
+
+
+// 	-	BLUR / FOXUS FUNCTIONS ON BROWSER 
+
+var vis = (function(){
+	    var stateKey,
+	        eventKey,
+	        keys = {
+	                hidden: "visibilitychange",
+	                webkitHidden: "webkitvisibilitychange",
+	                mozHidden: "mozvisibilitychange",
+	                msHidden: "msvisibilitychange"
+	    };
+	    for (stateKey in keys) {
+	        if (stateKey in document) {
+	            eventKey = keys[stateKey];
+	            break;
+	        }
+	    }
+	    return function(c) {
+	        if (c) document.addEventListener(eventKey, c,{pasive:true});
+	        return !document[stateKey];
+	    }
+	})();
+
+var restartOnFocus = function(opt) {
+	if (opt==undefined || opt.c==undefined) return false;
+	if (opt.windowfocused!=true) {
+		opt.windowfocused = true;
+	    punchgs.TweenLite.delayedCall(0.3,function(){        	
+	        // TAB IS ACTIVE, WE CAN START ANY PART OF THE SLIDER        
+	        if (opt.fallbacks.nextSlideOnWindowFocus=="on") opt.c.revnext();
+	        opt.c.revredraw();
+	        if (opt.lastsliderstatus=="playing")								
+			opt.c.revresume();
+	    });
+	}
+}
+
+var lastStatBlur = function(opt) {
+	opt.windowfocused = false;
+	opt.lastsliderstatus = opt.sliderstatus;	
+	opt.c.revpause();	
+	var actsh = opt.c.find('.active-revslide .slotholder'),
+		nextsh = opt.c.find('.processing-revslide .slotholder');
+
+	if (nextsh.data('kenburns')=="on") 				
+		_R.stopKenBurn(nextsh,opt);
+
+	if (actsh.data('kenburns')=="on") 				
+		_R.stopKenBurn(actsh,opt);
+	
+	
+}
+
+var tabBlurringCheck = function(container,opt) {
+	var notIE = (document.documentMode === undefined),
+	    isChromium = window.chrome;
+
+	if (notIE && !isChromium) {
+	    // checks for Firefox and other  NON IE Chrome versions
+	    jQuery(window).on("focusin", function () {
+			restartOnFocus(opt);
+	    }).on("focusout", function () {
+	    	lastStatBlur(opt);	    					
+	    });
+	} else {
+	    // checks for IE and Chromium versions
+	    if (window.addEventListener) {			    	
+	        // bind focus event
+	        window.addEventListener("focus", function (event) {
+				restartOnFocus(opt);
+	        }, {capture:false,passive:true});
+	        // bind blur event
+	        window.addEventListener("blur", function (event) {
+				lastStatBlur(opt);	  
+	        }, {capture:false,passive:true});
+
+	    } else {
+	        // bind focus event
+	        window.attachEvent("focus", function (event) {
+	        	restartOnFocus(opt);
+	        });
+	        // bind focus event
+	        window.attachEvent("blur", function (event) {
+				lastStatBlur(opt);	  
+	        });
+	    }
+	}
+}
+
+
+// 	-	GET THE URL PARAMETER //
+
+var getUrlVars = function (hashdivider){
+	var vars = [], hash;
+	var hashes = window.location.href.slice(window.location.href.indexOf(hashdivider) + 1).split('_');
+	for(var i = 0; i < hashes.length; i++)
+	{
+		hashes[i] = hashes[i].replace('%3D',"=");
+		hash = hashes[i].split('=');
+		vars.push(hash[0]);
+		vars[hash[0]] = hash[1];
+	}
+	return vars;
+}
+})(jQuery);
 /********************************************
 	-	THEMEPUNCH TOOLS Ver. 1.0     -
 	 Last Update of Tools 27.02.2015
@@ -96,8 +3124,6 @@ var _gsScope="undefined"!=typeof module&&module.exports&&"undefined"!=typeof glo
  **/
 var _gsScope="undefined"!=typeof module&&module.exports&&"undefined"!=typeof global?global:this||window;(_gsScope._gsQueue||(_gsScope._gsQueue=[])).push(function(){"use strict";_gsScope._gsDefine("easing.Back",["easing.Ease"],function(a){var b,c,d,e=_gsScope.GreenSockGlobals||_gsScope,f=e.com.greensock,g=2*Math.PI,h=Math.PI/2,i=f._class,j=function(b,c){var d=i("easing."+b,function(){},!0),e=d.prototype=new a;return e.constructor=d,e.getRatio=c,d},k=a.register||function(){},l=function(a,b,c,d,e){var f=i("easing."+a,{easeOut:new b,easeIn:new c,easeInOut:new d},!0);return k(f,a),f},m=function(a,b,c){this.t=a,this.v=b,c&&(this.next=c,c.prev=this,this.c=c.v-b,this.gap=c.t-a)},n=function(b,c){var d=i("easing."+b,function(a){this._p1=a||0===a?a:1.70158,this._p2=1.525*this._p1},!0),e=d.prototype=new a;return e.constructor=d,e.getRatio=c,e.config=function(a){return new d(a)},d},o=l("Back",n("BackOut",function(a){return(a-=1)*a*((this._p1+1)*a+this._p1)+1}),n("BackIn",function(a){return a*a*((this._p1+1)*a-this._p1)}),n("BackInOut",function(a){return(a*=2)<1?.5*a*a*((this._p2+1)*a-this._p2):.5*((a-=2)*a*((this._p2+1)*a+this._p2)+2)})),p=i("easing.SlowMo",function(a,b,c){b=b||0===b?b:.7,null==a?a=.7:a>1&&(a=1),this._p=1!==a?b:0,this._p1=(1-a)/2,this._p2=a,this._p3=this._p1+this._p2,this._calcEnd=c===!0},!0),q=p.prototype=new a;return q.constructor=p,q.getRatio=function(a){var b=a+(.5-a)*this._p;return a<this._p1?this._calcEnd?1-(a=1-a/this._p1)*a:b-(a=1-a/this._p1)*a*a*a*b:a>this._p3?this._calcEnd?1-(a=(a-this._p3)/this._p1)*a:b+(a-b)*(a=(a-this._p3)/this._p1)*a*a*a:this._calcEnd?1:b},p.ease=new p(.7,.7),q.config=p.config=function(a,b,c){return new p(a,b,c)},b=i("easing.SteppedEase",function(a){a=a||1,this._p1=1/a,this._p2=a+1},!0),q=b.prototype=new a,q.constructor=b,q.getRatio=function(a){return 0>a?a=0:a>=1&&(a=.999999999),(this._p2*a>>0)*this._p1},q.config=b.config=function(a){return new b(a)},c=i("easing.RoughEase",function(b){b=b||{};for(var c,d,e,f,g,h,i=b.taper||"none",j=[],k=0,l=0|(b.points||20),n=l,o=b.randomize!==!1,p=b.clamp===!0,q=b.template instanceof a?b.template:null,r="number"==typeof b.strength?.4*b.strength:.4;--n>-1;)c=o?Math.random():1/l*n,d=q?q.getRatio(c):c,"none"===i?e=r:"out"===i?(f=1-c,e=f*f*r):"in"===i?e=c*c*r:.5>c?(f=2*c,e=f*f*.5*r):(f=2*(1-c),e=f*f*.5*r),o?d+=Math.random()*e-.5*e:n%2?d+=.5*e:d-=.5*e,p&&(d>1?d=1:0>d&&(d=0)),j[k++]={x:c,y:d};for(j.sort(function(a,b){return a.x-b.x}),h=new m(1,1,null),n=l;--n>-1;)g=j[n],h=new m(g.x,g.y,h);this._prev=new m(0,0,0!==h.t?h:h.next)},!0),q=c.prototype=new a,q.constructor=c,q.getRatio=function(a){var b=this._prev;if(a>b.t){for(;b.next&&a>=b.t;)b=b.next;b=b.prev}else for(;b.prev&&a<=b.t;)b=b.prev;return this._prev=b,b.v+(a-b.t)/b.gap*b.c},q.config=function(a){return new c(a)},c.ease=new c,l("Bounce",j("BounceOut",function(a){return 1/2.75>a?7.5625*a*a:2/2.75>a?7.5625*(a-=1.5/2.75)*a+.75:2.5/2.75>a?7.5625*(a-=2.25/2.75)*a+.9375:7.5625*(a-=2.625/2.75)*a+.984375}),j("BounceIn",function(a){return(a=1-a)<1/2.75?1-7.5625*a*a:2/2.75>a?1-(7.5625*(a-=1.5/2.75)*a+.75):2.5/2.75>a?1-(7.5625*(a-=2.25/2.75)*a+.9375):1-(7.5625*(a-=2.625/2.75)*a+.984375)}),j("BounceInOut",function(a){var b=.5>a;return a=b?1-2*a:2*a-1,a=1/2.75>a?7.5625*a*a:2/2.75>a?7.5625*(a-=1.5/2.75)*a+.75:2.5/2.75>a?7.5625*(a-=2.25/2.75)*a+.9375:7.5625*(a-=2.625/2.75)*a+.984375,b?.5*(1-a):.5*a+.5})),l("Circ",j("CircOut",function(a){return Math.sqrt(1-(a-=1)*a)}),j("CircIn",function(a){return-(Math.sqrt(1-a*a)-1)}),j("CircInOut",function(a){return(a*=2)<1?-.5*(Math.sqrt(1-a*a)-1):.5*(Math.sqrt(1-(a-=2)*a)+1)})),d=function(b,c,d){var e=i("easing."+b,function(a,b){this._p1=a>=1?a:1,this._p2=(b||d)/(1>a?a:1),this._p3=this._p2/g*(Math.asin(1/this._p1)||0),this._p2=g/this._p2},!0),f=e.prototype=new a;return f.constructor=e,f.getRatio=c,f.config=function(a,b){return new e(a,b)},e},l("Elastic",d("ElasticOut",function(a){return this._p1*Math.pow(2,-10*a)*Math.sin((a-this._p3)*this._p2)+1},.3),d("ElasticIn",function(a){return-(this._p1*Math.pow(2,10*(a-=1))*Math.sin((a-this._p3)*this._p2))},.3),d("ElasticInOut",function(a){return(a*=2)<1?-.5*(this._p1*Math.pow(2,10*(a-=1))*Math.sin((a-this._p3)*this._p2)):this._p1*Math.pow(2,-10*(a-=1))*Math.sin((a-this._p3)*this._p2)*.5+1},.45)),l("Expo",j("ExpoOut",function(a){return 1-Math.pow(2,-10*a)}),j("ExpoIn",function(a){return Math.pow(2,10*(a-1))-.001}),j("ExpoInOut",function(a){return(a*=2)<1?.5*Math.pow(2,10*(a-1)):.5*(2-Math.pow(2,-10*(a-1)))})),l("Sine",j("SineOut",function(a){return Math.sin(a*h)}),j("SineIn",function(a){return-Math.cos(a*h)+1}),j("SineInOut",function(a){return-.5*(Math.cos(Math.PI*a)-1)})),i("easing.EaseLookup",{find:function(b){return a.map[b]}},!0),k(e.SlowMo,"SlowMo","ease,"),k(c,"RoughEase","ease,"),k(b,"SteppedEase","ease,"),o},!0)}),_gsScope._gsDefine&&_gsScope._gsQueue.pop()(),function(){"use strict";var a=function(){return _gsScope.GreenSockGlobals||_gsScope};"function"==typeof define&&define.amd?define(["TweenLite"],a):"undefined"!=typeof module&&module.exports&&(require("../TweenLite.js"),module.exports=a())}();
 
-
-/* CSS PLUGIN */
 /*!
  * VERSION: 1.19.0
  * DATE: 2016-07-14
@@ -106,11 +3132,2823 @@ var _gsScope="undefined"!=typeof module&&module.exports&&"undefined"!=typeof glo
  * @license Copyright (c) 2008-2016, GreenSock. All rights reserved.
  * This work is subject to the terms at http://greensock.com/standard-license or for
  * Club GreenSock members, the software agreement that was issued with your membership.
- * 
+ *
  * @author: Jack Doyle, jack@greensock.com
  */
-var _gsScope="undefined"!=typeof module&&module.exports&&"undefined"!=typeof global?global:this||window;(_gsScope._gsQueue||(_gsScope._gsQueue=[])).push(function(){"use strict";_gsScope._gsDefine("plugins.CSSPlugin",["plugins.TweenPlugin","TweenLite"],function(a,b){var c,d,e,f,g=function(){a.call(this,"css"),this._overwriteProps.length=0,this.setRatio=g.prototype.setRatio},h=_gsScope._gsDefine.globals,i={},j=g.prototype=new a("css");j.constructor=g,g.version="1.19.0",g.API=2,g.defaultTransformPerspective=0,g.defaultSkewType="compensated",g.defaultSmoothOrigin=!0,j="px",g.suffixMap={top:j,right:j,bottom:j,left:j,width:j,height:j,fontSize:j,padding:j,margin:j,perspective:j,lineHeight:""};var k,l,m,n,o,p,q,r,s=/(?:\-|\.|\b)(\d|\.|e\-)+/g,t=/(?:\d|\-\d|\.\d|\-\.\d|\+=\d|\-=\d|\+=.\d|\-=\.\d)+/g,u=/(?:\+=|\-=|\-|\b)[\d\-\.]+[a-zA-Z0-9]*(?:%|\b)/gi,v=/(?![+-]?\d*\.?\d+|[+-]|e[+-]\d+)[^0-9]/g,w=/(?:\d|\-|\+|=|#|\.)*/g,x=/opacity *= *([^)]*)/i,y=/opacity:([^;]*)/i,z=/alpha\(opacity *=.+?\)/i,A=/^(rgb|hsl)/,B=/([A-Z])/g,C=/-([a-z])/gi,D=/(^(?:url\(\"|url\())|(?:(\"\))$|\)$)/gi,E=function(a,b){return b.toUpperCase()},F=/(?:Left|Right|Width)/i,G=/(M11|M12|M21|M22)=[\d\-\.e]+/gi,H=/progid\:DXImageTransform\.Microsoft\.Matrix\(.+?\)/i,I=/,(?=[^\)]*(?:\(|$))/gi,J=/[\s,\(]/i,K=Math.PI/180,L=180/Math.PI,M={},N=document,O=function(a){return N.createElementNS?N.createElementNS("http://www.w3.org/1999/xhtml",a):N.createElement(a)},P=O("div"),Q=O("img"),R=g._internals={_specialProps:i},S=navigator.userAgent,T=function(){var a=S.indexOf("Android"),b=O("a");return m=-1!==S.indexOf("Safari")&&-1===S.indexOf("Chrome")&&(-1===a||Number(S.substr(a+8,1))>3),o=m&&Number(S.substr(S.indexOf("Version/")+8,1))<6,n=-1!==S.indexOf("Firefox"),(/MSIE ([0-9]{1,}[\.0-9]{0,})/.exec(S)||/Trident\/.*rv:([0-9]{1,}[\.0-9]{0,})/.exec(S))&&(p=parseFloat(RegExp.$1)),b?(b.style.cssText="top:1px;opacity:.55;",/^0.55/.test(b.style.opacity)):!1}(),U=function(a){return x.test("string"==typeof a?a:(a.currentStyle?a.currentStyle.filter:a.style.filter)||"")?parseFloat(RegExp.$1)/100:1},V=function(a){window.console&&console.log(a)},W="",X="",Y=function(a,b){b=b||P;var c,d,e=b.style;if(void 0!==e[a])return a;for(a=a.charAt(0).toUpperCase()+a.substr(1),c=["O","Moz","ms","Ms","Webkit"],d=5;--d>-1&&void 0===e[c[d]+a];);return d>=0?(X=3===d?"ms":c[d],W="-"+X.toLowerCase()+"-",X+a):null},Z=N.defaultView?N.defaultView.getComputedStyle:function(){},$=g.getStyle=function(a,b,c,d,e){var f;return T||"opacity"!==b?(!d&&a.style[b]?f=a.style[b]:(c=c||Z(a))?f=c[b]||c.getPropertyValue(b)||c.getPropertyValue(b.replace(B,"-$1").toLowerCase()):a.currentStyle&&(f=a.currentStyle[b]),null==e||f&&"none"!==f&&"auto"!==f&&"auto auto"!==f?f:e):U(a)},_=R.convertToPixels=function(a,c,d,e,f){if("px"===e||!e)return d;if("auto"===e||!d)return 0;var h,i,j,k=F.test(c),l=a,m=P.style,n=0>d,o=1===d;if(n&&(d=-d),o&&(d*=100),"%"===e&&-1!==c.indexOf("border"))h=d/100*(k?a.clientWidth:a.clientHeight);else{if(m.cssText="border:0 solid red;position:"+$(a,"position")+";line-height:0;","%"!==e&&l.appendChild&&"v"!==e.charAt(0)&&"rem"!==e)m[k?"borderLeftWidth":"borderTopWidth"]=d+e;else{if(l=a.parentNode||N.body,i=l._gsCache,j=b.ticker.frame,i&&k&&i.time===j)return i.width*d/100;m[k?"width":"height"]=d+e}l.appendChild(P),h=parseFloat(P[k?"offsetWidth":"offsetHeight"]),l.removeChild(P),k&&"%"===e&&g.cacheWidths!==!1&&(i=l._gsCache=l._gsCache||{},i.time=j,i.width=h/d*100),0!==h||f||(h=_(a,c,d,e,!0))}return o&&(h/=100),n?-h:h},aa=R.calculateOffset=function(a,b,c){if("absolute"!==$(a,"position",c))return 0;var d="left"===b?"Left":"Top",e=$(a,"margin"+d,c);return a["offset"+d]-(_(a,b,parseFloat(e),e.replace(w,""))||0)},ba=function(a,b){var c,d,e,f={};if(b=b||Z(a,null))if(c=b.length)for(;--c>-1;)e=b[c],(-1===e.indexOf("-transform")||Ca===e)&&(f[e.replace(C,E)]=b.getPropertyValue(e));else for(c in b)(-1===c.indexOf("Transform")||Ba===c)&&(f[c]=b[c]);else if(b=a.currentStyle||a.style)for(c in b)"string"==typeof c&&void 0===f[c]&&(f[c.replace(C,E)]=b[c]);return T||(f.opacity=U(a)),d=Pa(a,b,!1),f.rotation=d.rotation,f.skewX=d.skewX,f.scaleX=d.scaleX,f.scaleY=d.scaleY,f.x=d.x,f.y=d.y,Ea&&(f.z=d.z,f.rotationX=d.rotationX,f.rotationY=d.rotationY,f.scaleZ=d.scaleZ),f.filters&&delete f.filters,f},ca=function(a,b,c,d,e){var f,g,h,i={},j=a.style;for(g in c)"cssText"!==g&&"length"!==g&&isNaN(g)&&(b[g]!==(f=c[g])||e&&e[g])&&-1===g.indexOf("Origin")&&("number"==typeof f||"string"==typeof f)&&(i[g]="auto"!==f||"left"!==g&&"top"!==g?""!==f&&"auto"!==f&&"none"!==f||"string"!=typeof b[g]||""===b[g].replace(v,"")?f:0:aa(a,g),void 0!==j[g]&&(h=new ra(j,g,j[g],h)));if(d)for(g in d)"className"!==g&&(i[g]=d[g]);return{difs:i,firstMPT:h}},da={width:["Left","Right"],height:["Top","Bottom"]},ea=["marginLeft","marginRight","marginTop","marginBottom"],fa=function(a,b,c){if("svg"===(a.nodeName+"").toLowerCase())return(c||Z(a))[b]||0;if(a.getBBox&&Ma(a))return a.getBBox()[b]||0;var d=parseFloat("width"===b?a.offsetWidth:a.offsetHeight),e=da[b],f=e.length;for(c=c||Z(a,null);--f>-1;)d-=parseFloat($(a,"padding"+e[f],c,!0))||0,d-=parseFloat($(a,"border"+e[f]+"Width",c,!0))||0;return d},ga=function(a,b){if("contain"===a||"auto"===a||"auto auto"===a)return a+" ";(null==a||""===a)&&(a="0 0");var c,d=a.split(" "),e=-1!==a.indexOf("left")?"0%":-1!==a.indexOf("right")?"100%":d[0],f=-1!==a.indexOf("top")?"0%":-1!==a.indexOf("bottom")?"100%":d[1];if(d.length>3&&!b){for(d=a.split(", ").join(",").split(","),a=[],c=0;c<d.length;c++)a.push(ga(d[c]));return a.join(",")}return null==f?f="center"===e?"50%":"0":"center"===f&&(f="50%"),("center"===e||isNaN(parseFloat(e))&&-1===(e+"").indexOf("="))&&(e="50%"),a=e+" "+f+(d.length>2?" "+d[2]:""),b&&(b.oxp=-1!==e.indexOf("%"),b.oyp=-1!==f.indexOf("%"),b.oxr="="===e.charAt(1),b.oyr="="===f.charAt(1),b.ox=parseFloat(e.replace(v,"")),b.oy=parseFloat(f.replace(v,"")),b.v=a),b||a},ha=function(a,b){return"function"==typeof a&&(a=a(r,q)),"string"==typeof a&&"="===a.charAt(1)?parseInt(a.charAt(0)+"1",10)*parseFloat(a.substr(2)):parseFloat(a)-parseFloat(b)||0},ia=function(a,b){return"function"==typeof a&&(a=a(r,q)),null==a?b:"string"==typeof a&&"="===a.charAt(1)?parseInt(a.charAt(0)+"1",10)*parseFloat(a.substr(2))+b:parseFloat(a)||0},ja=function(a,b,c,d){var e,f,g,h,i,j=1e-6;return"function"==typeof a&&(a=a(r,q)),null==a?h=b:"number"==typeof a?h=a:(e=360,f=a.split("_"),i="="===a.charAt(1),g=(i?parseInt(a.charAt(0)+"1",10)*parseFloat(f[0].substr(2)):parseFloat(f[0]))*(-1===a.indexOf("rad")?1:L)-(i?0:b),f.length&&(d&&(d[c]=b+g),-1!==a.indexOf("short")&&(g%=e,g!==g%(e/2)&&(g=0>g?g+e:g-e)),-1!==a.indexOf("_cw")&&0>g?g=(g+9999999999*e)%e-(g/e|0)*e:-1!==a.indexOf("ccw")&&g>0&&(g=(g-9999999999*e)%e-(g/e|0)*e)),h=b+g),j>h&&h>-j&&(h=0),h},ka={aqua:[0,255,255],lime:[0,255,0],silver:[192,192,192],black:[0,0,0],maroon:[128,0,0],teal:[0,128,128],blue:[0,0,255],navy:[0,0,128],white:[255,255,255],fuchsia:[255,0,255],olive:[128,128,0],yellow:[255,255,0],orange:[255,165,0],gray:[128,128,128],purple:[128,0,128],green:[0,128,0],red:[255,0,0],pink:[255,192,203],cyan:[0,255,255],transparent:[255,255,255,0]},la=function(a,b,c){return a=0>a?a+1:a>1?a-1:a,255*(1>6*a?b+(c-b)*a*6:.5>a?c:2>3*a?b+(c-b)*(2/3-a)*6:b)+.5|0},ma=g.parseColor=function(a,b){var c,d,e,f,g,h,i,j,k,l,m;if(a)if("number"==typeof a)c=[a>>16,a>>8&255,255&a];else{if(","===a.charAt(a.length-1)&&(a=a.substr(0,a.length-1)),ka[a])c=ka[a];else if("#"===a.charAt(0))4===a.length&&(d=a.charAt(1),e=a.charAt(2),f=a.charAt(3),a="#"+d+d+e+e+f+f),a=parseInt(a.substr(1),16),c=[a>>16,a>>8&255,255&a];else if("hsl"===a.substr(0,3))if(c=m=a.match(s),b){if(-1!==a.indexOf("="))return a.match(t)}else g=Number(c[0])%360/360,h=Number(c[1])/100,i=Number(c[2])/100,e=.5>=i?i*(h+1):i+h-i*h,d=2*i-e,c.length>3&&(c[3]=Number(a[3])),c[0]=la(g+1/3,d,e),c[1]=la(g,d,e),c[2]=la(g-1/3,d,e);else c=a.match(s)||ka.transparent;c[0]=Number(c[0]),c[1]=Number(c[1]),c[2]=Number(c[2]),c.length>3&&(c[3]=Number(c[3]))}else c=ka.black;return b&&!m&&(d=c[0]/255,e=c[1]/255,f=c[2]/255,j=Math.max(d,e,f),k=Math.min(d,e,f),i=(j+k)/2,j===k?g=h=0:(l=j-k,h=i>.5?l/(2-j-k):l/(j+k),g=j===d?(e-f)/l+(f>e?6:0):j===e?(f-d)/l+2:(d-e)/l+4,g*=60),c[0]=g+.5|0,c[1]=100*h+.5|0,c[2]=100*i+.5|0),c},na=function(a,b){var c,d,e,f=a.match(oa)||[],g=0,h=f.length?"":a;for(c=0;c<f.length;c++)d=f[c],e=a.substr(g,a.indexOf(d,g)-g),g+=e.length+d.length,d=ma(d,b),3===d.length&&d.push(1),h+=e+(b?"hsla("+d[0]+","+d[1]+"%,"+d[2]+"%,"+d[3]:"rgba("+d.join(","))+")";return h+a.substr(g)},oa="(?:\\b(?:(?:rgb|rgba|hsl|hsla)\\(.+?\\))|\\B#(?:[0-9a-f]{3}){1,2}\\b";for(j in ka)oa+="|"+j+"\\b";oa=new RegExp(oa+")","gi"),g.colorStringFilter=function(a){var b,c=a[0]+a[1];oa.test(c)&&(b=-1!==c.indexOf("hsl(")||-1!==c.indexOf("hsla("),a[0]=na(a[0],b),a[1]=na(a[1],b)),oa.lastIndex=0},b.defaultStringFilter||(b.defaultStringFilter=g.colorStringFilter);var pa=function(a,b,c,d){if(null==a)return function(a){return a};var e,f=b?(a.match(oa)||[""])[0]:"",g=a.split(f).join("").match(u)||[],h=a.substr(0,a.indexOf(g[0])),i=")"===a.charAt(a.length-1)?")":"",j=-1!==a.indexOf(" ")?" ":",",k=g.length,l=k>0?g[0].replace(s,""):"";return k?e=b?function(a){var b,m,n,o;if("number"==typeof a)a+=l;else if(d&&I.test(a)){for(o=a.replace(I,"|").split("|"),n=0;n<o.length;n++)o[n]=e(o[n]);return o.join(",")}if(b=(a.match(oa)||[f])[0],m=a.split(b).join("").match(u)||[],n=m.length,k>n--)for(;++n<k;)m[n]=c?m[(n-1)/2|0]:g[n];return h+m.join(j)+j+b+i+(-1!==a.indexOf("inset")?" inset":"")}:function(a){var b,f,m;if("number"==typeof a)a+=l;else if(d&&I.test(a)){for(f=a.replace(I,"|").split("|"),m=0;m<f.length;m++)f[m]=e(f[m]);return f.join(",")}if(b=a.match(u)||[],m=b.length,k>m--)for(;++m<k;)b[m]=c?b[(m-1)/2|0]:g[m];return h+b.join(j)+i}:function(a){return a}},qa=function(a){return a=a.split(","),function(b,c,d,e,f,g,h){var i,j=(c+"").split(" ");for(h={},i=0;4>i;i++)h[a[i]]=j[i]=j[i]||j[(i-1)/2>>0];return e.parse(b,h,f,g)}},ra=(R._setPluginRatio=function(a){this.plugin.setRatio(a);for(var b,c,d,e,f,g=this.data,h=g.proxy,i=g.firstMPT,j=1e-6;i;)b=h[i.v],i.r?b=Math.round(b):j>b&&b>-j&&(b=0),i.t[i.p]=b,i=i._next;if(g.autoRotate&&(g.autoRotate.rotation=g.mod?g.mod(h.rotation,this.t):h.rotation),1===a||0===a)for(i=g.firstMPT,f=1===a?"e":"b";i;){if(c=i.t,c.type){if(1===c.type){for(e=c.xs0+c.s+c.xs1,d=1;d<c.l;d++)e+=c["xn"+d]+c["xs"+(d+1)];c[f]=e}}else c[f]=c.s+c.xs0;i=i._next}},function(a,b,c,d,e){this.t=a,this.p=b,this.v=c,this.r=e,d&&(d._prev=this,this._next=d)}),sa=(R._parseToProxy=function(a,b,c,d,e,f){var g,h,i,j,k,l=d,m={},n={},o=c._transform,p=M;for(c._transform=null,M=b,d=k=c.parse(a,b,d,e),M=p,f&&(c._transform=o,l&&(l._prev=null,l._prev&&(l._prev._next=null)));d&&d!==l;){if(d.type<=1&&(h=d.p,n[h]=d.s+d.c,m[h]=d.s,f||(j=new ra(d,"s",h,j,d.r),d.c=0),1===d.type))for(g=d.l;--g>0;)i="xn"+g,h=d.p+"_"+i,n[h]=d.data[i],m[h]=d[i],f||(j=new ra(d,i,h,j,d.rxp[i]));d=d._next}return{proxy:m,end:n,firstMPT:j,pt:k}},R.CSSPropTween=function(a,b,d,e,g,h,i,j,k,l,m){this.t=a,this.p=b,this.s=d,this.c=e,this.n=i||b,a instanceof sa||f.push(this.n),this.r=j,this.type=h||0,k&&(this.pr=k,c=!0),this.b=void 0===l?d:l,this.e=void 0===m?d+e:m,g&&(this._next=g,g._prev=this)}),ta=function(a,b,c,d,e,f){var g=new sa(a,b,c,d-c,e,-1,f);return g.b=c,g.e=g.xs0=d,g},ua=g.parseComplex=function(a,b,c,d,e,f,h,i,j,l){c=c||f||"","function"==typeof d&&(d=d(r,q)),h=new sa(a,b,0,0,h,l?2:1,null,!1,i,c,d),d+="",e&&oa.test(d+c)&&(d=[c,d],g.colorStringFilter(d),c=d[0],d=d[1]);var m,n,o,p,u,v,w,x,y,z,A,B,C,D=c.split(", ").join(",").split(" "),E=d.split(", ").join(",").split(" "),F=D.length,G=k!==!1;for((-1!==d.indexOf(",")||-1!==c.indexOf(","))&&(D=D.join(" ").replace(I,", ").split(" "),E=E.join(" ").replace(I,", ").split(" "),F=D.length),F!==E.length&&(D=(f||"").split(" "),F=D.length),h.plugin=j,h.setRatio=l,oa.lastIndex=0,m=0;F>m;m++)if(p=D[m],u=E[m],x=parseFloat(p),x||0===x)h.appendXtra("",x,ha(u,x),u.replace(t,""),G&&-1!==u.indexOf("px"),!0);else if(e&&oa.test(p))B=u.indexOf(")")+1,B=")"+(B?u.substr(B):""),C=-1!==u.indexOf("hsl")&&T,p=ma(p,C),u=ma(u,C),y=p.length+u.length>6,y&&!T&&0===u[3]?(h["xs"+h.l]+=h.l?" transparent":"transparent",h.e=h.e.split(E[m]).join("transparent")):(T||(y=!1),C?h.appendXtra(y?"hsla(":"hsl(",p[0],ha(u[0],p[0]),",",!1,!0).appendXtra("",p[1],ha(u[1],p[1]),"%,",!1).appendXtra("",p[2],ha(u[2],p[2]),y?"%,":"%"+B,!1):h.appendXtra(y?"rgba(":"rgb(",p[0],u[0]-p[0],",",!0,!0).appendXtra("",p[1],u[1]-p[1],",",!0).appendXtra("",p[2],u[2]-p[2],y?",":B,!0),y&&(p=p.length<4?1:p[3],h.appendXtra("",p,(u.length<4?1:u[3])-p,B,!1))),oa.lastIndex=0;else if(v=p.match(s)){if(w=u.match(t),!w||w.length!==v.length)return h;for(o=0,n=0;n<v.length;n++)A=v[n],z=p.indexOf(A,o),h.appendXtra(p.substr(o,z-o),Number(A),ha(w[n],A),"",G&&"px"===p.substr(z+A.length,2),0===n),o=z+A.length;h["xs"+h.l]+=p.substr(o)}else h["xs"+h.l]+=h.l||h["xs"+h.l]?" "+u:u;if(-1!==d.indexOf("=")&&h.data){for(B=h.xs0+h.data.s,m=1;m<h.l;m++)B+=h["xs"+m]+h.data["xn"+m];h.e=B+h["xs"+m]}return h.l||(h.type=-1,h.xs0=h.e),h.xfirst||h},va=9;for(j=sa.prototype,j.l=j.pr=0;--va>0;)j["xn"+va]=0,j["xs"+va]="";j.xs0="",j._next=j._prev=j.xfirst=j.data=j.plugin=j.setRatio=j.rxp=null,j.appendXtra=function(a,b,c,d,e,f){var g=this,h=g.l;return g["xs"+h]+=f&&(h||g["xs"+h])?" "+a:a||"",c||0===h||g.plugin?(g.l++,g.type=g.setRatio?2:1,g["xs"+g.l]=d||"",h>0?(g.data["xn"+h]=b+c,g.rxp["xn"+h]=e,g["xn"+h]=b,g.plugin||(g.xfirst=new sa(g,"xn"+h,b,c,g.xfirst||g,0,g.n,e,g.pr),g.xfirst.xs0=0),g):(g.data={s:b+c},g.rxp={},g.s=b,g.c=c,g.r=e,g)):(g["xs"+h]+=b+(d||""),g)};var wa=function(a,b){b=b||{},this.p=b.prefix?Y(a)||a:a,i[a]=i[this.p]=this,this.format=b.formatter||pa(b.defaultValue,b.color,b.collapsible,b.multi),b.parser&&(this.parse=b.parser),this.clrs=b.color,this.multi=b.multi,this.keyword=b.keyword,this.dflt=b.defaultValue,this.pr=b.priority||0},xa=R._registerComplexSpecialProp=function(a,b,c){"object"!=typeof b&&(b={parser:c});var d,e,f=a.split(","),g=b.defaultValue;for(c=c||[g],d=0;d<f.length;d++)b.prefix=0===d&&b.prefix,b.defaultValue=c[d]||g,e=new wa(f[d],b)},ya=R._registerPluginProp=function(a){if(!i[a]){var b=a.charAt(0).toUpperCase()+a.substr(1)+"Plugin";xa(a,{parser:function(a,c,d,e,f,g,j){var k=h.com.greensock.plugins[b];return k?(k._cssRegister(),i[d].parse(a,c,d,e,f,g,j)):(V("Error: "+b+" js file not loaded."),f)}})}};j=wa.prototype,j.parseComplex=function(a,b,c,d,e,f){var g,h,i,j,k,l,m=this.keyword;if(this.multi&&(I.test(c)||I.test(b)?(h=b.replace(I,"|").split("|"),i=c.replace(I,"|").split("|")):m&&(h=[b],i=[c])),i){for(j=i.length>h.length?i.length:h.length,g=0;j>g;g++)b=h[g]=h[g]||this.dflt,c=i[g]=i[g]||this.dflt,m&&(k=b.indexOf(m),l=c.indexOf(m),k!==l&&(-1===l?h[g]=h[g].split(m).join(""):-1===k&&(h[g]+=" "+m)));b=h.join(", "),c=i.join(", ")}return ua(a,this.p,b,c,this.clrs,this.dflt,d,this.pr,e,f)},j.parse=function(a,b,c,d,f,g,h){return this.parseComplex(a.style,this.format($(a,this.p,e,!1,this.dflt)),this.format(b),f,g)},g.registerSpecialProp=function(a,b,c){xa(a,{parser:function(a,d,e,f,g,h,i){var j=new sa(a,e,0,0,g,2,e,!1,c);return j.plugin=h,j.setRatio=b(a,d,f._tween,e),j},priority:c})},g.useSVGTransformAttr=m||n;var za,Aa="scaleX,scaleY,scaleZ,x,y,z,skewX,skewY,rotation,rotationX,rotationY,perspective,xPercent,yPercent".split(","),Ba=Y("transform"),Ca=W+"transform",Da=Y("transformOrigin"),Ea=null!==Y("perspective"),Fa=R.Transform=function(){this.perspective=parseFloat(g.defaultTransformPerspective)||0,this.force3D=g.defaultForce3D!==!1&&Ea?g.defaultForce3D||"auto":!1},Ga=window.SVGElement,Ha=function(a,b,c){var d,e=N.createElementNS("http://www.w3.org/2000/svg",a),f=/([a-z])([A-Z])/g;for(d in c)e.setAttributeNS(null,d.replace(f,"$1-$2").toLowerCase(),c[d]);return b.appendChild(e),e},Ia=N.documentElement,Ja=function(){var a,b,c,d=p||/Android/i.test(S)&&!window.chrome;return N.createElementNS&&!d&&(a=Ha("svg",Ia),b=Ha("rect",a,{width:100,height:50,x:100}),c=b.getBoundingClientRect().width,b.style[Da]="50% 50%",b.style[Ba]="scaleX(0.5)",d=c===b.getBoundingClientRect().width&&!(n&&Ea),Ia.removeChild(a)),d}(),Ka=function(a,b,c,d,e,f){var h,i,j,k,l,m,n,o,p,q,r,s,t,u,v=a._gsTransform,w=Oa(a,!0);v&&(t=v.xOrigin,u=v.yOrigin),(!d||(h=d.split(" ")).length<2)&&(n=a.getBBox(),b=ga(b).split(" "),h=[(-1!==b[0].indexOf("%")?parseFloat(b[0])/100*n.width:parseFloat(b[0]))+n.x,(-1!==b[1].indexOf("%")?parseFloat(b[1])/100*n.height:parseFloat(b[1]))+n.y]),c.xOrigin=k=parseFloat(h[0]),c.yOrigin=l=parseFloat(h[1]),d&&w!==Na&&(m=w[0],n=w[1],o=w[2],p=w[3],q=w[4],r=w[5],s=m*p-n*o,i=k*(p/s)+l*(-o/s)+(o*r-p*q)/s,j=k*(-n/s)+l*(m/s)-(m*r-n*q)/s,k=c.xOrigin=h[0]=i,l=c.yOrigin=h[1]=j),v&&(f&&(c.xOffset=v.xOffset,c.yOffset=v.yOffset,v=c),e||e!==!1&&g.defaultSmoothOrigin!==!1?(i=k-t,j=l-u,v.xOffset+=i*w[0]+j*w[2]-i,v.yOffset+=i*w[1]+j*w[3]-j):v.xOffset=v.yOffset=0),f||a.setAttribute("data-svg-origin",h.join(" "))},La=function(a){try{return a.getBBox()}catch(a){}},Ma=function(a){return!!(Ga&&a.getBBox&&a.getCTM&&La(a)&&(!a.parentNode||a.parentNode.getBBox&&a.parentNode.getCTM))},Na=[1,0,0,1,0,0],Oa=function(a,b){var c,d,e,f,g,h,i=a._gsTransform||new Fa,j=1e5,k=a.style;if(Ba?d=$(a,Ca,null,!0):a.currentStyle&&(d=a.currentStyle.filter.match(G),d=d&&4===d.length?[d[0].substr(4),Number(d[2].substr(4)),Number(d[1].substr(4)),d[3].substr(4),i.x||0,i.y||0].join(","):""),c=!d||"none"===d||"matrix(1, 0, 0, 1, 0, 0)"===d,c&&Ba&&((h="none"===Z(a).display)||!a.parentNode)&&(h&&(f=k.display,k.display="block"),a.parentNode||(g=1,Ia.appendChild(a)),d=$(a,Ca,null,!0),c=!d||"none"===d||"matrix(1, 0, 0, 1, 0, 0)"===d,f?k.display=f:h&&Ta(k,"display"),g&&Ia.removeChild(a)),(i.svg||a.getBBox&&Ma(a))&&(c&&-1!==(k[Ba]+"").indexOf("matrix")&&(d=k[Ba],c=0),e=a.getAttribute("transform"),c&&e&&(-1!==e.indexOf("matrix")?(d=e,c=0):-1!==e.indexOf("translate")&&(d="matrix(1,0,0,1,"+e.match(/(?:\-|\b)[\d\-\.e]+\b/gi).join(",")+")",c=0))),c)return Na;for(e=(d||"").match(s)||[],va=e.length;--va>-1;)f=Number(e[va]),e[va]=(g=f-(f|=0))?(g*j+(0>g?-.5:.5)|0)/j+f:f;return b&&e.length>6?[e[0],e[1],e[4],e[5],e[12],e[13]]:e},Pa=R.getTransform=function(a,c,d,e){if(a._gsTransform&&d&&!e)return a._gsTransform;var f,h,i,j,k,l,m=d?a._gsTransform||new Fa:new Fa,n=m.scaleX<0,o=2e-5,p=1e5,q=Ea?parseFloat($(a,Da,c,!1,"0 0 0").split(" ")[2])||m.zOrigin||0:0,r=parseFloat(g.defaultTransformPerspective)||0;if(m.svg=!(!a.getBBox||!Ma(a)),m.svg&&(Ka(a,$(a,Da,c,!1,"50% 50%")+"",m,a.getAttribute("data-svg-origin")),za=g.useSVGTransformAttr||Ja),f=Oa(a),f!==Na){if(16===f.length){var s,t,u,v,w,x=f[0],y=f[1],z=f[2],A=f[3],B=f[4],C=f[5],D=f[6],E=f[7],F=f[8],G=f[9],H=f[10],I=f[12],J=f[13],K=f[14],M=f[11],N=Math.atan2(D,H);m.zOrigin&&(K=-m.zOrigin,I=F*K-f[12],J=G*K-f[13],K=H*K+m.zOrigin-f[14]),m.rotationX=N*L,N&&(v=Math.cos(-N),w=Math.sin(-N),s=B*v+F*w,t=C*v+G*w,u=D*v+H*w,F=B*-w+F*v,G=C*-w+G*v,H=D*-w+H*v,M=E*-w+M*v,B=s,C=t,D=u),N=Math.atan2(-z,H),m.rotationY=N*L,N&&(v=Math.cos(-N),w=Math.sin(-N),s=x*v-F*w,t=y*v-G*w,u=z*v-H*w,G=y*w+G*v,H=z*w+H*v,M=A*w+M*v,x=s,y=t,z=u),N=Math.atan2(y,x),m.rotation=N*L,N&&(v=Math.cos(-N),w=Math.sin(-N),x=x*v+B*w,t=y*v+C*w,C=y*-w+C*v,D=z*-w+D*v,y=t),m.rotationX&&Math.abs(m.rotationX)+Math.abs(m.rotation)>359.9&&(m.rotationX=m.rotation=0,m.rotationY=180-m.rotationY),m.scaleX=(Math.sqrt(x*x+y*y)*p+.5|0)/p,m.scaleY=(Math.sqrt(C*C+G*G)*p+.5|0)/p,m.scaleZ=(Math.sqrt(D*D+H*H)*p+.5|0)/p,m.rotationX||m.rotationY?m.skewX=0:(m.skewX=B||C?Math.atan2(B,C)*L+m.rotation:m.skewX||0,Math.abs(m.skewX)>90&&Math.abs(m.skewX)<270&&(n?(m.scaleX*=-1,m.skewX+=m.rotation<=0?180:-180,m.rotation+=m.rotation<=0?180:-180):(m.scaleY*=-1,m.skewX+=m.skewX<=0?180:-180))),m.perspective=M?1/(0>M?-M:M):0,m.x=I,m.y=J,m.z=K,m.svg&&(m.x-=m.xOrigin-(m.xOrigin*x-m.yOrigin*B),m.y-=m.yOrigin-(m.yOrigin*y-m.xOrigin*C))}else if(!Ea||e||!f.length||m.x!==f[4]||m.y!==f[5]||!m.rotationX&&!m.rotationY){var O=f.length>=6,P=O?f[0]:1,Q=f[1]||0,R=f[2]||0,S=O?f[3]:1;m.x=f[4]||0,m.y=f[5]||0,i=Math.sqrt(P*P+Q*Q),j=Math.sqrt(S*S+R*R),k=P||Q?Math.atan2(Q,P)*L:m.rotation||0,l=R||S?Math.atan2(R,S)*L+k:m.skewX||0,Math.abs(l)>90&&Math.abs(l)<270&&(n?(i*=-1,l+=0>=k?180:-180,k+=0>=k?180:-180):(j*=-1,l+=0>=l?180:-180)),m.scaleX=i,m.scaleY=j,m.rotation=k,m.skewX=l,Ea&&(m.rotationX=m.rotationY=m.z=0,m.perspective=r,m.scaleZ=1),m.svg&&(m.x-=m.xOrigin-(m.xOrigin*P+m.yOrigin*R),m.y-=m.yOrigin-(m.xOrigin*Q+m.yOrigin*S))}m.zOrigin=q;for(h in m)m[h]<o&&m[h]>-o&&(m[h]=0)}return d&&(a._gsTransform=m,m.svg&&(za&&a.style[Ba]?b.delayedCall(.001,function(){Ta(a.style,Ba)}):!za&&a.getAttribute("transform")&&b.delayedCall(.001,function(){a.removeAttribute("transform")}))),m},Qa=function(a){var b,c,d=this.data,e=-d.rotation*K,f=e+d.skewX*K,g=1e5,h=(Math.cos(e)*d.scaleX*g|0)/g,i=(Math.sin(e)*d.scaleX*g|0)/g,j=(Math.sin(f)*-d.scaleY*g|0)/g,k=(Math.cos(f)*d.scaleY*g|0)/g,l=this.t.style,m=this.t.currentStyle;if(m){c=i,i=-j,j=-c,b=m.filter,l.filter="";var n,o,q=this.t.offsetWidth,r=this.t.offsetHeight,s="absolute"!==m.position,t="progid:DXImageTransform.Microsoft.Matrix(M11="+h+", M12="+i+", M21="+j+", M22="+k,u=d.x+q*d.xPercent/100,v=d.y+r*d.yPercent/100;if(null!=d.ox&&(n=(d.oxp?q*d.ox*.01:d.ox)-q/2,o=(d.oyp?r*d.oy*.01:d.oy)-r/2,u+=n-(n*h+o*i),v+=o-(n*j+o*k)),s?(n=q/2,o=r/2,t+=", Dx="+(n-(n*h+o*i)+u)+", Dy="+(o-(n*j+o*k)+v)+")"):t+=", sizingMethod='auto expand')",-1!==b.indexOf("DXImageTransform.Microsoft.Matrix(")?l.filter=b.replace(H,t):l.filter=t+" "+b,(0===a||1===a)&&1===h&&0===i&&0===j&&1===k&&(s&&-1===t.indexOf("Dx=0, Dy=0")||x.test(b)&&100!==parseFloat(RegExp.$1)||-1===b.indexOf(b.indexOf("Alpha"))&&l.removeAttribute("filter")),!s){var y,z,A,B=8>p?1:-1;for(n=d.ieOffsetX||0,o=d.ieOffsetY||0,d.ieOffsetX=Math.round((q-((0>h?-h:h)*q+(0>i?-i:i)*r))/2+u),d.ieOffsetY=Math.round((r-((0>k?-k:k)*r+(0>j?-j:j)*q))/2+v),va=0;4>va;va++)z=ea[va],y=m[z],c=-1!==y.indexOf("px")?parseFloat(y):_(this.t,z,parseFloat(y),y.replace(w,""))||0,A=c!==d[z]?2>va?-d.ieOffsetX:-d.ieOffsetY:2>va?n-d.ieOffsetX:o-d.ieOffsetY,l[z]=(d[z]=Math.round(c-A*(0===va||2===va?1:B)))+"px"}}},Ra=R.set3DTransformRatio=R.setTransformRatio=function(a){var b,c,d,e,f,g,h,i,j,k,l,m,o,p,q,r,s,t,u,v,w,x,y,z=this.data,A=this.t.style,B=z.rotation,C=z.rotationX,D=z.rotationY,E=z.scaleX,F=z.scaleY,G=z.scaleZ,H=z.x,I=z.y,J=z.z,L=z.svg,M=z.perspective,N=z.force3D;if(((1===a||0===a)&&"auto"===N&&(this.tween._totalTime===this.tween._totalDuration||!this.tween._totalTime)||!N)&&!J&&!M&&!D&&!C&&1===G||za&&L||!Ea)return void(B||z.skewX||L?(B*=K,x=z.skewX*K,y=1e5,b=Math.cos(B)*E,e=Math.sin(B)*E,c=Math.sin(B-x)*-F,f=Math.cos(B-x)*F,x&&"simple"===z.skewType&&(s=Math.tan(x-z.skewY*K),s=Math.sqrt(1+s*s),c*=s,f*=s,z.skewY&&(s=Math.tan(z.skewY*K),s=Math.sqrt(1+s*s),b*=s,e*=s)),L&&(H+=z.xOrigin-(z.xOrigin*b+z.yOrigin*c)+z.xOffset,I+=z.yOrigin-(z.xOrigin*e+z.yOrigin*f)+z.yOffset,za&&(z.xPercent||z.yPercent)&&(p=this.t.getBBox(),H+=.01*z.xPercent*p.width,I+=.01*z.yPercent*p.height),p=1e-6,p>H&&H>-p&&(H=0),p>I&&I>-p&&(I=0)),u=(b*y|0)/y+","+(e*y|0)/y+","+(c*y|0)/y+","+(f*y|0)/y+","+H+","+I+")",L&&za?this.t.setAttribute("transform","matrix("+u):A[Ba]=(z.xPercent||z.yPercent?"translate("+z.xPercent+"%,"+z.yPercent+"%) matrix(":"matrix(")+u):A[Ba]=(z.xPercent||z.yPercent?"translate("+z.xPercent+"%,"+z.yPercent+"%) matrix(":"matrix(")+E+",0,0,"+F+","+H+","+I+")");if(n&&(p=1e-4,p>E&&E>-p&&(E=G=2e-5),p>F&&F>-p&&(F=G=2e-5),!M||z.z||z.rotationX||z.rotationY||(M=0)),B||z.skewX)B*=K,q=b=Math.cos(B),r=e=Math.sin(B),z.skewX&&(B-=z.skewX*K,q=Math.cos(B),r=Math.sin(B),"simple"===z.skewType&&(s=Math.tan((z.skewX-z.skewY)*K),s=Math.sqrt(1+s*s),q*=s,r*=s,z.skewY&&(s=Math.tan(z.skewY*K),s=Math.sqrt(1+s*s),b*=s,e*=s))),c=-r,f=q;else{if(!(D||C||1!==G||M||L))return void(A[Ba]=(z.xPercent||z.yPercent?"translate("+z.xPercent+"%,"+z.yPercent+"%) translate3d(":"translate3d(")+H+"px,"+I+"px,"+J+"px)"+(1!==E||1!==F?" scale("+E+","+F+")":""));b=f=1,c=e=0}j=1,d=g=h=i=k=l=0,m=M?-1/M:0,o=z.zOrigin,p=1e-6,v=",",w="0",B=D*K,B&&(q=Math.cos(B),r=Math.sin(B),h=-r,k=m*-r,d=b*r,g=e*r,j=q,m*=q,b*=q,e*=q),B=C*K,B&&(q=Math.cos(B),r=Math.sin(B),s=c*q+d*r,t=f*q+g*r,i=j*r,l=m*r,d=c*-r+d*q,g=f*-r+g*q,j*=q,m*=q,c=s,f=t),1!==G&&(d*=G,g*=G,j*=G,m*=G),1!==F&&(c*=F,f*=F,i*=F,l*=F),1!==E&&(b*=E,e*=E,h*=E,k*=E),(o||L)&&(o&&(H+=d*-o,I+=g*-o,J+=j*-o+o),L&&(H+=z.xOrigin-(z.xOrigin*b+z.yOrigin*c)+z.xOffset,I+=z.yOrigin-(z.xOrigin*e+z.yOrigin*f)+z.yOffset),p>H&&H>-p&&(H=w),p>I&&I>-p&&(I=w),p>J&&J>-p&&(J=0)),u=z.xPercent||z.yPercent?"translate("+z.xPercent+"%,"+z.yPercent+"%) matrix3d(":"matrix3d(",u+=(p>b&&b>-p?w:b)+v+(p>e&&e>-p?w:e)+v+(p>h&&h>-p?w:h),u+=v+(p>k&&k>-p?w:k)+v+(p>c&&c>-p?w:c)+v+(p>f&&f>-p?w:f),C||D||1!==G?(u+=v+(p>i&&i>-p?w:i)+v+(p>l&&l>-p?w:l)+v+(p>d&&d>-p?w:d),u+=v+(p>g&&g>-p?w:g)+v+(p>j&&j>-p?w:j)+v+(p>m&&m>-p?w:m)+v):u+=",0,0,0,0,1,0,",u+=H+v+I+v+J+v+(M?1+-J/M:1)+")",A[Ba]=u};j=Fa.prototype,j.x=j.y=j.z=j.skewX=j.skewY=j.rotation=j.rotationX=j.rotationY=j.zOrigin=j.xPercent=j.yPercent=j.xOffset=j.yOffset=0,j.scaleX=j.scaleY=j.scaleZ=1,xa("transform,scale,scaleX,scaleY,scaleZ,x,y,z,rotation,rotationX,rotationY,rotationZ,skewX,skewY,shortRotation,shortRotationX,shortRotationY,shortRotationZ,transformOrigin,svgOrigin,transformPerspective,directionalRotation,parseTransform,force3D,skewType,xPercent,yPercent,smoothOrigin",{parser:function(a,b,c,d,f,h,i){if(d._lastParsedTransform===i)return f;d._lastParsedTransform=i;var j;"function"==typeof i[c]&&(j=i[c],i[c]=b);var k,l,m,n,o,p,s,t,u,v=a._gsTransform,w=a.style,x=1e-6,y=Aa.length,z=i,A={},B="transformOrigin",C=Pa(a,e,!0,z.parseTransform),D=z.transform&&("function"==typeof z.transform?z.transform(r,q):z.transform);if(d._transform=C,D&&"string"==typeof D&&Ba)l=P.style,l[Ba]=D,l.display="block",l.position="absolute",N.body.appendChild(P),k=Pa(P,null,!1),C.svg&&(p=C.xOrigin,s=C.yOrigin,k.x-=C.xOffset,k.y-=C.yOffset,(z.transformOrigin||z.svgOrigin)&&(D={},Ka(a,ga(z.transformOrigin),D,z.svgOrigin,z.smoothOrigin,!0),p=D.xOrigin,s=D.yOrigin,k.x-=D.xOffset-C.xOffset,k.y-=D.yOffset-C.yOffset),(p||s)&&(t=Oa(P,!0),k.x-=p-(p*t[0]+s*t[2]),k.y-=s-(p*t[1]+s*t[3]))),N.body.removeChild(P),k.perspective||(k.perspective=C.perspective),null!=z.xPercent&&(k.xPercent=ia(z.xPercent,C.xPercent)),null!=z.yPercent&&(k.yPercent=ia(z.yPercent,C.yPercent));else if("object"==typeof z){if(k={scaleX:ia(null!=z.scaleX?z.scaleX:z.scale,C.scaleX),scaleY:ia(null!=z.scaleY?z.scaleY:z.scale,C.scaleY),scaleZ:ia(z.scaleZ,C.scaleZ),x:ia(z.x,C.x),y:ia(z.y,C.y),z:ia(z.z,C.z),xPercent:ia(z.xPercent,C.xPercent),yPercent:ia(z.yPercent,C.yPercent),perspective:ia(z.transformPerspective,C.perspective)},o=z.directionalRotation,null!=o)if("object"==typeof o)for(l in o)z[l]=o[l];else z.rotation=o;"string"==typeof z.x&&-1!==z.x.indexOf("%")&&(k.x=0,k.xPercent=ia(z.x,C.xPercent)),"string"==typeof z.y&&-1!==z.y.indexOf("%")&&(k.y=0,k.yPercent=ia(z.y,C.yPercent)),k.rotation=ja("rotation"in z?z.rotation:"shortRotation"in z?z.shortRotation+"_short":"rotationZ"in z?z.rotationZ:C.rotation-C.skewY,C.rotation-C.skewY,"rotation",A),Ea&&(k.rotationX=ja("rotationX"in z?z.rotationX:"shortRotationX"in z?z.shortRotationX+"_short":C.rotationX||0,C.rotationX,"rotationX",A),k.rotationY=ja("rotationY"in z?z.rotationY:"shortRotationY"in z?z.shortRotationY+"_short":C.rotationY||0,C.rotationY,"rotationY",A)),k.skewX=ja(z.skewX,C.skewX-C.skewY),(k.skewY=ja(z.skewY,C.skewY))&&(k.skewX+=k.skewY,k.rotation+=k.skewY)}for(Ea&&null!=z.force3D&&(C.force3D=z.force3D,n=!0),C.skewType=z.skewType||C.skewType||g.defaultSkewType,m=C.force3D||C.z||C.rotationX||C.rotationY||k.z||k.rotationX||k.rotationY||k.perspective,m||null==z.scale||(k.scaleZ=1);--y>-1;)u=Aa[y],D=k[u]-C[u],(D>x||-x>D||null!=z[u]||null!=M[u])&&(n=!0,f=new sa(C,u,C[u],D,f),u in A&&(f.e=A[u]),f.xs0=0,f.plugin=h,d._overwriteProps.push(f.n));return D=z.transformOrigin,C.svg&&(D||z.svgOrigin)&&(p=C.xOffset,s=C.yOffset,Ka(a,ga(D),k,z.svgOrigin,z.smoothOrigin),f=ta(C,"xOrigin",(v?C:k).xOrigin,k.xOrigin,f,B),f=ta(C,"yOrigin",(v?C:k).yOrigin,k.yOrigin,f,B),(p!==C.xOffset||s!==C.yOffset)&&(f=ta(C,"xOffset",v?p:C.xOffset,C.xOffset,f,B),f=ta(C,"yOffset",v?s:C.yOffset,C.yOffset,f,B)),D=za?null:"0px 0px"),(D||Ea&&m&&C.zOrigin)&&(Ba?(n=!0,u=Da,D=(D||$(a,u,e,!1,"50% 50%"))+"",f=new sa(w,u,0,0,f,-1,B),f.b=w[u],f.plugin=h,Ea?(l=C.zOrigin,D=D.split(" "),C.zOrigin=(D.length>2&&(0===l||"0px"!==D[2])?parseFloat(D[2]):l)||0,f.xs0=f.e=D[0]+" "+(D[1]||"50%")+" 0px",f=new sa(C,"zOrigin",0,0,f,-1,f.n),f.b=l,f.xs0=f.e=C.zOrigin):f.xs0=f.e=D):ga(D+"",C)),n&&(d._transformType=C.svg&&za||!m&&3!==this._transformType?2:3),j&&(i[c]=j),f},prefix:!0}),xa("boxShadow",{defaultValue:"0px 0px 0px 0px #999",prefix:!0,color:!0,multi:!0,keyword:"inset"}),xa("borderRadius",{defaultValue:"0px",parser:function(a,b,c,f,g,h){b=this.format(b);var i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y=["borderTopLeftRadius","borderTopRightRadius","borderBottomRightRadius","borderBottomLeftRadius"],z=a.style;for(q=parseFloat(a.offsetWidth),r=parseFloat(a.offsetHeight),i=b.split(" "),j=0;j<y.length;j++)this.p.indexOf("border")&&(y[j]=Y(y[j])),m=l=$(a,y[j],e,!1,"0px"),-1!==m.indexOf(" ")&&(l=m.split(" "),m=l[0],l=l[1]),n=k=i[j],o=parseFloat(m),t=m.substr((o+"").length),u="="===n.charAt(1),u?(p=parseInt(n.charAt(0)+"1",10),n=n.substr(2),p*=parseFloat(n),s=n.substr((p+"").length-(0>p?1:0))||""):(p=parseFloat(n),s=n.substr((p+"").length)),""===s&&(s=d[c]||t),s!==t&&(v=_(a,"borderLeft",o,t),w=_(a,"borderTop",o,t),"%"===s?(m=v/q*100+"%",l=w/r*100+"%"):"em"===s?(x=_(a,"borderLeft",1,"em"),m=v/x+"em",l=w/x+"em"):(m=v+"px",l=w+"px"),u&&(n=parseFloat(m)+p+s,k=parseFloat(l)+p+s)),g=ua(z,y[j],m+" "+l,n+" "+k,!1,"0px",g);return g},prefix:!0,formatter:pa("0px 0px 0px 0px",!1,!0)}),xa("borderBottomLeftRadius,borderBottomRightRadius,borderTopLeftRadius,borderTopRightRadius",{defaultValue:"0px",parser:function(a,b,c,d,f,g){return ua(a.style,c,this.format($(a,c,e,!1,"0px 0px")),this.format(b),!1,"0px",f)},prefix:!0,formatter:pa("0px 0px",!1,!0)}),xa("backgroundPosition",{defaultValue:"0 0",parser:function(a,b,c,d,f,g){var h,i,j,k,l,m,n="background-position",o=e||Z(a,null),q=this.format((o?p?o.getPropertyValue(n+"-x")+" "+o.getPropertyValue(n+"-y"):o.getPropertyValue(n):a.currentStyle.backgroundPositionX+" "+a.currentStyle.backgroundPositionY)||"0 0"),r=this.format(b);if(-1!==q.indexOf("%")!=(-1!==r.indexOf("%"))&&r.split(",").length<2&&(m=$(a,"backgroundImage").replace(D,""),m&&"none"!==m)){for(h=q.split(" "),i=r.split(" "),Q.setAttribute("src",m),j=2;--j>-1;)q=h[j],k=-1!==q.indexOf("%"),k!==(-1!==i[j].indexOf("%"))&&(l=0===j?a.offsetWidth-Q.width:a.offsetHeight-Q.height,h[j]=k?parseFloat(q)/100*l+"px":parseFloat(q)/l*100+"%");q=h.join(" ")}return this.parseComplex(a.style,q,r,f,g)},formatter:ga}),xa("backgroundSize",{defaultValue:"0 0",formatter:function(a){return a+="",ga(-1===a.indexOf(" ")?a+" "+a:a)}}),xa("perspective",{defaultValue:"0px",prefix:!0}),xa("perspectiveOrigin",{defaultValue:"50% 50%",prefix:!0}),xa("transformStyle",{prefix:!0}),xa("backfaceVisibility",{prefix:!0}),xa("userSelect",{prefix:!0}),xa("margin",{parser:qa("marginTop,marginRight,marginBottom,marginLeft")}),xa("padding",{parser:qa("paddingTop,paddingRight,paddingBottom,paddingLeft")}),xa("clip",{defaultValue:"rect(0px,0px,0px,0px)",parser:function(a,b,c,d,f,g){var h,i,j;return 9>p?(i=a.currentStyle,j=8>p?" ":",",h="rect("+i.clipTop+j+i.clipRight+j+i.clipBottom+j+i.clipLeft+")",b=this.format(b).split(",").join(j)):(h=this.format($(a,this.p,e,!1,this.dflt)),b=this.format(b)),this.parseComplex(a.style,h,b,f,g)}}),xa("textShadow",{defaultValue:"0px 0px 0px #999",color:!0,multi:!0}),xa("autoRound,strictUnits",{parser:function(a,b,c,d,e){return e}}),xa("border",{defaultValue:"0px solid #000",parser:function(a,b,c,d,f,g){var h=$(a,"borderTopWidth",e,!1,"0px"),i=this.format(b).split(" "),j=i[0].replace(w,"");return"px"!==j&&(h=parseFloat(h)/_(a,"borderTopWidth",1,j)+j),this.parseComplex(a.style,this.format(h+" "+$(a,"borderTopStyle",e,!1,"solid")+" "+$(a,"borderTopColor",e,!1,"#000")),i.join(" "),f,g)},color:!0,formatter:function(a){var b=a.split(" ");return b[0]+" "+(b[1]||"solid")+" "+(a.match(oa)||["#000"])[0]}}),xa("borderWidth",{
-parser:qa("borderTopWidth,borderRightWidth,borderBottomWidth,borderLeftWidth")}),xa("float,cssFloat,styleFloat",{parser:function(a,b,c,d,e,f){var g=a.style,h="cssFloat"in g?"cssFloat":"styleFloat";return new sa(g,h,0,0,e,-1,c,!1,0,g[h],b)}});var Sa=function(a){var b,c=this.t,d=c.filter||$(this.data,"filter")||"",e=this.s+this.c*a|0;100===e&&(-1===d.indexOf("atrix(")&&-1===d.indexOf("radient(")&&-1===d.indexOf("oader(")?(c.removeAttribute("filter"),b=!$(this.data,"filter")):(c.filter=d.replace(z,""),b=!0)),b||(this.xn1&&(c.filter=d=d||"alpha(opacity="+e+")"),-1===d.indexOf("pacity")?0===e&&this.xn1||(c.filter=d+" alpha(opacity="+e+")"):c.filter=d.replace(x,"opacity="+e))};xa("opacity,alpha,autoAlpha",{defaultValue:"1",parser:function(a,b,c,d,f,g){var h=parseFloat($(a,"opacity",e,!1,"1")),i=a.style,j="autoAlpha"===c;return"string"==typeof b&&"="===b.charAt(1)&&(b=("-"===b.charAt(0)?-1:1)*parseFloat(b.substr(2))+h),j&&1===h&&"hidden"===$(a,"visibility",e)&&0!==b&&(h=0),T?f=new sa(i,"opacity",h,b-h,f):(f=new sa(i,"opacity",100*h,100*(b-h),f),f.xn1=j?1:0,i.zoom=1,f.type=2,f.b="alpha(opacity="+f.s+")",f.e="alpha(opacity="+(f.s+f.c)+")",f.data=a,f.plugin=g,f.setRatio=Sa),j&&(f=new sa(i,"visibility",0,0,f,-1,null,!1,0,0!==h?"inherit":"hidden",0===b?"hidden":"inherit"),f.xs0="inherit",d._overwriteProps.push(f.n),d._overwriteProps.push(c)),f}});var Ta=function(a,b){b&&(a.removeProperty?(("ms"===b.substr(0,2)||"webkit"===b.substr(0,6))&&(b="-"+b),a.removeProperty(b.replace(B,"-$1").toLowerCase())):a.removeAttribute(b))},Ua=function(a){if(this.t._gsClassPT=this,1===a||0===a){this.t.setAttribute("class",0===a?this.b:this.e);for(var b=this.data,c=this.t.style;b;)b.v?c[b.p]=b.v:Ta(c,b.p),b=b._next;1===a&&this.t._gsClassPT===this&&(this.t._gsClassPT=null)}else this.t.getAttribute("class")!==this.e&&this.t.setAttribute("class",this.e)};xa("className",{parser:function(a,b,d,f,g,h,i){var j,k,l,m,n,o=a.getAttribute("class")||"",p=a.style.cssText;if(g=f._classNamePT=new sa(a,d,0,0,g,2),g.setRatio=Ua,g.pr=-11,c=!0,g.b=o,k=ba(a,e),l=a._gsClassPT){for(m={},n=l.data;n;)m[n.p]=1,n=n._next;l.setRatio(1)}return a._gsClassPT=g,g.e="="!==b.charAt(1)?b:o.replace(new RegExp("(?:\\s|^)"+b.substr(2)+"(?![\\w-])"),"")+("+"===b.charAt(0)?" "+b.substr(2):""),a.setAttribute("class",g.e),j=ca(a,k,ba(a),i,m),a.setAttribute("class",o),g.data=j.firstMPT,a.style.cssText=p,g=g.xfirst=f.parse(a,j.difs,g,h)}});var Va=function(a){if((1===a||0===a)&&this.data._totalTime===this.data._totalDuration&&"isFromStart"!==this.data.data){var b,c,d,e,f,g=this.t.style,h=i.transform.parse;if("all"===this.e)g.cssText="",e=!0;else for(b=this.e.split(" ").join("").split(","),d=b.length;--d>-1;)c=b[d],i[c]&&(i[c].parse===h?e=!0:c="transformOrigin"===c?Da:i[c].p),Ta(g,c);e&&(Ta(g,Ba),f=this.t._gsTransform,f&&(f.svg&&(this.t.removeAttribute("data-svg-origin"),this.t.removeAttribute("transform")),delete this.t._gsTransform))}};for(xa("clearProps",{parser:function(a,b,d,e,f){return f=new sa(a,d,0,0,f,2),f.setRatio=Va,f.e=b,f.pr=-10,f.data=e._tween,c=!0,f}}),j="bezier,throwProps,physicsProps,physics2D".split(","),va=j.length;va--;)ya(j[va]);j=g.prototype,j._firstPT=j._lastParsedTransform=j._transform=null,j._onInitTween=function(a,b,h,j){if(!a.nodeType)return!1;this._target=q=a,this._tween=h,this._vars=b,r=j,k=b.autoRound,c=!1,d=b.suffixMap||g.suffixMap,e=Z(a,""),f=this._overwriteProps;var n,p,s,t,u,v,w,x,z,A=a.style;if(l&&""===A.zIndex&&(n=$(a,"zIndex",e),("auto"===n||""===n)&&this._addLazySet(A,"zIndex",0)),"string"==typeof b&&(t=A.cssText,n=ba(a,e),A.cssText=t+";"+b,n=ca(a,n,ba(a)).difs,!T&&y.test(b)&&(n.opacity=parseFloat(RegExp.$1)),b=n,A.cssText=t),b.className?this._firstPT=p=i.className.parse(a,b.className,"className",this,null,null,b):this._firstPT=p=this.parse(a,b,null),this._transformType){for(z=3===this._transformType,Ba?m&&(l=!0,""===A.zIndex&&(w=$(a,"zIndex",e),("auto"===w||""===w)&&this._addLazySet(A,"zIndex",0)),o&&this._addLazySet(A,"WebkitBackfaceVisibility",this._vars.WebkitBackfaceVisibility||(z?"visible":"hidden"))):A.zoom=1,s=p;s&&s._next;)s=s._next;x=new sa(a,"transform",0,0,null,2),this._linkCSSP(x,null,s),x.setRatio=Ba?Ra:Qa,x.data=this._transform||Pa(a,e,!0),x.tween=h,x.pr=-1,f.pop()}if(c){for(;p;){for(v=p._next,s=t;s&&s.pr>p.pr;)s=s._next;(p._prev=s?s._prev:u)?p._prev._next=p:t=p,(p._next=s)?s._prev=p:u=p,p=v}this._firstPT=t}return!0},j.parse=function(a,b,c,f){var g,h,j,l,m,n,o,p,s,t,u=a.style;for(g in b)n=b[g],"function"==typeof n&&(n=n(r,q)),h=i[g],h?c=h.parse(a,n,g,this,c,f,b):(m=$(a,g,e)+"",s="string"==typeof n,"color"===g||"fill"===g||"stroke"===g||-1!==g.indexOf("Color")||s&&A.test(n)?(s||(n=ma(n),n=(n.length>3?"rgba(":"rgb(")+n.join(",")+")"),c=ua(u,g,m,n,!0,"transparent",c,0,f)):s&&J.test(n)?c=ua(u,g,m,n,!0,null,c,0,f):(j=parseFloat(m),o=j||0===j?m.substr((j+"").length):"",(""===m||"auto"===m)&&("width"===g||"height"===g?(j=fa(a,g,e),o="px"):"left"===g||"top"===g?(j=aa(a,g,e),o="px"):(j="opacity"!==g?0:1,o="")),t=s&&"="===n.charAt(1),t?(l=parseInt(n.charAt(0)+"1",10),n=n.substr(2),l*=parseFloat(n),p=n.replace(w,"")):(l=parseFloat(n),p=s?n.replace(w,""):""),""===p&&(p=g in d?d[g]:o),n=l||0===l?(t?l+j:l)+p:b[g],o!==p&&""!==p&&(l||0===l)&&j&&(j=_(a,g,j,o),"%"===p?(j/=_(a,g,100,"%")/100,b.strictUnits!==!0&&(m=j+"%")):"em"===p||"rem"===p||"vw"===p||"vh"===p?j/=_(a,g,1,p):"px"!==p&&(l=_(a,g,l,p),p="px"),t&&(l||0===l)&&(n=l+j+p)),t&&(l+=j),!j&&0!==j||!l&&0!==l?void 0!==u[g]&&(n||n+""!="NaN"&&null!=n)?(c=new sa(u,g,l||j||0,0,c,-1,g,!1,0,m,n),c.xs0="none"!==n||"display"!==g&&-1===g.indexOf("Style")?n:m):V("invalid "+g+" tween value: "+b[g]):(c=new sa(u,g,j,l-j,c,0,g,k!==!1&&("px"===p||"zIndex"===g),0,m,n),c.xs0=p))),f&&c&&!c.plugin&&(c.plugin=f);return c},j.setRatio=function(a){var b,c,d,e=this._firstPT,f=1e-6;if(1!==a||this._tween._time!==this._tween._duration&&0!==this._tween._time)if(a||this._tween._time!==this._tween._duration&&0!==this._tween._time||this._tween._rawPrevTime===-1e-6)for(;e;){if(b=e.c*a+e.s,e.r?b=Math.round(b):f>b&&b>-f&&(b=0),e.type)if(1===e.type)if(d=e.l,2===d)e.t[e.p]=e.xs0+b+e.xs1+e.xn1+e.xs2;else if(3===d)e.t[e.p]=e.xs0+b+e.xs1+e.xn1+e.xs2+e.xn2+e.xs3;else if(4===d)e.t[e.p]=e.xs0+b+e.xs1+e.xn1+e.xs2+e.xn2+e.xs3+e.xn3+e.xs4;else if(5===d)e.t[e.p]=e.xs0+b+e.xs1+e.xn1+e.xs2+e.xn2+e.xs3+e.xn3+e.xs4+e.xn4+e.xs5;else{for(c=e.xs0+b+e.xs1,d=1;d<e.l;d++)c+=e["xn"+d]+e["xs"+(d+1)];e.t[e.p]=c}else-1===e.type?e.t[e.p]=e.xs0:e.setRatio&&e.setRatio(a);else e.t[e.p]=b+e.xs0;e=e._next}else for(;e;)2!==e.type?e.t[e.p]=e.b:e.setRatio(a),e=e._next;else for(;e;){if(2!==e.type)if(e.r&&-1!==e.type)if(b=Math.round(e.s+e.c),e.type){if(1===e.type){for(d=e.l,c=e.xs0+b+e.xs1,d=1;d<e.l;d++)c+=e["xn"+d]+e["xs"+(d+1)];e.t[e.p]=c}}else e.t[e.p]=b+e.xs0;else e.t[e.p]=e.e;else e.setRatio(a);e=e._next}},j._enableTransforms=function(a){this._transform=this._transform||Pa(this._target,e,!0),this._transformType=this._transform.svg&&za||!a&&3!==this._transformType?2:3};var Wa=function(a){this.t[this.p]=this.e,this.data._linkCSSP(this,this._next,null,!0)};j._addLazySet=function(a,b,c){var d=this._firstPT=new sa(a,b,0,0,this._firstPT,2);d.e=c,d.setRatio=Wa,d.data=this},j._linkCSSP=function(a,b,c,d){return a&&(b&&(b._prev=a),a._next&&(a._next._prev=a._prev),a._prev?a._prev._next=a._next:this._firstPT===a&&(this._firstPT=a._next,d=!0),c?c._next=a:d||null!==this._firstPT||(this._firstPT=a),a._next=b,a._prev=c),a},j._mod=function(a){for(var b=this._firstPT;b;)"function"==typeof a[b.p]&&a[b.p]===Math.round&&(b.r=1),b=b._next},j._kill=function(b){var c,d,e,f=b;if(b.autoAlpha||b.alpha){f={};for(d in b)f[d]=b[d];f.opacity=1,f.autoAlpha&&(f.visibility=1)}for(b.className&&(c=this._classNamePT)&&(e=c.xfirst,e&&e._prev?this._linkCSSP(e._prev,c._next,e._prev._prev):e===this._firstPT&&(this._firstPT=c._next),c._next&&this._linkCSSP(c._next,c._next._next,e._prev),this._classNamePT=null),c=this._firstPT;c;)c.plugin&&c.plugin!==d&&c.plugin._kill&&(c.plugin._kill(b),d=c.plugin),c=c._next;return a.prototype._kill.call(this,f)};var Xa=function(a,b,c){var d,e,f,g;if(a.slice)for(e=a.length;--e>-1;)Xa(a[e],b,c);else for(d=a.childNodes,e=d.length;--e>-1;)f=d[e],g=f.type,f.style&&(b.push(ba(f)),c&&c.push(f)),1!==g&&9!==g&&11!==g||!f.childNodes.length||Xa(f,b,c)};return g.cascadeTo=function(a,c,d){var e,f,g,h,i=b.to(a,c,d),j=[i],k=[],l=[],m=[],n=b._internals.reservedProps;for(a=i._targets||i.target,Xa(a,k,m),i.render(c,!0,!0),Xa(a,l),i.render(0,!0,!0),i._enabled(!0),e=m.length;--e>-1;)if(f=ca(m[e],k[e],l[e]),f.firstMPT){f=f.difs;for(g in d)n[g]&&(f[g]=d[g]);h={};for(g in f)h[g]=k[e][g];j.push(b.fromTo(m[e],c,h,f))}return j},a.activate([g]),g},!0)}),_gsScope._gsDefine&&_gsScope._gsQueue.pop()(),function(a){"use strict";var b=function(){return(_gsScope.GreenSockGlobals||_gsScope)[a]};"function"==typeof define&&define.amd?define(["TweenLite"],b):"undefined"!=typeof module&&module.exports&&(require("../TweenLite.js"),module.exports=b())}("CSSPlugin");
+var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(global) !== "undefined") ? global : this || window; //helps ensure compatibility with AMD/RequireJS and CommonJS/Node
+(_gsScope._gsQueue || (_gsScope._gsQueue = [])).push( function() {
+
+    "use strict";
+
+    _gsScope._gsDefine("plugins.CSSPlugin", ["plugins.TweenPlugin","TweenLite"], function(TweenPlugin, TweenLite) {
+
+        /** @constructor **/
+        var CSSPlugin = function() {
+                TweenPlugin.call(this, "css");
+                this._overwriteProps.length = 0;
+                this.setRatio = CSSPlugin.prototype.setRatio; //speed optimization (avoid prototype lookup on this "hot" method)
+            },
+            _globals = _gsScope._gsDefine.globals,
+            _hasPriority, //turns true whenever a CSSPropTween instance is created that has a priority other than 0. This helps us discern whether or not we should spend the time organizing the linked list or not after a CSSPlugin's _onInitTween() method is called.
+            _suffixMap, //we set this in _onInitTween() each time as a way to have a persistent variable we can use in other methods like _parse() without having to pass it around as a parameter and we keep _parse() decoupled from a particular CSSPlugin instance
+            _cs, //computed style (we store this in a shared variable to conserve memory and make minification tighter
+            _overwriteProps, //alias to the currently instantiating CSSPlugin's _overwriteProps array. We use this closure in order to avoid having to pass a reference around from method to method and aid in minification.
+            _specialProps = {},
+            p = CSSPlugin.prototype = new TweenPlugin("css");
+
+        p.constructor = CSSPlugin;
+        CSSPlugin.version = "1.19.0";
+        CSSPlugin.API = 2;
+        CSSPlugin.defaultTransformPerspective = 0;
+        CSSPlugin.defaultSkewType = "compensated";
+        CSSPlugin.defaultSmoothOrigin = true;
+        p = "px"; //we'll reuse the "p" variable to keep file size down
+        CSSPlugin.suffixMap = {top:p, right:p, bottom:p, left:p, width:p, height:p, fontSize:p, padding:p, margin:p, perspective:p, lineHeight:""};
+
+
+        var _numExp = /(?:\-|\.|\b)(\d|\.|e\-)+/g,
+            _relNumExp = /(?:\d|\-\d|\.\d|\-\.\d|\+=\d|\-=\d|\+=.\d|\-=\.\d)+/g,
+            _valuesExp = /(?:\+=|\-=|\-|\b)[\d\-\.]+[a-zA-Z0-9]*(?:%|\b)/gi, //finds all the values that begin with numbers or += or -= and then a number. Includes suffixes. We use this to split complex values apart like "1px 5px 20px rgb(255,102,51)"
+            _NaNExp = /(?![+-]?\d*\.?\d+|[+-]|e[+-]\d+)[^0-9]/g, //also allows scientific notation and doesn't kill the leading -/+ in -= and +=
+            _suffixExp = /(?:\d|\-|\+|=|#|\.)*/g,
+            _opacityExp = /opacity *= *([^)]*)/i,
+            _opacityValExp = /opacity:([^;]*)/i,
+            _alphaFilterExp = /alpha\(opacity *=.+?\)/i,
+            _rgbhslExp = /^(rgb|hsl)/,
+            _capsExp = /([A-Z])/g,
+            _camelExp = /-([a-z])/gi,
+            _urlExp = /(^(?:url\(\"|url\())|(?:(\"\))$|\)$)/gi, //for pulling out urls from url(...) or url("...") strings (some browsers wrap urls in quotes, some don't when reporting things like backgroundImage)
+            _camelFunc = function(s, g) { return g.toUpperCase(); },
+            _horizExp = /(?:Left|Right|Width)/i,
+            _ieGetMatrixExp = /(M11|M12|M21|M22)=[\d\-\.e]+/gi,
+            _ieSetMatrixExp = /progid\:DXImageTransform\.Microsoft\.Matrix\(.+?\)/i,
+            _commasOutsideParenExp = /,(?=[^\)]*(?:\(|$))/gi, //finds any commas that are not within parenthesis
+            _complexExp = /[\s,\(]/i, //for testing a string to find if it has a space, comma, or open parenthesis (clues that it's a complex value)
+            _DEG2RAD = Math.PI / 180,
+            _RAD2DEG = 180 / Math.PI,
+            _forcePT = {},
+            _doc = document,
+            _createElement = function(type) {
+                return _doc.createElementNS ? _doc.createElementNS("http://www.w3.org/1999/xhtml", type) : _doc.createElement(type);
+            },
+            _tempDiv = _createElement("div"),
+            _tempImg = _createElement("img"),
+            _internals = CSSPlugin._internals = {_specialProps:_specialProps}, //provides a hook to a few internal methods that we need to access from inside other plugins
+            _agent = navigator.userAgent,
+            _autoRound,
+            _reqSafariFix, //we won't apply the Safari transform fix until we actually come across a tween that affects a transform property (to maintain best performance).
+
+            _isSafari,
+            _isFirefox, //Firefox has a bug that causes 3D transformed elements to randomly disappear unless a repaint is forced after each update on each element.
+            _isSafariLT6, //Safari (and Android 4 which uses a flavor of Safari) has a bug that prevents changes to "top" and "left" properties from rendering properly if changed on the same frame as a transform UNLESS we set the element's WebkitBackfaceVisibility to hidden (weird, I know). Doing this for Android 3 and earlier seems to actually cause other problems, though (fun!)
+            _ieVers,
+            _supportsOpacity = (function() { //we set _isSafari, _ieVers, _isFirefox, and _supportsOpacity all in one function here to reduce file size slightly, especially in the minified version.
+                var i = _agent.indexOf("Android"),
+                    a = _createElement("a");
+                _isSafari = (_agent.indexOf("Safari") !== -1 && _agent.indexOf("Chrome") === -1 && (i === -1 || Number(_agent.substr(i+8, 1)) > 3));
+                _isSafariLT6 = (_isSafari && (Number(_agent.substr(_agent.indexOf("Version/")+8, 1)) < 6));
+                _isFirefox = (_agent.indexOf("Firefox") !== -1);
+                if ((/MSIE ([0-9]{1,}[\.0-9]{0,})/).exec(_agent) || (/Trident\/.*rv:([0-9]{1,}[\.0-9]{0,})/).exec(_agent)) {
+                    _ieVers = parseFloat( RegExp.$1 );
+                }
+                if (!a) {
+                    return false;
+                }
+                a.style.cssText = "top:1px;opacity:.55;";
+                return /^0.55/.test(a.style.opacity);
+            }()),
+            _getIEOpacity = function(v) {
+                return (_opacityExp.test( ((typeof(v) === "string") ? v : (v.currentStyle ? v.currentStyle.filter : v.style.filter) || "") ) ? ( parseFloat( RegExp.$1 ) / 100 ) : 1);
+            },
+            _log = function(s) {//for logging messages, but in a way that won't throw errors in old versions of IE.
+                if (window.console) {
+                    console.log(s);
+                }
+            },
+            _target, //when initting a CSSPlugin, we set this variable so that we can access it from within many other functions without having to pass it around as params
+            _index, //when initting a CSSPlugin, we set this variable so that we can access it from within many other functions without having to pass it around as params
+
+            _prefixCSS = "", //the non-camelCase vendor prefix like "-o-", "-moz-", "-ms-", or "-webkit-"
+            _prefix = "", //camelCase vendor prefix like "O", "ms", "Webkit", or "Moz".
+
+            // @private feed in a camelCase property name like "transform" and it will check to see if it is valid as-is or if it needs a vendor prefix. It returns the corrected camelCase property name (i.e. "WebkitTransform" or "MozTransform" or "transform" or null if no such property is found, like if the browser is IE8 or before, "transform" won't be found at all)
+            _checkPropPrefix = function(p, e) {
+                e = e || _tempDiv;
+                var s = e.style,
+                    a, i;
+                if (s[p] !== undefined) {
+                    return p;
+                }
+                p = p.charAt(0).toUpperCase() + p.substr(1);
+                a = ["O","Moz","ms","Ms","Webkit"];
+                i = 5;
+                while (--i > -1 && s[a[i]+p] === undefined) { }
+                if (i >= 0) {
+                    _prefix = (i === 3) ? "ms" : a[i];
+                    _prefixCSS = "-" + _prefix.toLowerCase() + "-";
+                    return _prefix + p;
+                }
+                return null;
+            },
+
+            _getComputedStyle = _doc.defaultView ? _doc.defaultView.getComputedStyle : function() {},
+
+            /**
+             * @private Returns the css style for a particular property of an element. For example, to get whatever the current "left" css value for an element with an ID of "myElement", you could do:
+             * var currentLeft = CSSPlugin.getStyle( document.getElementById("myElement"), "left");
+             *
+             * @param {!Object} t Target element whose style property you want to query
+             * @param {!string} p Property name (like "left" or "top" or "marginTop", etc.)
+             * @param {Object=} cs Computed style object. This just provides a way to speed processing if you're going to get several properties on the same element in quick succession - you can reuse the result of the getComputedStyle() call.
+             * @param {boolean=} calc If true, the value will not be read directly from the element's "style" property (if it exists there), but instead the getComputedStyle() result will be used. This can be useful when you want to ensure that the browser itself is interpreting the value.
+             * @param {string=} dflt Default value that should be returned in the place of null, "none", "auto" or "auto auto".
+             * @return {?string} The current property value
+             */
+            _getStyle = CSSPlugin.getStyle = function(t, p, cs, calc, dflt) {
+                var rv;
+                if (!_supportsOpacity) if (p === "opacity") { //several versions of IE don't use the standard "opacity" property - they use things like filter:alpha(opacity=50), so we parse that here.
+                    return _getIEOpacity(t);
+                }
+                if (!calc && t.style[p]) {
+                    rv = t.style[p];
+                } else if ((cs = cs || _getComputedStyle(t))) {
+                    rv = cs[p] || cs.getPropertyValue(p) || cs.getPropertyValue(p.replace(_capsExp, "-$1").toLowerCase());
+                } else if (t.currentStyle) {
+                    rv = t.currentStyle[p];
+                }
+                return (dflt != null && (!rv || rv === "none" || rv === "auto" || rv === "auto auto")) ? dflt : rv;
+            },
+
+            /**
+             * @private Pass the target element, the property name, the numeric value, and the suffix (like "%", "em", "px", etc.) and it will spit back the equivalent pixel number.
+             * @param {!Object} t Target element
+             * @param {!string} p Property name (like "left", "top", "marginLeft", etc.)
+             * @param {!number} v Value
+             * @param {string=} sfx Suffix (like "px" or "%" or "em")
+             * @param {boolean=} recurse If true, the call is a recursive one. In some browsers (like IE7/8), occasionally the value isn't accurately reported initially, but if we run the function again it will take effect.
+             * @return {number} value in pixels
+             */
+            _convertToPixels = _internals.convertToPixels = function(t, p, v, sfx, recurse) {
+                if (sfx === "px" || !sfx) { return v; }
+                if (sfx === "auto" || !v) { return 0; }
+                var horiz = _horizExp.test(p),
+                    node = t,
+                    style = _tempDiv.style,
+                    neg = (v < 0),
+                    precise = (v === 1),
+                    pix, cache, time;
+                if (neg) {
+                    v = -v;
+                }
+                if (precise) {
+                    v *= 100;
+                }
+                if (sfx === "%" && p.indexOf("border") !== -1) {
+                    pix = (v / 100) * (horiz ? t.clientWidth : t.clientHeight);
+                } else {
+                    style.cssText = "border:0 solid red;position:" + _getStyle(t, "position") + ";line-height:0;";
+                    if (sfx === "%" || !node.appendChild || sfx.charAt(0) === "v" || sfx === "rem") {
+                        node = t.parentNode || _doc.body;
+                        cache = node._gsCache;
+                        time = TweenLite.ticker.frame;
+                        if (cache && horiz && cache.time === time) { //performance optimization: we record the width of elements along with the ticker frame so that we can quickly get it again on the same tick (seems relatively safe to assume it wouldn't change on the same tick)
+                            return cache.width * v / 100;
+                        }
+                        style[(horiz ? "width" : "height")] = v + sfx;
+                    } else {
+                        style[(horiz ? "borderLeftWidth" : "borderTopWidth")] = v + sfx;
+                    }
+                    node.appendChild(_tempDiv);
+                    pix = parseFloat(_tempDiv[(horiz ? "offsetWidth" : "offsetHeight")]);
+                    node.removeChild(_tempDiv);
+                    if (horiz && sfx === "%" && CSSPlugin.cacheWidths !== false) {
+                        cache = node._gsCache = node._gsCache || {};
+                        cache.time = time;
+                        cache.width = pix / v * 100;
+                    }
+                    if (pix === 0 && !recurse) {
+                        pix = _convertToPixels(t, p, v, sfx, true);
+                    }
+                }
+                if (precise) {
+                    pix /= 100;
+                }
+                return neg ? -pix : pix;
+            },
+            _calculateOffset = _internals.calculateOffset = function(t, p, cs) { //for figuring out "top" or "left" in px when it's "auto". We need to factor in margin with the offsetLeft/offsetTop
+                if (_getStyle(t, "position", cs) !== "absolute") { return 0; }
+                var dim = ((p === "left") ? "Left" : "Top"),
+                    v = _getStyle(t, "margin" + dim, cs);
+                return t["offset" + dim] - (_convertToPixels(t, p, parseFloat(v), v.replace(_suffixExp, "")) || 0);
+            },
+
+            // @private returns at object containing ALL of the style properties in camelCase and their associated values.
+            _getAllStyles = function(t, cs) {
+                var s = {},
+                    i, tr, p;
+                if ((cs = cs || _getComputedStyle(t, null))) {
+                    if ((i = cs.length)) {
+                        while (--i > -1) {
+                            p = cs[i];
+                            if (p.indexOf("-transform") === -1 || _transformPropCSS === p) { //Some webkit browsers duplicate transform values, one non-prefixed and one prefixed ("transform" and "WebkitTransform"), so we must weed out the extra one here.
+                                s[p.replace(_camelExp, _camelFunc)] = cs.getPropertyValue(p);
+                            }
+                        }
+                    } else { //some browsers behave differently - cs.length is always 0, so we must do a for...in loop.
+                        for (i in cs) {
+                            if (i.indexOf("Transform") === -1 || _transformProp === i) { //Some webkit browsers duplicate transform values, one non-prefixed and one prefixed ("transform" and "WebkitTransform"), so we must weed out the extra one here.
+                                s[i] = cs[i];
+                            }
+                        }
+                    }
+                } else if ((cs = t.currentStyle || t.style)) {
+                    for (i in cs) {
+                        if (typeof(i) === "string" && s[i] === undefined) {
+                            s[i.replace(_camelExp, _camelFunc)] = cs[i];
+                        }
+                    }
+                }
+                if (!_supportsOpacity) {
+                    s.opacity = _getIEOpacity(t);
+                }
+                tr = _getTransform(t, cs, false);
+                s.rotation = tr.rotation;
+                s.skewX = tr.skewX;
+                s.scaleX = tr.scaleX;
+                s.scaleY = tr.scaleY;
+                s.x = tr.x;
+                s.y = tr.y;
+                if (_supports3D) {
+                    s.z = tr.z;
+                    s.rotationX = tr.rotationX;
+                    s.rotationY = tr.rotationY;
+                    s.scaleZ = tr.scaleZ;
+                }
+                if (s.filters) {
+                    delete s.filters;
+                }
+                return s;
+            },
+
+            // @private analyzes two style objects (as returned by _getAllStyles()) and only looks for differences between them that contain tweenable values (like a number or color). It returns an object with a "difs" property which refers to an object containing only those isolated properties and values for tweening, and a "firstMPT" property which refers to the first MiniPropTween instance in a linked list that recorded all the starting values of the different properties so that we can revert to them at the end or beginning of the tween - we don't want the cascading to get messed up. The forceLookup parameter is an optional generic object with properties that should be forced into the results - this is necessary for className tweens that are overwriting others because imagine a scenario where a rollover/rollout adds/removes a class and the user swipes the mouse over the target SUPER fast, thus nothing actually changed yet and the subsequent comparison of the properties would indicate they match (especially when px rounding is taken into consideration), thus no tweening is necessary even though it SHOULD tween and remove those properties after the tween (otherwise the inline styles will contaminate things). See the className SpecialProp code for details.
+            _cssDif = function(t, s1, s2, vars, forceLookup) {
+                var difs = {},
+                    style = t.style,
+                    val, p, mpt;
+                for (p in s2) {
+                    if (p !== "cssText") if (p !== "length") if (isNaN(p)) if (s1[p] !== (val = s2[p]) || (forceLookup && forceLookup[p])) if (p.indexOf("Origin") === -1) if (typeof(val) === "number" || typeof(val) === "string") {
+                        difs[p] = (val === "auto" && (p === "left" || p === "top")) ? _calculateOffset(t, p) : ((val === "" || val === "auto" || val === "none") && typeof(s1[p]) === "string" && s1[p].replace(_NaNExp, "") !== "") ? 0 : val; //if the ending value is defaulting ("" or "auto"), we check the starting value and if it can be parsed into a number (a string which could have a suffix too, like 700px), then we swap in 0 for "" or "auto" so that things actually tween.
+                        if (style[p] !== undefined) { //for className tweens, we must remember which properties already existed inline - the ones that didn't should be removed when the tween isn't in progress because they were only introduced to facilitate the transition between classes.
+                            mpt = new MiniPropTween(style, p, style[p], mpt);
+                        }
+                    }
+                }
+                if (vars) {
+                    for (p in vars) { //copy properties (except className)
+                        if (p !== "className") {
+                            difs[p] = vars[p];
+                        }
+                    }
+                }
+                return {difs:difs, firstMPT:mpt};
+            },
+            _dimensions = {width:["Left","Right"], height:["Top","Bottom"]},
+            _margins = ["marginLeft","marginRight","marginTop","marginBottom"],
+
+            /**
+             * @private Gets the width or height of an element
+             * @param {!Object} t Target element
+             * @param {!string} p Property name ("width" or "height")
+             * @param {Object=} cs Computed style object (if one exists). Just a speed optimization.
+             * @return {number} Dimension (in pixels)
+             */
+            _getDimension = function(t, p, cs) {
+                if ((t.nodeName + "").toLowerCase() === "svg") { //Chrome no longer supports offsetWidth/offsetHeight on SVG elements.
+                    return (cs || _getComputedStyle(t))[p] || 0;
+                } else if (t.getBBox && _isSVG(t)) {
+                    return t.getBBox()[p] || 0;
+                }
+                var v = parseFloat((p === "width") ? t.offsetWidth : t.offsetHeight),
+                    a = _dimensions[p],
+                    i = a.length;
+                cs = cs || _getComputedStyle(t, null);
+                while (--i > -1) {
+                    v -= parseFloat( _getStyle(t, "padding" + a[i], cs, true) ) || 0;
+                    v -= parseFloat( _getStyle(t, "border" + a[i] + "Width", cs, true) ) || 0;
+                }
+                return v;
+            },
+
+            // @private Parses position-related complex strings like "top left" or "50px 10px" or "70% 20%", etc. which are used for things like transformOrigin or backgroundPosition. Optionally decorates a supplied object (recObj) with the following properties: "ox" (offsetX), "oy" (offsetY), "oxp" (if true, "ox" is a percentage not a pixel value), and "oxy" (if true, "oy" is a percentage not a pixel value)
+            _parsePosition = function(v, recObj) {
+                if (v === "contain" || v === "auto" || v === "auto auto") { //note: Firefox uses "auto auto" as default whereas Chrome uses "auto".
+                    return v + " ";
+                }
+                if (v == null || v === "") {
+                    v = "0 0";
+                }
+                var a = v.split(" "),
+                    x = (v.indexOf("left") !== -1) ? "0%" : (v.indexOf("right") !== -1) ? "100%" : a[0],
+                    y = (v.indexOf("top") !== -1) ? "0%" : (v.indexOf("bottom") !== -1) ? "100%" : a[1],
+                    i;
+                if (a.length > 3 && !recObj) { //multiple positions
+                    a = v.split(", ").join(",").split(",");
+                    v = [];
+                    for (i = 0; i < a.length; i++) {
+                        v.push(_parsePosition(a[i]));
+                    }
+                    return v.join(",");
+                }
+                if (y == null) {
+                    y = (x === "center") ? "50%" : "0";
+                } else if (y === "center") {
+                    y = "50%";
+                }
+                if (x === "center" || (isNaN(parseFloat(x)) && (x + "").indexOf("=") === -1)) { //remember, the user could flip-flop the values and say "bottom center" or "center bottom", etc. "center" is ambiguous because it could be used to describe horizontal or vertical, hence the isNaN(). If there's an "=" sign in the value, it's relative.
+                    x = "50%";
+                }
+                v = x + " " + y + ((a.length > 2) ? " " + a[2] : "");
+                if (recObj) {
+                    recObj.oxp = (x.indexOf("%") !== -1);
+                    recObj.oyp = (y.indexOf("%") !== -1);
+                    recObj.oxr = (x.charAt(1) === "=");
+                    recObj.oyr = (y.charAt(1) === "=");
+                    recObj.ox = parseFloat(x.replace(_NaNExp, ""));
+                    recObj.oy = parseFloat(y.replace(_NaNExp, ""));
+                    recObj.v = v;
+                }
+                return recObj || v;
+            },
+
+            /**
+             * @private Takes an ending value (typically a string, but can be a number) and a starting value and returns the change between the two, looking for relative value indicators like += and -= and it also ignores suffixes (but make sure the ending value starts with a number or +=/-= and that the starting value is a NUMBER!)
+             * @param {(number|string)} e End value which is typically a string, but could be a number
+             * @param {(number|string)} b Beginning value which is typically a string but could be a number
+             * @return {number} Amount of change between the beginning and ending values (relative values that have a "+=" or "-=" are recognized)
+             */
+            _parseChange = function(e, b) {
+                if (typeof(e) === "function") {
+                    e = e(_index, _target);
+                }
+                return (typeof(e) === "string" && e.charAt(1) === "=") ? parseInt(e.charAt(0) + "1", 10) * parseFloat(e.substr(2)) : (parseFloat(e) - parseFloat(b)) || 0;
+            },
+
+            /**
+             * @private Takes a value and a default number, checks if the value is relative, null, or numeric and spits back a normalized number accordingly. Primarily used in the _parseTransform() function.
+             * @param {Object} v Value to be parsed
+             * @param {!number} d Default value (which is also used for relative calculations if "+=" or "-=" is found in the first parameter)
+             * @return {number} Parsed value
+             */
+            _parseVal = function(v, d) {
+                if (typeof(v) === "function") {
+                    v = v(_index, _target);
+                }
+                return (v == null) ? d : (typeof(v) === "string" && v.charAt(1) === "=") ? parseInt(v.charAt(0) + "1", 10) * parseFloat(v.substr(2)) + d : parseFloat(v) || 0;
+            },
+
+            /**
+             * @private Translates strings like "40deg" or "40" or 40rad" or "+=40deg" or "270_short" or "-90_cw" or "+=45_ccw" to a numeric radian angle. Of course a starting/default value must be fed in too so that relative values can be calculated properly.
+             * @param {Object} v Value to be parsed
+             * @param {!number} d Default value (which is also used for relative calculations if "+=" or "-=" is found in the first parameter)
+             * @param {string=} p property name for directionalEnd (optional - only used when the parsed value is directional ("_short", "_cw", or "_ccw" suffix). We need a way to store the uncompensated value so that at the end of the tween, we set it to exactly what was requested with no directional compensation). Property name would be "rotation", "rotationX", or "rotationY"
+             * @param {Object=} directionalEnd An object that will store the raw end values for directional angles ("_short", "_cw", or "_ccw" suffix). We need a way to store the uncompensated value so that at the end of the tween, we set it to exactly what was requested with no directional compensation.
+             * @return {number} parsed angle in radians
+             */
+            _parseAngle = function(v, d, p, directionalEnd) {
+                var min = 0.000001,
+                    cap, split, dif, result, isRelative;
+                if (typeof(v) === "function") {
+                    v = v(_index, _target);
+                }
+                if (v == null) {
+                    result = d;
+                } else if (typeof(v) === "number") {
+                    result = v;
+                } else {
+                    cap = 360;
+                    split = v.split("_");
+                    isRelative = (v.charAt(1) === "=");
+                    dif = (isRelative ? parseInt(v.charAt(0) + "1", 10) * parseFloat(split[0].substr(2)) : parseFloat(split[0])) * ((v.indexOf("rad") === -1) ? 1 : _RAD2DEG) - (isRelative ? 0 : d);
+                    if (split.length) {
+                        if (directionalEnd) {
+                            directionalEnd[p] = d + dif;
+                        }
+                        if (v.indexOf("short") !== -1) {
+                            dif = dif % cap;
+                            if (dif !== dif % (cap / 2)) {
+                                dif = (dif < 0) ? dif + cap : dif - cap;
+                            }
+                        }
+                        if (v.indexOf("_cw") !== -1 && dif < 0) {
+                            dif = ((dif + cap * 9999999999) % cap) - ((dif / cap) | 0) * cap;
+                        } else if (v.indexOf("ccw") !== -1 && dif > 0) {
+                            dif = ((dif - cap * 9999999999) % cap) - ((dif / cap) | 0) * cap;
+                        }
+                    }
+                    result = d + dif;
+                }
+                if (result < min && result > -min) {
+                    result = 0;
+                }
+                return result;
+            },
+
+            _colorLookup = {aqua:[0,255,255],
+                lime:[0,255,0],
+                silver:[192,192,192],
+                black:[0,0,0],
+                maroon:[128,0,0],
+                teal:[0,128,128],
+                blue:[0,0,255],
+                navy:[0,0,128],
+                white:[255,255,255],
+                fuchsia:[255,0,255],
+                olive:[128,128,0],
+                yellow:[255,255,0],
+                orange:[255,165,0],
+                gray:[128,128,128],
+                purple:[128,0,128],
+                green:[0,128,0],
+                red:[255,0,0],
+                pink:[255,192,203],
+                cyan:[0,255,255],
+                transparent:[255,255,255,0]},
+
+            _hue = function(h, m1, m2) {
+                h = (h < 0) ? h + 1 : (h > 1) ? h - 1 : h;
+                return ((((h * 6 < 1) ? m1 + (m2 - m1) * h * 6 : (h < 0.5) ? m2 : (h * 3 < 2) ? m1 + (m2 - m1) * (2 / 3 - h) * 6 : m1) * 255) + 0.5) | 0;
+            },
+
+            /**
+             * @private Parses a color (like #9F0, #FF9900, rgb(255,51,153) or hsl(108, 50%, 10%)) into an array with 3 elements for red, green, and blue or if toHSL parameter is true, it will populate the array with hue, saturation, and lightness values. If a relative value is found in an hsl() or hsla() string, it will preserve those relative prefixes and all the values in the array will be strings instead of numbers (in all other cases it will be populated with numbers).
+             * @param {(string|number)} v The value the should be parsed which could be a string like #9F0 or rgb(255,102,51) or rgba(255,0,0,0.5) or it could be a number like 0xFF00CC or even a named color like red, blue, purple, etc.
+             * @param {(boolean)} toHSL If true, an hsl() or hsla() value will be returned instead of rgb() or rgba()
+             * @return {Array.<number>} An array containing red, green, and blue (and optionally alpha) in that order, or if the toHSL parameter was true, the array will contain hue, saturation and lightness (and optionally alpha) in that order. Always numbers unless there's a relative prefix found in an hsl() or hsla() string and toHSL is true.
+             */
+            _parseColor = CSSPlugin.parseColor = function(v, toHSL) {
+                var a, r, g, b, h, s, l, max, min, d, wasHSL;
+                if (!v) {
+                    a = _colorLookup.black;
+                } else if (typeof(v) === "number") {
+                    a = [v >> 16, (v >> 8) & 255, v & 255];
+                } else {
+                    if (v.charAt(v.length - 1) === ",") { //sometimes a trailing comma is included and we should chop it off (typically from a comma-delimited list of values like a textShadow:"2px 2px 2px blue, 5px 5px 5px rgb(255,0,0)" - in this example "blue," has a trailing comma. We could strip it out inside parseComplex() but we'd need to do it to the beginning and ending values plus it wouldn't provide protection from other potential scenarios like if the user passes in a similar value.
+                        v = v.substr(0, v.length - 1);
+                    }
+                    if (_colorLookup[v]) {
+                        a = _colorLookup[v];
+                    } else if (v.charAt(0) === "#") {
+                        if (v.length === 4) { //for shorthand like #9F0
+                            r = v.charAt(1);
+                            g = v.charAt(2);
+                            b = v.charAt(3);
+                            v = "#" + r + r + g + g + b + b;
+                        }
+                        v = parseInt(v.substr(1), 16);
+                        a = [v >> 16, (v >> 8) & 255, v & 255];
+                    } else if (v.substr(0, 3) === "hsl") {
+                        a = wasHSL = v.match(_numExp);
+                        if (!toHSL) {
+                            h = (Number(a[0]) % 360) / 360;
+                            s = Number(a[1]) / 100;
+                            l = Number(a[2]) / 100;
+                            g = (l <= 0.5) ? l * (s + 1) : l + s - l * s;
+                            r = l * 2 - g;
+                            if (a.length > 3) {
+                                a[3] = Number(v[3]);
+                            }
+                            a[0] = _hue(h + 1 / 3, r, g);
+                            a[1] = _hue(h, r, g);
+                            a[2] = _hue(h - 1 / 3, r, g);
+                        } else if (v.indexOf("=") !== -1) { //if relative values are found, just return the raw strings with the relative prefixes in place.
+                            return v.match(_relNumExp);
+                        }
+                    } else {
+                        a = v.match(_numExp) || _colorLookup.transparent;
+                    }
+                    a[0] = Number(a[0]);
+                    a[1] = Number(a[1]);
+                    a[2] = Number(a[2]);
+                    if (a.length > 3) {
+                        a[3] = Number(a[3]);
+                    }
+                }
+                if (toHSL && !wasHSL) {
+                    r = a[0] / 255;
+                    g = a[1] / 255;
+                    b = a[2] / 255;
+                    max = Math.max(r, g, b);
+                    min = Math.min(r, g, b);
+                    l = (max + min) / 2;
+                    if (max === min) {
+                        h = s = 0;
+                    } else {
+                        d = max - min;
+                        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                        h = (max === r) ? (g - b) / d + (g < b ? 6 : 0) : (max === g) ? (b - r) / d + 2 : (r - g) / d + 4;
+                        h *= 60;
+                    }
+                    a[0] = (h + 0.5) | 0;
+                    a[1] = (s * 100 + 0.5) | 0;
+                    a[2] = (l * 100 + 0.5) | 0;
+                }
+                return a;
+            },
+            _formatColors = function(s, toHSL) {
+                var colors = s.match(_colorExp) || [],
+                    charIndex = 0,
+                    parsed = colors.length ? "" : s,
+                    i, color, temp;
+                for (i = 0; i < colors.length; i++) {
+                    color = colors[i];
+                    temp = s.substr(charIndex, s.indexOf(color, charIndex)-charIndex);
+                    charIndex += temp.length + color.length;
+                    color = _parseColor(color, toHSL);
+                    if (color.length === 3) {
+                        color.push(1);
+                    }
+                    parsed += temp + (toHSL ? "hsla(" + color[0] + "," + color[1] + "%," + color[2] + "%," + color[3] : "rgba(" + color.join(",")) + ")";
+                }
+                return parsed + s.substr(charIndex);
+            },
+            _colorExp = "(?:\\b(?:(?:rgb|rgba|hsl|hsla)\\(.+?\\))|\\B#(?:[0-9a-f]{3}){1,2}\\b"; //we'll dynamically build this Regular Expression to conserve file size. After building it, it will be able to find rgb(), rgba(), # (hexadecimal), and named color values like red, blue, purple, etc.
+
+        for (p in _colorLookup) {
+            _colorExp += "|" + p + "\\b";
+        }
+        _colorExp = new RegExp(_colorExp+")", "gi");
+
+        CSSPlugin.colorStringFilter = function(a) {
+            var combined = a[0] + a[1],
+                toHSL;
+            if (_colorExp.test(combined)) {
+                toHSL = (combined.indexOf("hsl(") !== -1 || combined.indexOf("hsla(") !== -1);
+                a[0] = _formatColors(a[0], toHSL);
+                a[1] = _formatColors(a[1], toHSL);
+            }
+            _colorExp.lastIndex = 0;
+        };
+
+        if (!TweenLite.defaultStringFilter) {
+            TweenLite.defaultStringFilter = CSSPlugin.colorStringFilter;
+        }
+
+        /**
+         * @private Returns a formatter function that handles taking a string (or number in some cases) and returning a consistently formatted one in terms of delimiters, quantity of values, etc. For example, we may get boxShadow values defined as "0px red" or "0px 0px 10px rgb(255,0,0)" or "0px 0px 20px 20px #F00" and we need to ensure that what we get back is described with 4 numbers and a color. This allows us to feed it into the _parseComplex() method and split the values up appropriately. The neat thing about this _getFormatter() function is that the dflt defines a pattern as well as a default, so for example, _getFormatter("0px 0px 0px 0px #777", true) not only sets the default as 0px for all distances and #777 for the color, but also sets the pattern such that 4 numbers and a color will always get returned.
+         * @param {!string} dflt The default value and pattern to follow. So "0px 0px 0px 0px #777" will ensure that 4 numbers and a color will always get returned.
+         * @param {boolean=} clr If true, the values should be searched for color-related data. For example, boxShadow values typically contain a color whereas borderRadius don't.
+         * @param {boolean=} collapsible If true, the value is a top/left/right/bottom style one that acts like margin or padding, where if only one value is received, it's used for all 4; if 2 are received, the first is duplicated for 3rd (bottom) and the 2nd is duplicated for the 4th spot (left), etc.
+         * @return {Function} formatter function
+         */
+        var _getFormatter = function(dflt, clr, collapsible, multi) {
+                if (dflt == null) {
+                    return function(v) {return v;};
+                }
+                var dColor = clr ? (dflt.match(_colorExp) || [""])[0] : "",
+                    dVals = dflt.split(dColor).join("").match(_valuesExp) || [],
+                    pfx = dflt.substr(0, dflt.indexOf(dVals[0])),
+                    sfx = (dflt.charAt(dflt.length - 1) === ")") ? ")" : "",
+                    delim = (dflt.indexOf(" ") !== -1) ? " " : ",",
+                    numVals = dVals.length,
+                    dSfx = (numVals > 0) ? dVals[0].replace(_numExp, "") : "",
+                    formatter;
+                if (!numVals) {
+                    return function(v) {return v;};
+                }
+                if (clr) {
+                    formatter = function(v) {
+                        var color, vals, i, a;
+                        if (typeof(v) === "number") {
+                            v += dSfx;
+                        } else if (multi && _commasOutsideParenExp.test(v)) {
+                            a = v.replace(_commasOutsideParenExp, "|").split("|");
+                            for (i = 0; i < a.length; i++) {
+                                a[i] = formatter(a[i]);
+                            }
+                            return a.join(",");
+                        }
+                        color = (v.match(_colorExp) || [dColor])[0];
+                        vals = v.split(color).join("").match(_valuesExp) || [];
+                        i = vals.length;
+                        if (numVals > i--) {
+                            while (++i < numVals) {
+                                vals[i] = collapsible ? vals[(((i - 1) / 2) | 0)] : dVals[i];
+                            }
+                        }
+                        return pfx + vals.join(delim) + delim + color + sfx + (v.indexOf("inset") !== -1 ? " inset" : "");
+                    };
+                    return formatter;
+
+                }
+                formatter = function(v) {
+                    var vals, a, i;
+                    if (typeof(v) === "number") {
+                        v += dSfx;
+                    } else if (multi && _commasOutsideParenExp.test(v)) {
+                        a = v.replace(_commasOutsideParenExp, "|").split("|");
+                        for (i = 0; i < a.length; i++) {
+                            a[i] = formatter(a[i]);
+                        }
+                        return a.join(",");
+                    }
+                    vals = v.match(_valuesExp) || [];
+                    i = vals.length;
+                    if (numVals > i--) {
+                        while (++i < numVals) {
+                            vals[i] = collapsible ? vals[(((i - 1) / 2) | 0)] : dVals[i];
+                        }
+                    }
+                    return pfx + vals.join(delim) + sfx;
+                };
+                return formatter;
+            },
+
+            /**
+             * @private returns a formatter function that's used for edge-related values like marginTop, marginLeft, paddingBottom, paddingRight, etc. Just pass a comma-delimited list of property names related to the edges.
+             * @param {!string} props a comma-delimited list of property names in order from top to left, like "marginTop,marginRight,marginBottom,marginLeft"
+             * @return {Function} a formatter function
+             */
+            _getEdgeParser = function(props) {
+                props = props.split(",");
+                return function(t, e, p, cssp, pt, plugin, vars) {
+                    var a = (e + "").split(" "),
+                        i;
+                    vars = {};
+                    for (i = 0; i < 4; i++) {
+                        vars[props[i]] = a[i] = a[i] || a[(((i - 1) / 2) >> 0)];
+                    }
+                    return cssp.parse(t, vars, pt, plugin);
+                };
+            },
+
+            // @private used when other plugins must tween values first, like BezierPlugin or ThrowPropsPlugin, etc. That plugin's setRatio() gets called first so that the values are updated, and then we loop through the MiniPropTweens which handle copying the values into their appropriate slots so that they can then be applied correctly in the main CSSPlugin setRatio() method. Remember, we typically create a proxy object that has a bunch of uniquely-named properties that we feed to the sub-plugin and it does its magic normally, and then we must interpret those values and apply them to the css because often numbers must get combined/concatenated, suffixes added, etc. to work with css, like boxShadow could have 4 values plus a color.
+            _setPluginRatio = _internals._setPluginRatio = function(v) {
+                this.plugin.setRatio(v);
+                var d = this.data,
+                    proxy = d.proxy,
+                    mpt = d.firstMPT,
+                    min = 0.000001,
+                    val, pt, i, str, p;
+                while (mpt) {
+                    val = proxy[mpt.v];
+                    if (mpt.r) {
+                        val = Math.round(val);
+                    } else if (val < min && val > -min) {
+                        val = 0;
+                    }
+                    mpt.t[mpt.p] = val;
+                    mpt = mpt._next;
+                }
+                if (d.autoRotate) {
+                    d.autoRotate.rotation = d.mod ? d.mod(proxy.rotation, this.t) : proxy.rotation; //special case for ModifyPlugin to hook into an auto-rotating bezier
+                }
+                //at the end, we must set the CSSPropTween's "e" (end) value dynamically here because that's what is used in the final setRatio() method. Same for "b" at the beginning.
+                if (v === 1 || v === 0) {
+                    mpt = d.firstMPT;
+                    p = (v === 1) ? "e" : "b";
+                    while (mpt) {
+                        pt = mpt.t;
+                        if (!pt.type) {
+                            pt[p] = pt.s + pt.xs0;
+                        } else if (pt.type === 1) {
+                            str = pt.xs0 + pt.s + pt.xs1;
+                            for (i = 1; i < pt.l; i++) {
+                                str += pt["xn"+i] + pt["xs"+(i+1)];
+                            }
+                            pt[p] = str;
+                        }
+                        mpt = mpt._next;
+                    }
+                }
+            },
+
+            /**
+             * @private @constructor Used by a few SpecialProps to hold important values for proxies. For example, _parseToProxy() creates a MiniPropTween instance for each property that must get tweened on the proxy, and we record the original property name as well as the unique one we create for the proxy, plus whether or not the value needs to be rounded plus the original value.
+             * @param {!Object} t target object whose property we're tweening (often a CSSPropTween)
+             * @param {!string} p property name
+             * @param {(number|string|object)} v value
+             * @param {MiniPropTween=} next next MiniPropTween in the linked list
+             * @param {boolean=} r if true, the tweened value should be rounded to the nearest integer
+             */
+            MiniPropTween = function(t, p, v, next, r) {
+                this.t = t;
+                this.p = p;
+                this.v = v;
+                this.r = r;
+                if (next) {
+                    next._prev = this;
+                    this._next = next;
+                }
+            },
+
+            /**
+             * @private Most other plugins (like BezierPlugin and ThrowPropsPlugin and others) can only tween numeric values, but CSSPlugin must accommodate special values that have a bunch of extra data (like a suffix or strings between numeric values, etc.). For example, boxShadow has values like "10px 10px 20px 30px rgb(255,0,0)" which would utterly confuse other plugins. This method allows us to split that data apart and grab only the numeric data and attach it to uniquely-named properties of a generic proxy object ({}) so that we can feed that to virtually any plugin to have the numbers tweened. However, we must also keep track of which properties from the proxy go with which CSSPropTween values and instances. So we create a linked list of MiniPropTweens. Each one records a target (the original CSSPropTween), property (like "s" or "xn1" or "xn2") that we're tweening and the unique property name that was used for the proxy (like "boxShadow_xn1" and "boxShadow_xn2") and whether or not they need to be rounded. That way, in the _setPluginRatio() method we can simply copy the values over from the proxy to the CSSPropTween instance(s). Then, when the main CSSPlugin setRatio() method runs and applies the CSSPropTween values accordingly, they're updated nicely. So the external plugin tweens the numbers, _setPluginRatio() copies them over, and setRatio() acts normally, applying css-specific values to the element.
+             * This method returns an object that has the following properties:
+             *  - proxy: a generic object containing the starting values for all the properties that will be tweened by the external plugin.  This is what we feed to the external _onInitTween() as the target
+             *  - end: a generic object containing the ending values for all the properties that will be tweened by the external plugin. This is what we feed to the external plugin's _onInitTween() as the destination values
+             *  - firstMPT: the first MiniPropTween in the linked list
+             *  - pt: the first CSSPropTween in the linked list that was created when parsing. If shallow is true, this linked list will NOT attach to the one passed into the _parseToProxy() as the "pt" (4th) parameter.
+             * @param {!Object} t target object to be tweened
+             * @param {!(Object|string)} vars the object containing the information about the tweening values (typically the end/destination values) that should be parsed
+             * @param {!CSSPlugin} cssp The CSSPlugin instance
+             * @param {CSSPropTween=} pt the next CSSPropTween in the linked list
+             * @param {TweenPlugin=} plugin the external TweenPlugin instance that will be handling tweening the numeric values
+             * @param {boolean=} shallow if true, the resulting linked list from the parse will NOT be attached to the CSSPropTween that was passed in as the "pt" (4th) parameter.
+             * @return An object containing the following properties: proxy, end, firstMPT, and pt (see above for descriptions)
+             */
+            _parseToProxy = _internals._parseToProxy = function(t, vars, cssp, pt, plugin, shallow) {
+                var bpt = pt,
+                    start = {},
+                    end = {},
+                    transform = cssp._transform,
+                    oldForce = _forcePT,
+                    i, p, xp, mpt, firstPT;
+                cssp._transform = null;
+                _forcePT = vars;
+                pt = firstPT = cssp.parse(t, vars, pt, plugin);
+                _forcePT = oldForce;
+                //break off from the linked list so the new ones are isolated.
+                if (shallow) {
+                    cssp._transform = transform;
+                    if (bpt) {
+                        bpt._prev = null;
+                        if (bpt._prev) {
+                            bpt._prev._next = null;
+                        }
+                    }
+                }
+                while (pt && pt !== bpt) {
+                    if (pt.type <= 1) {
+                        p = pt.p;
+                        end[p] = pt.s + pt.c;
+                        start[p] = pt.s;
+                        if (!shallow) {
+                            mpt = new MiniPropTween(pt, "s", p, mpt, pt.r);
+                            pt.c = 0;
+                        }
+                        if (pt.type === 1) {
+                            i = pt.l;
+                            while (--i > 0) {
+                                xp = "xn" + i;
+                                p = pt.p + "_" + xp;
+                                end[p] = pt.data[xp];
+                                start[p] = pt[xp];
+                                if (!shallow) {
+                                    mpt = new MiniPropTween(pt, xp, p, mpt, pt.rxp[xp]);
+                                }
+                            }
+                        }
+                    }
+                    pt = pt._next;
+                }
+                return {proxy:start, end:end, firstMPT:mpt, pt:firstPT};
+            },
+
+
+
+            /**
+             * @constructor Each property that is tweened has at least one CSSPropTween associated with it. These instances store important information like the target, property, starting value, amount of change, etc. They can also optionally have a number of "extra" strings and numeric values named xs1, xn1, xs2, xn2, xs3, xn3, etc. where "s" indicates string and "n" indicates number. These can be pieced together in a complex-value tween (type:1) that has alternating types of data like a string, number, string, number, etc. For example, boxShadow could be "5px 5px 8px rgb(102, 102, 51)". In that value, there are 6 numbers that may need to tween and then pieced back together into a string again with spaces, suffixes, etc. xs0 is special in that it stores the suffix for standard (type:0) tweens, -OR- the first string (prefix) in a complex-value (type:1) CSSPropTween -OR- it can be the non-tweening value in a type:-1 CSSPropTween. We do this to conserve memory.
+             * CSSPropTweens have the following optional properties as well (not defined through the constructor):
+             *  - l: Length in terms of the number of extra properties that the CSSPropTween has (default: 0). For example, for a boxShadow we may need to tween 5 numbers in which case l would be 5; Keep in mind that the start/end values for the first number that's tweened are always stored in the s and c properties to conserve memory. All additional values thereafter are stored in xn1, xn2, etc.
+             *  - xfirst: The first instance of any sub-CSSPropTweens that are tweening properties of this instance. For example, we may split up a boxShadow tween so that there's a main CSSPropTween of type:1 that has various xs* and xn* values associated with the h-shadow, v-shadow, blur, color, etc. Then we spawn a CSSPropTween for each of those that has a higher priority and runs BEFORE the main CSSPropTween so that the values are all set by the time it needs to re-assemble them. The xfirst gives us an easy way to identify the first one in that chain which typically ends at the main one (because they're all prepende to the linked list)
+             *  - plugin: The TweenPlugin instance that will handle the tweening of any complex values. For example, sometimes we don't want to use normal subtweens (like xfirst refers to) to tween the values - we might want ThrowPropsPlugin or BezierPlugin some other plugin to do the actual tweening, so we create a plugin instance and store a reference here. We need this reference so that if we get a request to round values or disable a tween, we can pass along that request.
+             *  - data: Arbitrary data that needs to be stored with the CSSPropTween. Typically if we're going to have a plugin handle the tweening of a complex-value tween, we create a generic object that stores the END values that we're tweening to and the CSSPropTween's xs1, xs2, etc. have the starting values. We store that object as data. That way, we can simply pass that object to the plugin and use the CSSPropTween as the target.
+             *  - setRatio: Only used for type:2 tweens that require custom functionality. In this case, we call the CSSPropTween's setRatio() method and pass the ratio each time the tween updates. This isn't quite as efficient as doing things directly in the CSSPlugin's setRatio() method, but it's very convenient and flexible.
+             * @param {!Object} t Target object whose property will be tweened. Often a DOM element, but not always. It could be anything.
+             * @param {string} p Property to tween (name). For example, to tween element.width, p would be "width".
+             * @param {number} s Starting numeric value
+             * @param {number} c Change in numeric value over the course of the entire tween. For example, if element.width starts at 5 and should end at 100, c would be 95.
+             * @param {CSSPropTween=} next The next CSSPropTween in the linked list. If one is defined, we will define its _prev as the new instance, and the new instance's _next will be pointed at it.
+             * @param {number=} type The type of CSSPropTween where -1 = a non-tweening value, 0 = a standard simple tween, 1 = a complex value (like one that has multiple numbers in a comma- or space-delimited string like border:"1px solid red"), and 2 = one that uses a custom setRatio function that does all of the work of applying the values on each update.
+             * @param {string=} n Name of the property that should be used for overwriting purposes which is typically the same as p but not always. For example, we may need to create a subtween for the 2nd part of a "clip:rect(...)" tween in which case "p" might be xs1 but "n" is still "clip"
+             * @param {boolean=} r If true, the value(s) should be rounded
+             * @param {number=} pr Priority in the linked list order. Higher priority CSSPropTweens will be updated before lower priority ones. The default priority is 0.
+             * @param {string=} b Beginning value. We store this to ensure that it is EXACTLY what it was when the tween began without any risk of interpretation issues.
+             * @param {string=} e Ending value. We store this to ensure that it is EXACTLY what the user defined at the end of the tween without any risk of interpretation issues.
+             */
+            CSSPropTween = _internals.CSSPropTween = function(t, p, s, c, next, type, n, r, pr, b, e) {
+                this.t = t; //target
+                this.p = p; //property
+                this.s = s; //starting value
+                this.c = c; //change value
+                this.n = n || p; //name that this CSSPropTween should be associated to (usually the same as p, but not always - n is what overwriting looks at)
+                if (!(t instanceof CSSPropTween)) {
+                    _overwriteProps.push(this.n);
+                }
+                this.r = r; //round (boolean)
+                this.type = type || 0; //0 = normal tween, -1 = non-tweening (in which case xs0 will be applied to the target's property, like tp.t[tp.p] = tp.xs0), 1 = complex-value SpecialProp, 2 = custom setRatio() that does all the work
+                if (pr) {
+                    this.pr = pr;
+                    _hasPriority = true;
+                }
+                this.b = (b === undefined) ? s : b;
+                this.e = (e === undefined) ? s + c : e;
+                if (next) {
+                    this._next = next;
+                    next._prev = this;
+                }
+            },
+
+            _addNonTweeningNumericPT = function(target, prop, start, end, next, overwriteProp) { //cleans up some code redundancies and helps minification. Just a fast way to add a NUMERIC non-tweening CSSPropTween
+                var pt = new CSSPropTween(target, prop, start, end - start, next, -1, overwriteProp);
+                pt.b = start;
+                pt.e = pt.xs0 = end;
+                return pt;
+            },
+
+            /**
+             * Takes a target, the beginning value and ending value (as strings) and parses them into a CSSPropTween (possibly with child CSSPropTweens) that accommodates multiple numbers, colors, comma-delimited values, etc. For example:
+             * sp.parseComplex(element, "boxShadow", "5px 10px 20px rgb(255,102,51)", "0px 0px 0px red", true, "0px 0px 0px rgb(0,0,0,0)", pt);
+             * It will walk through the beginning and ending values (which should be in the same format with the same number and type of values) and figure out which parts are numbers, what strings separate the numeric/tweenable values, and then create the CSSPropTweens accordingly. If a plugin is defined, no child CSSPropTweens will be created. Instead, the ending values will be stored in the "data" property of the returned CSSPropTween like: {s:-5, xn1:-10, xn2:-20, xn3:255, xn4:0, xn5:0} so that it can be fed to any other plugin and it'll be plain numeric tweens but the recomposition of the complex value will be handled inside CSSPlugin's setRatio().
+             * If a setRatio is defined, the type of the CSSPropTween will be set to 2 and recomposition of the values will be the responsibility of that method.
+             *
+             * @param {!Object} t Target whose property will be tweened
+             * @param {!string} p Property that will be tweened (its name, like "left" or "backgroundColor" or "boxShadow")
+             * @param {string} b Beginning value
+             * @param {string} e Ending value
+             * @param {boolean} clrs If true, the value could contain a color value like "rgb(255,0,0)" or "#F00" or "red". The default is false, so no colors will be recognized (a performance optimization)
+             * @param {(string|number|Object)} dflt The default beginning value that should be used if no valid beginning value is defined or if the number of values inside the complex beginning and ending values don't match
+             * @param {?CSSPropTween} pt CSSPropTween instance that is the current head of the linked list (we'll prepend to this).
+             * @param {number=} pr Priority in the linked list order. Higher priority properties will be updated before lower priority ones. The default priority is 0.
+             * @param {TweenPlugin=} plugin If a plugin should handle the tweening of extra properties, pass the plugin instance here. If one is defined, then NO subtweens will be created for any extra properties (the properties will be created - just not additional CSSPropTween instances to tween them) because the plugin is expected to do so. However, the end values WILL be populated in the "data" property, like {s:100, xn1:50, xn2:300}
+             * @param {function(number)=} setRatio If values should be set in a custom function instead of being pieced together in a type:1 (complex-value) CSSPropTween, define that custom function here.
+             * @return {CSSPropTween} The first CSSPropTween in the linked list which includes the new one(s) added by the parseComplex() call.
+             */
+            _parseComplex = CSSPlugin.parseComplex = function(t, p, b, e, clrs, dflt, pt, pr, plugin, setRatio) {
+                //DEBUG: _log("parseComplex: "+p+", b: "+b+", e: "+e);
+                b = b || dflt || "";
+                if (typeof(e) === "function") {
+                    e = e(_index, _target);
+                }
+                pt = new CSSPropTween(t, p, 0, 0, pt, (setRatio ? 2 : 1), null, false, pr, b, e);
+                e += ""; //ensures it's a string
+                if (clrs && _colorExp.test(e + b)) { //if colors are found, normalize the formatting to rgba() or hsla().
+                    e = [b, e];
+                    CSSPlugin.colorStringFilter(e);
+                    b = e[0];
+                    e = e[1];
+                }
+                var ba = b.split(", ").join(",").split(" "), //beginning array
+                    ea = e.split(", ").join(",").split(" "), //ending array
+                    l = ba.length,
+                    autoRound = (_autoRound !== false),
+                    i, xi, ni, bv, ev, bnums, enums, bn, hasAlpha, temp, cv, str, useHSL;
+                if (e.indexOf(",") !== -1 || b.indexOf(",") !== -1) {
+                    ba = ba.join(" ").replace(_commasOutsideParenExp, ", ").split(" ");
+                    ea = ea.join(" ").replace(_commasOutsideParenExp, ", ").split(" ");
+                    l = ba.length;
+                }
+                if (l !== ea.length) {
+                    //DEBUG: _log("mismatched formatting detected on " + p + " (" + b + " vs " + e + ")");
+                    ba = (dflt || "").split(" ");
+                    l = ba.length;
+                }
+                pt.plugin = plugin;
+                pt.setRatio = setRatio;
+                _colorExp.lastIndex = 0;
+                for (i = 0; i < l; i++) {
+                    bv = ba[i];
+                    ev = ea[i];
+                    bn = parseFloat(bv);
+                    //if the value begins with a number (most common). It's fine if it has a suffix like px
+                    if (bn || bn === 0) {
+                        pt.appendXtra("", bn, _parseChange(ev, bn), ev.replace(_relNumExp, ""), (autoRound && ev.indexOf("px") !== -1), true);
+
+                        //if the value is a color
+                    } else if (clrs && _colorExp.test(bv)) {
+                        str = ev.indexOf(")") + 1;
+                        str = ")" + (str ? ev.substr(str) : ""); //if there's a comma or ) at the end, retain it.
+                        useHSL = (ev.indexOf("hsl") !== -1 && _supportsOpacity);
+                        bv = _parseColor(bv, useHSL);
+                        ev = _parseColor(ev, useHSL);
+                        hasAlpha = (bv.length + ev.length > 6);
+                        if (hasAlpha && !_supportsOpacity && ev[3] === 0) { //older versions of IE don't support rgba(), so if the destination alpha is 0, just use "transparent" for the end color
+                            pt["xs" + pt.l] += pt.l ? " transparent" : "transparent";
+                            pt.e = pt.e.split(ea[i]).join("transparent");
+                        } else {
+                            if (!_supportsOpacity) { //old versions of IE don't support rgba().
+                                hasAlpha = false;
+                            }
+                            if (useHSL) {
+                                pt.appendXtra((hasAlpha ? "hsla(" : "hsl("), bv[0], _parseChange(ev[0], bv[0]), ",", false, true)
+                                    .appendXtra("", bv[1], _parseChange(ev[1], bv[1]), "%,", false)
+                                    .appendXtra("", bv[2], _parseChange(ev[2], bv[2]), (hasAlpha ? "%," : "%" + str), false);
+                            } else {
+                                pt.appendXtra((hasAlpha ? "rgba(" : "rgb("), bv[0], ev[0] - bv[0], ",", true, true)
+                                    .appendXtra("", bv[1], ev[1] - bv[1], ",", true)
+                                    .appendXtra("", bv[2], ev[2] - bv[2], (hasAlpha ? "," : str), true);
+                            }
+
+                            if (hasAlpha) {
+                                bv = (bv.length < 4) ? 1 : bv[3];
+                                pt.appendXtra("", bv, ((ev.length < 4) ? 1 : ev[3]) - bv, str, false);
+                            }
+                        }
+                        _colorExp.lastIndex = 0; //otherwise the test() on the RegExp could move the lastIndex and taint future results.
+
+                    } else {
+                        bnums = bv.match(_numExp); //gets each group of numbers in the beginning value string and drops them into an array
+
+                        //if no number is found, treat it as a non-tweening value and just append the string to the current xs.
+                        if (!bnums) {
+                            pt["xs" + pt.l] += (pt.l || pt["xs" + pt.l]) ? " " + ev : ev;
+
+                            //loop through all the numbers that are found and construct the extra values on the pt.
+                        } else {
+                            enums = ev.match(_relNumExp); //get each group of numbers in the end value string and drop them into an array. We allow relative values too, like +=50 or -=.5
+                            if (!enums || enums.length !== bnums.length) {
+                                //DEBUG: _log("mismatched formatting detected on " + p + " (" + b + " vs " + e + ")");
+                                return pt;
+                            }
+                            ni = 0;
+                            for (xi = 0; xi < bnums.length; xi++) {
+                                cv = bnums[xi];
+                                temp = bv.indexOf(cv, ni);
+                                pt.appendXtra(bv.substr(ni, temp - ni), Number(cv), _parseChange(enums[xi], cv), "", (autoRound && bv.substr(temp + cv.length, 2) === "px"), (xi === 0));
+                                ni = temp + cv.length;
+                            }
+                            pt["xs" + pt.l] += bv.substr(ni);
+                        }
+                    }
+                }
+                //if there are relative values ("+=" or "-=" prefix), we need to adjust the ending value to eliminate the prefixes and combine the values properly.
+                if (e.indexOf("=") !== -1) if (pt.data) {
+                    str = pt.xs0 + pt.data.s;
+                    for (i = 1; i < pt.l; i++) {
+                        str += pt["xs" + i] + pt.data["xn" + i];
+                    }
+                    pt.e = str + pt["xs" + i];
+                }
+                if (!pt.l) {
+                    pt.type = -1;
+                    pt.xs0 = pt.e;
+                }
+                return pt.xfirst || pt;
+            },
+            i = 9;
+
+
+        p = CSSPropTween.prototype;
+        p.l = p.pr = 0; //length (number of extra properties like xn1, xn2, xn3, etc.
+        while (--i > 0) {
+            p["xn" + i] = 0;
+            p["xs" + i] = "";
+        }
+        p.xs0 = "";
+        p._next = p._prev = p.xfirst = p.data = p.plugin = p.setRatio = p.rxp = null;
+
+
+        /**
+         * Appends and extra tweening value to a CSSPropTween and automatically manages any prefix and suffix strings. The first extra value is stored in the s and c of the main CSSPropTween instance, but thereafter any extras are stored in the xn1, xn2, xn3, etc. The prefixes and suffixes are stored in the xs0, xs1, xs2, etc. properties. For example, if I walk through a clip value like "rect(10px, 5px, 0px, 20px)", the values would be stored like this:
+         * xs0:"rect(", s:10, xs1:"px, ", xn1:5, xs2:"px, ", xn2:0, xs3:"px, ", xn3:20, xn4:"px)"
+         * And they'd all get joined together when the CSSPlugin renders (in the setRatio() method).
+         * @param {string=} pfx Prefix (if any)
+         * @param {!number} s Starting value
+         * @param {!number} c Change in numeric value over the course of the entire tween. For example, if the start is 5 and the end is 100, the change would be 95.
+         * @param {string=} sfx Suffix (if any)
+         * @param {boolean=} r Round (if true).
+         * @param {boolean=} pad If true, this extra value should be separated by the previous one by a space. If there is no previous extra and pad is true, it will automatically drop the space.
+         * @return {CSSPropTween} returns itself so that multiple methods can be chained together.
+         */
+        p.appendXtra = function(pfx, s, c, sfx, r, pad) {
+            var pt = this,
+                l = pt.l;
+            pt["xs" + l] += (pad && (l || pt["xs" + l])) ? " " + pfx : pfx || "";
+            if (!c) if (l !== 0 && !pt.plugin) { //typically we'll combine non-changing values right into the xs to optimize performance, but we don't combine them when there's a plugin that will be tweening the values because it may depend on the values being split apart, like for a bezier, if a value doesn't change between the first and second iteration but then it does on the 3rd, we'll run into trouble because there's no xn slot for that value!
+                pt["xs" + l] += s + (sfx || "");
+                return pt;
+            }
+            pt.l++;
+            pt.type = pt.setRatio ? 2 : 1;
+            pt["xs" + pt.l] = sfx || "";
+            if (l > 0) {
+                pt.data["xn" + l] = s + c;
+                pt.rxp["xn" + l] = r; //round extra property (we need to tap into this in the _parseToProxy() method)
+                pt["xn" + l] = s;
+                if (!pt.plugin) {
+                    pt.xfirst = new CSSPropTween(pt, "xn" + l, s, c, pt.xfirst || pt, 0, pt.n, r, pt.pr);
+                    pt.xfirst.xs0 = 0; //just to ensure that the property stays numeric which helps modern browsers speed up processing. Remember, in the setRatio() method, we do pt.t[pt.p] = val + pt.xs0 so if pt.xs0 is "" (the default), it'll cast the end value as a string. When a property is a number sometimes and a string sometimes, it prevents the compiler from locking in the data type, slowing things down slightly.
+                }
+                return pt;
+            }
+            pt.data = {s:s + c};
+            pt.rxp = {};
+            pt.s = s;
+            pt.c = c;
+            pt.r = r;
+            return pt;
+        };
+
+        /**
+         * @constructor A SpecialProp is basically a css property that needs to be treated in a non-standard way, like if it may contain a complex value like boxShadow:"5px 10px 15px rgb(255, 102, 51)" or if it is associated with another plugin like ThrowPropsPlugin or BezierPlugin. Every SpecialProp is associated with a particular property name like "boxShadow" or "throwProps" or "bezier" and it will intercept those values in the vars object that's passed to the CSSPlugin and handle them accordingly.
+         * @param {!string} p Property name (like "boxShadow" or "throwProps")
+         * @param {Object=} options An object containing any of the following configuration options:
+         *                      - defaultValue: the default value
+         *                      - parser: A function that should be called when the associated property name is found in the vars. This function should return a CSSPropTween instance and it should ensure that it is properly inserted into the linked list. It will receive 4 paramters: 1) The target, 2) The value defined in the vars, 3) The CSSPlugin instance (whose _firstPT should be used for the linked list), and 4) A computed style object if one was calculated (this is a speed optimization that allows retrieval of starting values quicker)
+         *                      - formatter: a function that formats any value received for this special property (for example, boxShadow could take "5px 5px red" and format it to "5px 5px 0px 0px red" so that both the beginning and ending values have a common order and quantity of values.)
+         *                      - prefix: if true, we'll determine whether or not this property requires a vendor prefix (like Webkit or Moz or ms or O)
+         *                      - color: set this to true if the value for this SpecialProp may contain color-related values like rgb(), rgba(), etc.
+         *                      - priority: priority in the linked list order. Higher priority SpecialProps will be updated before lower priority ones. The default priority is 0.
+         *                      - multi: if true, the formatter should accommodate a comma-delimited list of values, like boxShadow could have multiple boxShadows listed out.
+         *                      - collapsible: if true, the formatter should treat the value like it's a top/right/bottom/left value that could be collapsed, like "5px" would apply to all, "5px, 10px" would use 5px for top/bottom and 10px for right/left, etc.
+         *                      - keyword: a special keyword that can [optionally] be found inside the value (like "inset" for boxShadow). This allows us to validate beginning/ending values to make sure they match (if the keyword is found in one, it'll be added to the other for consistency by default).
+         */
+        var SpecialProp = function(p, options) {
+                options = options || {};
+                this.p = options.prefix ? _checkPropPrefix(p) || p : p;
+                _specialProps[p] = _specialProps[this.p] = this;
+                this.format = options.formatter || _getFormatter(options.defaultValue, options.color, options.collapsible, options.multi);
+                if (options.parser) {
+                    this.parse = options.parser;
+                }
+                this.clrs = options.color;
+                this.multi = options.multi;
+                this.keyword = options.keyword;
+                this.dflt = options.defaultValue;
+                this.pr = options.priority || 0;
+            },
+
+            //shortcut for creating a new SpecialProp that can accept multiple properties as a comma-delimited list (helps minification). dflt can be an array for multiple values (we don't do a comma-delimited list because the default value may contain commas, like rect(0px,0px,0px,0px)). We attach this method to the SpecialProp class/object instead of using a private _createSpecialProp() method so that we can tap into it externally if necessary, like from another plugin.
+            _registerComplexSpecialProp = _internals._registerComplexSpecialProp = function(p, options, defaults) {
+                if (typeof(options) !== "object") {
+                    options = {parser:defaults}; //to make backwards compatible with older versions of BezierPlugin and ThrowPropsPlugin
+                }
+                var a = p.split(","),
+                    d = options.defaultValue,
+                    i, temp;
+                defaults = defaults || [d];
+                for (i = 0; i < a.length; i++) {
+                    options.prefix = (i === 0 && options.prefix);
+                    options.defaultValue = defaults[i] || d;
+                    temp = new SpecialProp(a[i], options);
+                }
+            },
+
+            //creates a placeholder special prop for a plugin so that the property gets caught the first time a tween of it is attempted, and at that time it makes the plugin register itself, thus taking over for all future tweens of that property. This allows us to not mandate that things load in a particular order and it also allows us to log() an error that informs the user when they attempt to tween an external plugin-related property without loading its .js file.
+            _registerPluginProp = _internals._registerPluginProp = function(p) {
+                if (!_specialProps[p]) {
+                    var pluginName = p.charAt(0).toUpperCase() + p.substr(1) + "Plugin";
+                    _registerComplexSpecialProp(p, {parser:function(t, e, p, cssp, pt, plugin, vars) {
+                        var pluginClass = _globals.com.greensock.plugins[pluginName];
+                        if (!pluginClass) {
+                            _log("Error: " + pluginName + " js file not loaded.");
+                            return pt;
+                        }
+                        pluginClass._cssRegister();
+                        return _specialProps[p].parse(t, e, p, cssp, pt, plugin, vars);
+                    }});
+                }
+            };
+
+
+        p = SpecialProp.prototype;
+
+        /**
+         * Alias for _parseComplex() that automatically plugs in certain values for this SpecialProp, like its property name, whether or not colors should be sensed, the default value, and priority. It also looks for any keyword that the SpecialProp defines (like "inset" for boxShadow) and ensures that the beginning and ending values have the same number of values for SpecialProps where multi is true (like boxShadow and textShadow can have a comma-delimited list)
+         * @param {!Object} t target element
+         * @param {(string|number|object)} b beginning value
+         * @param {(string|number|object)} e ending (destination) value
+         * @param {CSSPropTween=} pt next CSSPropTween in the linked list
+         * @param {TweenPlugin=} plugin If another plugin will be tweening the complex value, that TweenPlugin instance goes here.
+         * @param {function=} setRatio If a custom setRatio() method should be used to handle this complex value, that goes here.
+         * @return {CSSPropTween=} First CSSPropTween in the linked list
+         */
+        p.parseComplex = function(t, b, e, pt, plugin, setRatio) {
+            var kwd = this.keyword,
+                i, ba, ea, l, bi, ei;
+            //if this SpecialProp's value can contain a comma-delimited list of values (like boxShadow or textShadow), we must parse them in a special way, and look for a keyword (like "inset" for boxShadow) and ensure that the beginning and ending BOTH have it if the end defines it as such. We also must ensure that there are an equal number of values specified (we can't tween 1 boxShadow to 3 for example)
+            if (this.multi) if (_commasOutsideParenExp.test(e) || _commasOutsideParenExp.test(b)) {
+                ba = b.replace(_commasOutsideParenExp, "|").split("|");
+                ea = e.replace(_commasOutsideParenExp, "|").split("|");
+            } else if (kwd) {
+                ba = [b];
+                ea = [e];
+            }
+            if (ea) {
+                l = (ea.length > ba.length) ? ea.length : ba.length;
+                for (i = 0; i < l; i++) {
+                    b = ba[i] = ba[i] || this.dflt;
+                    e = ea[i] = ea[i] || this.dflt;
+                    if (kwd) {
+                        bi = b.indexOf(kwd);
+                        ei = e.indexOf(kwd);
+                        if (bi !== ei) {
+                            if (ei === -1) { //if the keyword isn't in the end value, remove it from the beginning one.
+                                ba[i] = ba[i].split(kwd).join("");
+                            } else if (bi === -1) { //if the keyword isn't in the beginning, add it.
+                                ba[i] += " " + kwd;
+                            }
+                        }
+                    }
+                }
+                b = ba.join(", ");
+                e = ea.join(", ");
+            }
+            return _parseComplex(t, this.p, b, e, this.clrs, this.dflt, pt, this.pr, plugin, setRatio);
+        };
+
+        /**
+         * Accepts a target and end value and spits back a CSSPropTween that has been inserted into the CSSPlugin's linked list and conforms with all the conventions we use internally, like type:-1, 0, 1, or 2, setting up any extra property tweens, priority, etc. For example, if we have a boxShadow SpecialProp and call:
+         * this._firstPT = sp.parse(element, "5px 10px 20px rgb(2550,102,51)", "boxShadow", this);
+         * It should figure out the starting value of the element's boxShadow, compare it to the provided end value and create all the necessary CSSPropTweens of the appropriate types to tween the boxShadow. The CSSPropTween that gets spit back should already be inserted into the linked list (the 4th parameter is the current head, so prepend to that).
+         * @param {!Object} t Target object whose property is being tweened
+         * @param {Object} e End value as provided in the vars object (typically a string, but not always - like a throwProps would be an object).
+         * @param {!string} p Property name
+         * @param {!CSSPlugin} cssp The CSSPlugin instance that should be associated with this tween.
+         * @param {?CSSPropTween} pt The CSSPropTween that is the current head of the linked list (we'll prepend to it)
+         * @param {TweenPlugin=} plugin If a plugin will be used to tween the parsed value, this is the plugin instance.
+         * @param {Object=} vars Original vars object that contains the data for parsing.
+         * @return {CSSPropTween} The first CSSPropTween in the linked list which includes the new one(s) added by the parse() call.
+         */
+        p.parse = function(t, e, p, cssp, pt, plugin, vars) {
+            return this.parseComplex(t.style, this.format(_getStyle(t, this.p, _cs, false, this.dflt)), this.format(e), pt, plugin);
+        };
+
+        /**
+         * Registers a special property that should be intercepted from any "css" objects defined in tweens. This allows you to handle them however you want without CSSPlugin doing it for you. The 2nd parameter should be a function that accepts 3 parameters:
+         *  1) Target object whose property should be tweened (typically a DOM element)
+         *  2) The end/destination value (could be a string, number, object, or whatever you want)
+         *  3) The tween instance (you probably don't need to worry about this, but it can be useful for looking up information like the duration)
+         *
+         * Then, your function should return a function which will be called each time the tween gets rendered, passing a numeric "ratio" parameter to your function that indicates the change factor (usually between 0 and 1). For example:
+         *
+         * CSSPlugin.registerSpecialProp("myCustomProp", function(target, value, tween) {
+		 *      var start = target.style.width;
+		 *      return function(ratio) {
+		 *              target.style.width = (start + value * ratio) + "px";
+		 *              console.log("set width to " + target.style.width);
+		 *          }
+		 * }, 0);
+         *
+         * Then, when I do this tween, it will trigger my special property:
+         *
+         * TweenLite.to(element, 1, {css:{myCustomProp:100}});
+         *
+         * In the example, of course, we're just changing the width, but you can do anything you want.
+         *
+         * @param {!string} name Property name (or comma-delimited list of property names) that should be intercepted and handled by your function. For example, if I define "myCustomProp", then it would handle that portion of the following tween: TweenLite.to(element, 1, {css:{myCustomProp:100}})
+         * @param {!function(Object, Object, Object, string):function(number)} onInitTween The function that will be called when a tween of this special property is performed. The function will receive 4 parameters: 1) Target object that should be tweened, 2) Value that was passed to the tween, 3) The tween instance itself (rarely used), and 4) The property name that's being tweened. Your function should return a function that should be called on every update of the tween. That function will receive a single parameter that is a "change factor" value (typically between 0 and 1) indicating the amount of change as a ratio. You can use this to determine how to set the values appropriately in your function.
+         * @param {number=} priority Priority that helps the engine determine the order in which to set the properties (default: 0). Higher priority properties will be updated before lower priority ones.
+         */
+        CSSPlugin.registerSpecialProp = function(name, onInitTween, priority) {
+            _registerComplexSpecialProp(name, {parser:function(t, e, p, cssp, pt, plugin, vars) {
+                var rv = new CSSPropTween(t, p, 0, 0, pt, 2, p, false, priority);
+                rv.plugin = plugin;
+                rv.setRatio = onInitTween(t, e, cssp._tween, p);
+                return rv;
+            }, priority:priority});
+        };
+
+
+
+
+
+
+        //transform-related methods and properties
+        CSSPlugin.useSVGTransformAttr = _isSafari || _isFirefox; //Safari and Firefox both have some rendering bugs when applying CSS transforms to SVG elements, so default to using the "transform" attribute instead (users can override this).
+        var _transformProps = ("scaleX,scaleY,scaleZ,x,y,z,skewX,skewY,rotation,rotationX,rotationY,perspective,xPercent,yPercent").split(","),
+            _transformProp = _checkPropPrefix("transform"), //the Javascript (camelCase) transform property, like msTransform, WebkitTransform, MozTransform, or OTransform.
+            _transformPropCSS = _prefixCSS + "transform",
+            _transformOriginProp = _checkPropPrefix("transformOrigin"),
+            _supports3D = (_checkPropPrefix("perspective") !== null),
+            Transform = _internals.Transform = function() {
+                this.perspective = parseFloat(CSSPlugin.defaultTransformPerspective) || 0;
+                this.force3D = (CSSPlugin.defaultForce3D === false || !_supports3D) ? false : CSSPlugin.defaultForce3D || "auto";
+            },
+            _SVGElement = window.SVGElement,
+            _useSVGTransformAttr,
+            //Some browsers (like Firefox and IE) don't honor transform-origin properly in SVG elements, so we need to manually adjust the matrix accordingly. We feature detect here rather than always doing the conversion for certain browsers because they may fix the problem at some point in the future.
+
+            _createSVG = function(type, container, attributes) {
+                var element = _doc.createElementNS("http://www.w3.org/2000/svg", type),
+                    reg = /([a-z])([A-Z])/g,
+                    p;
+                for (p in attributes) {
+                    element.setAttributeNS(null, p.replace(reg, "$1-$2").toLowerCase(), attributes[p]);
+                }
+                container.appendChild(element);
+                return element;
+            },
+            _docElement = _doc.documentElement,
+            _forceSVGTransformAttr = (function() {
+                //IE and Android stock don't support CSS transforms on SVG elements, so we must write them to the "transform" attribute. We populate this variable in the _parseTransform() method, and only if/when we come across an SVG element
+                var force = _ieVers || (/Android/i.test(_agent) && !window.chrome),
+                    svg, rect, width;
+                if (_doc.createElementNS && !force) { //IE8 and earlier doesn't support SVG anyway
+                    svg = _createSVG("svg", _docElement);
+                    rect = _createSVG("rect", svg, {width:100, height:50, x:100});
+                    width = rect.getBoundingClientRect().width;
+                    rect.style[_transformOriginProp] = "50% 50%";
+                    rect.style[_transformProp] = "scaleX(0.5)";
+                    force = (width === rect.getBoundingClientRect().width && !(_isFirefox && _supports3D)); //note: Firefox fails the test even though it does support CSS transforms in 3D. Since we can't push 3D stuff into the transform attribute, we force Firefox to pass the test here (as long as it does truly support 3D).
+                    _docElement.removeChild(svg);
+                }
+                return force;
+            })(),
+            _parseSVGOrigin = function(e, local, decoratee, absolute, smoothOrigin, skipRecord) {
+                var tm = e._gsTransform,
+                    m = _getMatrix(e, true),
+                    v, x, y, xOrigin, yOrigin, a, b, c, d, tx, ty, determinant, xOriginOld, yOriginOld;
+                if (tm) {
+                    xOriginOld = tm.xOrigin; //record the original values before we alter them.
+                    yOriginOld = tm.yOrigin;
+                }
+                if (!absolute || (v = absolute.split(" ")).length < 2) {
+                    b = e.getBBox();
+                    local = _parsePosition(local).split(" ");
+                    v = [(local[0].indexOf("%") !== -1 ? parseFloat(local[0]) / 100 * b.width : parseFloat(local[0])) + b.x,
+                        (local[1].indexOf("%") !== -1 ? parseFloat(local[1]) / 100 * b.height : parseFloat(local[1])) + b.y];
+                }
+                decoratee.xOrigin = xOrigin = parseFloat(v[0]);
+                decoratee.yOrigin = yOrigin = parseFloat(v[1]);
+                if (absolute && m !== _identity2DMatrix) { //if svgOrigin is being set, we must invert the matrix and determine where the absolute point is, factoring in the current transforms. Otherwise, the svgOrigin would be based on the element's non-transformed position on the canvas.
+                    a = m[0];
+                    b = m[1];
+                    c = m[2];
+                    d = m[3];
+                    tx = m[4];
+                    ty = m[5];
+                    determinant = (a * d - b * c);
+                    x = xOrigin * (d / determinant) + yOrigin * (-c / determinant) + ((c * ty - d * tx) / determinant);
+                    y = xOrigin * (-b / determinant) + yOrigin * (a / determinant) - ((a * ty - b * tx) / determinant);
+                    xOrigin = decoratee.xOrigin = v[0] = x;
+                    yOrigin = decoratee.yOrigin = v[1] = y;
+                }
+                if (tm) { //avoid jump when transformOrigin is changed - adjust the x/y values accordingly
+                    if (skipRecord) {
+                        decoratee.xOffset = tm.xOffset;
+                        decoratee.yOffset = tm.yOffset;
+                        tm = decoratee;
+                    }
+                    if (smoothOrigin || (smoothOrigin !== false && CSSPlugin.defaultSmoothOrigin !== false)) {
+                        x = xOrigin - xOriginOld;
+                        y = yOrigin - yOriginOld;
+                        //originally, we simply adjusted the x and y values, but that would cause problems if, for example, you created a rotational tween part-way through an x/y tween. Managing the offset in a separate variable gives us ultimate flexibility.
+                        //tm.x -= x - (x * m[0] + y * m[2]);
+                        //tm.y -= y - (x * m[1] + y * m[3]);
+                        tm.xOffset += (x * m[0] + y * m[2]) - x;
+                        tm.yOffset += (x * m[1] + y * m[3]) - y;
+                    } else {
+                        tm.xOffset = tm.yOffset = 0;
+                    }
+                }
+                if (!skipRecord) {
+                    e.setAttribute("data-svg-origin", v.join(" "));
+                }
+            },
+            _canGetBBox = function(e) {
+                try {
+                    return e.getBBox(); //Firefox throws errors if you try calling getBBox() on an SVG element that's not rendered (like in a <symbol> or <defs>). https://bugzilla.mozilla.org/show_bug.cgi?id=612118
+                } catch (e) {}
+            },
+            _isSVG = function(e) { //reports if the element is an SVG on which getBBox() actually works
+                return !!(_SVGElement && e.getBBox && e.getCTM && _canGetBBox(e) && (!e.parentNode || (e.parentNode.getBBox && e.parentNode.getCTM)));
+            },
+            _identity2DMatrix = [1,0,0,1,0,0],
+            _getMatrix = function(e, force2D) {
+                var tm = e._gsTransform || new Transform(),
+                    rnd = 100000,
+                    style = e.style,
+                    isDefault, s, m, n, dec, none;
+                if (_transformProp) {
+                    s = _getStyle(e, _transformPropCSS, null, true);
+                } else if (e.currentStyle) {
+                    //for older versions of IE, we need to interpret the filter portion that is in the format: progid:DXImageTransform.Microsoft.Matrix(M11=6.123233995736766e-17, M12=-1, M21=1, M22=6.123233995736766e-17, sizingMethod='auto expand') Notice that we need to swap b and c compared to a normal matrix.
+                    s = e.currentStyle.filter.match(_ieGetMatrixExp);
+                    s = (s && s.length === 4) ? [s[0].substr(4), Number(s[2].substr(4)), Number(s[1].substr(4)), s[3].substr(4), (tm.x || 0), (tm.y || 0)].join(",") : "";
+                }
+                isDefault = (!s || s === "none" || s === "matrix(1, 0, 0, 1, 0, 0)");
+                if (isDefault && _transformProp && ((none = (_getComputedStyle(e).display === "none")) || !e.parentNode)) {
+                    if (none) { //browsers don't report transforms accurately unless the element is in the DOM and has a display value that's not "none".
+                        n = style.display;
+                        style.display = "block";
+                    }
+                    if (!e.parentNode) {
+                        dec = 1; //flag
+                        _docElement.appendChild(e);
+                    }
+                    s = _getStyle(e, _transformPropCSS, null, true);
+                    isDefault = (!s || s === "none" || s === "matrix(1, 0, 0, 1, 0, 0)");
+                    if (n) {
+                        style.display = n;
+                    } else if (none) {
+                        _removeProp(style, "display");
+                    }
+                    if (dec) {
+                        _docElement.removeChild(e);
+                    }
+                }
+                if (tm.svg || (e.getBBox && _isSVG(e))) {
+                    if (isDefault && (style[_transformProp] + "").indexOf("matrix") !== -1) { //some browsers (like Chrome 40) don't correctly report transforms that are applied inline on an SVG element (they don't get included in the computed style), so we double-check here and accept matrix values
+                        s = style[_transformProp];
+                        isDefault = 0;
+                    }
+                    m = e.getAttribute("transform");
+                    if (isDefault && m) {
+                        if (m.indexOf("matrix") !== -1) { //just in case there's a "transform" value specified as an attribute instead of CSS style. Accept either a matrix() or simple translate() value though.
+                            s = m;
+                            isDefault = 0;
+                        } else if (m.indexOf("translate") !== -1) {
+                            s = "matrix(1,0,0,1," + m.match(/(?:\-|\b)[\d\-\.e]+\b/gi).join(",") + ")";
+                            isDefault = 0;
+                        }
+                    }
+                }
+                if (isDefault) {
+                    return _identity2DMatrix;
+                }
+                //split the matrix values out into an array (m for matrix)
+                m = (s || "").match(_numExp) || [];
+                i = m.length;
+                while (--i > -1) {
+                    n = Number(m[i]);
+                    m[i] = (dec = n - (n |= 0)) ? ((dec * rnd + (dec < 0 ? -0.5 : 0.5)) | 0) / rnd + n : n; //convert strings to Numbers and round to 5 decimal places to avoid issues with tiny numbers. Roughly 20x faster than Number.toFixed(). We also must make sure to round before dividing so that values like 0.9999999999 become 1 to avoid glitches in browser rendering and interpretation of flipped/rotated 3D matrices. And don't just multiply the number by rnd, floor it, and then divide by rnd because the bitwise operations max out at a 32-bit signed integer, thus it could get clipped at a relatively low value (like 22,000.00000 for example).
+                }
+                return (force2D && m.length > 6) ? [m[0], m[1], m[4], m[5], m[12], m[13]] : m;
+            },
+
+            /**
+             * Parses the transform values for an element, returning an object with x, y, z, scaleX, scaleY, scaleZ, rotation, rotationX, rotationY, skewX, and skewY properties. Note: by default (for performance reasons), all skewing is combined into skewX and rotation but skewY still has a place in the transform object so that we can record how much of the skew is attributed to skewX vs skewY. Remember, a skewY of 10 looks the same as a rotation of 10 and skewX of -10.
+             * @param {!Object} t target element
+             * @param {Object=} cs computed style object (optional)
+             * @param {boolean=} rec if true, the transform values will be recorded to the target element's _gsTransform object, like target._gsTransform = {x:0, y:0, z:0, scaleX:1...}
+             * @param {boolean=} parse if true, we'll ignore any _gsTransform values that already exist on the element, and force a reparsing of the css (calculated style)
+             * @return {object} object containing all of the transform properties/values like {x:0, y:0, z:0, scaleX:1...}
+             */
+            _getTransform = _internals.getTransform = function(t, cs, rec, parse) {
+                if (t._gsTransform && rec && !parse) {
+                    return t._gsTransform; //if the element already has a _gsTransform, use that. Note: some browsers don't accurately return the calculated style for the transform (particularly for SVG), so it's almost always safest to just use the values we've already applied rather than re-parsing things.
+                }
+                var tm = rec ? t._gsTransform || new Transform() : new Transform(),
+                    invX = (tm.scaleX < 0), //in order to interpret things properly, we need to know if the user applied a negative scaleX previously so that we can adjust the rotation and skewX accordingly. Otherwise, if we always interpret a flipped matrix as affecting scaleY and the user only wants to tween the scaleX on multiple sequential tweens, it would keep the negative scaleY without that being the user's intent.
+                    min = 0.00002,
+                    rnd = 100000,
+                    zOrigin = _supports3D ? parseFloat(_getStyle(t, _transformOriginProp, cs, false, "0 0 0").split(" ")[2]) || tm.zOrigin  || 0 : 0,
+                    defaultTransformPerspective = parseFloat(CSSPlugin.defaultTransformPerspective) || 0,
+                    m, i, scaleX, scaleY, rotation, skewX;
+
+                tm.svg = !!(t.getBBox && _isSVG(t));
+                if (tm.svg) {
+                    _parseSVGOrigin(t, _getStyle(t, _transformOriginProp, cs, false, "50% 50%") + "", tm, t.getAttribute("data-svg-origin"));
+                    _useSVGTransformAttr = CSSPlugin.useSVGTransformAttr || _forceSVGTransformAttr;
+                }
+                m = _getMatrix(t);
+                if (m !== _identity2DMatrix) {
+
+                    if (m.length === 16) {
+                        //we'll only look at these position-related 6 variables first because if x/y/z all match, it's relatively safe to assume we don't need to re-parse everything which risks losing important rotational information (like rotationX:180 plus rotationY:180 would look the same as rotation:180 - there's no way to know for sure which direction was taken based solely on the matrix3d() values)
+                        var a11 = m[0], a21 = m[1], a31 = m[2], a41 = m[3],
+                            a12 = m[4], a22 = m[5], a32 = m[6], a42 = m[7],
+                            a13 = m[8], a23 = m[9], a33 = m[10],
+                            a14 = m[12], a24 = m[13], a34 = m[14],
+                            a43 = m[11],
+                            angle = Math.atan2(a32, a33),
+                            t1, t2, t3, t4, cos, sin;
+
+                        //we manually compensate for non-zero z component of transformOrigin to work around bugs in Safari
+                        if (tm.zOrigin) {
+                            a34 = -tm.zOrigin;
+                            a14 = a13*a34-m[12];
+                            a24 = a23*a34-m[13];
+                            a34 = a33*a34+tm.zOrigin-m[14];
+                        }
+                        tm.rotationX = angle * _RAD2DEG;
+                        //rotationX
+                        if (angle) {
+                            cos = Math.cos(-angle);
+                            sin = Math.sin(-angle);
+                            t1 = a12*cos+a13*sin;
+                            t2 = a22*cos+a23*sin;
+                            t3 = a32*cos+a33*sin;
+                            a13 = a12*-sin+a13*cos;
+                            a23 = a22*-sin+a23*cos;
+                            a33 = a32*-sin+a33*cos;
+                            a43 = a42*-sin+a43*cos;
+                            a12 = t1;
+                            a22 = t2;
+                            a32 = t3;
+                        }
+                        //rotationY
+                        angle = Math.atan2(-a31, a33);
+                        tm.rotationY = angle * _RAD2DEG;
+                        if (angle) {
+                            cos = Math.cos(-angle);
+                            sin = Math.sin(-angle);
+                            t1 = a11*cos-a13*sin;
+                            t2 = a21*cos-a23*sin;
+                            t3 = a31*cos-a33*sin;
+                            a23 = a21*sin+a23*cos;
+                            a33 = a31*sin+a33*cos;
+                            a43 = a41*sin+a43*cos;
+                            a11 = t1;
+                            a21 = t2;
+                            a31 = t3;
+                        }
+                        //rotationZ
+                        angle = Math.atan2(a21, a11);
+                        tm.rotation = angle * _RAD2DEG;
+                        if (angle) {
+                            cos = Math.cos(-angle);
+                            sin = Math.sin(-angle);
+                            a11 = a11*cos+a12*sin;
+                            t2 = a21*cos+a22*sin;
+                            a22 = a21*-sin+a22*cos;
+                            a32 = a31*-sin+a32*cos;
+                            a21 = t2;
+                        }
+
+                        if (tm.rotationX && Math.abs(tm.rotationX) + Math.abs(tm.rotation) > 359.9) { //when rotationY is set, it will often be parsed as 180 degrees different than it should be, and rotationX and rotation both being 180 (it looks the same), so we adjust for that here.
+                            tm.rotationX = tm.rotation = 0;
+                            tm.rotationY = 180 - tm.rotationY;
+                        }
+
+                        tm.scaleX = ((Math.sqrt(a11 * a11 + a21 * a21) * rnd + 0.5) | 0) / rnd;
+                        tm.scaleY = ((Math.sqrt(a22 * a22 + a23 * a23) * rnd + 0.5) | 0) / rnd;
+                        tm.scaleZ = ((Math.sqrt(a32 * a32 + a33 * a33) * rnd + 0.5) | 0) / rnd;
+                        if (tm.rotationX || tm.rotationY) {
+                            tm.skewX = 0;
+                        } else {
+                            tm.skewX = (a12 || a22) ? Math.atan2(a12, a22) * _RAD2DEG + tm.rotation : tm.skewX || 0;
+                            if (Math.abs(tm.skewX) > 90 && Math.abs(tm.skewX) < 270) {
+                                if (invX) {
+                                    tm.scaleX *= -1;
+                                    tm.skewX += (tm.rotation <= 0) ? 180 : -180;
+                                    tm.rotation += (tm.rotation <= 0) ? 180 : -180;
+                                } else {
+                                    tm.scaleY *= -1;
+                                    tm.skewX += (tm.skewX <= 0) ? 180 : -180;
+                                }
+                            }
+                        }
+                        tm.perspective = a43 ? 1 / ((a43 < 0) ? -a43 : a43) : 0;
+                        tm.x = a14;
+                        tm.y = a24;
+                        tm.z = a34;
+                        if (tm.svg) {
+                            tm.x -= tm.xOrigin - (tm.xOrigin * a11 - tm.yOrigin * a12);
+                            tm.y -= tm.yOrigin - (tm.yOrigin * a21 - tm.xOrigin * a22);
+                        }
+
+                    } else if ((!_supports3D || parse || !m.length || tm.x !== m[4] || tm.y !== m[5] || (!tm.rotationX && !tm.rotationY))) { //sometimes a 6-element matrix is returned even when we performed 3D transforms, like if rotationX and rotationY are 180. In cases like this, we still need to honor the 3D transforms. If we just rely on the 2D info, it could affect how the data is interpreted, like scaleY might get set to -1 or rotation could get offset by 180 degrees. For example, do a TweenLite.to(element, 1, {css:{rotationX:180, rotationY:180}}) and then later, TweenLite.to(element, 1, {css:{rotationX:0}}) and without this conditional logic in place, it'd jump to a state of being unrotated when the 2nd tween starts. Then again, we need to honor the fact that the user COULD alter the transforms outside of CSSPlugin, like by manually applying new css, so we try to sense that by looking at x and y because if those changed, we know the changes were made outside CSSPlugin and we force a reinterpretation of the matrix values. Also, in Webkit browsers, if the element's "display" is "none", its calculated style value will always return empty, so if we've already recorded the values in the _gsTransform object, we'll just rely on those.
+                        var k = (m.length >= 6),
+                            a = k ? m[0] : 1,
+                            b = m[1] || 0,
+                            c = m[2] || 0,
+                            d = k ? m[3] : 1;
+                        tm.x = m[4] || 0;
+                        tm.y = m[5] || 0;
+                        scaleX = Math.sqrt(a * a + b * b);
+                        scaleY = Math.sqrt(d * d + c * c);
+                        rotation = (a || b) ? Math.atan2(b, a) * _RAD2DEG : tm.rotation || 0; //note: if scaleX is 0, we cannot accurately measure rotation. Same for skewX with a scaleY of 0. Therefore, we default to the previously recorded value (or zero if that doesn't exist).
+                        skewX = (c || d) ? Math.atan2(c, d) * _RAD2DEG + rotation : tm.skewX || 0;
+                        if (Math.abs(skewX) > 90 && Math.abs(skewX) < 270) {
+                            if (invX) {
+                                scaleX *= -1;
+                                skewX += (rotation <= 0) ? 180 : -180;
+                                rotation += (rotation <= 0) ? 180 : -180;
+                            } else {
+                                scaleY *= -1;
+                                skewX += (skewX <= 0) ? 180 : -180;
+                            }
+                        }
+                        tm.scaleX = scaleX;
+                        tm.scaleY = scaleY;
+                        tm.rotation = rotation;
+                        tm.skewX = skewX;
+                        if (_supports3D) {
+                            tm.rotationX = tm.rotationY = tm.z = 0;
+                            tm.perspective = defaultTransformPerspective;
+                            tm.scaleZ = 1;
+                        }
+                        if (tm.svg) {
+                            tm.x -= tm.xOrigin - (tm.xOrigin * a + tm.yOrigin * c);
+                            tm.y -= tm.yOrigin - (tm.xOrigin * b + tm.yOrigin * d);
+                        }
+                    }
+                    tm.zOrigin = zOrigin;
+                    //some browsers have a hard time with very small values like 2.4492935982947064e-16 (notice the "e-" towards the end) and would render the object slightly off. So we round to 0 in these cases. The conditional logic here is faster than calling Math.abs(). Also, browsers tend to render a SLIGHTLY rotated object in a fuzzy way, so we need to snap to exactly 0 when appropriate.
+                    for (i in tm) {
+                        if (tm[i] < min) if (tm[i] > -min) {
+                            tm[i] = 0;
+                        }
+                    }
+                }
+                //DEBUG: _log("parsed rotation of " + t.getAttribute("id")+": "+(tm.rotationX)+", "+(tm.rotationY)+", "+(tm.rotation)+", scale: "+tm.scaleX+", "+tm.scaleY+", "+tm.scaleZ+", position: "+tm.x+", "+tm.y+", "+tm.z+", perspective: "+tm.perspective+ ", origin: "+ tm.xOrigin+ ","+ tm.yOrigin);
+                if (rec) {
+                    t._gsTransform = tm; //record to the object's _gsTransform which we use so that tweens can control individual properties independently (we need all the properties to accurately recompose the matrix in the setRatio() method)
+                    if (tm.svg) { //if we're supposed to apply transforms to the SVG element's "transform" attribute, make sure there aren't any CSS transforms applied or they'll override the attribute ones. Also clear the transform attribute if we're using CSS, just to be clean.
+                        if (_useSVGTransformAttr && t.style[_transformProp]) {
+                            TweenLite.delayedCall(0.001, function(){ //if we apply this right away (before anything has rendered), we risk there being no transforms for a brief moment and it also interferes with adjusting the transformOrigin in a tween with immediateRender:true (it'd try reading the matrix and it wouldn't have the appropriate data in place because we just removed it).
+                                _removeProp(t.style, _transformProp);
+                            });
+                        } else if (!_useSVGTransformAttr && t.getAttribute("transform")) {
+                            TweenLite.delayedCall(0.001, function(){
+                                t.removeAttribute("transform");
+                            });
+                        }
+                    }
+                }
+                return tm;
+            },
+
+            //for setting 2D transforms in IE6, IE7, and IE8 (must use a "filter" to emulate the behavior of modern day browser transforms)
+            _setIETransformRatio = function(v) {
+                var t = this.data, //refers to the element's _gsTransform object
+                    ang = -t.rotation * _DEG2RAD,
+                    skew = ang + t.skewX * _DEG2RAD,
+                    rnd = 100000,
+                    a = ((Math.cos(ang) * t.scaleX * rnd) | 0) / rnd,
+                    b = ((Math.sin(ang) * t.scaleX * rnd) | 0) / rnd,
+                    c = ((Math.sin(skew) * -t.scaleY * rnd) | 0) / rnd,
+                    d = ((Math.cos(skew) * t.scaleY * rnd) | 0) / rnd,
+                    style = this.t.style,
+                    cs = this.t.currentStyle,
+                    filters, val;
+                if (!cs) {
+                    return;
+                }
+                val = b; //just for swapping the variables an inverting them (reused "val" to avoid creating another variable in memory). IE's filter matrix uses a non-standard matrix configuration (angle goes the opposite way, and b and c are reversed and inverted)
+                b = -c;
+                c = -val;
+                filters = cs.filter;
+                style.filter = ""; //remove filters so that we can accurately measure offsetWidth/offsetHeight
+                var w = this.t.offsetWidth,
+                    h = this.t.offsetHeight,
+                    clip = (cs.position !== "absolute"),
+                    m = "progid:DXImageTransform.Microsoft.Matrix(M11=" + a + ", M12=" + b + ", M21=" + c + ", M22=" + d,
+                    ox = t.x + (w * t.xPercent / 100),
+                    oy = t.y + (h * t.yPercent / 100),
+                    dx, dy;
+
+                //if transformOrigin is being used, adjust the offset x and y
+                if (t.ox != null) {
+                    dx = ((t.oxp) ? w * t.ox * 0.01 : t.ox) - w / 2;
+                    dy = ((t.oyp) ? h * t.oy * 0.01 : t.oy) - h / 2;
+                    ox += dx - (dx * a + dy * b);
+                    oy += dy - (dx * c + dy * d);
+                }
+
+                if (!clip) {
+                    m += ", sizingMethod='auto expand')";
+                } else {
+                    dx = (w / 2);
+                    dy = (h / 2);
+                    //translate to ensure that transformations occur around the correct origin (default is center).
+                    m += ", Dx=" + (dx - (dx * a + dy * b) + ox) + ", Dy=" + (dy - (dx * c + dy * d) + oy) + ")";
+                }
+                if (filters.indexOf("DXImageTransform.Microsoft.Matrix(") !== -1) {
+                    style.filter = filters.replace(_ieSetMatrixExp, m);
+                } else {
+                    style.filter = m + " " + filters; //we must always put the transform/matrix FIRST (before alpha(opacity=xx)) to avoid an IE bug that slices part of the object when rotation is applied with alpha.
+                }
+
+                //at the end or beginning of the tween, if the matrix is normal (1, 0, 0, 1) and opacity is 100 (or doesn't exist), remove the filter to improve browser performance.
+                if (v === 0 || v === 1) if (a === 1) if (b === 0) if (c === 0) if (d === 1) if (!clip || m.indexOf("Dx=0, Dy=0") !== -1) if (!_opacityExp.test(filters) || parseFloat(RegExp.$1) === 100) if (filters.indexOf("gradient(" && filters.indexOf("Alpha")) === -1) {
+                    style.removeAttribute("filter");
+                }
+
+                //we must set the margins AFTER applying the filter in order to avoid some bugs in IE8 that could (in rare scenarios) cause them to be ignored intermittently (vibration).
+                if (!clip) {
+                    var mult = (_ieVers < 8) ? 1 : -1, //in Internet Explorer 7 and before, the box model is broken, causing the browser to treat the width/height of the actual rotated filtered image as the width/height of the box itself, but Microsoft corrected that in IE8. We must use a negative offset in IE8 on the right/bottom
+                        marg, prop, dif;
+                    dx = t.ieOffsetX || 0;
+                    dy = t.ieOffsetY || 0;
+                    t.ieOffsetX = Math.round((w - ((a < 0 ? -a : a) * w + (b < 0 ? -b : b) * h)) / 2 + ox);
+                    t.ieOffsetY = Math.round((h - ((d < 0 ? -d : d) * h + (c < 0 ? -c : c) * w)) / 2 + oy);
+                    for (i = 0; i < 4; i++) {
+                        prop = _margins[i];
+                        marg = cs[prop];
+                        //we need to get the current margin in case it is being tweened separately (we want to respect that tween's changes)
+                        val = (marg.indexOf("px") !== -1) ? parseFloat(marg) : _convertToPixels(this.t, prop, parseFloat(marg), marg.replace(_suffixExp, "")) || 0;
+                        if (val !== t[prop]) {
+                            dif = (i < 2) ? -t.ieOffsetX : -t.ieOffsetY; //if another tween is controlling a margin, we cannot only apply the difference in the ieOffsets, so we essentially zero-out the dx and dy here in that case. We record the margin(s) later so that we can keep comparing them, making this code very flexible.
+                        } else {
+                            dif = (i < 2) ? dx - t.ieOffsetX : dy - t.ieOffsetY;
+                        }
+                        style[prop] = (t[prop] = Math.round( val - dif * ((i === 0 || i === 2) ? 1 : mult) )) + "px";
+                    }
+                }
+            },
+
+            /* translates a super small decimal to a string WITHOUT scientific notation
+             _safeDecimal = function(n) {
+             var s = (n < 0 ? -n : n) + "",
+             a = s.split("e-");
+             return (n < 0 ? "-0." : "0.") + new Array(parseInt(a[1], 10) || 0).join("0") + a[0].split(".").join("");
+             },
+             */
+
+            _setTransformRatio = _internals.set3DTransformRatio = _internals.setTransformRatio = function(v) {
+                var t = this.data, //refers to the element's _gsTransform object
+                    style = this.t.style,
+                    angle = t.rotation,
+                    rotationX = t.rotationX,
+                    rotationY = t.rotationY,
+                    sx = t.scaleX,
+                    sy = t.scaleY,
+                    sz = t.scaleZ,
+                    x = t.x,
+                    y = t.y,
+                    z = t.z,
+                    isSVG = t.svg,
+                    perspective = t.perspective,
+                    force3D = t.force3D,
+                    a11, a12, a13, a21, a22, a23, a31, a32, a33, a41, a42, a43,
+                    zOrigin, min, cos, sin, t1, t2, transform, comma, zero, skew, rnd;
+                //check to see if we should render as 2D (and SVGs must use 2D when _useSVGTransformAttr is true)
+                if (((((v === 1 || v === 0) && force3D === "auto" && (this.tween._totalTime === this.tween._totalDuration || !this.tween._totalTime)) || !force3D) && !z && !perspective && !rotationY && !rotationX && sz === 1) || (_useSVGTransformAttr && isSVG) || !_supports3D) { //on the final render (which could be 0 for a from tween), if there are no 3D aspects, render in 2D to free up memory and improve performance especially on mobile devices. Check the tween's totalTime/totalDuration too in order to make sure it doesn't happen between repeats if it's a repeating tween.
+
+                    //2D
+                    if (angle || t.skewX || isSVG) {
+                        angle *= _DEG2RAD;
+                        skew = t.skewX * _DEG2RAD;
+                        rnd = 100000;
+                        a11 = Math.cos(angle) * sx;
+                        a21 = Math.sin(angle) * sx;
+                        a12 = Math.sin(angle - skew) * -sy;
+                        a22 = Math.cos(angle - skew) * sy;
+                        if (skew && t.skewType === "simple") { //by default, we compensate skewing on the other axis to make it look more natural, but you can set the skewType to "simple" to use the uncompensated skewing that CSS does
+                            t1 = Math.tan(skew - t.skewY * _DEG2RAD);
+                            t1 = Math.sqrt(1 + t1 * t1);
+                            a12 *= t1;
+                            a22 *= t1;
+                            if (t.skewY) {
+                                t1 = Math.tan(t.skewY * _DEG2RAD);
+                                t1 = Math.sqrt(1 + t1 * t1);
+                                a11 *= t1;
+                                a21 *= t1;
+                            }
+                        }
+                        if (isSVG) {
+                            x += t.xOrigin - (t.xOrigin * a11 + t.yOrigin * a12) + t.xOffset;
+                            y += t.yOrigin - (t.xOrigin * a21 + t.yOrigin * a22) + t.yOffset;
+                            if (_useSVGTransformAttr && (t.xPercent || t.yPercent)) { //The SVG spec doesn't support percentage-based translation in the "transform" attribute, so we merge it into the matrix to simulate it.
+                                min = this.t.getBBox();
+                                x += t.xPercent * 0.01 * min.width;
+                                y += t.yPercent * 0.01 * min.height;
+                            }
+                            min = 0.000001;
+                            if (x < min) if (x > -min) {
+                                x = 0;
+                            }
+                            if (y < min) if (y > -min) {
+                                y = 0;
+                            }
+                        }
+                        transform = (((a11 * rnd) | 0) / rnd) + "," + (((a21 * rnd) | 0) / rnd) + "," + (((a12 * rnd) | 0) / rnd) + "," + (((a22 * rnd) | 0) / rnd) + "," + x + "," + y + ")";
+                        if (isSVG && _useSVGTransformAttr) {
+                            this.t.setAttribute("transform", "matrix(" + transform);
+                        } else {
+                            //some browsers have a hard time with very small values like 2.4492935982947064e-16 (notice the "e-" towards the end) and would render the object slightly off. So we round to 5 decimal places.
+                            style[_transformProp] = ((t.xPercent || t.yPercent) ? "translate(" + t.xPercent + "%," + t.yPercent + "%) matrix(" : "matrix(") + transform;
+                        }
+                    } else {
+                        style[_transformProp] = ((t.xPercent || t.yPercent) ? "translate(" + t.xPercent + "%," + t.yPercent + "%) matrix(" : "matrix(") + sx + ",0,0," + sy + "," + x + "," + y + ")";
+                    }
+                    return;
+
+                }
+                if (_isFirefox) { //Firefox has a bug (at least in v25) that causes it to render the transparent part of 32-bit PNG images as black when displayed inside an iframe and the 3D scale is very small and doesn't change sufficiently enough between renders (like if you use a Power4.easeInOut to scale from 0 to 1 where the beginning values only change a tiny amount to begin the tween before accelerating). In this case, we force the scale to be 0.00002 instead which is visually the same but works around the Firefox issue.
+                    min = 0.0001;
+                    if (sx < min && sx > -min) {
+                        sx = sz = 0.00002;
+                    }
+                    if (sy < min && sy > -min) {
+                        sy = sz = 0.00002;
+                    }
+                    if (perspective && !t.z && !t.rotationX && !t.rotationY) { //Firefox has a bug that causes elements to have an odd super-thin, broken/dotted black border on elements that have a perspective set but aren't utilizing 3D space (no rotationX, rotationY, or z).
+                        perspective = 0;
+                    }
+                }
+                if (angle || t.skewX) {
+                    angle *= _DEG2RAD;
+                    cos = a11 = Math.cos(angle);
+                    sin = a21 = Math.sin(angle);
+                    if (t.skewX) {
+                        angle -= t.skewX * _DEG2RAD;
+                        cos = Math.cos(angle);
+                        sin = Math.sin(angle);
+                        if (t.skewType === "simple") { //by default, we compensate skewing on the other axis to make it look more natural, but you can set the skewType to "simple" to use the uncompensated skewing that CSS does
+                            t1 = Math.tan((t.skewX - t.skewY) * _DEG2RAD);
+                            t1 = Math.sqrt(1 + t1 * t1);
+                            cos *= t1;
+                            sin *= t1;
+                            if (t.skewY) {
+                                t1 = Math.tan(t.skewY * _DEG2RAD);
+                                t1 = Math.sqrt(1 + t1 * t1);
+                                a11 *= t1;
+                                a21 *= t1;
+                            }
+                        }
+                    }
+                    a12 = -sin;
+                    a22 = cos;
+
+                } else if (!rotationY && !rotationX && sz === 1 && !perspective && !isSVG) { //if we're only translating and/or 2D scaling, this is faster...
+                    style[_transformProp] = ((t.xPercent || t.yPercent) ? "translate(" + t.xPercent + "%," + t.yPercent + "%) translate3d(" : "translate3d(") + x + "px," + y + "px," + z +"px)" + ((sx !== 1 || sy !== 1) ? " scale(" + sx + "," + sy + ")" : "");
+                    return;
+                } else {
+                    a11 = a22 = 1;
+                    a12 = a21 = 0;
+                }
+                // KEY  INDEX   AFFECTS
+                // a11  0       rotation, rotationY, scaleX
+                // a21  1       rotation, rotationY, scaleX
+                // a31  2       rotationY, scaleX
+                // a41  3       rotationY, scaleX
+                // a12  4       rotation, skewX, rotationX, scaleY
+                // a22  5       rotation, skewX, rotationX, scaleY
+                // a32  6       rotationX, scaleY
+                // a42  7       rotationX, scaleY
+                // a13  8       rotationY, rotationX, scaleZ
+                // a23  9       rotationY, rotationX, scaleZ
+                // a33  10      rotationY, rotationX, scaleZ
+                // a43  11      rotationY, rotationX, perspective, scaleZ
+                // a14  12      x, zOrigin, svgOrigin
+                // a24  13      y, zOrigin, svgOrigin
+                // a34  14      z, zOrigin
+                // a44  15
+                // rotation: Math.atan2(a21, a11)
+                // rotationY: Math.atan2(a13, a33) (or Math.atan2(a13, a11))
+                // rotationX: Math.atan2(a32, a33)
+                a33 = 1;
+                a13 = a23 = a31 = a32 = a41 = a42 = 0;
+                a43 = (perspective) ? -1 / perspective : 0;
+                zOrigin = t.zOrigin;
+                min = 0.000001; //threshold below which browsers use scientific notation which won't work.
+                comma = ",";
+                zero = "0";
+                angle = rotationY * _DEG2RAD;
+                if (angle) {
+                    cos = Math.cos(angle);
+                    sin = Math.sin(angle);
+                    a31 = -sin;
+                    a41 = a43*-sin;
+                    a13 = a11*sin;
+                    a23 = a21*sin;
+                    a33 = cos;
+                    a43 *= cos;
+                    a11 *= cos;
+                    a21 *= cos;
+                }
+                angle = rotationX * _DEG2RAD;
+                if (angle) {
+                    cos = Math.cos(angle);
+                    sin = Math.sin(angle);
+                    t1 = a12*cos+a13*sin;
+                    t2 = a22*cos+a23*sin;
+                    a32 = a33*sin;
+                    a42 = a43*sin;
+                    a13 = a12*-sin+a13*cos;
+                    a23 = a22*-sin+a23*cos;
+                    a33 = a33*cos;
+                    a43 = a43*cos;
+                    a12 = t1;
+                    a22 = t2;
+                }
+                if (sz !== 1) {
+                    a13*=sz;
+                    a23*=sz;
+                    a33*=sz;
+                    a43*=sz;
+                }
+                if (sy !== 1) {
+                    a12*=sy;
+                    a22*=sy;
+                    a32*=sy;
+                    a42*=sy;
+                }
+                if (sx !== 1) {
+                    a11*=sx;
+                    a21*=sx;
+                    a31*=sx;
+                    a41*=sx;
+                }
+
+                if (zOrigin || isSVG) {
+                    if (zOrigin) {
+                        x += a13*-zOrigin;
+                        y += a23*-zOrigin;
+                        z += a33*-zOrigin+zOrigin;
+                    }
+                    if (isSVG) { //due to bugs in some browsers, we need to manage the transform-origin of SVG manually
+                        x += t.xOrigin - (t.xOrigin * a11 + t.yOrigin * a12) + t.xOffset;
+                        y += t.yOrigin - (t.xOrigin * a21 + t.yOrigin * a22) + t.yOffset;
+                    }
+                    if (x < min && x > -min) {
+                        x = zero;
+                    }
+                    if (y < min && y > -min) {
+                        y = zero;
+                    }
+                    if (z < min && z > -min) {
+                        z = 0; //don't use string because we calculate perspective later and need the number.
+                    }
+                }
+
+                //optimized way of concatenating all the values into a string. If we do it all in one shot, it's slower because of the way browsers have to create temp strings and the way it affects memory. If we do it piece-by-piece with +=, it's a bit slower too. We found that doing it in these sized chunks works best overall:
+                transform = ((t.xPercent || t.yPercent) ? "translate(" + t.xPercent + "%," + t.yPercent + "%) matrix3d(" : "matrix3d(");
+                transform += ((a11 < min && a11 > -min) ? zero : a11) + comma + ((a21 < min && a21 > -min) ? zero : a21) + comma + ((a31 < min && a31 > -min) ? zero : a31);
+                transform += comma + ((a41 < min && a41 > -min) ? zero : a41) + comma + ((a12 < min && a12 > -min) ? zero : a12) + comma + ((a22 < min && a22 > -min) ? zero : a22);
+                if (rotationX || rotationY || sz !== 1) { //performance optimization (often there's no rotationX or rotationY, so we can skip these calculations)
+                    transform += comma + ((a32 < min && a32 > -min) ? zero : a32) + comma + ((a42 < min && a42 > -min) ? zero : a42) + comma + ((a13 < min && a13 > -min) ? zero : a13);
+                    transform += comma + ((a23 < min && a23 > -min) ? zero : a23) + comma + ((a33 < min && a33 > -min) ? zero : a33) + comma + ((a43 < min && a43 > -min) ? zero : a43) + comma;
+                } else {
+                    transform += ",0,0,0,0,1,0,";
+                }
+                transform += x + comma + y + comma + z + comma + (perspective ? (1 + (-z / perspective)) : 1) + ")";
+
+                style[_transformProp] = transform;
+            };
+
+        p = Transform.prototype;
+        p.x = p.y = p.z = p.skewX = p.skewY = p.rotation = p.rotationX = p.rotationY = p.zOrigin = p.xPercent = p.yPercent = p.xOffset = p.yOffset = 0;
+        p.scaleX = p.scaleY = p.scaleZ = 1;
+
+        _registerComplexSpecialProp("transform,scale,scaleX,scaleY,scaleZ,x,y,z,rotation,rotationX,rotationY,rotationZ,skewX,skewY,shortRotation,shortRotationX,shortRotationY,shortRotationZ,transformOrigin,svgOrigin,transformPerspective,directionalRotation,parseTransform,force3D,skewType,xPercent,yPercent,smoothOrigin", {parser:function(t, e, parsingProp, cssp, pt, plugin, vars) {
+            if (cssp._lastParsedTransform === vars) { return pt; } //only need to parse the transform once, and only if the browser supports it.
+            cssp._lastParsedTransform = vars;
+            var swapFunc;
+            if (typeof(vars[parsingProp]) === "function") { //whatever property triggers the initial parsing might be a function-based value in which case it already got called in parse(), thus we don't want to call it again in here. The most efficient way to avoid this is to temporarily swap the value directly into the vars object, and then after we do all our parsing in this function, we'll swap it back again.
+                swapFunc = vars[parsingProp];
+                vars[parsingProp] = e;
+            }
+            var originalGSTransform = t._gsTransform,
+                style = t.style,
+                min = 0.000001,
+                i = _transformProps.length,
+                v = vars,
+                endRotations = {},
+                transformOriginString = "transformOrigin",
+                m1 = _getTransform(t, _cs, true, v.parseTransform),
+                orig = v.transform && ((typeof(v.transform) === "function") ? v.transform(_index, _target) : v.transform),
+                m2, copy, has3D, hasChange, dr, x, y, matrix, p;
+            cssp._transform = m1;
+            if (orig && typeof(orig) === "string" && _transformProp) { //for values like transform:"rotate(60deg) scale(0.5, 0.8)"
+                copy = _tempDiv.style; //don't use the original target because it might be SVG in which case some browsers don't report computed style correctly.
+                copy[_transformProp] = orig;
+                copy.display = "block"; //if display is "none", the browser often refuses to report the transform properties correctly.
+                copy.position = "absolute";
+                _doc.body.appendChild(_tempDiv);
+                m2 = _getTransform(_tempDiv, null, false);
+                if (m1.svg) { //if it's an SVG element, x/y part of the matrix will be affected by whatever we use as the origin and the offsets, so compensate here...
+                    x = m1.xOrigin;
+                    y = m1.yOrigin;
+                    m2.x -= m1.xOffset;
+                    m2.y -= m1.yOffset;
+                    if (v.transformOrigin || v.svgOrigin) { //if this tween is altering the origin, we must factor that in here. The actual work of recording the transformOrigin values and setting up the PropTween is done later (still inside this function) so we cannot leave the changes intact here - we only want to update the x/y accordingly.
+                        orig = {};
+                        _parseSVGOrigin(t, _parsePosition(v.transformOrigin), orig, v.svgOrigin, v.smoothOrigin, true);
+                        x = orig.xOrigin;
+                        y = orig.yOrigin;
+                        m2.x -= orig.xOffset - m1.xOffset;
+                        m2.y -= orig.yOffset - m1.yOffset;
+                    }
+                    if (x || y) {
+                        matrix = _getMatrix(_tempDiv, true);
+                        m2.x -= x - (x * matrix[0] + y * matrix[2]);
+                        m2.y -= y - (x * matrix[1] + y * matrix[3]);
+                    }
+                }
+                _doc.body.removeChild(_tempDiv);
+                if (!m2.perspective) {
+                    m2.perspective = m1.perspective; //tweening to no perspective gives very unintuitive results - just keep the same perspective in that case.
+                }
+                if (v.xPercent != null) {
+                    m2.xPercent = _parseVal(v.xPercent, m1.xPercent);
+                }
+                if (v.yPercent != null) {
+                    m2.yPercent = _parseVal(v.yPercent, m1.yPercent);
+                }
+            } else if (typeof(v) === "object") { //for values like scaleX, scaleY, rotation, x, y, skewX, and skewY or transform:{...} (object)
+                m2 = {scaleX:_parseVal((v.scaleX != null) ? v.scaleX : v.scale, m1.scaleX),
+                    scaleY:_parseVal((v.scaleY != null) ? v.scaleY : v.scale, m1.scaleY),
+                    scaleZ:_parseVal(v.scaleZ, m1.scaleZ),
+                    x:_parseVal(v.x, m1.x),
+                    y:_parseVal(v.y, m1.y),
+                    z:_parseVal(v.z, m1.z),
+                    xPercent:_parseVal(v.xPercent, m1.xPercent),
+                    yPercent:_parseVal(v.yPercent, m1.yPercent),
+                    perspective:_parseVal(v.transformPerspective, m1.perspective)};
+                dr = v.directionalRotation;
+                if (dr != null) {
+                    if (typeof(dr) === "object") {
+                        for (copy in dr) {
+                            v[copy] = dr[copy];
+                        }
+                    } else {
+                        v.rotation = dr;
+                    }
+                }
+                if (typeof(v.x) === "string" && v.x.indexOf("%") !== -1) {
+                    m2.x = 0;
+                    m2.xPercent = _parseVal(v.x, m1.xPercent);
+                }
+                if (typeof(v.y) === "string" && v.y.indexOf("%") !== -1) {
+                    m2.y = 0;
+                    m2.yPercent = _parseVal(v.y, m1.yPercent);
+                }
+
+                m2.rotation = _parseAngle(("rotation" in v) ? v.rotation : ("shortRotation" in v) ? v.shortRotation + "_short" : ("rotationZ" in v) ? v.rotationZ : m1.rotation - m1.skewY, m1.rotation - m1.skewY, "rotation", endRotations); //see notes below about skewY for why we subtract it from rotation here
+                if (_supports3D) {
+                    m2.rotationX = _parseAngle(("rotationX" in v) ? v.rotationX : ("shortRotationX" in v) ? v.shortRotationX + "_short" : m1.rotationX || 0, m1.rotationX, "rotationX", endRotations);
+                    m2.rotationY = _parseAngle(("rotationY" in v) ? v.rotationY : ("shortRotationY" in v) ? v.shortRotationY + "_short" : m1.rotationY || 0, m1.rotationY, "rotationY", endRotations);
+                }
+                m2.skewX = _parseAngle(v.skewX, m1.skewX - m1.skewY); //see notes below about skewY and why we subtract it from skewX here
+
+                //note: for performance reasons, we combine all skewing into the skewX and rotation values, ignoring skewY but we must still record it so that we can discern how much of the overall skew is attributed to skewX vs. skewY. Otherwise, if the skewY would always act relative (tween skewY to 10deg, for example, multiple times and if we always combine things into skewX, we can't remember that skewY was 10 from last time). Remember, a skewY of 10 degrees looks the same as a rotation of 10 degrees plus a skewX of -10 degrees.
+                if ((m2.skewY = _parseAngle(v.skewY, m1.skewY))) {
+                    m2.skewX += m2.skewY;
+                    m2.rotation += m2.skewY;
+                }
+            }
+            if (_supports3D && v.force3D != null) {
+                m1.force3D = v.force3D;
+                hasChange = true;
+            }
+
+            m1.skewType = v.skewType || m1.skewType || CSSPlugin.defaultSkewType;
+
+            has3D = (m1.force3D || m1.z || m1.rotationX || m1.rotationY || m2.z || m2.rotationX || m2.rotationY || m2.perspective);
+            if (!has3D && v.scale != null) {
+                m2.scaleZ = 1; //no need to tween scaleZ.
+            }
+
+            while (--i > -1) {
+                p = _transformProps[i];
+                orig = m2[p] - m1[p];
+                if (orig > min || orig < -min || v[p] != null || _forcePT[p] != null) {
+                    hasChange = true;
+                    pt = new CSSPropTween(m1, p, m1[p], orig, pt);
+                    if (p in endRotations) {
+                        pt.e = endRotations[p]; //directional rotations typically have compensated values during the tween, but we need to make sure they end at exactly what the user requested
+                    }
+                    pt.xs0 = 0; //ensures the value stays numeric in setRatio()
+                    pt.plugin = plugin;
+                    cssp._overwriteProps.push(pt.n);
+                }
+            }
+
+            orig = v.transformOrigin;
+            if (m1.svg && (orig || v.svgOrigin)) {
+                x = m1.xOffset; //when we change the origin, in order to prevent things from jumping we adjust the x/y so we must record those here so that we can create PropTweens for them and flip them at the same time as the origin
+                y = m1.yOffset;
+                _parseSVGOrigin(t, _parsePosition(orig), m2, v.svgOrigin, v.smoothOrigin);
+                pt = _addNonTweeningNumericPT(m1, "xOrigin", (originalGSTransform ? m1 : m2).xOrigin, m2.xOrigin, pt, transformOriginString); //note: if there wasn't a transformOrigin defined yet, just start with the destination one; it's wasteful otherwise, and it causes problems with fromTo() tweens. For example, TweenLite.to("#wheel", 3, {rotation:180, transformOrigin:"50% 50%", delay:1}); TweenLite.fromTo("#wheel", 3, {scale:0.5, transformOrigin:"50% 50%"}, {scale:1, delay:2}); would cause a jump when the from values revert at the beginning of the 2nd tween.
+                pt = _addNonTweeningNumericPT(m1, "yOrigin", (originalGSTransform ? m1 : m2).yOrigin, m2.yOrigin, pt, transformOriginString);
+                if (x !== m1.xOffset || y !== m1.yOffset) {
+                    pt = _addNonTweeningNumericPT(m1, "xOffset", (originalGSTransform ? x : m1.xOffset), m1.xOffset, pt, transformOriginString);
+                    pt = _addNonTweeningNumericPT(m1, "yOffset", (originalGSTransform ? y : m1.yOffset), m1.yOffset, pt, transformOriginString);
+                }
+                orig = _useSVGTransformAttr ? null : "0px 0px"; //certain browsers (like firefox) completely botch transform-origin, so we must remove it to prevent it from contaminating transforms. We manage it ourselves with xOrigin and yOrigin
+            }
+            if (orig || (_supports3D && has3D && m1.zOrigin)) { //if anything 3D is happening and there's a transformOrigin with a z component that's non-zero, we must ensure that the transformOrigin's z-component is set to 0 so that we can manually do those calculations to get around Safari bugs. Even if the user didn't specifically define a "transformOrigin" in this particular tween (maybe they did it via css directly).
+                if (_transformProp) {
+                    hasChange = true;
+                    p = _transformOriginProp;
+                    orig = (orig || _getStyle(t, p, _cs, false, "50% 50%")) + ""; //cast as string to avoid errors
+                    pt = new CSSPropTween(style, p, 0, 0, pt, -1, transformOriginString);
+                    pt.b = style[p];
+                    pt.plugin = plugin;
+                    if (_supports3D) {
+                        copy = m1.zOrigin;
+                        orig = orig.split(" ");
+                        m1.zOrigin = ((orig.length > 2 && !(copy !== 0 && orig[2] === "0px")) ? parseFloat(orig[2]) : copy) || 0; //Safari doesn't handle the z part of transformOrigin correctly, so we'll manually handle it in the _set3DTransformRatio() method.
+                        pt.xs0 = pt.e = orig[0] + " " + (orig[1] || "50%") + " 0px"; //we must define a z value of 0px specifically otherwise iOS 5 Safari will stick with the old one (if one was defined)!
+                        pt = new CSSPropTween(m1, "zOrigin", 0, 0, pt, -1, pt.n); //we must create a CSSPropTween for the _gsTransform.zOrigin so that it gets reset properly at the beginning if the tween runs backward (as opposed to just setting m1.zOrigin here)
+                        pt.b = copy;
+                        pt.xs0 = pt.e = m1.zOrigin;
+                    } else {
+                        pt.xs0 = pt.e = orig;
+                    }
+
+                    //for older versions of IE (6-8), we need to manually calculate things inside the setRatio() function. We record origin x and y (ox and oy) and whether or not the values are percentages (oxp and oyp).
+                } else {
+                    _parsePosition(orig + "", m1);
+                }
+            }
+            if (hasChange) {
+                cssp._transformType = (!(m1.svg && _useSVGTransformAttr) && (has3D || this._transformType === 3)) ? 3 : 2; //quicker than calling cssp._enableTransforms();
+            }
+            if (swapFunc) {
+                vars[parsingProp] = swapFunc;
+            }
+            return pt;
+        }, prefix:true});
+
+        _registerComplexSpecialProp("boxShadow", {defaultValue:"0px 0px 0px 0px #999", prefix:true, color:true, multi:true, keyword:"inset"});
+
+        _registerComplexSpecialProp("borderRadius", {defaultValue:"0px", parser:function(t, e, p, cssp, pt, plugin) {
+            e = this.format(e);
+            var props = ["borderTopLeftRadius","borderTopRightRadius","borderBottomRightRadius","borderBottomLeftRadius"],
+                style = t.style,
+                ea1, i, es2, bs2, bs, es, bn, en, w, h, esfx, bsfx, rel, hn, vn, em;
+            w = parseFloat(t.offsetWidth);
+            h = parseFloat(t.offsetHeight);
+            ea1 = e.split(" ");
+            for (i = 0; i < props.length; i++) { //if we're dealing with percentages, we must convert things separately for the horizontal and vertical axis!
+                if (this.p.indexOf("border")) { //older browsers used a prefix
+                    props[i] = _checkPropPrefix(props[i]);
+                }
+                bs = bs2 = _getStyle(t, props[i], _cs, false, "0px");
+                if (bs.indexOf(" ") !== -1) {
+                    bs2 = bs.split(" ");
+                    bs = bs2[0];
+                    bs2 = bs2[1];
+                }
+                es = es2 = ea1[i];
+                bn = parseFloat(bs);
+                bsfx = bs.substr((bn + "").length);
+                rel = (es.charAt(1) === "=");
+                if (rel) {
+                    en = parseInt(es.charAt(0)+"1", 10);
+                    es = es.substr(2);
+                    en *= parseFloat(es);
+                    esfx = es.substr((en + "").length - (en < 0 ? 1 : 0)) || "";
+                } else {
+                    en = parseFloat(es);
+                    esfx = es.substr((en + "").length);
+                }
+                if (esfx === "") {
+                    esfx = _suffixMap[p] || bsfx;
+                }
+                if (esfx !== bsfx) {
+                    hn = _convertToPixels(t, "borderLeft", bn, bsfx); //horizontal number (we use a bogus "borderLeft" property just because the _convertToPixels() method searches for the keywords "Left", "Right", "Top", and "Bottom" to determine of it's a horizontal or vertical property, and we need "border" in the name so that it knows it should measure relative to the element itself, not its parent.
+                    vn = _convertToPixels(t, "borderTop", bn, bsfx); //vertical number
+                    if (esfx === "%") {
+                        bs = (hn / w * 100) + "%";
+                        bs2 = (vn / h * 100) + "%";
+                    } else if (esfx === "em") {
+                        em = _convertToPixels(t, "borderLeft", 1, "em");
+                        bs = (hn / em) + "em";
+                        bs2 = (vn / em) + "em";
+                    } else {
+                        bs = hn + "px";
+                        bs2 = vn + "px";
+                    }
+                    if (rel) {
+                        es = (parseFloat(bs) + en) + esfx;
+                        es2 = (parseFloat(bs2) + en) + esfx;
+                    }
+                }
+                pt = _parseComplex(style, props[i], bs + " " + bs2, es + " " + es2, false, "0px", pt);
+            }
+            return pt;
+        }, prefix:true, formatter:_getFormatter("0px 0px 0px 0px", false, true)});
+        _registerComplexSpecialProp("borderBottomLeftRadius,borderBottomRightRadius,borderTopLeftRadius,borderTopRightRadius", {defaultValue:"0px", parser:function(t, e, p, cssp, pt, plugin) {
+            return _parseComplex(t.style, p, this.format(_getStyle(t, p, _cs, false, "0px 0px")), this.format(e), false, "0px", pt);
+        }, prefix:true, formatter:_getFormatter("0px 0px", false, true)});
+        _registerComplexSpecialProp("backgroundPosition", {defaultValue:"0 0", parser:function(t, e, p, cssp, pt, plugin) {
+            var bp = "background-position",
+                cs = (_cs || _getComputedStyle(t, null)),
+                bs = this.format( ((cs) ? _ieVers ? cs.getPropertyValue(bp + "-x") + " " + cs.getPropertyValue(bp + "-y") : cs.getPropertyValue(bp) : t.currentStyle.backgroundPositionX + " " + t.currentStyle.backgroundPositionY) || "0 0"), //Internet Explorer doesn't report background-position correctly - we must query background-position-x and background-position-y and combine them (even in IE10). Before IE9, we must do the same with the currentStyle object and use camelCase
+                es = this.format(e),
+                ba, ea, i, pct, overlap, src;
+            if ((bs.indexOf("%") !== -1) !== (es.indexOf("%") !== -1) && es.split(",").length < 2) {
+                src = _getStyle(t, "backgroundImage").replace(_urlExp, "");
+                if (src && src !== "none") {
+                    ba = bs.split(" ");
+                    ea = es.split(" ");
+                    _tempImg.setAttribute("src", src); //set the temp IMG's src to the background-image so that we can measure its width/height
+                    i = 2;
+                    while (--i > -1) {
+                        bs = ba[i];
+                        pct = (bs.indexOf("%") !== -1);
+                        if (pct !== (ea[i].indexOf("%") !== -1)) {
+                            overlap = (i === 0) ? t.offsetWidth - _tempImg.width : t.offsetHeight - _tempImg.height;
+                            ba[i] = pct ? (parseFloat(bs) / 100 * overlap) + "px" : (parseFloat(bs) / overlap * 100) + "%";
+                        }
+                    }
+                    bs = ba.join(" ");
+                }
+            }
+            return this.parseComplex(t.style, bs, es, pt, plugin);
+        }, formatter:_parsePosition});
+        _registerComplexSpecialProp("backgroundSize", {defaultValue:"0 0", formatter:function(v) {
+            v += ""; //ensure it's a string
+            return _parsePosition(v.indexOf(" ") === -1 ? v + " " + v : v); //if set to something like "100% 100%", Safari typically reports the computed style as just "100%" (no 2nd value), but we should ensure that there are two values, so copy the first one. Otherwise, it'd be interpreted as "100% 0" (wrong).
+        }});
+        _registerComplexSpecialProp("perspective", {defaultValue:"0px", prefix:true});
+        _registerComplexSpecialProp("perspectiveOrigin", {defaultValue:"50% 50%", prefix:true});
+        _registerComplexSpecialProp("transformStyle", {prefix:true});
+        _registerComplexSpecialProp("backfaceVisibility", {prefix:true});
+        _registerComplexSpecialProp("userSelect", {prefix:true});
+        _registerComplexSpecialProp("margin", {parser:_getEdgeParser("marginTop,marginRight,marginBottom,marginLeft")});
+        _registerComplexSpecialProp("padding", {parser:_getEdgeParser("paddingTop,paddingRight,paddingBottom,paddingLeft")});
+        _registerComplexSpecialProp("clip", {defaultValue:"rect(0px,0px,0px,0px)", parser:function(t, e, p, cssp, pt, plugin){
+            var b, cs, delim;
+            if (_ieVers < 9) { //IE8 and earlier don't report a "clip" value in the currentStyle - instead, the values are split apart into clipTop, clipRight, clipBottom, and clipLeft. Also, in IE7 and earlier, the values inside rect() are space-delimited, not comma-delimited.
+                cs = t.currentStyle;
+                delim = _ieVers < 8 ? " " : ",";
+                b = "rect(" + cs.clipTop + delim + cs.clipRight + delim + cs.clipBottom + delim + cs.clipLeft + ")";
+                e = this.format(e).split(",").join(delim);
+            } else {
+                b = this.format(_getStyle(t, this.p, _cs, false, this.dflt));
+                e = this.format(e);
+            }
+            return this.parseComplex(t.style, b, e, pt, plugin);
+        }});
+        _registerComplexSpecialProp("textShadow", {defaultValue:"0px 0px 0px #999", color:true, multi:true});
+        _registerComplexSpecialProp("autoRound,strictUnits", {parser:function(t, e, p, cssp, pt) {return pt;}}); //just so that we can ignore these properties (not tween them)
+        _registerComplexSpecialProp("border", {defaultValue:"0px solid #000", parser:function(t, e, p, cssp, pt, plugin) {
+            var bw = _getStyle(t, "borderTopWidth", _cs, false, "0px"),
+                end = this.format(e).split(" "),
+                esfx = end[0].replace(_suffixExp, "");
+            if (esfx !== "px") { //if we're animating to a non-px value, we need to convert the beginning width to that unit.
+                bw = (parseFloat(bw) / _convertToPixels(t, "borderTopWidth", 1, esfx)) + esfx;
+            }
+            return this.parseComplex(t.style, this.format(bw + " " + _getStyle(t, "borderTopStyle", _cs, false, "solid") + " " + _getStyle(t, "borderTopColor", _cs, false, "#000")), end.join(" "), pt, plugin);
+        }, color:true, formatter:function(v) {
+            var a = v.split(" ");
+            return a[0] + " " + (a[1] || "solid") + " " + (v.match(_colorExp) || ["#000"])[0];
+        }});
+        _registerComplexSpecialProp("borderWidth", {parser:_getEdgeParser("borderTopWidth,borderRightWidth,borderBottomWidth,borderLeftWidth")}); //Firefox doesn't pick up on borderWidth set in style sheets (only inline).
+        _registerComplexSpecialProp("float,cssFloat,styleFloat", {parser:function(t, e, p, cssp, pt, plugin) {
+            var s = t.style,
+                prop = ("cssFloat" in s) ? "cssFloat" : "styleFloat";
+            return new CSSPropTween(s, prop, 0, 0, pt, -1, p, false, 0, s[prop], e);
+        }});
+
+        //opacity-related
+        var _setIEOpacityRatio = function(v) {
+            var t = this.t, //refers to the element's style property
+                filters = t.filter || _getStyle(this.data, "filter") || "",
+                val = (this.s + this.c * v) | 0,
+                skip;
+            if (val === 100) { //for older versions of IE that need to use a filter to apply opacity, we should remove the filter if opacity hits 1 in order to improve performance, but make sure there isn't a transform (matrix) or gradient in the filters.
+                if (filters.indexOf("atrix(") === -1 && filters.indexOf("radient(") === -1 && filters.indexOf("oader(") === -1) {
+                    t.removeAttribute("filter");
+                    skip = (!_getStyle(this.data, "filter")); //if a class is applied that has an alpha filter, it will take effect (we don't want that), so re-apply our alpha filter in that case. We must first remove it and then check.
+                } else {
+                    t.filter = filters.replace(_alphaFilterExp, "");
+                    skip = true;
+                }
+            }
+            if (!skip) {
+                if (this.xn1) {
+                    t.filter = filters = filters || ("alpha(opacity=" + val + ")"); //works around bug in IE7/8 that prevents changes to "visibility" from being applied properly if the filter is changed to a different alpha on the same frame.
+                }
+                if (filters.indexOf("pacity") === -1) { //only used if browser doesn't support the standard opacity style property (IE 7 and 8). We omit the "O" to avoid case-sensitivity issues
+                    if (val !== 0 || !this.xn1) { //bugs in IE7/8 won't render the filter properly if opacity is ADDED on the same frame/render as "visibility" changes (this.xn1 is 1 if this tween is an "autoAlpha" tween)
+                        t.filter = filters + " alpha(opacity=" + val + ")"; //we round the value because otherwise, bugs in IE7/8 can prevent "visibility" changes from being applied properly.
+                    }
+                } else {
+                    t.filter = filters.replace(_opacityExp, "opacity=" + val);
+                }
+            }
+        };
+        _registerComplexSpecialProp("opacity,alpha,autoAlpha", {defaultValue:"1", parser:function(t, e, p, cssp, pt, plugin) {
+            var b = parseFloat(_getStyle(t, "opacity", _cs, false, "1")),
+                style = t.style,
+                isAutoAlpha = (p === "autoAlpha");
+            if (typeof(e) === "string" && e.charAt(1) === "=") {
+                e = ((e.charAt(0) === "-") ? -1 : 1) * parseFloat(e.substr(2)) + b;
+            }
+            if (isAutoAlpha && b === 1 && _getStyle(t, "visibility", _cs) === "hidden" && e !== 0) { //if visibility is initially set to "hidden", we should interpret that as intent to make opacity 0 (a convenience)
+                b = 0;
+            }
+            if (_supportsOpacity) {
+                pt = new CSSPropTween(style, "opacity", b, e - b, pt);
+            } else {
+                pt = new CSSPropTween(style, "opacity", b * 100, (e - b) * 100, pt);
+                pt.xn1 = isAutoAlpha ? 1 : 0; //we need to record whether or not this is an autoAlpha so that in the setRatio(), we know to duplicate the setting of the alpha in order to work around a bug in IE7 and IE8 that prevents changes to "visibility" from taking effect if the filter is changed to a different alpha(opacity) at the same time. Setting it to the SAME value first, then the new value works around the IE7/8 bug.
+                style.zoom = 1; //helps correct an IE issue.
+                pt.type = 2;
+                pt.b = "alpha(opacity=" + pt.s + ")";
+                pt.e = "alpha(opacity=" + (pt.s + pt.c) + ")";
+                pt.data = t;
+                pt.plugin = plugin;
+                pt.setRatio = _setIEOpacityRatio;
+            }
+            if (isAutoAlpha) { //we have to create the "visibility" PropTween after the opacity one in the linked list so that they run in the order that works properly in IE8 and earlier
+                pt = new CSSPropTween(style, "visibility", 0, 0, pt, -1, null, false, 0, ((b !== 0) ? "inherit" : "hidden"), ((e === 0) ? "hidden" : "inherit"));
+                pt.xs0 = "inherit";
+                cssp._overwriteProps.push(pt.n);
+                cssp._overwriteProps.push(p);
+            }
+            return pt;
+        }});
+
+
+        var _removeProp = function(s, p) {
+                if (p) {
+                    if (s.removeProperty) {
+                        if (p.substr(0,2) === "ms" || p.substr(0,6) === "webkit") { //Microsoft and some Webkit browsers don't conform to the standard of capitalizing the first prefix character, so we adjust so that when we prefix the caps with a dash, it's correct (otherwise it'd be "ms-transform" instead of "-ms-transform" for IE9, for example)
+                            p = "-" + p;
+                        }
+                        s.removeProperty(p.replace(_capsExp, "-$1").toLowerCase());
+                    } else { //note: old versions of IE use "removeAttribute()" instead of "removeProperty()"
+                        s.removeAttribute(p);
+                    }
+                }
+            },
+            _setClassNameRatio = function(v) {
+                this.t._gsClassPT = this;
+                if (v === 1 || v === 0) {
+                    this.t.setAttribute("class", (v === 0) ? this.b : this.e);
+                    var mpt = this.data, //first MiniPropTween
+                        s = this.t.style;
+                    while (mpt) {
+                        if (!mpt.v) {
+                            _removeProp(s, mpt.p);
+                        } else {
+                            s[mpt.p] = mpt.v;
+                        }
+                        mpt = mpt._next;
+                    }
+                    if (v === 1 && this.t._gsClassPT === this) {
+                        this.t._gsClassPT = null;
+                    }
+                } else if (this.t.getAttribute("class") !== this.e) {
+                    this.t.setAttribute("class", this.e);
+                }
+            };
+        _registerComplexSpecialProp("className", {parser:function(t, e, p, cssp, pt, plugin, vars) {
+            var b = t.getAttribute("class") || "", //don't use t.className because it doesn't work consistently on SVG elements; getAttribute("class") and setAttribute("class", value") is more reliable.
+                cssText = t.style.cssText,
+                difData, bs, cnpt, cnptLookup, mpt;
+            pt = cssp._classNamePT = new CSSPropTween(t, p, 0, 0, pt, 2);
+            pt.setRatio = _setClassNameRatio;
+            pt.pr = -11;
+            _hasPriority = true;
+            pt.b = b;
+            bs = _getAllStyles(t, _cs);
+            //if there's a className tween already operating on the target, force it to its end so that the necessary inline styles are removed and the class name is applied before we determine the end state (we don't want inline styles interfering that were there just for class-specific values)
+            cnpt = t._gsClassPT;
+            if (cnpt) {
+                cnptLookup = {};
+                mpt = cnpt.data; //first MiniPropTween which stores the inline styles - we need to force these so that the inline styles don't contaminate things. Otherwise, there's a small chance that a tween could start and the inline values match the destination values and they never get cleaned.
+                while (mpt) {
+                    cnptLookup[mpt.p] = 1;
+                    mpt = mpt._next;
+                }
+                cnpt.setRatio(1);
+            }
+            t._gsClassPT = pt;
+            pt.e = (e.charAt(1) !== "=") ? e : b.replace(new RegExp("(?:\\s|^)" + e.substr(2) + "(?![\\w-])"), "") + ((e.charAt(0) === "+") ? " " + e.substr(2) : "");
+            t.setAttribute("class", pt.e);
+            difData = _cssDif(t, bs, _getAllStyles(t), vars, cnptLookup);
+            t.setAttribute("class", b);
+            pt.data = difData.firstMPT;
+            t.style.cssText = cssText; //we recorded cssText before we swapped classes and ran _getAllStyles() because in cases when a className tween is overwritten, we remove all the related tweening properties from that class change (otherwise class-specific stuff can't override properties we've directly set on the target's style object due to specificity).
+            pt = pt.xfirst = cssp.parse(t, difData.difs, pt, plugin); //we record the CSSPropTween as the xfirst so that we can handle overwriting propertly (if "className" gets overwritten, we must kill all the properties associated with the className part of the tween, so we can loop through from xfirst to the pt itself)
+            return pt;
+        }});
+
+
+        var _setClearPropsRatio = function(v) {
+            if (v === 1 || v === 0) if (this.data._totalTime === this.data._totalDuration && this.data.data !== "isFromStart") { //this.data refers to the tween. Only clear at the END of the tween (remember, from() tweens make the ratio go from 1 to 0, so we can't just check that and if the tween is the zero-duration one that's created internally to render the starting values in a from() tween, ignore that because otherwise, for example, from(...{height:100, clearProps:"height", delay:1}) would wipe the height at the beginning of the tween and after 1 second, it'd kick back in).
+                var s = this.t.style,
+                    transformParse = _specialProps.transform.parse,
+                    a, p, i, clearTransform, transform;
+                if (this.e === "all") {
+                    s.cssText = "";
+                    clearTransform = true;
+                } else {
+                    a = this.e.split(" ").join("").split(",");
+                    i = a.length;
+                    while (--i > -1) {
+                        p = a[i];
+                        if (_specialProps[p]) {
+                            if (_specialProps[p].parse === transformParse) {
+                                clearTransform = true;
+                            } else {
+                                p = (p === "transformOrigin") ? _transformOriginProp : _specialProps[p].p; //ensures that special properties use the proper browser-specific property name, like "scaleX" might be "-webkit-transform" or "boxShadow" might be "-moz-box-shadow"
+                            }
+                        }
+                        _removeProp(s, p);
+                    }
+                }
+                if (clearTransform) {
+                    _removeProp(s, _transformProp);
+                    transform = this.t._gsTransform;
+                    if (transform) {
+                        if (transform.svg) {
+                            this.t.removeAttribute("data-svg-origin");
+                            this.t.removeAttribute("transform");
+                        }
+                        delete this.t._gsTransform;
+                    }
+                }
+
+            }
+        };
+        _registerComplexSpecialProp("clearProps", {parser:function(t, e, p, cssp, pt) {
+            pt = new CSSPropTween(t, p, 0, 0, pt, 2);
+            pt.setRatio = _setClearPropsRatio;
+            pt.e = e;
+            pt.pr = -10;
+            pt.data = cssp._tween;
+            _hasPriority = true;
+            return pt;
+        }});
+
+        p = "bezier,throwProps,physicsProps,physics2D".split(",");
+        i = p.length;
+        while (i--) {
+            _registerPluginProp(p[i]);
+        }
+
+
+
+
+
+
+
+
+        p = CSSPlugin.prototype;
+        p._firstPT = p._lastParsedTransform = p._transform = null;
+
+        //gets called when the tween renders for the first time. This kicks everything off, recording start/end values, etc.
+        p._onInitTween = function(target, vars, tween, index) {
+            if (!target.nodeType) { //css is only for dom elements
+                return false;
+            }
+            this._target = _target = target;
+            this._tween = tween;
+            this._vars = vars;
+            _index = index;
+            _autoRound = vars.autoRound;
+            _hasPriority = false;
+            _suffixMap = vars.suffixMap || CSSPlugin.suffixMap;
+            _cs = _getComputedStyle(target, "");
+            _overwriteProps = this._overwriteProps;
+            var style = target.style,
+                v, pt, pt2, first, last, next, zIndex, tpt, threeD;
+            if (_reqSafariFix) if (style.zIndex === "") {
+                v = _getStyle(target, "zIndex", _cs);
+                if (v === "auto" || v === "") {
+                    //corrects a bug in [non-Android] Safari that prevents it from repainting elements in their new positions if they don't have a zIndex set. We also can't just apply this inside _parseTransform() because anything that's moved in any way (like using "left" or "top" instead of transforms like "x" and "y") can be affected, so it is best to ensure that anything that's tweening has a z-index. Setting "WebkitPerspective" to a non-zero value worked too except that on iOS Safari things would flicker randomly. Plus zIndex is less memory-intensive.
+                    this._addLazySet(style, "zIndex", 0);
+                }
+            }
+
+            if (typeof(vars) === "string") {
+                first = style.cssText;
+                v = _getAllStyles(target, _cs);
+                style.cssText = first + ";" + vars;
+                v = _cssDif(target, v, _getAllStyles(target)).difs;
+                if (!_supportsOpacity && _opacityValExp.test(vars)) {
+                    v.opacity = parseFloat( RegExp.$1 );
+                }
+                vars = v;
+                style.cssText = first;
+            }
+
+            if (vars.className) { //className tweens will combine any differences they find in the css with the vars that are passed in, so {className:"myClass", scale:0.5, left:20} would work.
+                this._firstPT = pt = _specialProps.className.parse(target, vars.className, "className", this, null, null, vars);
+            } else {
+                this._firstPT = pt = this.parse(target, vars, null);
+            }
+
+            if (this._transformType) {
+                threeD = (this._transformType === 3);
+                if (!_transformProp) {
+                    style.zoom = 1; //helps correct an IE issue.
+                } else if (_isSafari) {
+                    _reqSafariFix = true;
+                    //if zIndex isn't set, iOS Safari doesn't repaint things correctly sometimes (seemingly at random).
+                    if (style.zIndex === "") {
+                        zIndex = _getStyle(target, "zIndex", _cs);
+                        if (zIndex === "auto" || zIndex === "") {
+                            this._addLazySet(style, "zIndex", 0);
+                        }
+                    }
+                    //Setting WebkitBackfaceVisibility corrects 3 bugs:
+                    // 1) [non-Android] Safari skips rendering changes to "top" and "left" that are made on the same frame/render as a transform update.
+                    // 2) iOS Safari sometimes neglects to repaint elements in their new positions. Setting "WebkitPerspective" to a non-zero value worked too except that on iOS Safari things would flicker randomly.
+                    // 3) Safari sometimes displayed odd artifacts when tweening the transform (or WebkitTransform) property, like ghosts of the edges of the element remained. Definitely a browser bug.
+                    //Note: we allow the user to override the auto-setting by defining WebkitBackfaceVisibility in the vars of the tween.
+                    if (_isSafariLT6) {
+                        this._addLazySet(style, "WebkitBackfaceVisibility", this._vars.WebkitBackfaceVisibility || (threeD ? "visible" : "hidden"));
+                    }
+                }
+                pt2 = pt;
+                while (pt2 && pt2._next) {
+                    pt2 = pt2._next;
+                }
+                tpt = new CSSPropTween(target, "transform", 0, 0, null, 2);
+                this._linkCSSP(tpt, null, pt2);
+                tpt.setRatio = _transformProp ? _setTransformRatio : _setIETransformRatio;
+                tpt.data = this._transform || _getTransform(target, _cs, true);
+                tpt.tween = tween;
+                tpt.pr = -1; //ensures that the transforms get applied after the components are updated.
+                _overwriteProps.pop(); //we don't want to force the overwrite of all "transform" tweens of the target - we only care about individual transform properties like scaleX, rotation, etc. The CSSPropTween constructor automatically adds the property to _overwriteProps which is why we need to pop() here.
+            }
+
+            if (_hasPriority) {
+                //reorders the linked list in order of pr (priority)
+                while (pt) {
+                    next = pt._next;
+                    pt2 = first;
+                    while (pt2 && pt2.pr > pt.pr) {
+                        pt2 = pt2._next;
+                    }
+                    if ((pt._prev = pt2 ? pt2._prev : last)) {
+                        pt._prev._next = pt;
+                    } else {
+                        first = pt;
+                    }
+                    if ((pt._next = pt2)) {
+                        pt2._prev = pt;
+                    } else {
+                        last = pt;
+                    }
+                    pt = next;
+                }
+                this._firstPT = first;
+            }
+            return true;
+        };
+
+
+        p.parse = function(target, vars, pt, plugin) {
+            var style = target.style,
+                p, sp, bn, en, bs, es, bsfx, esfx, isStr, rel;
+            for (p in vars) {
+                es = vars[p]; //ending value string
+                if (typeof(es) === "function") {
+                    es = es(_index, _target);
+                }
+                sp = _specialProps[p]; //SpecialProp lookup.
+                if (sp) {
+                    pt = sp.parse(target, es, p, this, pt, plugin, vars);
+
+                } else {
+                    bs = _getStyle(target, p, _cs) + "";
+                    isStr = (typeof(es) === "string");
+                    if (p === "color" || p === "fill" || p === "stroke" || p.indexOf("Color") !== -1 || (isStr && _rgbhslExp.test(es))) { //Opera uses background: to define color sometimes in addition to backgroundColor:
+                        if (!isStr) {
+                            es = _parseColor(es);
+                            es = ((es.length > 3) ? "rgba(" : "rgb(") + es.join(",") + ")";
+                        }
+                        pt = _parseComplex(style, p, bs, es, true, "transparent", pt, 0, plugin);
+
+                    } else if (isStr && _complexExp.test(es)) {
+                        pt = _parseComplex(style, p, bs, es, true, null, pt, 0, plugin);
+
+                    } else {
+                        bn = parseFloat(bs);
+                        bsfx = (bn || bn === 0) ? bs.substr((bn + "").length) : ""; //remember, bs could be non-numeric like "normal" for fontWeight, so we should default to a blank suffix in that case.
+
+                        if (bs === "" || bs === "auto") {
+                            if (p === "width" || p === "height") {
+                                bn = _getDimension(target, p, _cs);
+                                bsfx = "px";
+                            } else if (p === "left" || p === "top") {
+                                bn = _calculateOffset(target, p, _cs);
+                                bsfx = "px";
+                            } else {
+                                bn = (p !== "opacity") ? 0 : 1;
+                                bsfx = "";
+                            }
+                        }
+
+                        rel = (isStr && es.charAt(1) === "=");
+                        if (rel) {
+                            en = parseInt(es.charAt(0) + "1", 10);
+                            es = es.substr(2);
+                            en *= parseFloat(es);
+                            esfx = es.replace(_suffixExp, "");
+                        } else {
+                            en = parseFloat(es);
+                            esfx = isStr ? es.replace(_suffixExp, "") : "";
+                        }
+
+                        if (esfx === "") {
+                            esfx = (p in _suffixMap) ? _suffixMap[p] : bsfx; //populate the end suffix, prioritizing the map, then if none is found, use the beginning suffix.
+                        }
+
+                        es = (en || en === 0) ? (rel ? en + bn : en) + esfx : vars[p]; //ensures that any += or -= prefixes are taken care of. Record the end value before normalizing the suffix because we always want to end the tween on exactly what they intended even if it doesn't match the beginning value's suffix.
+
+                        //if the beginning/ending suffixes don't match, normalize them...
+                        if (bsfx !== esfx) if (esfx !== "") if (en || en === 0) if (bn) { //note: if the beginning value (bn) is 0, we don't need to convert units!
+                            bn = _convertToPixels(target, p, bn, bsfx);
+                            if (esfx === "%") {
+                                bn /= _convertToPixels(target, p, 100, "%") / 100;
+                                if (vars.strictUnits !== true) { //some browsers report only "px" values instead of allowing "%" with getComputedStyle(), so we assume that if we're tweening to a %, we should start there too unless strictUnits:true is defined. This approach is particularly useful for responsive designs that use from() tweens.
+                                    bs = bn + "%";
+                                }
+
+                            } else if (esfx === "em" || esfx === "rem" || esfx === "vw" || esfx === "vh") {
+                                bn /= _convertToPixels(target, p, 1, esfx);
+
+                                //otherwise convert to pixels.
+                            } else if (esfx !== "px") {
+                                en = _convertToPixels(target, p, en, esfx);
+                                esfx = "px"; //we don't use bsfx after this, so we don't need to set it to px too.
+                            }
+                            if (rel) if (en || en === 0) {
+                                es = (en + bn) + esfx; //the changes we made affect relative calculations, so adjust the end value here.
+                            }
+                        }
+
+                        if (rel) {
+                            en += bn;
+                        }
+
+                        if ((bn || bn === 0) && (en || en === 0)) { //faster than isNaN(). Also, previously we required en !== bn but that doesn't really gain much performance and it prevents _parseToProxy() from working properly if beginning and ending values match but need to get tweened by an external plugin anyway. For example, a bezier tween where the target starts at left:0 and has these points: [{left:50},{left:0}] wouldn't work properly because when parsing the last point, it'd match the first (current) one and a non-tweening CSSPropTween would be recorded when we actually need a normal tween (type:0) so that things get updated during the tween properly.
+                            pt = new CSSPropTween(style, p, bn, en - bn, pt, 0, p, (_autoRound !== false && (esfx === "px" || p === "zIndex")), 0, bs, es);
+                            pt.xs0 = esfx;
+                            //DEBUG: _log("tween "+p+" from "+pt.b+" ("+bn+esfx+") to "+pt.e+" with suffix: "+pt.xs0);
+                        }  else {
+                            pt = new CSSPropTween(style, p, en || bn || 0, 0, pt, -1, p, false, 0, bs, es);
+                            pt.xs0 = (es === "none" && (p === "display" || p.indexOf("Style") !== -1)) ? bs : es; //intermediate value should typically be set immediately (end value) except for "display" or things like borderTopStyle, borderBottomStyle, etc. which should use the beginning value during the tween.
+                            //DEBUG: _log("non-tweening value "+p+": "+pt.xs0);
+                        }
+                    }
+                }
+                if (plugin) if (pt && !pt.plugin) {
+                    pt.plugin = plugin;
+                }
+            }
+            return pt;
+        };
+
+
+        //gets called every time the tween updates, passing the new ratio (typically a value between 0 and 1, but not always (for example, if an Elastic.easeOut is used, the value can jump above 1 mid-tween). It will always start and 0 and end at 1.
+        p.setRatio = function(v) {
+            var pt = this._firstPT,
+                min = 0.000001,
+                val, str, i;
+            //at the end of the tween, we set the values to exactly what we received in order to make sure non-tweening values (like "position" or "float" or whatever) are set and so that if the beginning/ending suffixes (units) didn't match and we normalized to px, the value that the user passed in is used here. We check to see if the tween is at its beginning in case it's a from() tween in which case the ratio will actually go from 1 to 0 over the course of the tween (backwards).
+            if (v === 1 && (this._tween._time === this._tween._duration || this._tween._time === 0)) {
+                while (pt) {
+                    if (pt.type !== 2) {
+                        if (pt.r && pt.type !== -1) {
+                            val = Math.round(pt.s + pt.c);
+                            if (!pt.type) {
+                                pt.t[pt.p] = val + pt.xs0;
+                            } else if (pt.type === 1) { //complex value (one that typically has multiple numbers inside a string, like "rect(5px,10px,20px,25px)"
+                                i = pt.l;
+                                str = pt.xs0 + val + pt.xs1;
+                                for (i = 1; i < pt.l; i++) {
+                                    str += pt["xn"+i] + pt["xs"+(i+1)];
+                                }
+                                pt.t[pt.p] = str;
+                            }
+                        } else {
+                            pt.t[pt.p] = pt.e;
+                        }
+                    } else {
+                        pt.setRatio(v);
+                    }
+                    pt = pt._next;
+                }
+
+            } else if (v || !(this._tween._time === this._tween._duration || this._tween._time === 0) || this._tween._rawPrevTime === -0.000001) {
+                while (pt) {
+                    val = pt.c * v + pt.s;
+                    if (pt.r) {
+                        val = Math.round(val);
+                    } else if (val < min) if (val > -min) {
+                        val = 0;
+                    }
+                    if (!pt.type) {
+                        pt.t[pt.p] = val + pt.xs0;
+                    } else if (pt.type === 1) { //complex value (one that typically has multiple numbers inside a string, like "rect(5px,10px,20px,25px)"
+                        i = pt.l;
+                        if (i === 2) {
+                            pt.t[pt.p] = pt.xs0 + val + pt.xs1 + pt.xn1 + pt.xs2;
+                        } else if (i === 3) {
+                            pt.t[pt.p] = pt.xs0 + val + pt.xs1 + pt.xn1 + pt.xs2 + pt.xn2 + pt.xs3;
+                        } else if (i === 4) {
+                            pt.t[pt.p] = pt.xs0 + val + pt.xs1 + pt.xn1 + pt.xs2 + pt.xn2 + pt.xs3 + pt.xn3 + pt.xs4;
+                        } else if (i === 5) {
+                            pt.t[pt.p] = pt.xs0 + val + pt.xs1 + pt.xn1 + pt.xs2 + pt.xn2 + pt.xs3 + pt.xn3 + pt.xs4 + pt.xn4 + pt.xs5;
+                        } else {
+                            str = pt.xs0 + val + pt.xs1;
+                            for (i = 1; i < pt.l; i++) {
+                                str += pt["xn"+i] + pt["xs"+(i+1)];
+                            }
+                            pt.t[pt.p] = str;
+                        }
+
+                    } else if (pt.type === -1) { //non-tweening value
+                        pt.t[pt.p] = pt.xs0;
+
+                    } else if (pt.setRatio) { //custom setRatio() for things like SpecialProps, external plugins, etc.
+                        pt.setRatio(v);
+                    }
+                    pt = pt._next;
+                }
+
+                //if the tween is reversed all the way back to the beginning, we need to restore the original values which may have different units (like % instead of px or em or whatever).
+            } else {
+                while (pt) {
+                    if (pt.type !== 2) {
+                        pt.t[pt.p] = pt.b;
+                    } else {
+                        pt.setRatio(v);
+                    }
+                    pt = pt._next;
+                }
+            }
+        };
+
+        /**
+         * @private
+         * Forces rendering of the target's transforms (rotation, scale, etc.) whenever the CSSPlugin's setRatio() is called.
+         * Basically, this tells the CSSPlugin to create a CSSPropTween (type 2) after instantiation that runs last in the linked
+         * list and calls the appropriate (3D or 2D) rendering function. We separate this into its own method so that we can call
+         * it from other plugins like BezierPlugin if, for example, it needs to apply an autoRotation and this CSSPlugin
+         * doesn't have any transform-related properties of its own. You can call this method as many times as you
+         * want and it won't create duplicate CSSPropTweens.
+         *
+         * @param {boolean} threeD if true, it should apply 3D tweens (otherwise, just 2D ones are fine and typically faster)
+         */
+        p._enableTransforms = function(threeD) {
+            this._transform = this._transform || _getTransform(this._target, _cs, true); //ensures that the element has a _gsTransform property with the appropriate values.
+            this._transformType = (!(this._transform.svg && _useSVGTransformAttr) && (threeD || this._transformType === 3)) ? 3 : 2;
+        };
+
+        var lazySet = function(v) {
+            this.t[this.p] = this.e;
+            this.data._linkCSSP(this, this._next, null, true); //we purposefully keep this._next even though it'd make sense to null it, but this is a performance optimization, as this happens during the while (pt) {} loop in setRatio() at the bottom of which it sets pt = pt._next, so if we null it, the linked list will be broken in that loop.
+        };
+        /** @private Gives us a way to set a value on the first render (and only the first render). **/
+        p._addLazySet = function(t, p, v) {
+            var pt = this._firstPT = new CSSPropTween(t, p, 0, 0, this._firstPT, 2);
+            pt.e = v;
+            pt.setRatio = lazySet;
+            pt.data = this;
+        };
+
+        /** @private **/
+        p._linkCSSP = function(pt, next, prev, remove) {
+            if (pt) {
+                if (next) {
+                    next._prev = pt;
+                }
+                if (pt._next) {
+                    pt._next._prev = pt._prev;
+                }
+                if (pt._prev) {
+                    pt._prev._next = pt._next;
+                } else if (this._firstPT === pt) {
+                    this._firstPT = pt._next;
+                    remove = true; //just to prevent resetting this._firstPT 5 lines down in case pt._next is null. (optimized for speed)
+                }
+                if (prev) {
+                    prev._next = pt;
+                } else if (!remove && this._firstPT === null) {
+                    this._firstPT = pt;
+                }
+                pt._next = next;
+                pt._prev = prev;
+            }
+            return pt;
+        };
+
+        p._mod = function(lookup) {
+            var pt = this._firstPT;
+            while (pt) {
+                if (typeof(lookup[pt.p]) === "function" && lookup[pt.p] === Math.round) { //only gets called by RoundPropsPlugin (ModifyPlugin manages all the rendering internally for CSSPlugin properties that need modification). Remember, we handle rounding a bit differently in this plugin for performance reasons, leveraging "r" as an indicator that the value should be rounded internally..
+                    pt.r = 1;
+                }
+                pt = pt._next;
+            }
+        };
+
+        //we need to make sure that if alpha or autoAlpha is killed, opacity is too. And autoAlpha affects the "visibility" property.
+        p._kill = function(lookup) {
+            var copy = lookup,
+                pt, p, xfirst;
+            if (lookup.autoAlpha || lookup.alpha) {
+                copy = {};
+                for (p in lookup) { //copy the lookup so that we're not changing the original which may be passed elsewhere.
+                    copy[p] = lookup[p];
+                }
+                copy.opacity = 1;
+                if (copy.autoAlpha) {
+                    copy.visibility = 1;
+                }
+            }
+            if (lookup.className && (pt = this._classNamePT)) { //for className tweens, we need to kill any associated CSSPropTweens too; a linked list starts at the className's "xfirst".
+                xfirst = pt.xfirst;
+                if (xfirst && xfirst._prev) {
+                    this._linkCSSP(xfirst._prev, pt._next, xfirst._prev._prev); //break off the prev
+                } else if (xfirst === this._firstPT) {
+                    this._firstPT = pt._next;
+                }
+                if (pt._next) {
+                    this._linkCSSP(pt._next, pt._next._next, xfirst._prev);
+                }
+                this._classNamePT = null;
+            }
+            pt = this._firstPT;
+            while (pt) {
+                if (pt.plugin && pt.plugin !== p && pt.plugin._kill) { //for plugins that are registered with CSSPlugin, we should notify them of the kill.
+                    pt.plugin._kill(lookup);
+                    p = pt.plugin;
+                }
+                pt = pt._next;
+            }
+            return TweenPlugin.prototype._kill.call(this, copy);
+        };
+
+
+
+        //used by cascadeTo() for gathering all the style properties of each child element into an array for comparison.
+        var _getChildStyles = function(e, props, targets) {
+            var children, i, child, type;
+            if (e.slice) {
+                i = e.length;
+                while (--i > -1) {
+                    _getChildStyles(e[i], props, targets);
+                }
+                return;
+            }
+            children = e.childNodes;
+            i = children.length;
+            while (--i > -1) {
+                child = children[i];
+                type = child.type;
+                if (child.style) {
+                    props.push(_getAllStyles(child));
+                    if (targets) {
+                        targets.push(child);
+                    }
+                }
+                if ((type === 1 || type === 9 || type === 11) && child.childNodes.length) {
+                    _getChildStyles(child, props, targets);
+                }
+            }
+        };
+
+        /**
+         * Typically only useful for className tweens that may affect child elements, this method creates a TweenLite
+         * and then compares the style properties of all the target's child elements at the tween's start and end, and
+         * if any are different, it also creates tweens for those and returns an array containing ALL of the resulting
+         * tweens (so that you can easily add() them to a TimelineLite, for example). The reason this functionality is
+         * wrapped into a separate static method of CSSPlugin instead of being integrated into all regular className tweens
+         * is because it creates entirely new tweens that may have completely different targets than the original tween,
+         * so if they were all lumped into the original tween instance, it would be inconsistent with the rest of the API
+         * and it would create other problems. For example:
+         *  - If I create a tween of elementA, that tween instance may suddenly change its target to include 50 other elements (unintuitive if I specifically defined the target I wanted)
+         *  - We can't just create new independent tweens because otherwise, what happens if the original/parent tween is reversed or pause or dropped into a TimelineLite for tight control? You'd expect that tween's behavior to affect all the others.
+         *  - Analyzing every style property of every child before and after the tween is an expensive operation when there are many children, so this behavior shouldn't be imposed on all className tweens by default, especially since it's probably rare that this extra functionality is needed.
+         *
+         * @param {Object} target object to be tweened
+         * @param {number} Duration in seconds (or frames for frames-based tweens)
+         * @param {Object} Object containing the end values, like {className:"newClass", ease:Linear.easeNone}
+         * @return {Array} An array of TweenLite instances
+         */
+        CSSPlugin.cascadeTo = function(target, duration, vars) {
+            var tween = TweenLite.to(target, duration, vars),
+                results = [tween],
+                b = [],
+                e = [],
+                targets = [],
+                _reservedProps = TweenLite._internals.reservedProps,
+                i, difs, p, from;
+            target = tween._targets || tween.target;
+            _getChildStyles(target, b, targets);
+            tween.render(duration, true, true);
+            _getChildStyles(target, e);
+            tween.render(0, true, true);
+            tween._enabled(true);
+            i = targets.length;
+            while (--i > -1) {
+                difs = _cssDif(targets[i], b[i], e[i]);
+                if (difs.firstMPT) {
+                    difs = difs.difs;
+                    for (p in vars) {
+                        if (_reservedProps[p]) {
+                            difs[p] = vars[p];
+                        }
+                    }
+                    from = {};
+                    for (p in difs) {
+                        from[p] = b[i][p];
+                    }
+                    results.push(TweenLite.fromTo(targets[i], duration, from, difs));
+                }
+            }
+            return results;
+        };
+
+        TweenPlugin.activate([CSSPlugin]);
+        return CSSPlugin;
+
+    }, true);
+
+}); if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); }
+
+//export to AMD/RequireJS and CommonJS/Node (precursor to full modular build system coming at a later date)
+(function(name) {
+    "use strict";
+    var getGlobal = function() {
+        return (_gsScope.GreenSockGlobals || _gsScope)[name];
+    };
+    if (typeof(define) === "function" && define.amd) { //AMD
+        define(["TweenLite"], getGlobal);
+    } else if (typeof(module) !== "undefined" && module.exports) { //node
+        require("../TweenLite.js");
+        module.exports = getGlobal();
+    }
+}("CSSPlugin"));
+
 
 /* SPLIT TEXT UTIL */
 /*!
