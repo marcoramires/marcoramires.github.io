@@ -6,9 +6,9 @@ angular
     .module('app')
     .controller('DefaultController', DefaultController);
 
-DefaultController.$inject = ['$scope', '$log'];
+DefaultController.$inject = ['$rootScope', '$scope', '$log'];
 
-function DefaultController($scope, $log) {
+function DefaultController($rootScope, $scope, $log) {
     $log.log('> Default Controller: ', this);
 
     /* ----------------------------------------------
@@ -16,7 +16,7 @@ function DefaultController($scope, $log) {
      ------------------------------------------------*/
     function preloader() {
         Pace.on('done', function () {
-            // $("#contents").fadeIn(1000);
+            $(".animate-content").fadeIn(300);
             $log.log('* Pre-Loader Done *');
         });
     }
@@ -195,15 +195,36 @@ function DefaultController($scope, $log) {
      M A N A G E  P A G E S
      ------------------------------------------------*/
     function managePages() {
+        $('.open-layer', '#navbar').on('click', function (e) {
+            closeLayer();
+            var wheight = $(window).height();
+            var layerToOpen = $(this).data('layer');
+            $('.layer-page').removeClass('active');
+            $('.' + layerToOpen).css({
+                '-webkit-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight + ')',
+                '-moz-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight + ')',
+                '-ms-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight + ')',
+                '-o-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight + ')',
+                'transform': 'matrix(1, 0, 0, 1, 0, -' + wheight + ')'
+            }).addClass('active');
+            closeNavVertical();
+            return false;
+        });
+        // $('.open-home').on('click', function (e) {
+        //     closeLayer();
+        //     closeNavVertical();
+        //     return false;
+        // });
         $('.close-layer').on('click', function (e) {
             closeLayer();
         });
-        // hash navigation
+
+        // // hast navigation
         var match = location.hash.match(/^#!\/?(.*)$/)[1];
         if (match) {
             var wheight1 = $(window).height();
             $('.layer-page').removeClass('active');
-                $('.' + match).css({
+            $('.' + match).css({
                 '-webkit-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')',
                 '-moz-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')',
                 '-ms-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')',

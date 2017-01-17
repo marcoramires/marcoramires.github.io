@@ -5,9 +5,9 @@ angular
     .module('app')
     .controller('PictureController', PictureController);
 
-PictureController.$inject = ['$scope', '$log', '$stateParams'];
+PictureController.$inject = ['$rootScope', '$scope', '$log', '$stateParams'];
 
-function PictureController($scope, $log, $stateParams) {
+function PictureController($rootScope, $scope, $log, $stateParams) {
     $log.log('> Picture Controller: ', this);
     $log.log('> Picture Name: ', $stateParams.pictureName);
 
@@ -20,7 +20,7 @@ function PictureController($scope, $log, $stateParams) {
      ------------------------------------------------*/
     function preloader() {
         Pace.on('done', function () {
-            // $("#contents").fadeIn(1000);
+            $(".animate-content").fadeIn(300);
             $log.log('* Pre-Loader Done *');
         });
     }

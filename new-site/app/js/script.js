@@ -60,7 +60,14 @@
             $stateProvider.state(pictureState);
             $stateProvider.state(blogState);
             $stateProvider.state(postState);
-        }]);
+        }])
+        .run(function($rootScope, $location) {
+            $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+                console.info('[event] routeChangeStart...');
+                $(".animate-content").fadeOut(300);
+                Pace.restart();
+            });
+        });
 
     angular.element(document).ready(function() {
         angular.bootstrap('body', ['app']);

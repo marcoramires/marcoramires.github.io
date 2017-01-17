@@ -1,17 +1,47 @@
+<!-- Static navbar -->
+<nav class="navbar">
+    <div class="">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <div class="close-nav"></div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ui-sref="home">Home</a></li>
+                <li><a ui-sref="page-about" data-layer="page-about">About</a></li>
+                <!--<li><a href="#" class="open-layer" data-layer="page-albums">Albums</a></li>-->
+                <li><a ui-sref="page-gallery" data-layer="page-gallery">Gallery</a></li>
+                <li><a ui-sref="blog">Blog (soon)</a></li>
+                <li><a ui-sref="page-contact" data-layer="page-contact">Contact</a></li>
+                <li><a ui-sref="picture">picture</a></li>
+            </ul>
+            <ul class="social-links">
+                <li><a href="https://www.instagram.com/marcoramires/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                <li><a href="https://twitter.com/marcoramires" target="_blank"><i class="fa fa-twitter"></i></a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav><!--/.navbar -->
+<div class="animate-content">
 <!-- intro -->
-<div class="intro">
-    <!--<div class="image-cover menu-bottom" id="post2-intro-slider01"></div>-->
-    <!-- social links -->
-    <ul class="social-links ontop">
-        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-        <li><a href="#"><i class="fa fa-share-alt"></i></a></li>
-        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-    </ul>
-</div>
-
-<!-- post -->
-<div class="section post-whidout-sidebar">
+    <div class="intro">
+        <!--<div class="image-cover menu-bottom" id="post2-intro-slider01"></div>-->
+        <!-- social links -->
+        <ul class="social-links ontop">
+            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+            <li><a href="#"><i class="fa fa-share-alt"></i></a></li>
+            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+        </ul>
+    </div>
+    <!-- post -->
+    <div class="section post-whidout-sidebar">
     <div class="container">
         <div class="row">
             <div class="col-md-9 col-md-offset-2">
@@ -44,10 +74,11 @@
         </div>
     </div>
 </div>
-<footer>
+    <footer>
     <ul class="social-links">
         <li><a href="https://www.instagram.com/marcoramires/" target="_blank"><i class="fa fa-instagram"></i></a></li>
         <li><a href="https://twitter.com/marcoramires" target="_blank"><i class="fa fa-twitter"></i></a></li>
     </ul>
     <p class="social-links">© 2017 All rights reserved. Please read our <a href="/terms-conditions/">terms &amp; conditions</a>.</p>
 </footer>
+</div>
