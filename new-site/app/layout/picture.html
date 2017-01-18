@@ -59,7 +59,8 @@
                         <p class="header price" ng-show="data.size !== null">Total: {{data.availableOptions[data.size].price | currency: 'AUD$ ':0}}</p>
                         <p class="header" ng-show="data.size !== null">* Frame not included.</p>
                         <p>Production time : 10 days (excluding shipping)</p>
-                        <button class="btn" ng-disabled="data.size === null">Order Now</button>
+                        <!--<button class="btn" ng-disabled="data.size === null">Order Now</button>-->
+                        <div id="paypal-button"></div>
                         <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam perferendis molestiae dolore quae mollitia placeat est amet similique, iure, consequatur possimus ipsa eius recusandae ex nostrum? Iste amet consequuntur magni. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci quaerat debitis earum et perspiciatis ipsum delectus minus suscipit, pariatur laboriosam nobis! Quas harum, delectus et unde in officia distinctio voluptatibus!</p>-->
                         <hr>
                         <h2>FAQ</h2>
@@ -119,3 +120,4 @@
         </div>
     </div>
 </div>
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>

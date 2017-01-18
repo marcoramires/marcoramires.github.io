@@ -43,6 +43,62 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state) {
     function preloader() {
         Pace.on('done', function () {
             $(".animate-content").addClass('load-finish');
+            if($rootScope.paypal === undefined) {
+                $rootScope.paypal = paypal.Button.render({
+                    env: 'sandbox', // Specify 'sandbox' for the test environment
+                    client: {
+                        sandbox:    'AX-MNu6chPspfWTp__Cb2JCpy9Sj9P2NTqC2sO_-j-Gajj_2R6ByPpT2-dMMp0FOZ2d25HJqwfdx4DhB',
+                        production: 'xxxxxxxxx'
+                    },
+                    payment: function() {
+                        var env = this.props.env;
+                        var client = this.props.client;
+                        return paypal.rest.payment.create(env, client, {
+                            intent: "sale",
+                            payer: {
+                                payment_method: "paypal"
+                            },
+                            transactions: [
+                                {
+                                    amount: {
+                                        total: "1.00",
+                                        currency: "AUD"
+                                    },
+                                    item_list: {
+                                        items: [
+                                            {
+                                                quantity: "1",
+                                                name: "Yellow Fin",
+                                                price: "1",
+                                                currency: "AUD",
+                                                description: "",
+                                                tax: "0"
+                                            }]
+                                    },
+                                    description: "Yellow Fin: Print Only 12x18 (30x45cm) Unframed Print",
+                                    invoice_number: "1234567890",
+                                    custom: "Custom message"
+                                }
+                            ]
+                        });
+                    },
+                    commit: true, // Optional: show a 'Pay Now' button in the checkout flow
+                    onAuthorize: function(data, actions) {
+                        // Optional: display a confirmation page here
+                        return actions.payment.execute().then(function() {
+                            // Show a success page to the buyer
+                        });
+                    },
+                    onCancel: function(data, actions) {
+                        return actions.redirect();
+                    },
+                    style: {
+                        size: 'medium',
+                        color: 'blue',
+                        shape: 'rect'
+                    }
+                }, '#paypal-button');
+            }
             $log.log('* Pre-Loader Done *');
         });
     }
