@@ -3937,6 +3937,9 @@ body.comingsoon .primary-title {
   .header {
     margin: 0;
     font-weight: bold;
+    &.price {
+      font-size: 1.2em;
+    }
   }
   img {
     margin-bottom: 0;
