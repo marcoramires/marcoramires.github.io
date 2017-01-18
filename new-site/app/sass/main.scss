@@ -3945,11 +3945,13 @@ body.comingsoon .primary-title {
     margin-bottom: 0;
   }
   h2 {
-    margin-top: 55px;
+    margin-top: 45px;
     margin-bottom: 25px;
   }
   hr {
-    margin-top: 20px;
+    margin-top: 30px;
+    max-width: 100%;
+    border-color: #d3d3d3;
   }
 }
 
