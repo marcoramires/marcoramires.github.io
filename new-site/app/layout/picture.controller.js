@@ -5,15 +5,24 @@ angular
     .module('app')
     .controller('PictureController', PictureController);
 
-PictureController.$inject = ['$rootScope', '$scope', '$log', '$stateParams'];
+PictureController.$inject = ['$rootScope', '$scope', '$log', '$stateParams', '$state'];
 
-function PictureController($rootScope, $scope, $log, $stateParams) {
+function PictureController($rootScope, $scope, $log, $stateParams, $state) {
     $log.log('> Picture Controller: ', this);
     $log.log('> Picture Name: ', $stateParams.pictureName);
 
-    //TODO: Service Layer - get image details
+    this.details = {
+        name:  "yellow fin",
+        location: "Byron Bay",
+        dateTaken: "15/06/2016",
+        camera: '1/1000 F1.4 ISO100',
+        ref: 'IMG_22021'
+    };
+
     var _pictureName = $stateParams.pictureName;
-    this.pictureName = _pictureName.replace('-', ' ');
+    if(_pictureName.replace('-', ' ').toLowerCase() !== this.details.name) {
+        $state.go('home',  {location: 'replace'})
+    }
 
     /* ----------------------------------------------
      P R E L O A D E R - TODO: Move to Service layer

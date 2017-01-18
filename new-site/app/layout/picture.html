@@ -44,10 +44,10 @@
                             <!--<div class="blog-post-author" id="blog2-post-author1"></div>-->
                             <a href="#" class="button-blog ico-share"></a>
                         </div>
-                        <h1 class="primary-title text-left">{{picture.pictureName}}</h1>
-                        <p class="blog-post-date block"><i class="icon fa fa-map-marker"></i>Byron Bay - 15th june 2016</p>
-                        <p class="blog-post-date block"><i class="icon fa fa-camera"></i>1/1000 F1.4 ISO100 </p>
-                        <p class="blog-post-date block">Ref: IMG_22021</p>
+                        <h1 class="primary-title text-left">{{picture.details.name}}</h1>
+                        <p class="blog-post-date block"><i class="icon fa fa-map-marker"></i>{{picture.details.location}} - {{picture.details.dateTaken}}</p>
+                        <p class="blog-post-date block"><i class="icon fa fa-camera"></i>{{picture.details.camera}}</p>
+                        <p class="blog-post-date block">Ref: {{picture.details.ref}}</p>
                         <img src="images/site/test-indoor.jpg" alt="">
                         <h2>Buy this image</h2>
                         <div class="plain-select">
@@ -62,6 +62,7 @@
                             </select>
                         </div>
                         <p class="header">Total: AUD$ --</p>
+                        <p class="header">* Frame not included.</p>
                         <p>Production time : 10 days (excluding shipping)</p>
                         <button class="btn">Order Now</button>
                         <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam perferendis molestiae dolore quae mollitia placeat est amet similique, iure, consequatur possimus ipsa eius recusandae ex nostrum? Iste amet consequuntur magni. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci quaerat debitis earum et perspiciatis ipsum delectus minus suscipit, pariatur laboriosam nobis! Quas harum, delectus et unde in officia distinctio voluptatibus!</p>-->
