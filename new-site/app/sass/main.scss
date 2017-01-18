@@ -3937,12 +3937,22 @@ body.comingsoon .primary-title {
     line-height: 63px;
   }
 
+  .header {
+    margin: 0;
+    font-weight: bold;
+  }
+
   img {
     margin-bottom: 0;
   }
 
   h2 {
     margin-top: 55px;
+    margin-bottom: 25px;
+  }
+
+  hr {
+    margin-top: 20px;
   }
 }
 
@@ -4227,11 +4237,27 @@ select {
   -webkit-appearance: none;
   padding: 10px 20px;
   display: block;
-  max-height: 56px;
+  height: 56px;
   font-weight: 300;
   font-size: 1rem;
   border: 1px solid #000;
-  margin: 0 0 30px;
+  margin: 0;
+}
+.plain-select {
+  margin: 0;
+}
+.plain-select:after{
+  content: "";
+  position: relative;
+  z-index: 2;
+  right: -220px;
+  top: -25px;
+  height: 0;
+  width: 0;
+  border-top: 5px solid #000;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  pointer-events: none;
 }
 
 .animate-content {
