@@ -6,10 +6,15 @@ angular
     .module('app')
     .controller('DefaultController', DefaultController);
 
-DefaultController.$inject = ['$rootScope', '$scope', '$log'];
+DefaultController.$inject = ['$rootScope', '$scope', '$log', '$location'];
 
-function DefaultController($rootScope, $scope, $log) {
+function DefaultController($rootScope, $scope, $log, $location) {
     $log.log('> Default Controller: ', this);
+
+    var searchObject = $location.search();
+    console.log(searchObject);
+    $scope.orderId = searchObject.paymentId;
+
 
     /* ----------------------------------------------
      P R E L O A D E R - TODO: Move to Service layer

@@ -42,7 +42,7 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
             sandbox: 'AX-MNu6chPspfWTp__Cb2JCpy9Sj9P2NTqC2sO_-j-Gajj_2R6ByPpT2-dMMp0FOZ2d25HJqwfdx4DhB',
             production: 'xxxxxxxxx'
         };
-        var _prodDescription = 'Print only:' + $scope.data.picture.name + ' ' + $scope.data.availableOptions[$scope.data.size].name;
+        var _prodDescription = 'Print only: ' + $scope.data.picture + ' ' + $scope.data.availableOptions[$scope.data.size].name;
         var _prodValue = $scope.data.availableOptions[$scope.data.size].price;
         var _total = _prodValue;
 
