@@ -3954,8 +3954,6 @@ body.comingsoon .primary-title {
     border-color: #d3d3d3;
   }
 }
-
-
 @media (max-width: 768px) {
   .intro {
     height: 85%;
@@ -3977,7 +3975,6 @@ body.comingsoon .primary-title {
     }
   }
 }
-
 @media (min-width: 768px) {
   .page-picture {
     .blog-post-date {
@@ -3996,6 +3993,38 @@ body.comingsoon .primary-title {
     }
   }
 }
+
+/* Review Page */
+.page-review .section,
+.page-review .container-fluid,
+.page-review .container,
+.page-review .row,
+.page-review .content-section {
+  height: 100%;
+  text-align: center;
+}
+.page-review div[class*="col-"] {
+  height: auto;
+}
+@media (max-width: 768px) {
+  .page-review .content-section {
+    margin-top: 100px;
+  }
+}
+@media (min-width: 768px) {
+  .page-review .content-section > div {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+  }
+  .page-review div[class*="col-"] {
+    margin-top: 0;
+    height: 100%;
+  }
+}
+
 
 
 /*------------------------------------------------------------------
@@ -4271,7 +4300,6 @@ body {
 
 /* Photo Page */
 /* ---------- */
-
 select {
   border-radius: 0;
   background: none;
@@ -4291,7 +4319,7 @@ select {
 .plain-select:after{
   content: "";
   position: relative;
-  z-index: 2;
+  z-index: 1;
   right: -220px;
   top: -25px;
   height: 0;
