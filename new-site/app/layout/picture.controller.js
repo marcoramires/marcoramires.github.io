@@ -58,6 +58,10 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
                     payer: {
                         payment_method: "paypal"
                     },
+                    redirect_urls: {
+                        return_url: "http://localhost:3000/#!/page-paypal",
+                        cancel_url: "http://localhost:3000/#!/picture/yellow-fin"
+                    },
                     transactions: [
                         {
                             amount: {
@@ -87,8 +91,7 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
             onAuthorize: function (data, actions) {
                 // Optional: display a confirmation page here
                 return actions.payment.execute().then(function () {
-                    // Show a success page to the buyer
-                    alert('Paypal Success!');
+                    actions.redirect();
                 });
             },
             onCancel: function (data, actions) {

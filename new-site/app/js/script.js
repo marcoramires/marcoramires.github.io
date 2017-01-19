@@ -35,6 +35,12 @@
                 templateUrl: 'layout/default.html',
                 controller: 'DefaultController'
             };
+            var paypalState = {
+                name: 'page-paypal',
+                url: '/page-paypal',
+                templateUrl: 'layout/default.html',
+                controller: 'DefaultController'
+            };
             var pictureState = {
                 name: 'picture',
                 url: '/picture/:pictureName',
@@ -59,6 +65,7 @@
             $stateProvider.state(pictureState);
             $stateProvider.state(blogState);
             $stateProvider.state(postState);
+            $stateProvider.state(paypalState);
         }])
         .run(function($rootScope, $location) {
             $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){

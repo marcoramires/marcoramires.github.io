@@ -224,7 +224,7 @@ function DefaultController($rootScope, $scope, $log) {
         if (match) {
             var wheight1 = $(window).height();
             $('.layer-page').removeClass('active');
-            $('.' + match).css({
+            $('.' + match.split("?")[0]).css({
                 '-webkit-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')',
                 '-moz-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')',
                 '-ms-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')',

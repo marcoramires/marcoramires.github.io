@@ -4076,7 +4076,7 @@ select {
 }
 @media (max-width: 768px) {
   .page-review .content-section {
-    margin-top: 100px;
+    margin-top: 20px;
   }
 }
 @media (min-width: 768px) {
@@ -4096,7 +4096,15 @@ select {
   margin-left: 15px;
 }
 .page-review .change-order {
-  margin: 0;
+  margin: 20px 0;
+  padding: 0 20px;
+  height: 35px;
+}
+.page-review {
+  .price {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
 }
 
 /*------------------------------------------------------------------
