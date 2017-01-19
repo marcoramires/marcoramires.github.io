@@ -5,7 +5,7 @@
 ;(function () {
     'use strict';
     angular
-        .module('app', ['ui.router'])
+        .module('app', ['ui.router', 'oc.lazyLoad'])
         .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
 
             /* Router - Angular UI Router */

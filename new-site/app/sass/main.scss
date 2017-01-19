@@ -3993,8 +3993,70 @@ body.comingsoon .primary-title {
     }
   }
 }
+select {
+  border-radius: 0;
+  background: none;
+  width: 250px;
+  -webkit-appearance: none;
+  padding: 10px 20px;
+  display: block;
+  height: 56px;
+  font-weight: 300;
+  font-size: 1rem;
+  border: 1px solid #000;
+  margin: 0;
+}
+.plain-select {
+  margin: 0;
+}
+.plain-select:after{
+  content: "";
+  position: relative;
+  z-index: 1;
+  right: -220px;
+  top: -25px;
+  height: 0;
+  width: 0;
+  border-top: 5px solid #000;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  pointer-events: none;
+}
 
 /* Review Page */
+.page-review {
+  .fa-spinner {
+    -webkit-animation-name: spin;
+    -webkit-animation-duration: 1000ms;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: spin;
+    -moz-animation-duration: 1000ms;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -ms-animation-name: spin;
+    -ms-animation-duration: 1000ms;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-timing-function: linear;
+    animation-name: spin;
+    animation-duration: 1000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+
+  @-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+  }
+  @-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+  }
+  @keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+  }
+}
 .page-review .section,
 .page-review .container-fluid,
 .page-review .container,
@@ -4024,8 +4086,6 @@ body.comingsoon .primary-title {
     height: 100%;
   }
 }
-
-
 
 /*------------------------------------------------------------------
 [8. Variations]
@@ -4296,38 +4356,6 @@ body {
 }
 .holder {
   display: none;
-}
-
-/* Photo Page */
-/* ---------- */
-select {
-  border-radius: 0;
-  background: none;
-  width: 250px;
-  -webkit-appearance: none;
-  padding: 10px 20px;
-  display: block;
-  height: 56px;
-  font-weight: 300;
-  font-size: 1rem;
-  border: 1px solid #000;
-  margin: 0;
-}
-.plain-select {
-  margin: 0;
-}
-.plain-select:after{
-  content: "";
-  position: relative;
-  z-index: 1;
-  right: -220px;
-  top: -25px;
-  height: 0;
-  width: 0;
-  border-top: 5px solid #000;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  pointer-events: none;
 }
 
 .animate-content {

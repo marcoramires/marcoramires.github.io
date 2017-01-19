@@ -5,9 +5,9 @@ angular
     .module('app')
     .controller('PictureController', PictureController);
 
-PictureController.$inject = ['$rootScope', '$scope', '$log', '$stateParams', '$state'];
+PictureController.$inject = ['$rootScope', '$scope', '$log', '$stateParams', '$state', '$ocLazyLoad'];
 
-function PictureController($rootScope, $scope, $log, $stateParams, $state) {
+function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLazyLoad) {
     $log.log('> Picture Controller: ', this);
     $log.log('> Picture Name: ', $stateParams.pictureName);
 
@@ -29,6 +29,10 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state) {
             {id: '4', name: '6 x 24 inches - 92 x 60 cm', price: 150},
             {id: '5', name: '45 x 34 inches - 114 x 76 cm', price: 200}
         ]
+    };
+    $scope.payments = {
+        loaded: false,
+        options: '' //TODO:
     };
 
     //TODO: Move to payment service
@@ -96,6 +100,17 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state) {
                 shape: 'rect'
             }
         }, '#paypal-button');
+    }
+
+    function $$reviewOrder () {
+        $ocLazyLoad.load(
+            ['https://www.paypalobjects.com/api/checkout.js'])
+            .then(function() {
+                console.log('Paypal loaded');
+                $$payPal();
+            }).then(function() {
+            $scope.payments.loaded = true;
+        });
     }
 
     var _pictureName = $stateParams.pictureName;
@@ -184,10 +199,17 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state) {
                 'transform': 'matrix(1, 0, 0, 1, 0, -' + wheight + ')'
             }).addClass('active');
             closeNavVertical();
-            console.log(layerToOpen);
+
+            if(layerToOpen === 'page-review') {
+                console.log('call review function');
+                $$reviewOrder();
+            }
+
             return false;
         });
         $('.close-layer').on('click', function (e) {
+            $('#paypal-button').html('');
+            $scope.payments.loaded = false;
             closeLayer();
         });
         $log.log('* Manage-Page Done *');
