@@ -48,7 +48,7 @@
                         <p class="blog-post-date block"><i class="icon fa fa-map-marker"></i>{{picture.details.location}} - {{picture.details.dateTaken}}</p>
                         <p class="blog-post-date block"><i class="icon fa fa-camera"></i>{{picture.details.camera}}</p>
                         <p class="blog-post-date block">Ref: {{picture.details.ref}}</p>
-                        <img src="images/site/test-indoor.jpg" alt="">
+                        <img src="images/site/test_b.jpg" alt="">
                         <h2>Buy this image</h2>
                         <div class="plain-select">
                             <select name="repeatSelect" id="repeatSelect" ng-model="data.size">
@@ -124,12 +124,12 @@
         <div class="section">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-7 col-md-offset-2">
+                    <div class="col-md-5 col-md-offset-3">
                         <div class="content-section">
                             <div>
                                 <h3>Review Order</h3>
-                                <img src="images/site/test-indoor.jpg" alt="">
-                                <p>{{data.picture.name}} </p>
+                                <img src="images/site/test_b.jpg" alt="">
+                                <p>{{data.picture}} </p>
                                 <p>Print only:{{data.availableOptions[data.size].name}}</p>
                                 <p class="price" ng-show="data.size !== null">Total: {{data.availableOptions[data.size].price | currency: 'AUD$ ':0}}</p>
                                 <p>Available payments</p>

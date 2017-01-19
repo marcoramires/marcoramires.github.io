@@ -20,7 +20,7 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
     };
 
     $scope.data = {
-        picture: this.details,
+        picture: this.details.name.toUpperCase(),
         availableOptions: [
             {id: '0', name: '12 x 8 inches - 30 x 20 cm', price: 25},
             {id: '1', name: '18 x 12 inches - 45 x 30 cm', price: 50},
