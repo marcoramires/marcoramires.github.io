@@ -2450,8 +2450,8 @@ body.comingsoon .primary-title {
 .page-blog .btn {
   width: calc(100% - 20px);
   float: none;
-  background-color: #1d78cb;
-  color: #fff;
+  //background-color: #1d78cb;
+  //color: #fff;
   height: 50px;
   margin: 0 0 35px;
   font-size: 1em;
@@ -4060,6 +4060,9 @@ select {
 .page-review p {
   margin: 10px;
 }
+.page-review .btn {
+  width: auto;
+}
 .page-review .section,
 .page-review .container-fluid,
 .page-review .container,
@@ -4088,6 +4091,12 @@ select {
     margin-top: 0;
     height: 100%;
   }
+}
+#paypal-button {
+  margin-left: 15px;
+}
+.page-review .change-order {
+  margin: 0;
 }
 
 /*------------------------------------------------------------------

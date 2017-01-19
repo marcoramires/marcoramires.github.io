@@ -59,7 +59,7 @@
                         <p class="header price" ng-show="data.size !== null">Total: {{data.availableOptions[data.size].price | currency: 'AUD$ ':0}}</p>
                         <p class="header" ng-show="data.size !== null">* Frame not included.</p>
                         <p>Production time : 10 days (excluding shipping)</p>
-                        <button class="btn open-layer" ng-disabled="data.size === null" data-layer="page-review">Order Now</button>
+                        <button class="btn btn-primary open-layer" ng-disabled="data.size === null" data-layer="page-review">Order Now</button>
                         <!--<div id="paypal-button" ng-show="data.size !== null"></div>-->
                         <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam perferendis molestiae dolore quae mollitia placeat est amet similique, iure, consequatur possimus ipsa eius recusandae ex nostrum? Iste amet consequuntur magni. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci quaerat debitis earum et perspiciatis ipsum delectus minus suscipit, pariatur laboriosam nobis! Quas harum, delectus et unde in officia distinctio voluptatibus!</p>-->
                         <hr>
@@ -124,10 +124,13 @@
         <div class="section">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-11">
+                    <div class="col-md-6 col-md-offset-3">
                         <div class="content-section">
                             <div>
                                 <h3>Review Order</h3>
+                                <img src="images/site/test-indoor.jpg" alt="">
+                                <p>Print only: {{data.picture.name}} {{data.availableOptions[data.size].name}}</p>
+                                <button class="btn btn-default change-order">Change order</button>
                                 <p>Available payments</p>
                                 <p ng-show="!payments.loaded">Loading <i class="fa fa-spinner spin"></i></p>
                                 <div id="paypal-button" ng-show="payments.loaded"></div>

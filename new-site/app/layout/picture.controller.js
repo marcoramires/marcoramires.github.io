@@ -211,7 +211,7 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
 
             return false;
         });
-        $('.close-layer').on('click', function (e) {
+        $('.close-layer, .change-order').on('click', function (e) {
             $('#paypal-button').html('');
             $scope.payments.loaded = false;
             closeLayer();
