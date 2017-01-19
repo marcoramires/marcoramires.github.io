@@ -5,9 +5,9 @@ angular
     .module('app')
     .controller('PictureController', PictureController);
 
-PictureController.$inject = ['$rootScope', '$scope', '$log', '$stateParams', '$state', '$ocLazyLoad'];
+PictureController.$inject = ['$rootScope', '$scope', '$log', '$stateParams', '$state', '$ocLazyLoad', '$interval'];
 
-function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLazyLoad) {
+function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLazyLoad, $interval) {
     $log.log('> Picture Controller: ', this);
     $log.log('> Picture Name: ', $stateParams.pictureName);
 
@@ -46,7 +46,7 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
         var _prodValue = $scope.data.availableOptions[$scope.data.size].price;
         var _total = _prodValue;
 
-        return paypal.Button.render({
+        $rootScope.paypal = paypal.Button.render({
             env: 'sandbox', // Specify 'sandbox' for the test environment
             client: {
                 sandbox: 'AX-MNu6chPspfWTp__Cb2JCpy9Sj9P2NTqC2sO_-j-Gajj_2R6ByPpT2-dMMp0FOZ2d25HJqwfdx4DhB',
@@ -106,10 +106,14 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
         $ocLazyLoad.load(
             ['https://www.paypalobjects.com/api/checkout.js'])
             .then(function() {
-                console.log('Paypal loaded');
                 $$payPal();
             }).then(function() {
-            $scope.payments.loaded = true;
+            var promise = $interval(function(){
+                if($rootScope.paypal.resolved){
+                    $interval.cancel(promise);
+                    $scope.payments.loaded = true;
+                }
+            },500);
         });
     }
 
