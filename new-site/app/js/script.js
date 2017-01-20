@@ -13,6 +13,7 @@
                 // .trackPages(true)
                 .useECommerce(true, true)
                 .setPageEvent('$stateChangeSuccess')
+                .ignoreFirstPageLoad(true)
                 // .readFromRoute(true);
                 // .trackUrlParams(true)
                 // .setRemoveRegExp(/\?(.*)/); //removes query strings
