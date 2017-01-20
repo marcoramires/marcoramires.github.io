@@ -6,9 +6,9 @@ angular
     .module('app')
     .controller('DefaultController', DefaultController);
 
-DefaultController.$inject = ['$rootScope', '$scope', '$log', '$location', 'Analytics'];
+DefaultController.$inject = ['$scope', '$log', '$location', 'Analytics', 'Events_Service'];
 
-function DefaultController($rootScope, $scope, $log, $location, Analytics) {
+function DefaultController($scope, $log, $location, Analytics, Events_Service) {
     $log.log('> Default Controller: ', this);
 
     var searchObject = $location.search();
@@ -353,6 +353,9 @@ function DefaultController($rootScope, $scope, $log, $location, Analytics) {
             $dy.on('onCloseAfter.lg',function(event){
                 $(this).parent(".holder").removeClass("is-expandend");
             });
+
+            // Create a new tracking event with a value
+            Analytics.trackEvent('Home Page', 'FAB (full-screen)', 'Yellow Fin', 1);
         });
 
         //TODO: Review this
@@ -378,5 +381,8 @@ function DefaultController($rootScope, $scope, $log, $location, Analytics) {
         imageLayer();
         isotopeGrid();
         mobileFab();
+        Events_Service.run().all();
     });
 }
+
+// 'Outbound Links', 'Click', url]);

@@ -5,9 +5,9 @@ angular
     .module('app')
     .controller('PictureController', PictureController);
 
-PictureController.$inject = ['$rootScope', '$scope', '$log', '$stateParams', '$state', '$ocLazyLoad', '$interval', 'Analytics'];
+PictureController.$inject = ['$rootScope', '$scope', '$log', '$stateParams', '$state', '$ocLazyLoad', '$interval', 'Analytics', 'Events_Service'];
 
-function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLazyLoad, $interval, Analytics) {
+function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLazyLoad, $interval, Analytics, Events_Service) {
     $log.log('> Picture Controller: ', this);
     // $log.log('> Picture Name: ', $stateParams.pictureName);
 
@@ -229,5 +229,6 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
         preloader();
         navigation();
         managePages();
+        Events_Service.run().all();
     });
 }
