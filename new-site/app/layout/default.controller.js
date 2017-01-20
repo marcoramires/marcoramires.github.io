@@ -238,7 +238,6 @@ function DefaultController($scope, $log, $location, Analytics, Events_Service) {
                 '-o-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')',
                 'transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')'
             }).addClass('active');
-            // Analytics.trackPage(match);
         }
         // $log.log('* Manage-Page Done *');
     }
