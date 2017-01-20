@@ -5,11 +5,11 @@ angular
     .module('app')
     .controller('PictureController', PictureController);
 
-PictureController.$inject = ['$rootScope', '$scope', '$log', '$stateParams', '$state', '$ocLazyLoad', '$interval'];
+PictureController.$inject = ['$rootScope', '$scope', '$log', '$stateParams', '$state', '$ocLazyLoad', '$interval', 'Analytics'];
 
-function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLazyLoad, $interval) {
+function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLazyLoad, $interval, Analytics) {
     $log.log('> Picture Controller: ', this);
-    $log.log('> Picture Name: ', $stateParams.pictureName);
+    // $log.log('> Picture Name: ', $stateParams.pictureName);
 
     this.details = {
         name: "yellow fin",
@@ -131,7 +131,7 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
     function preloader() {
         Pace.on('done', function () {
             $(".animate-content").addClass('load-finish');
-            $log.log('* Pre-Loader Done *');
+            // $log.log('* Pre-Loader Done *');
         });
     }
 
@@ -149,7 +149,7 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
             $(this).parent().addClass('active').siblings().removeClass('active');
             $('#navbar').collapse('hide');
         });
-        $log.log('* Navigation Done *');
+        // $log.log('* Navigation Done *');
     }
 
     /*----------------------------------------------
@@ -186,7 +186,7 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
     $(window).on('resize', function (e) {
         resizeLayers();
         closeNavVertical();
-        $log.log('* Window-Resize Done *');
+        // $log.log('* Window-Resize Done *');
     });
 
     /*----------------------------------------------
@@ -208,7 +208,6 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
             closeNavVertical();
 
             if(layerToOpen === 'page-review') {
-                console.log('call review function');
                 $$reviewOrder();
             }
 
@@ -219,7 +218,7 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
             $scope.payments.loaded = false;
             closeLayer();
         });
-        $log.log('* Manage-Page Done *');
+        // $log.log('* Manage-Page Done *');
     }
 
     /*----------------------------------------------

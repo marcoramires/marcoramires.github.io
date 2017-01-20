@@ -5,8 +5,18 @@
 ;(function () {
     'use strict';
     angular
-        .module('app', ['ui.router', 'oc.lazyLoad'])
-        .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
+        .module('app', ['ui.router', 'oc.lazyLoad', 'angular-google-analytics'])
+        .config(['$stateProvider', '$urlRouterProvider', 'AnalyticsProvider', function($stateProvider, $urlRouterProvider, AnalyticsProvider) {
+
+            // Add configuration code as desired
+            AnalyticsProvider.setAccount('UA-66126082-2')
+                // .trackPages(true)
+                .useECommerce(true, true)
+                .setPageEvent('$stateChangeSuccess')
+                // .readFromRoute(true);
+                // .trackUrlParams(true)
+                // .setRemoveRegExp(/\?(.*)/); //removes query strings
+                .setCurrency('AUD');
 
             /* Router - Angular UI Router */
             /* -------------------------- */
@@ -66,13 +76,12 @@
             $stateProvider.state(blogState);
             $stateProvider.state(postState);
             $stateProvider.state(paypalState);
-        }])
-        .run(function($rootScope, $location) {
+        }]).run(['$rootScope', 'Analytics', function($rootScope, Analytics) {
             $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-                console.info('[event] routeChangeStart...');
+                // console.info('[event] routeChangeStart...');
                 Pace.restart();
             });
-        });
+    }]);
 
     angular.element(document).ready(function() {
         angular.bootstrap('body', ['app']);

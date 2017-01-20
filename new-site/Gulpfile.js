@@ -52,7 +52,7 @@ gulp.task('js-plugins', function () {
 });
 
 gulp.task('js-vendor', function () {
-    return gulp.src(['node_modules/jquery/dist/jquery.js', 'app/js/vendor/vendor.js', 'node_modules/angular/angular.js', 'node_modules/angular-ui-router/release/angular-ui-router.js', 'node_modules/oclazyload/dist/ocLazyLoad.js'])
+    return gulp.src(['node_modules/jquery/dist/jquery.js', 'app/js/vendor/vendor.js', 'node_modules/angular/angular.js', 'node_modules/angular-ui-router/release/angular-ui-router.js', 'node_modules/oclazyload/dist/ocLazyLoad.js', '/Users/marcoramires/GIT/Prototypes/marcoramires.github.io/new-site/node_modules/angular-google-analytics/dist/angular-google-analytics.min.js'])
         .pipe(concat('vendor.js'))
         .pipe(gulp.dest('.tmp/scripts'));
 });

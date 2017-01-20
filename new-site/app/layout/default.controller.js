@@ -6,15 +6,13 @@ angular
     .module('app')
     .controller('DefaultController', DefaultController);
 
-DefaultController.$inject = ['$rootScope', '$scope', '$log', '$location'];
+DefaultController.$inject = ['$rootScope', '$scope', '$log', '$location', 'Analytics'];
 
-function DefaultController($rootScope, $scope, $log, $location) {
+function DefaultController($rootScope, $scope, $log, $location, Analytics) {
     $log.log('> Default Controller: ', this);
 
     var searchObject = $location.search();
-    console.log(searchObject);
     $scope.orderId = searchObject.paymentId;
-
 
     /* ----------------------------------------------
      P R E L O A D E R - TODO: Move to Service layer
@@ -22,7 +20,7 @@ function DefaultController($rootScope, $scope, $log, $location) {
     function preloader() {
         Pace.on('done', function () {
             $(".animate-content").addClass('load-finish');
-            $log.log('* Pre-Loader Done *');
+            // $log.log('* Pre-Loader Done *');
         });
     }
 
@@ -157,7 +155,7 @@ function DefaultController($rootScope, $scope, $log, $location) {
         $('.tp-tabs').on('mouseleave', function (e) {
             $('body').removeClass('showThumbnails');
         });
-        $log.log('* Main-Banner Done *');
+        // $log.log('* Main-Banner Done *');
     }
 
     /*----------------------------------------------
@@ -170,13 +168,13 @@ function DefaultController($rootScope, $scope, $log, $location) {
         $('.grid-lr').each(function () {
             $(this).after('<div class="img-lr-grid"></div>');
         });
-        $log.log('* Image-Layer Done *');
+        // $log.log('* Image-Layer Done *');
     }
     function imageLayerGallery() {
         $('.lg-img-wrap').each(function () {
             $(this).after('<div class="img-lr"></div>');
         });
-        $log.log('* Image-Layer-Gallery Done *');
+        // $log.log('* Image-Layer-Gallery Done *');
     }
 
     /*----------------------------------------------
@@ -193,7 +191,11 @@ function DefaultController($rootScope, $scope, $log, $location) {
             $(this).parent().addClass('active').siblings().removeClass('active');
             $('#navbar').collapse('hide');
         });
-        $log.log('* Navigation Done *');
+
+        $('.open-layer, .open-home').on('click', function () {
+            Analytics.trackPage($(this).attr('data-layer'));
+        });
+        // $log.log('* Navigation Done *');
     }
 
     /*----------------------------------------------
@@ -236,8 +238,9 @@ function DefaultController($rootScope, $scope, $log, $location) {
                 '-o-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')',
                 'transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')'
             }).addClass('active');
+            // Analytics.trackPage(match);
         }
-        $log.log('* Manage-Page Done *');
+        // $log.log('* Manage-Page Done *');
     }
 
     /*----------------------------------------------
@@ -271,7 +274,7 @@ function DefaultController($rootScope, $scope, $log, $location) {
     $(window).on('resize', function (e) {
         resizeLayers();
         closeNavVertical();
-        $log.log('* Window-Resize Done *');
+        // $log.log('* Window-Resize Done *');
     });
 
     /*----------------------------------------------
@@ -319,7 +322,7 @@ function DefaultController($rootScope, $scope, $log, $location) {
                 imageLayerGallery();
             });
         }
-        $log.log('* Isotope-Grid Done *');
+        // $log.log('* Isotope-Grid Done *');
     }
 
     /* ---------------------------------------------
@@ -360,7 +363,7 @@ function DefaultController($rootScope, $scope, $log, $location) {
             $('.fab').addClass('animate');
         }, 1500);
 
-        $log.log('* Mobile-FAB Done *');
+        // $log.log('* Mobile-FAB Done *');
     }
 
     /*----------------------------------------------
