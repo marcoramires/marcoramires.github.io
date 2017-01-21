@@ -8,8 +8,13 @@
         .module('app', ['ui.router', 'oc.lazyLoad', 'angular-google-analytics'])
         .config(['$stateProvider', '$urlRouterProvider', 'AnalyticsProvider', function($stateProvider, $urlRouterProvider, AnalyticsProvider) {
 
-            // Add configuration code as desired
-            AnalyticsProvider.setAccount('UA-66126082-2')
+            var _env = 'production';
+            var _analytics = {
+                sandbox: 'UA-66126082-2',
+                production: 'UA-66126082-1'
+            };
+
+            AnalyticsProvider.setAccount(_analytics[_env])
                 // .trackPages(true)
                 .useECommerce(true, true)
                 .setPageEvent('$stateChangeSuccess')
@@ -525,7 +530,7 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
     function $$payPal() {
         var _env = 'production';
         var _client = {
-            production: 'AX-MNu6chPspfWTp__Cb2JCpy9Sj9P2NTqC2sO_-j-Gajj_2R6ByPpT2-dMMp0FOZ2d25HJqwfdx4DhB',
+            sandbox: 'AX-MNu6chPspfWTp__Cb2JCpy9Sj9P2NTqC2sO_-j-Gajj_2R6ByPpT2-dMMp0FOZ2d25HJqwfdx4DhB',
             production: 'xxxxxxxxx'
         };
         var _prodDescription = 'Print only: ' + $scope.data.picture + ' ' + $scope.data.availableOptions[$scope.data.size].name;
@@ -533,7 +538,7 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
         var _total = _prodValue;
 
         $rootScope.paypal = paypal.Button.render({
-            env: 'production', // Specify 'production' for the test environment
+            env: _env, // Specify 'production' for the test environment
             client: _client,
             payment: function () {
                 return paypal.rest.payment.create(_env, _client, {
