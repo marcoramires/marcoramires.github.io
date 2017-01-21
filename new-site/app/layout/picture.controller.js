@@ -5,9 +5,9 @@ angular
     .module('app')
     .controller('PictureController', PictureController);
 
-PictureController.$inject = ['$rootScope', '$scope', '$log', '$stateParams', '$state', '$ocLazyLoad', '$interval', 'Events_Service'];
+PictureController.$inject = ['$rootScope', '$scope', '$log', '$stateParams', '$state', '$ocLazyLoad', '$interval', 'Events_Service', 'Analytics'];
 
-function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLazyLoad, $interval, Events_Service) {
+function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLazyLoad, $interval, Events_Service, Analytics) {
     $log.log('> Picture Controller: ', this);
     // $log.log('> Picture Name: ', $stateParams.pictureName);
 
@@ -48,10 +48,7 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
 
         $rootScope.paypal = paypal.Button.render({
             env: 'sandbox', // Specify 'sandbox' for the test environment
-            client: {
-                sandbox: 'AX-MNu6chPspfWTp__Cb2JCpy9Sj9P2NTqC2sO_-j-Gajj_2R6ByPpT2-dMMp0FOZ2d25HJqwfdx4DhB',
-                production: 'xxxxxxxxx'
-            },
+            client: _client,
             payment: function () {
                 return paypal.rest.payment.create(_env, _client, {
                     intent: "sale",
@@ -103,6 +100,9 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
                 shape: 'rect'
             }
         }, '#paypal-button');
+
+        Analytics.trackPage('/page-review-order');
+        Analytics.trackEvent('Review Order', 'Picture', _prodDescription);
     }
 
     function $$reviewOrder () {
@@ -115,6 +115,9 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
                 if($rootScope.paypal.resolved){
                     $interval.cancel(promise);
                     $scope.payments.loaded = true;
+                    $('.button-paypal').click(function() {
+                        Analytics.trackEvent('Button', 'Click', 'PayPal');
+                    });
                 }
             },500);
         });

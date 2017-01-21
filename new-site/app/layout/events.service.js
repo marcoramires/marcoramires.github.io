@@ -19,9 +19,25 @@ function Events_Service (Analytics){
             });
         };
 
+        var _gaSelect = function () {
+            $('select').on('change', function() {
+                var text = $(this).find('option:selected').text();
+                Analytics.trackEvent('Select', 'Change', text);
+            });
+        };
+
+        var _gaButton = function () {
+            $('button').click(function() {
+                var text = $(this).text();
+                Analytics.trackEvent('Button', 'Click', text);
+            });
+        };
+
         this.all = function () {
             _linkControl();
             _gaExternalLinks();
+            _gaSelect();
+            _gaButton();
         };
     }
 
