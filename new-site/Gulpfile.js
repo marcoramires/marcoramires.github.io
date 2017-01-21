@@ -104,6 +104,10 @@ gulp.task('replace-dist', function () {
     gulp.src(['.tmp/scripts/main.js'])
         .pipe(replace('layout', '/dist/layout'))
         .pipe(gulp.dest('.build/scripts/'));
+
+    gulp.src(['app/layout/*.html'])
+        .pipe(replace('images', '../../dist/images'))
+        .pipe(gulp.dest('.build/layout/'));
 });
 
 // Deployment task
