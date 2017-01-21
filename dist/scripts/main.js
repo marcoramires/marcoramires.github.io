@@ -511,9 +511,9 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
             {id: '0', name: '12 x 8 inches - 30 x 20 cm', price: 25},
             {id: '1', name: '18 x 12 inches - 45 x 30 cm', price: 50},
             {id: '2', name: '24 x 16 inches - 60 x 40 cm', price: 75},
-            {id: '3', name: '30 x 20 inches - 75 x 50 cm', price: 100},
-            {id: '4', name: '6 x 24 inches - 92 x 60 cm', price: 150},
-            {id: '5', name: '45 x 34 inches - 114 x 76 cm', price: 200}
+            {id: '3', name: '30 x 20 inches - 75 x 50 cm', price: 130},
+            {id: '4', name: '36 x 24 inches - 92 x 60 cm', price: 180},
+            {id: '5', name: '45 x 34 inches - 114 x 76 cm', price: 250}
         ]
     };
     $scope.payments = {
