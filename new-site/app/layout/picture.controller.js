@@ -40,7 +40,7 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
         var _env = 'sandbox';
         var _client = {
             sandbox: 'AX-MNu6chPspfWTp__Cb2JCpy9Sj9P2NTqC2sO_-j-Gajj_2R6ByPpT2-dMMp0FOZ2d25HJqwfdx4DhB',
-            production: 'xxxxxxxxx'
+            production: 'AbsV2ykBRbKcZGz-O-27Y8-jFMVQrgU8vQ7owgvB1afFMMcGYrPdMFrQVWgONmO8TnrUy4-V2n23IEj8'
         };
         var _prodDescription = 'Print only: ' + $scope.data.picture + ' ' + $scope.data.availableOptions[$scope.data.size].name;
         var _prodValue = $scope.data.availableOptions[$scope.data.size].price;
