@@ -56,8 +56,8 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
                         payment_method: "paypal"
                     },
                     redirect_urls: {
-                        return_url: "http://localhost:3000/#!/page-paypal",
-                        cancel_url: "http://localhost:3000/#!/picture/yellow-fin"
+                        return_url: "https://marcoramires.com/#!/page-paypal",
+                        cancel_url: "https://marcoramires.com/#!/picture/yellow-fin"
                     },
                     transactions: [
                         {
