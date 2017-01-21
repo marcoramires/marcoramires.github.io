@@ -108,10 +108,17 @@ gulp.task('replace-dist', function () {
     gulp.src(['app/layout/*.html'])
         .pipe(replace('images', '../../dist/images'))
         .pipe(gulp.dest('.build/layout/'));
+
+    gulp.src(['index.html'])
+        .pipe(replace('scripts', 'dist/scripts'))
+        .pipe(replace('styles/', 'dist/styles/'))
+        .pipe(gulp.dest('.build/'));
 });
 
 // Deployment task
 gulp.task('build-dist', ['sass', 'styles-vendor', 'styles-plugins', 'js', 'js-plugins', 'js-vendor', 'js-preload', 'images', 'fonts'], function() {
-    return gulp.src(['.build/**/*', '!.build/images/demo/**/*'])
+    gulp.src(['.build/**/*', '!.build/images/demo/**/*', '!.build/index.html'])
         .pipe(gulp.dest('../dist'));
+    gulp.src(['.build/index.html'])
+        .pipe(gulp.dest('../'));
 });
