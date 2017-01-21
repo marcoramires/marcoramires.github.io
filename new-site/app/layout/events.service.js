@@ -33,11 +33,19 @@ function Events_Service (Analytics){
             });
         };
 
+        var _gaFilters = function() {
+          $('#filters li').click(function () {
+              var filter = $(this).attr('data-filter').replace('.','');
+              Analytics.trackEvent('Filter', 'Click', filter);
+          });
+        };
+
         this.all = function () {
             _linkControl();
             _gaExternalLinks();
             _gaSelect();
             _gaButton();
+            _gaFilters();
         };
     }
 
