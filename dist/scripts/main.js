@@ -523,9 +523,9 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
 
     //TODO: Move to payment service
     function $$payPal() {
-        var _env = 'sandbox';
+        var _env = 'production';
         var _client = {
-            sandbox: 'AX-MNu6chPspfWTp__Cb2JCpy9Sj9P2NTqC2sO_-j-Gajj_2R6ByPpT2-dMMp0FOZ2d25HJqwfdx4DhB',
+            production: 'AX-MNu6chPspfWTp__Cb2JCpy9Sj9P2NTqC2sO_-j-Gajj_2R6ByPpT2-dMMp0FOZ2d25HJqwfdx4DhB',
             production: 'xxxxxxxxx'
         };
         var _prodDescription = 'Print only: ' + $scope.data.picture + ' ' + $scope.data.availableOptions[$scope.data.size].name;
@@ -533,7 +533,7 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
         var _total = _prodValue;
 
         $rootScope.paypal = paypal.Button.render({
-            env: 'sandbox', // Specify 'sandbox' for the test environment
+            env: 'production', // Specify 'production' for the test environment
             client: _client,
             payment: function () {
                 return paypal.rest.payment.create(_env, _client, {
