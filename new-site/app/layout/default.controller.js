@@ -320,6 +320,15 @@ function DefaultController($scope, $log, $location, Analytics, Events_Service) {
             $lg.on('onAfterOpen.lg', function (event) {
                 imageLayerGallery();
             });
+
+            $('.gallery-links a').click(function(e) {
+                e.stopPropagation();
+            });
+
+            $('.gallery-links a.favorite').click(function(e) {
+                e.preventDefault();
+            });
+
         }
         // $log.log('* Isotope-Grid Done *');
     }

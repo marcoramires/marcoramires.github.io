@@ -40,12 +40,28 @@ function Events_Service (Analytics){
           });
         };
 
+        var _gaShoppingCart = function() {
+            $('a.shopping-cart').click(function () {
+                var link = $(this).attr('href').replace('#!', '');
+                Analytics.trackEvent('Shopping Cart Link', 'Click', link);
+            });
+        };
+
+        var _gaFavorite = function() {
+            $('a.favorite').click(function () {
+                var link = $(this).attr('href').replace('#!', '');
+                Analytics.trackEvent('Favorite Link', 'Click', link);
+            });
+        };
+
         this.all = function () {
             _linkControl();
             _gaExternalLinks();
             _gaSelect();
             _gaButton();
             _gaFilters();
+            _gaShoppingCart();
+            _gaFavorite();
         };
     }
 
