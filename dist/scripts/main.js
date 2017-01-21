@@ -25,48 +25,48 @@
             var homeState = {
                 name: 'home',
                 url: '/',
-                templateUrl: 'layout/default.html',
+                templateUrl: '/dist/layout/default.html',
                 controller : 'DefaultController'
             };
             var contactState = {
                 name: 'page-contact',
                 url: '/page-contact',
-                templateUrl: '../layout/default.html',
+                templateUrl: '/dist/layout/default.html',
                 controller : 'DefaultController'
             };
             var galleryState = {
                 name: 'page-gallery',
                 url: '/page-gallery',
-                templateUrl: 'layout/default.html',
+                templateUrl: '/dist/layout/default.html',
                 controller : 'DefaultController'
             };
             var aboutState = {
                 name: 'page-about',
                 url: '/page-about',
-                templateUrl: 'layout/default.html',
+                templateUrl: '/dist/layout/default.html',
                 controller: 'DefaultController'
             };
             var paypalState = {
                 name: 'page-paypal',
                 url: '/page-paypal',
-                templateUrl: 'layout/default.html',
+                templateUrl: '/dist/layout/default.html',
                 controller: 'DefaultController'
             };
             var pictureState = {
                 name: 'picture',
                 url: '/picture/:pictureName',
-                templateUrl: 'layout/picture.html',
+                templateUrl: '/dist/layout/picture.html',
                 controller: 'PictureController as picture'
             };
             var blogState = {
                 name: 'blog',
                 url: '/blog',
-                templateUrl: 'layout/blog.html'
+                templateUrl: '/dist/layout/blog.html'
             };
             var postState = {
                 name: 'post',
                 url: '/post',
-                templateUrl: 'layout/post.html'
+                templateUrl: '/dist/layout/post.html'
             };
 
             $stateProvider.state(homeState);

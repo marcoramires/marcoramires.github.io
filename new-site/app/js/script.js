@@ -31,7 +31,7 @@
             var contactState = {
                 name: 'page-contact',
                 url: '/page-contact',
-                templateUrl: '../layout/default.html',
+                templateUrl: 'layout/default.html',
                 controller : 'DefaultController'
             };
             var galleryState = {

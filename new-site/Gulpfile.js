@@ -8,6 +8,7 @@ var sass        = require('gulp-sass');
 var sourcemaps   = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var bourbon = require('node-bourbon').includePaths;
+var replace = require('gulp-replace');
 
 // Static Server + watching scss/html files
 gulp.task('serve', ['sass', 'styles-vendor', 'styles-plugins', 'js', 'js-plugins', 'js-vendor', 'js-preload'], function() {
@@ -99,8 +100,14 @@ gulp.task('fonts', function () {
         .pipe(gulp.dest('.tmp/fonts'));
 });
 
+gulp.task('replace-dist', function () {
+    gulp.src(['.tmp/scripts/main.js'])
+        .pipe(replace('layout', '/dist/layout'))
+        .pipe(gulp.dest('.build/scripts/'));
+});
+
 // Deployment task
 gulp.task('build-dist', ['sass', 'styles-vendor', 'styles-plugins', 'js', 'js-plugins', 'js-vendor', 'js-preload', 'images', 'fonts'], function() {
-    return gulp.src(['.tmp/**/*', '!.tmp/images/demo/**/*'])
+    return gulp.src(['.build/**/*', '!.build/images/demo/**/*'])
         .pipe(gulp.dest('../dist'));
 });
