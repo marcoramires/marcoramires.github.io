@@ -47,7 +47,7 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
         var _total = _prodValue;
 
         $rootScope.paypal = paypal.Button.render({
-            env: 'sandbox', // Specify 'sandbox' for the test environment
+            env: _env, // Specify 'sandbox' for the test environment
             client: _client,
             payment: function () {
                 return paypal.rest.payment.create(_env, _client, {

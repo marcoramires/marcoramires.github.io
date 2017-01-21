@@ -8,8 +8,13 @@
         .module('app', ['ui.router', 'oc.lazyLoad', 'angular-google-analytics'])
         .config(['$stateProvider', '$urlRouterProvider', 'AnalyticsProvider', function($stateProvider, $urlRouterProvider, AnalyticsProvider) {
 
-            // Add configuration code as desired
-            AnalyticsProvider.setAccount('UA-66126082-2')
+            var _env = 'sandbox';
+            var _analytics = {
+                sandbox: 'UA-66126082-2',
+                production: 'UA-66126082-1'
+            };
+
+            AnalyticsProvider.setAccount(_analytics[_env])
                 // .trackPages(true)
                 .useECommerce(true, true)
                 .setPageEvent('$stateChangeSuccess')
