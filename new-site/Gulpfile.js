@@ -34,7 +34,7 @@ gulp.task('js-watch', ['js'], function (done) {
 
 // process JS files and return the stream.
 gulp.task('js', function () {
-    return gulp.src(['app/js/**/*.js', 'app/layout/*.controller.js', '!app/js/vendor/*.js', '!app/js/plugins/*.js'])
+    return gulp.src(['app/js/**/*.js', 'app/layout/*.controller.js', 'app/layout/*.service.js', '!app/js/vendor/*.js', '!app/js/plugins/*.js'])
         .pipe(concat('main.js'))
         .pipe(gulp.dest('.tmp/scripts'));
 });
@@ -52,7 +52,7 @@ gulp.task('js-plugins', function () {
 });
 
 gulp.task('js-vendor', function () {
-    return gulp.src(['node_modules/jquery/dist/jquery.js', 'app/js/vendor/vendor.js', 'node_modules/angular/angular.js', 'node_modules/angular-ui-router/release/angular-ui-router.js'])
+    return gulp.src(['node_modules/jquery/dist/jquery.js', 'app/js/vendor/vendor.js', 'node_modules/angular/angular.js', 'node_modules/angular-ui-router/release/angular-ui-router.js', 'node_modules/oclazyload/dist/ocLazyLoad.js', 'node_modules/angular-google-analytics/dist/angular-google-analytics.min.js'])
         .pipe(concat('vendor.js'))
         .pipe(gulp.dest('.tmp/scripts'));
 });

@@ -6,10 +6,13 @@ angular
     .module('app')
     .controller('DefaultController', DefaultController);
 
-DefaultController.$inject = ['$rootScope', '$scope', '$log'];
+DefaultController.$inject = ['$scope', '$log', '$location', 'Analytics', 'Events_Service'];
 
-function DefaultController($rootScope, $scope, $log) {
+function DefaultController($scope, $log, $location, Analytics, Events_Service) {
     $log.log('> Default Controller: ', this);
+
+    var searchObject = $location.search();
+    $scope.orderId = searchObject.paymentId;
 
     /* ----------------------------------------------
      P R E L O A D E R - TODO: Move to Service layer
@@ -17,7 +20,7 @@ function DefaultController($rootScope, $scope, $log) {
     function preloader() {
         Pace.on('done', function () {
             $(".animate-content").addClass('load-finish');
-            $log.log('* Pre-Loader Done *');
+            // $log.log('* Pre-Loader Done *');
         });
     }
 
@@ -152,7 +155,7 @@ function DefaultController($rootScope, $scope, $log) {
         $('.tp-tabs').on('mouseleave', function (e) {
             $('body').removeClass('showThumbnails');
         });
-        $log.log('* Main-Banner Done *');
+        // $log.log('* Main-Banner Done *');
     }
 
     /*----------------------------------------------
@@ -165,13 +168,13 @@ function DefaultController($rootScope, $scope, $log) {
         $('.grid-lr').each(function () {
             $(this).after('<div class="img-lr-grid"></div>');
         });
-        $log.log('* Image-Layer Done *');
+        // $log.log('* Image-Layer Done *');
     }
     function imageLayerGallery() {
         $('.lg-img-wrap').each(function () {
             $(this).after('<div class="img-lr"></div>');
         });
-        $log.log('* Image-Layer-Gallery Done *');
+        // $log.log('* Image-Layer-Gallery Done *');
     }
 
     /*----------------------------------------------
@@ -188,7 +191,11 @@ function DefaultController($rootScope, $scope, $log) {
             $(this).parent().addClass('active').siblings().removeClass('active');
             $('#navbar').collapse('hide');
         });
-        $log.log('* Navigation Done *');
+
+        $('.open-layer, .open-home').on('click', function () {
+            Analytics.trackPage($(this).attr('data-layer'));
+        });
+        // $log.log('* Navigation Done *');
     }
 
     /*----------------------------------------------
@@ -224,7 +231,7 @@ function DefaultController($rootScope, $scope, $log) {
         if (match) {
             var wheight1 = $(window).height();
             $('.layer-page').removeClass('active');
-            $('.' + match).css({
+            $('.' + match.split("?")[0]).css({
                 '-webkit-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')',
                 '-moz-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')',
                 '-ms-transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')',
@@ -232,7 +239,7 @@ function DefaultController($rootScope, $scope, $log) {
                 'transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')'
             }).addClass('active');
         }
-        $log.log('* Manage-Page Done *');
+        // $log.log('* Manage-Page Done *');
     }
 
     /*----------------------------------------------
@@ -266,7 +273,7 @@ function DefaultController($rootScope, $scope, $log) {
     $(window).on('resize', function (e) {
         resizeLayers();
         closeNavVertical();
-        $log.log('* Window-Resize Done *');
+        // $log.log('* Window-Resize Done *');
     });
 
     /*----------------------------------------------
@@ -313,8 +320,17 @@ function DefaultController($rootScope, $scope, $log) {
             $lg.on('onAfterOpen.lg', function (event) {
                 imageLayerGallery();
             });
+
+            $('.gallery-links a').click(function(e) {
+                e.stopPropagation();
+            });
+
+            $('.gallery-links a.favorite').click(function(e) {
+                e.preventDefault();
+            });
+
         }
-        $log.log('* Isotope-Grid Done *');
+        // $log.log('* Isotope-Grid Done *');
     }
 
     /* ---------------------------------------------
@@ -345,6 +361,9 @@ function DefaultController($rootScope, $scope, $log) {
             $dy.on('onCloseAfter.lg',function(event){
                 $(this).parent(".holder").removeClass("is-expandend");
             });
+
+            // Create a new tracking event with a value
+            Analytics.trackEvent('Home Page', 'FAB (full-screen)', 'Yellow Fin', 1);
         });
 
         //TODO: Review this
@@ -355,7 +374,7 @@ function DefaultController($rootScope, $scope, $log) {
             $('.fab').addClass('animate');
         }, 1500);
 
-        $log.log('* Mobile-FAB Done *');
+        // $log.log('* Mobile-FAB Done *');
     }
 
     /*----------------------------------------------
@@ -370,5 +389,8 @@ function DefaultController($rootScope, $scope, $log) {
         imageLayer();
         isotopeGrid();
         mobileFab();
+        Events_Service.run().all();
     });
 }
+
+// 'Outbound Links', 'Click', url]);

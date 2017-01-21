@@ -13,11 +13,11 @@
         <div id="navbar" class="navbar-collapse collapse">
             <div class="close-nav"></div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a ui-sref="home">Home</a></li>
+                <li><a ui-sref="home" data-layer="/">Home</a></li>
                 <li><a ui-sref="page-about" data-layer="page-about">About</a></li>
                 <!--<li><a href="#" class="open-layer" data-layer="page-albums">Albums</a></li>-->
                 <li><a ui-sref="page-gallery" data-layer="page-gallery">Gallery</a></li>
-                <li><a href="#">Blog (soon)</a></li>
+                <li><a href="">Blog (soon)</a></li>
                 <li><a ui-sref="page-contact" data-layer="page-contact">Contact</a></li>
                 <!--<li><a ui-sref="picture">picture</a></li>-->
             </ul>
@@ -42,28 +42,25 @@
                     <div class="content-post post-without-sidebar">
                         <div class="post-extra">
                             <!--<div class="blog-post-author" id="blog2-post-author1"></div>-->
-                            <a href="#" class="button-blog ico-share"></a>
+                            <a href="" class="button-blog ico-share"></a>
                         </div>
-                        <h1 class="primary-title text-left">{{picture.pictureName}}</h1>
-                        <p class="blog-post-date block"><i class="icon fa fa-map-marker"></i>Byron Bay - 15th june 2016</p>
-                        <p class="blog-post-date block"><i class="icon fa fa-camera"></i>1/1000 F1.4 ISO100 </p>
-                        <p class="blog-post-date block">Ref: IMG_22021</p>
-                        <img src="images/site/test-indoor.jpg" alt="">
+                        <h1 class="primary-title text-left">{{picture.details.name}}</h1>
+                        <p class="blog-post-date block"><i class="icon fa fa-map-marker"></i>{{picture.details.location}} - {{picture.details.dateTaken}}</p>
+                        <p class="blog-post-date block"><i class="icon fa fa-camera"></i>{{picture.details.camera}}</p>
+                        <p class="blog-post-date block">Ref: {{picture.details.ref}}</p>
+                        <img src="images/site/test_b.jpg" alt="">
                         <h2>Buy this image</h2>
                         <div class="plain-select">
-                             <select>
+                            <select name="ImageSize" id="ImageSize" ng-model="data.size">
                                 <option value="" disabled="disabled" selected="selected">Select --</option>
-                                <option value="1">12 x 8 inches - 30 x 20 cm</option>
-                                <option value="1">18 x 12 inches - 45 x 30 cm</option>
-                                <option value="1">24 x 16 inches - 60 x 40 cm</option>
-                                <option value="1">30 x 20 inches - 75 x 50 cm</option>
-                                <option value="1">36 x 24 inches - 92 x 60 cm</option>
-                                <option value="1">45 x 34 inches - 114 x 76 cm</option>
+                                <option ng-repeat="option in data.availableOptions" value="{{option.id}}">{{option.name}}</option>
                             </select>
                         </div>
-                        <p class="header">Total: AUD$ --</p>
+                        <p class="header price" ng-show="data.size !== null">Total: {{data.availableOptions[data.size].price | currency: 'AUD$ ':0}}</p>
+                        <p class="header" ng-show="data.size !== null">* Frame not included.</p>
                         <p>Production time : 10 days (excluding shipping)</p>
-                        <button class="btn">Order Now</button>
+                        <button class="btn btn-primary open-layer" data- ng-disabled="data.size === null" data-layer="page-review">Order Now</button>
+                        <!--<div id="paypal-button" ng-show="data.size !== null"></div>-->
                         <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam perferendis molestiae dolore quae mollitia placeat est amet similique, iure, consequatur possimus ipsa eius recusandae ex nostrum? Iste amet consequuntur magni. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci quaerat debitis earum et perspiciatis ipsum delectus minus suscipit, pariatur laboriosam nobis! Quas harum, delectus et unde in officia distinctio voluptatibus!</p>-->
                         <hr>
                         <h2>FAQ</h2>
@@ -122,4 +119,36 @@
             </div>
         </div>
     </div>
+    <div class="layer-page page-review">
+        <!--<span class="close-layer">close</span>-->
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5 col-md-offset-3 col-lg-5 col-lg-offset-3 col-">
+                        <div class="content-section">
+                            <div>
+                                <h3>Review Order</h3>
+                                <img src="images/site/test_b.jpg" alt="">
+                                <p>{{data.picture}} </p>
+                                <p>Print only:{{data.availableOptions[data.size].name}}</p>
+                                <p class="price" ng-show="data.size !== null">Total: {{data.availableOptions[data.size].price | currency: 'AUD$ ':0}}</p>
+                                <p>Available payments</p>
+                                <p ng-show="!payments.loaded">Loading <i class="fa fa-spinner spin"></i></p>
+                                <div id="paypal-button" ng-show="payments.loaded"></div>
+                                <button class="btn btn-default change-order">Change order</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="col-sm-6">-->
+                    <!--<div class="content-section">-->
+                    <!--<div>-->
+                    <!--<div id="map"></div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+    </div><!--/.page-contact -->
 </div>
+<!--<script src="https://www.paypalobjects.com/api/checkout.js"></script>-->

@@ -5,8 +5,19 @@
 ;(function () {
     'use strict';
     angular
-        .module('app', ['ui.router'])
-        .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
+        .module('app', ['ui.router', 'oc.lazyLoad', 'angular-google-analytics'])
+        .config(['$stateProvider', '$urlRouterProvider', 'AnalyticsProvider', function($stateProvider, $urlRouterProvider, AnalyticsProvider) {
+
+            // Add configuration code as desired
+            AnalyticsProvider.setAccount('UA-66126082-2')
+                // .trackPages(true)
+                .useECommerce(true, true)
+                .setPageEvent('$stateChangeSuccess')
+                .ignoreFirstPageLoad(true)
+                // .readFromRoute(true);
+                // .trackUrlParams(true)
+                // .setRemoveRegExp(/\?(.*)/); //removes query strings
+                .setCurrency('AUD');
 
             /* Router - Angular UI Router */
             /* -------------------------- */
@@ -35,6 +46,12 @@
                 templateUrl: 'layout/default.html',
                 controller: 'DefaultController'
             };
+            var paypalState = {
+                name: 'page-paypal',
+                url: '/page-paypal',
+                templateUrl: 'layout/default.html',
+                controller: 'DefaultController'
+            };
             var pictureState = {
                 name: 'picture',
                 url: '/picture/:pictureName',
@@ -59,13 +76,13 @@
             $stateProvider.state(pictureState);
             $stateProvider.state(blogState);
             $stateProvider.state(postState);
-        }])
-        .run(function($rootScope, $location) {
+            $stateProvider.state(paypalState);
+        }]).run(['$rootScope', 'Analytics', function($rootScope, Analytics) {
             $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-                console.info('[event] routeChangeStart...');
+                // console.info('[event] routeChangeStart...');
                 Pace.restart();
             });
-        });
+    }]);
 
     angular.element(document).ready(function() {
         angular.bootstrap('body', ['app']);
