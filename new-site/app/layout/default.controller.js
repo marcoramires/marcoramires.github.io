@@ -390,11 +390,11 @@ function DefaultController($timeout, $scope, $log, $location, Analytics, Events_
         //TODO: Move to directive
         $timeout(function () {
             mainBanner();
+            isotopeGrid();
         }, 200);
         navigation();
         managePages();
         imageLayer();
-        isotopeGrid();
         mobileFab();
         Events_Service.run().all();
     });
