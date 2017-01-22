@@ -6,13 +6,18 @@ angular
     .module('app')
     .controller('DefaultController', DefaultController);
 
-DefaultController.$inject = ['$scope', '$log', '$location', 'Analytics', 'Events_Service'];
+DefaultController.$inject = ['$timeout', '$scope', '$log', '$location', 'Analytics', 'Events_Service', 'DataService'];
 
-function DefaultController($scope, $log, $location, Analytics, Events_Service) {
+function DefaultController($timeout, $scope, $log, $location, Analytics, Events_Service, DataService) {
     $log.log('> Default Controller: ', this);
 
     var searchObject = $location.search();
     $scope.orderId = searchObject.paymentId;
+
+    DataService.getCollection('pictures').then(function (data) {
+        console.log(data);
+        $scope.pictures = data;
+    });
 
     /* ----------------------------------------------
      P R E L O A D E R - TODO: Move to Service layer
@@ -20,7 +25,7 @@ function DefaultController($scope, $log, $location, Analytics, Events_Service) {
     function preloader() {
         Pace.on('done', function () {
             $(".animate-content").addClass('load-finish');
-            // $log.log('* Pre-Loader Done *');
+            $log.log('* Pre-Loader Done *');
         });
     }
 
@@ -155,7 +160,7 @@ function DefaultController($scope, $log, $location, Analytics, Events_Service) {
         $('.tp-tabs').on('mouseleave', function (e) {
             $('body').removeClass('showThumbnails');
         });
-        // $log.log('* Main-Banner Done *');
+        $log.log('* Main-Banner Done *');
     }
 
     /*----------------------------------------------
@@ -168,13 +173,13 @@ function DefaultController($scope, $log, $location, Analytics, Events_Service) {
         $('.grid-lr').each(function () {
             $(this).after('<div class="img-lr-grid"></div>');
         });
-        // $log.log('* Image-Layer Done *');
+        $log.log('* Image-Layer Done *');
     }
     function imageLayerGallery() {
         $('.lg-img-wrap').each(function () {
             $(this).after('<div class="img-lr"></div>');
         });
-        // $log.log('* Image-Layer-Gallery Done *');
+        $log.log('* Image-Layer-Gallery Done *');
     }
 
     /*----------------------------------------------
@@ -195,7 +200,7 @@ function DefaultController($scope, $log, $location, Analytics, Events_Service) {
         $('.open-layer, .open-home').on('click', function () {
             Analytics.trackPage($(this).attr('data-layer'));
         });
-        // $log.log('* Navigation Done *');
+        $log.log('* Navigation Done *');
     }
 
     /*----------------------------------------------
@@ -239,7 +244,7 @@ function DefaultController($scope, $log, $location, Analytics, Events_Service) {
                 'transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')'
             }).addClass('active');
         }
-        // $log.log('* Manage-Page Done *');
+        $log.log('* Manage-Page Done *');
     }
 
     /*----------------------------------------------
@@ -330,7 +335,7 @@ function DefaultController($scope, $log, $location, Analytics, Events_Service) {
             });
 
         }
-        // $log.log('* Isotope-Grid Done *');
+        $log.log('* Isotope-Grid Done *');
     }
 
     /* ---------------------------------------------
@@ -374,7 +379,7 @@ function DefaultController($scope, $log, $location, Analytics, Events_Service) {
             $('.fab').addClass('animate');
         }, 1500);
 
-        // $log.log('* Mobile-FAB Done *');
+        $log.log('* Mobile-FAB Done *');
     }
 
     /*----------------------------------------------
@@ -383,7 +388,10 @@ function DefaultController($scope, $log, $location, Analytics, Events_Service) {
     angular.element(document).ready(function() {
         $('body').removeClass('page-blog page-picture');
         preloader();
-        mainBanner();
+        //TODO: Move to directive
+        $timeout(function () {
+            mainBanner();
+        }, 200);
         navigation();
         managePages();
         imageLayer();
@@ -392,5 +400,3 @@ function DefaultController($scope, $log, $location, Analytics, Events_Service) {
         Events_Service.run().all();
     });
 }
-
-// 'Outbound Links', 'Click', url]);

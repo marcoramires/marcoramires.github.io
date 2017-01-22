@@ -35,9 +35,9 @@
         <div id="rev_slider" class="rev_slider fullwidthabanner" style="display:none;" data-version="5.0.7">
             <ul>
                 <!-- SLIDE  -->
-                <li data-index="rs-51" data-transition="slideoverhorizontal" data-slotamount="7" data-easein="default" data-easeout="default" data-masterspeed="1500" data-thumb="images/site/slider-home/IMG_3180-320x160.jpg" data-rotate="0" data-fstransition="fade" data-fsmasterspeed="1000" data-fsslotamount="7" data-saveperformance="off" data-title="Title 1" data-description="Description 1" data-param1="1 / 2">
+                <li ng-repeat="picture in pictures" data-index="" data-transition="slideoverhorizontal" data-slotamount="7" data-easein="default" data-easeout="default" data-masterspeed="1500" data-thumb="images/site/slider-home/{{picture.ref}}-320x160.jpg" data-rotate="0" data-fstransition="fade" data-fsmasterspeed="1000" data-fsslotamount="7" data-saveperformance="off" data-title="{{picture.name}}" data-description="{{picture.description}}" data-param1="1 / 2">
                     <!-- MAIN IMAGE -->
-                    <img src="images/site/slider-home/IMG_3180-1920x1080.jpg" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
+                    <img ng-src="images/site/slider-home/{{picture.ref}}-1920x1080.jpg" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
                     <!-- social links -->
                     <ul class="social-links ontop">
                         <li><a class="shopping-cart" ui-sref="picture({pictureName: 'yellow-fin'})"><i class="fa fa-shopping-cart"></i></a></li>
@@ -174,15 +174,15 @@
             <div class="row">
                 <!-- photo gallery -->
                 <div id="grid-gallery">
-                    <div class="grid-item surf" data-src="images/site/slider-home/IMG_3180-1920x1080.jpg">
-                        <div class="grid-lr">
-                            <img src="images/site/slider-home/IMG_3180-1920x1080.jpg" alt="">
-                        </div>
-                        <ul class="gallery-links ontop">
-                            <li><a class="shopping-cart" ui-sref="picture({pictureName: 'yellow-fin'})"><i class="fa fa-shopping-cart"></i></a></li>
-                            <li><a class="favorite" href="#"><i class="fa fa-heart"></i></a></li>
-                        </ul>
-                    </div>
+                    <!--<div class="grid-item surf" data-src="images/site/slider-home/IMG_3180-1920x1080.jpg">-->
+                        <!--<div class="grid-lr">-->
+                            <!--<img src="images/site/slider-home/IMG_3180-1920x1080.jpg" alt="">-->
+                        <!--</div>-->
+                        <!--<ul class="gallery-links ontop">-->
+                            <!--<li><a class="shopping-cart" ui-sref="picture({pictureName: 'yellow-fin'})"><i class="fa fa-shopping-cart"></i></a></li>-->
+                            <!--<li><a class="favorite" href="#"><i class="fa fa-heart"></i></a></li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
                 </div><!--/#grid-gallery -->
             </div>
         </div>
