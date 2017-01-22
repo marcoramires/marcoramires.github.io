@@ -4028,29 +4028,22 @@ select {
   padding: 0;
   display: block;
   margin: 20px 0 0;
-  border: 1px solid deeppink;
-  height: 100%;
 
   img {
-    margin: 23.5% 0 0;
+    margin: -52% 0 0;
     position: absolute;
     z-index: 1;
     width: 55%;
     left: 0;
     display: block;
+
     &:first-of-type {
+      position: relative;
       margin: 0;
       z-index: 2;
       width: 100%;
       height: auto;
     }
-  }
-}
-
-
-@media (max-width: 768px) {
-  .image-frame {
-    min-height: 350px;
   }
 }
 
