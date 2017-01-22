@@ -31,8 +31,7 @@
 <div class="animate-content">
     <!-- intro -->
     <div class="intro">
-        <div class="image-cover menu-bottom" id="post2-intro-slider01">
-        </div>
+        <div class="image-cover menu-bottom" style="background-image: url('images/site/slider-home/{{details.ref}}-1920x1080.jpg');"></div>
     </div>
     <!-- post -->
     <div class="section post-whidout-sidebar">
@@ -44,11 +43,14 @@
                             <!--<div class="blog-post-author" id="blog2-post-author1"></div>-->
                             <a href="" class="button-blog ico-share"></a>
                         </div>
-                        <h1 class="primary-title text-left">{{picture.details.name}}</h1>
-                        <p class="blog-post-date block"><i class="icon fa fa-map-marker"></i>{{picture.details.location}} - {{picture.details.dateTaken}}</p>
-                        <p class="blog-post-date block"><i class="icon fa fa-camera"></i>{{picture.details.camera}}</p>
-                        <p class="blog-post-date block">Ref: {{picture.details.ref}}</p>
-                        <img src="images/site/test_b.jpg" alt="">
+                        <h1 class="primary-title text-left">{{details.name}}</h1>
+                        <p class="blog-post-date block"><i class="icon fa fa-map-marker"></i>{{details.location}} - {{details.dateTaken}}</p>
+                        <p class="blog-post-date block"><i class="icon fa fa-camera"></i>{{details.camera}}</p>
+                        <p class="blog-post-date block">Ref: {{details.ref}}</p>
+                        <div class="image-frame">
+                            <img src="images/site/iStock_Transparent.png" alt="">
+                            <img ng-src="images/site/slider-home/{{details.ref}}-1920x1080.jpg" alt="">
+                        </div>
                         <h2>Buy this image</h2>
                         <div class="plain-select">
                             <select name="ImageSize" id="ImageSize" ng-model="data.size">

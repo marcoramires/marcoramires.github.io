@@ -61,7 +61,7 @@
                 name: 'picture',
                 url: '/picture/:pictureName',
                 templateUrl: 'layout/picture.html',
-                controller: 'PictureController as picture'
+                controller: 'PictureController'
             };
             var blogState = {
                 name: 'blog',

@@ -4023,6 +4023,26 @@ select {
   pointer-events: none;
 }
 
+.image-frame {
+  position: relative;
+  padding: 0;
+  min-height: 450px;
+  margin: 20px 0 0;
+
+  img {
+    margin: 23.5% 0 0;
+    position: absolute;
+    z-index: 1;
+    width: 55%;
+
+    &:first-of-type {
+      margin: 0;
+      z-index: 2;
+      width: 100%;
+    }
+  }
+}
+
 /* Review Page */
 .page-review {
   .fa-spinner {
@@ -4209,7 +4229,7 @@ body.dark input[type=submit]:hover {
   background-image: url('../images/demo/blog/photo-post3.jpg');
 }
 #post2-intro-slider01 {
-  background-image: url('../images/site/test.jpg');
+  //background-image: url('../images/site/test.jpg');
 }
 #blog2-post-author1 {
   background-image: url('../images/demo/blog/author.jpg');

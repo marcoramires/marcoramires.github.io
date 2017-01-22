@@ -15,7 +15,6 @@ function DefaultController($timeout, $scope, $log, $location, Analytics, Events_
     $scope.orderId = searchObject.paymentId;
 
     DataService.getCollection('pictures').then(function (data) {
-        console.log(data);
         $scope.pictures = data;
     });
 
