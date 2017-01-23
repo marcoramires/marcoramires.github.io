@@ -125,7 +125,7 @@ gulp.task('replace-dist', function () {
         .pipe(gulp.dest('.build/dist/scripts/'));
 
     gulp.src(['app/layout/*.html'])
-        .pipe(replace('images', '../../dist/images'))
+        .pipe(replace('images/site/', 'https://marcoramires.imgix.net/'))
         .pipe(gulp.dest('.build/dist/layout/'));
 
     gulp.src(['index.html'])
