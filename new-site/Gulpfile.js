@@ -106,28 +106,31 @@ gulp.task('fonts', function () {
 });
 
 gulp.task('replace-dist', function () {
-    gulp.src(['.tmp/scripts/main.js'])
+    gulp.src(['.build/scripts/main.js'])
         .pipe(replace('layout', '/dist/layout'))
         .pipe(replace('data/app', '/dist/data/app'))
         .pipe(replace('\'sandbox\'', '\'production\''))
-        .pipe(gulp.dest('.build/scripts/'));
+        .pipe(gulp.dest('../dist/scripts/'));
 
     gulp.src(['app/layout/*.html'])
         .pipe(replace('images', '../../dist/images'))
         .pipe(gulp.dest('.build/layout/'));
 
-    gulp.src(['index.html'])
+    gulp.src(['.tmp/index.html'])
         .pipe(replace('scripts', 'dist/scripts'))
         .pipe(replace('styles/', 'dist/styles/'))
-        .pipe(gulp.dest('.build/'));
+        .pipe(gulp.dest('../'));
+
+    gulp.src(['.build/**/*'])
+        .pipe(gulp.dest('../dist/'));
 });
 
 // Deployment task
 gulp.task('build-dist', ['sass', 'styles-vendor', 'styles-plugins', 'js', 'js-plugins', 'js-vendor', 'js-preload', 'images', 'fonts', 'app-data'], function() {
-    gulp.src(['.build/**/*', '!.build/images/demo/**/*', '!.build/index.html'])
-        .pipe(gulp.dest('../dist'));
-    gulp.src(['.tmp/data/**/*'])
-        .pipe(gulp.dest('../dist/data'));
-    gulp.src(['.build/index.html'])
-        .pipe(gulp.dest('../'));
+
+    gulp.src(['.tmp/**/*', '!.tmp/images/demo/**/*'])
+        .pipe(gulp.dest('.build'));
+
+    gulp.src(['index.html'])
+        .pipe(gulp.dest('.tmp'));
 });

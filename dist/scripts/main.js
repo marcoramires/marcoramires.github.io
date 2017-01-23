@@ -8,7 +8,7 @@
         .module('app', ['ui.router', 'oc.lazyLoad', 'angular-google-analytics'])
         .config(['$sceDelegateProvider', '$stateProvider', '$urlRouterProvider', 'AnalyticsProvider', function($sceDelegateProvider, $stateProvider, $urlRouterProvider, AnalyticsProvider) {
 
-            var _env = 'production';
+            var _env = 'sandbox';
             var _analytics = {
                 sandbox: 'UA-66126082-2',
                 production: 'UA-66126082-1'
@@ -37,48 +37,48 @@
             var homeState = {
                 name: 'home',
                 url: '/',
-                templateUrl: '/dist/layout/default.html',
+                templateUrl: 'layout/default.html',
                 controller : 'DefaultController'
             };
             var contactState = {
                 name: 'page-contact',
                 url: '/page-contact',
-                templateUrl: '/dist/layout/default.html',
+                templateUrl: 'layout/default.html',
                 controller : 'DefaultController'
             };
             var galleryState = {
                 name: 'page-gallery',
                 url: '/page-gallery',
-                templateUrl: '/dist/layout/default.html',
+                templateUrl: 'layout/default.html',
                 controller : 'DefaultController'
             };
             var aboutState = {
                 name: 'page-about',
                 url: '/page-about',
-                templateUrl: '/dist/layout/default.html',
+                templateUrl: 'layout/default.html',
                 controller: 'DefaultController'
             };
             var paypalState = {
                 name: 'page-paypal',
                 url: '/page-paypal',
-                templateUrl: '/dist/layout/default.html',
+                templateUrl: 'layout/default.html',
                 controller: 'DefaultController'
             };
             var pictureState = {
                 name: 'picture',
                 url: '/picture/:pictureName',
-                templateUrl: '/dist/layout/picture.html',
+                templateUrl: 'layout/picture.html',
                 controller: 'PictureController'
             };
             var blogState = {
                 name: 'blog',
                 url: '/blog',
-                templateUrl: '/dist/layout/blog.html'
+                templateUrl: 'layout/blog.html'
             };
             var postState = {
                 name: 'post',
                 url: '/post',
-                templateUrl: '/dist/layout/post.html'
+                templateUrl: 'layout/post.html'
             };
 
             $stateProvider.state(homeState);
@@ -111,7 +111,7 @@ function DataService($http, $log) {
     };
 
     function getCollection(type) {
-        return $http.get('/dist/data/app.' + type + '.json')
+        return $http.get('data/app.' + type + '.json')
             .then(getCollectionComplete)
             .catch(getCollectionFailed);
 
@@ -125,7 +125,7 @@ function DataService($http, $log) {
     }
 
     function getItem(type, query, queryBy) {
-        return $http.get('/dist/data/app.' + type + '.json')
+        return $http.get('data/app.' + type + '.json')
             .then(getItemComplete)
             .catch(getItemFailed);
 
@@ -679,7 +679,7 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
 
     //TODO: Move to payment service
     function $$payPal() {
-        var _env = 'production';
+        var _env = 'sandbox';
         var _client = {
             sandbox: 'AX-MNu6chPspfWTp__Cb2JCpy9Sj9P2NTqC2sO_-j-Gajj_2R6ByPpT2-dMMp0FOZ2d25HJqwfdx4DhB',
             production: 'AbsV2ykBRbKcZGz-O-27Y8-jFMVQrgU8vQ7owgvB1afFMMcGYrPdMFrQVWgONmO8TnrUy4-V2n23IEj8'
@@ -689,7 +689,7 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
         var _total = _prodValue;
 
         $rootScope.paypal = paypal.Button.render({
-            env: _env, // Specify 'production' for the test environment
+            env: _env, // Specify 'sandbox' for the test environment
             client: _client,
             payment: function () {
                 return paypal.rest.payment.create(_env, _client, {
