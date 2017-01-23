@@ -3956,7 +3956,7 @@ body.comingsoon .primary-title {
 }
 @media (max-width: 768px) {
   .intro {
-    height: 75%;
+    height: 72%;
   }
   .post-whidout-sidebar:before {
     display: none;
@@ -3976,7 +3976,7 @@ body.comingsoon .primary-title {
   }
 }
 
-@media (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1024px) {
   .intro {
     height: 80%;
   }
