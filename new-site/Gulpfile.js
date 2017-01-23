@@ -141,7 +141,7 @@ gulp.task('build-release', ['replace-dist'], function () {
         .pipe(gulp.dest('.build/dist/'));
 });
 
-gulp.task('build-commit', ['replace-dist'], function () {
+gulp.task('build-commit', function () {
     gulp.src(['.build/**/*'])
         .pipe(gulp.dest('../'));
 });
