@@ -1155,7 +1155,7 @@ header {
   position: fixed;
   width: 100%;
   height: 100%;
-  z-index: 5;
+  z-index: 1;
   top: 100%;
   left: 0;
   -webkit-transition: all 0.5s;
@@ -4049,6 +4049,8 @@ select {
 
 /* Review Page */
 .page-review {
+  z-index: 5;
+
   .fa-spinner {
     -webkit-animation-name: spin;
     -webkit-animation-duration: 1000ms;
