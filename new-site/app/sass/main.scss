@@ -478,7 +478,7 @@ header {
 .left-menu .navbar {
   position: absolute;
   width: 100%;
-  z-index: 2;
+  z-index: 10;
   opacity: 1;
 }
 .left-menu .navbar .navbar-toggle .icon-bar {
@@ -3956,7 +3956,7 @@ body.comingsoon .primary-title {
 }
 @media (max-width: 768px) {
   .intro {
-    height: 85%;
+    height: 74%;
   }
   .post-whidout-sidebar:before {
     display: none;
@@ -3973,6 +3973,12 @@ body.comingsoon .primary-title {
     a {
       max-width: 100px;
     }
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1024px) {
+  .intro {
+    height: 74%;
   }
 }
 @media (min-width: 768px) {
@@ -4049,8 +4055,10 @@ select {
 
 /* Review Page */
 .page-review {
-  z-index: 5;
-
+  z-index: -1;
+  &.active {
+    z-index: 5;
+  }
   .fa-spinner {
     -webkit-animation-name: spin;
     -webkit-animation-duration: 1000ms;

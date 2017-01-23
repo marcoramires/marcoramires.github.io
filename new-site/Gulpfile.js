@@ -132,8 +132,6 @@ gulp.task('replace-dist', function () {
         .pipe(replace('scripts', 'dist/scripts'))
         .pipe(replace('styles/', 'dist/styles/'))
         .pipe(gulp.dest('.build/'));
-
-
 });
 
 gulp.task('build-release', ['replace-dist'], function () {
@@ -141,9 +139,11 @@ gulp.task('build-release', ['replace-dist'], function () {
         .pipe(gulp.dest('.build/dist/'));
 });
 
-gulp.task('build-commit', ['replace-dist'], function () {
+gulp.task('build-commit', function () {
     gulp.src(['.build/**/*'])
         .pipe(gulp.dest('../'));
 });
+
+
 
 
