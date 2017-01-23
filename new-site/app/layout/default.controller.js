@@ -18,6 +18,7 @@ function DefaultController($timeout, $scope, $log, $location, Analytics, Events_
         $scope.pictures = data;
     });
 
+
     /* ----------------------------------------------
      P R E L O A D E R - TODO: Move to Service layer
      ------------------------------------------------*/
@@ -390,12 +391,12 @@ function DefaultController($timeout, $scope, $log, $location, Analytics, Events_
         //TODO: Move to directive
         $timeout(function () {
             mainBanner();
+            mobileFab();
             isotopeGrid();
         }, 200);
         navigation();
         managePages();
         imageLayer();
-        mobileFab();
         Events_Service.run().all();
     });
 }
