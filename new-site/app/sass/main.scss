@@ -4049,8 +4049,9 @@ select {
 
 /* Review Page */
 .page-review {
-  z-index: 5;
-
+  &.active {
+    z-index: 5;
+  }
   .fa-spinner {
     -webkit-animation-name: spin;
     -webkit-animation-duration: 1000ms;
