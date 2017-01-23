@@ -108,6 +108,7 @@ gulp.task('fonts', function () {
 gulp.task('replace-dist', function () {
     gulp.src(['.tmp/scripts/main.js'])
         .pipe(replace('layout', '/dist/layout'))
+        .pipe(replace('data/app', '/dist/data/app'))
         .pipe(replace('\'sandbox\'', '\'production\''))
         .pipe(gulp.dest('.build/scripts/'));
 

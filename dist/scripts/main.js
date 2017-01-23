@@ -111,7 +111,7 @@ function DataService($http, $log) {
     };
 
     function getCollection(type) {
-        return $http.get('data/app.' + type + '.json')
+        return $http.get('/dist/data/app.' + type + '.json')
             .then(getCollectionComplete)
             .catch(getCollectionFailed);
 
@@ -125,7 +125,7 @@ function DataService($http, $log) {
     }
 
     function getItem(type, query, queryBy) {
-        return $http.get('data/app.' + type + '.json')
+        return $http.get('/dist/data/app.' + type + '.json')
             .then(getItemComplete)
             .catch(getItemFailed);
 
