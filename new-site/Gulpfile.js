@@ -120,9 +120,6 @@ gulp.task('replace-dist', function () {
         .pipe(replace('scripts', 'dist/scripts'))
         .pipe(replace('styles/', 'dist/styles/'))
         .pipe(gulp.dest('../'));
-
-    gulp.src(['.build/**/*'])
-        .pipe(gulp.dest('../dist/'));
 });
 
 // Deployment task
