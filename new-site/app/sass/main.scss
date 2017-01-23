@@ -4023,8 +4023,35 @@ select {
   pointer-events: none;
 }
 
+.image-frame {
+  position: relative;
+  padding: 0;
+  display: block;
+  margin: 20px 0 0;
+
+  img {
+    margin: -52% 0 0;
+    position: absolute;
+    z-index: 1;
+    width: 55%;
+    left: 0;
+    display: block;
+
+    &:first-of-type {
+      position: relative;
+      margin: 0;
+      z-index: 2;
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
 /* Review Page */
 .page-review {
+  &.active {
+    z-index: 5;
+  }
   .fa-spinner {
     -webkit-animation-name: spin;
     -webkit-animation-duration: 1000ms;
@@ -4209,7 +4236,7 @@ body.dark input[type=submit]:hover {
   background-image: url('../images/demo/blog/photo-post3.jpg');
 }
 #post2-intro-slider01 {
-  background-image: url('../images/site/test.jpg');
+  //background-image: url('../images/site/test.jpg');
 }
 #blog2-post-author1 {
   background-image: url('../images/demo/blog/author.jpg');

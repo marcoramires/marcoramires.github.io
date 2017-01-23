@@ -31,8 +31,7 @@
 <div class="animate-content">
     <!-- intro -->
     <div class="intro">
-        <div class="image-cover menu-bottom" id="post2-intro-slider01">
-        </div>
+        <div class="image-cover menu-bottom" style="background-image: url('{{details.src}}');"></div>
     </div>
     <!-- post -->
     <div class="section post-whidout-sidebar">
@@ -44,11 +43,14 @@
                             <!--<div class="blog-post-author" id="blog2-post-author1"></div>-->
                             <a href="" class="button-blog ico-share"></a>
                         </div>
-                        <h1 class="primary-title text-left">{{picture.details.name}}</h1>
-                        <p class="blog-post-date block"><i class="icon fa fa-map-marker"></i>{{picture.details.location}} - {{picture.details.dateTaken}}</p>
-                        <p class="blog-post-date block"><i class="icon fa fa-camera"></i>{{picture.details.camera}}</p>
-                        <p class="blog-post-date block">Ref: {{picture.details.ref}}</p>
-                        <img src="images/site/test_b.jpg" alt="">
+                        <h1 class="primary-title text-left">{{details.name}}</h1>
+                        <p class="blog-post-date block"><i class="icon fa fa-map-marker"></i>{{details.location}} - {{details.dateTaken}}</p>
+                        <p class="blog-post-date block"><i class="icon fa fa-camera"></i>{{details.camera}}</p>
+                        <p class="blog-post-date block">Ref: {{details.ref}}</p>
+                        <div class="image-frame">
+                            <img src="images/site/iStock_Transparent.png?w=800" alt="">
+                            <img ng-src="{{details.src}}" alt="{{details.description}}">
+                        </div>
                         <h2>Buy this image</h2>
                         <div class="plain-select">
                             <select name="ImageSize" id="ImageSize" ng-model="data.size">
@@ -128,7 +130,11 @@
                         <div class="content-section">
                             <div>
                                 <h3>Review Order</h3>
-                                <img src="images/site/test_b.jpg" alt="">
+                                <div class="image-frame">
+                                    <img src="images/site/iStock_Transparent.png?w=800" alt="">
+                                    <img ng-src="{{details.src}}" alt="{{details.description}}">
+                                </div>
+                                <!--<img src="images/site/test_b.jpg" alt="">-->
                                 <p>{{data.picture}} </p>
                                 <p>Print only:{{data.availableOptions[data.size].name}}</p>
                                 <p class="price" ng-show="data.size !== null">Total: {{data.availableOptions[data.size].price | currency: 'AUD$ ':0}}</p>

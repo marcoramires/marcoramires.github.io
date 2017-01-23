@@ -6,7 +6,7 @@
     'use strict';
     angular
         .module('app', ['ui.router', 'oc.lazyLoad', 'angular-google-analytics'])
-        .config(['$stateProvider', '$urlRouterProvider', 'AnalyticsProvider', function($stateProvider, $urlRouterProvider, AnalyticsProvider) {
+        .config(['$sceDelegateProvider', '$stateProvider', '$urlRouterProvider', 'AnalyticsProvider', function($sceDelegateProvider, $stateProvider, $urlRouterProvider, AnalyticsProvider) {
 
             var _env = 'production';
             var _analytics = {
@@ -23,6 +23,13 @@
                 // .trackUrlParams(true)
                 // .setRemoveRegExp(/\?(.*)/); //removes query strings
                 .setCurrency('AUD');
+
+            $sceDelegateProvider.resourceUrlWhitelist([
+                // Allow same origin resource loads.
+                'self',
+                // Allow loading from our assets domain.  Notice the difference between * and **.
+                'https://marcoramires.imgix.net/**'
+            ]);
 
             /* Router - Angular UI Router */
             /* -------------------------- */
@@ -61,7 +68,7 @@
                 name: 'picture',
                 url: '/picture/:pictureName',
                 templateUrl: '/dist/layout/picture.html',
-                controller: 'PictureController as picture'
+                controller: 'PictureController'
             };
             var blogState = {
                 name: 'blog',
@@ -94,6 +101,136 @@
     });
 })();
 /**
+ * Created by marcoramires on 1/22/17.
+ */
+function DataService($http, $log) {
+
+    return {
+        getCollection: getCollection,
+        getItem: getItem
+    };
+
+    function getCollection(type) {
+        return $http.get('/dist/data/app.' + type + '.json')
+            .then(getCollectionComplete)
+            .catch(getCollectionFailed);
+
+        function getCollectionComplete(response) {
+            return response.data;
+        }
+
+        function getCollectionFailed(error) {
+            $log.error('XHR Failed for getCollection.' + error.data);
+        }
+    }
+
+    function getItem(type, query, queryBy) {
+        return $http.get('/dist/data/app.' + type + '.json')
+            .then(getItemComplete)
+            .catch(getItemFailed);
+
+        function getItemComplete(response) {
+            var matchIndex = '';
+            $.each(response.data, function (index, value) {
+                if(query.toLowerCase() === value[queryBy]) {
+                    matchIndex = index;
+                }
+            });
+            return response.data[matchIndex];
+        }
+
+        function getItemFailed(error) {
+            $log.error('XHR Failed for getItem.' + error.data);
+        }
+    }
+}
+
+DataService.$inject = ['$http', '$log'];
+
+angular
+    .module('app')
+    .factory('DataService', DataService);
+
+/**
+ * Created by marcoramires on 20/1/17.
+ */
+
+function Events_Service (Analytics){
+
+    function Events_Service() {
+
+        var _linkControl = function () {
+            $("a[href*='http://'], a[href*='https://']").addClass('external-link').attr('target', '_blank');
+        };
+
+        var _gaExternalLinks = function () {
+            $('.external-link').click(function() {
+                var url = $(this).attr('href');
+                Analytics.trackEvent('Outbound Links', 'Click', url);
+                window.open(this.href);
+                return false;
+            });
+        };
+
+        var _gaSelect = function () {
+            $('select').on('change', function() {
+                var text = $(this).find('option:selected').text();
+                Analytics.trackEvent('Select', 'Change', text);
+            });
+        };
+
+        var _gaButton = function () {
+            $('button').click(function() {
+                var text = $(this).text();
+                Analytics.trackEvent('Button', 'Click', text);
+            });
+        };
+
+        var _gaFilters = function() {
+          $('#filters li').click(function () {
+              var filter = $(this).attr('data-filter').replace('.','');
+              Analytics.trackEvent('Filter', 'Click', filter);
+          });
+        };
+
+        var _gaShoppingCart = function() {
+            $('a.shopping-cart').click(function () {
+                var link = $(this).attr('href').replace('#!', '');
+                Analytics.trackEvent('Shopping Cart Link', 'Click', link);
+            });
+        };
+
+        var _gaFavorite = function() {
+            $('a.favorite').click(function () {
+                var link = $(this).attr('href').replace('#!', '');
+                Analytics.trackEvent('Favorite Link', 'Click', link);
+            });
+        };
+
+        this.all = function () {
+            _linkControl();
+            _gaExternalLinks();
+            _gaSelect();
+            _gaButton();
+            _gaFilters();
+            _gaShoppingCart();
+            _gaFavorite();
+        };
+    }
+
+    Events_Service.run = function () {
+        return new Events_Service();
+    };
+
+    return Events_Service;
+}
+
+angular
+    .module('app')
+    .factory('Events_Service', Events_Service);
+
+Events_Service.$inject = ['Analytics'];
+/**
  * Created by marcoramires on 1/15/17.
  */
 
@@ -101,13 +238,20 @@ angular
     .module('app')
     .controller('DefaultController', DefaultController);
 
-DefaultController.$inject = ['$scope', '$log', '$location', 'Analytics', 'Events_Service'];
+DefaultController.$inject = ['$timeout', '$scope', '$log', '$location', 'Analytics', 'Events_Service', 'DataService'];
 
-function DefaultController($scope, $log, $location, Analytics, Events_Service) {
+function DefaultController($timeout, $scope, $log, $location, Analytics, Events_Service, DataService) {
     $log.log('> Default Controller: ', this);
 
     var searchObject = $location.search();
     $scope.orderId = searchObject.paymentId;
+
+    // $scope.imageSizesTemplate = ['w=901&h=901', 'w=431&h=597', 'w=431&h=701', 'w=431&h=507', 'w=431&h=501', 'w=431&h=701', 'w=431&h=341', 'w=901&h=521', 'w=862&h=822', 'w=431&h=507', 'w=901&h=901', 'w=431&h=401', 'w=431&h=411', 'w=431&h=701', 'w=901&h=521', 'w=431&h=701', 'w=431&h=597', 'w=431&h=341'];
+    $scope.imageSizes = ['w=901&h=901'];
+
+    // DataService.getCollection('pictures').then(function (data) {
+    //     $scope.pictures = data;
+    // });
 
     /* ----------------------------------------------
      P R E L O A D E R - TODO: Move to Service layer
@@ -115,7 +259,7 @@ function DefaultController($scope, $log, $location, Analytics, Events_Service) {
     function preloader() {
         Pace.on('done', function () {
             $(".animate-content").addClass('load-finish');
-            // $log.log('* Pre-Loader Done *');
+            $log.log('* Pre-Loader Done *');
         });
     }
 
@@ -250,7 +394,7 @@ function DefaultController($scope, $log, $location, Analytics, Events_Service) {
         $('.tp-tabs').on('mouseleave', function (e) {
             $('body').removeClass('showThumbnails');
         });
-        // $log.log('* Main-Banner Done *');
+        $log.log('* Main-Banner Done *');
     }
 
     /*----------------------------------------------
@@ -263,13 +407,13 @@ function DefaultController($scope, $log, $location, Analytics, Events_Service) {
         $('.grid-lr').each(function () {
             $(this).after('<div class="img-lr-grid"></div>');
         });
-        // $log.log('* Image-Layer Done *');
+        $log.log('* Image-Layer Done *');
     }
     function imageLayerGallery() {
         $('.lg-img-wrap').each(function () {
             $(this).after('<div class="img-lr"></div>');
         });
-        // $log.log('* Image-Layer-Gallery Done *');
+        $log.log('* Image-Layer-Gallery Done *');
     }
 
     /*----------------------------------------------
@@ -290,7 +434,7 @@ function DefaultController($scope, $log, $location, Analytics, Events_Service) {
         $('.open-layer, .open-home').on('click', function () {
             Analytics.trackPage($(this).attr('data-layer'));
         });
-        // $log.log('* Navigation Done *');
+        $log.log('* Navigation Done *');
     }
 
     /*----------------------------------------------
@@ -334,7 +478,7 @@ function DefaultController($scope, $log, $location, Analytics, Events_Service) {
                 'transform': 'matrix(1, 0, 0, 1, 0, -' + wheight1 + ')'
             }).addClass('active');
         }
-        // $log.log('* Manage-Page Done *');
+        $log.log('* Manage-Page Done *');
     }
 
     /*----------------------------------------------
@@ -425,7 +569,7 @@ function DefaultController($scope, $log, $location, Analytics, Events_Service) {
             });
 
         }
-        // $log.log('* Isotope-Grid Done *');
+        $log.log('* Isotope-Grid Done *');
     }
 
     /* ---------------------------------------------
@@ -469,7 +613,7 @@ function DefaultController($scope, $log, $location, Analytics, Events_Service) {
             $('.fab').addClass('animate');
         }, 1500);
 
-        // $log.log('* Mobile-FAB Done *');
+        $log.log('* Mobile-FAB Done *');
     }
 
     /*----------------------------------------------
@@ -477,18 +621,22 @@ function DefaultController($scope, $log, $location, Analytics, Events_Service) {
      ------------------------------------------------*/
     angular.element(document).ready(function() {
         $('body').removeClass('page-blog page-picture');
-        preloader();
-        mainBanner();
-        navigation();
-        managePages();
-        imageLayer();
-        isotopeGrid();
-        mobileFab();
-        Events_Service.run().all();
+        DataService.getCollection('pictures').then(function (data) {
+            $scope.pictures = data;
+            preloader();
+            //TODO: Move to directive
+            $timeout(function () {
+                mainBanner();
+                mobileFab();
+                isotopeGrid();
+            }, 100);
+            navigation();
+            managePages();
+            imageLayer();
+            Events_Service.run().all();
+        });
     });
 }
-
-// 'Outbound Links', 'Click', url]);
 /**
  * Created by marcoramires on 1/15/17.
  */
@@ -496,22 +644,13 @@ angular
     .module('app')
     .controller('PictureController', PictureController);
 
-PictureController.$inject = ['$rootScope', '$scope', '$log', '$stateParams', '$state', '$ocLazyLoad', '$interval', 'Events_Service', 'Analytics'];
+PictureController.$inject = ['$rootScope', '$scope', '$log', '$stateParams', '$state', '$ocLazyLoad', '$interval', 'Events_Service', 'Analytics', 'DataService'];
 
-function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLazyLoad, $interval, Events_Service, Analytics) {
+function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLazyLoad, $interval, Events_Service, Analytics, DataService) {
     $log.log('> Picture Controller: ', this);
     // $log.log('> Picture Name: ', $stateParams.pictureName);
 
-    this.details = {
-        name: "yellow fin",
-        location: "Byron Bay",
-        dateTaken: "15/06/2016",
-        camera: '1/1000 F1.4 ISO100',
-        ref: 'IMG_22021'
-    };
-
     $scope.data = {
-        picture: this.details.name.toUpperCase(),
         availableOptions: [
             {id: '0', name: '12 x 8 inches - 30 x 20 cm', price: 25},
             {id: '1', name: '18 x 12 inches - 45 x 30 cm', price: 50},
@@ -612,11 +751,6 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
                 }
             },500);
         });
-    }
-
-    var _pictureName = $stateParams.pictureName;
-    if (_pictureName.replace('-', ' ').toLowerCase() !== this.details.name) {
-        $state.go('home', {location: 'replace'})
     }
 
     /* ----------------------------------------------
@@ -720,88 +854,15 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
      ------------------------------------------------*/
     angular.element(document).ready(function () {
         $('body').addClass('page-blog page-picture');
-        preloader();
-        navigation();
-        managePages();
-        Events_Service.run().all();
+        DataService.getItem('pictures', $stateParams.pictureName, "url").then(function (data) {
+            $scope.details = data;
+            if (data === undefined || $stateParams.pictureName.toLowerCase() !== $scope.details.url) {
+                $state.go('home', {location: 'replace'})
+            }
+            preloader();
+            navigation();
+            managePages();
+            Events_Service.run().all();
+        });
     });
 }
-/**
- * Created by marcoramires on 20/1/17.
- */
-
-function Events_Service (Analytics){
-
-    function Events_Service() {
-
-        var _linkControl = function () {
-            $("a[href*='http://'], a[href*='https://']").addClass('external-link').attr('target', '_blank');
-        };
-
-        var _gaExternalLinks = function () {
-            $('.external-link').click(function() {
-                var url = $(this).attr('href');
-                Analytics.trackEvent('Outbound Links', 'Click', url);
-                window.open(this.href);
-                return false;
-            });
-        };
-
-        var _gaSelect = function () {
-            $('select').on('change', function() {
-                var text = $(this).find('option:selected').text();
-                Analytics.trackEvent('Select', 'Change', text);
-            });
-        };
-
-        var _gaButton = function () {
-            $('button').click(function() {
-                var text = $(this).text();
-                Analytics.trackEvent('Button', 'Click', text);
-            });
-        };
-
-        var _gaFilters = function() {
-          $('#filters li').click(function () {
-              var filter = $(this).attr('data-filter').replace('.','');
-              Analytics.trackEvent('Filter', 'Click', filter);
-          });
-        };
-
-        var _gaShoppingCart = function() {
-            $('a.shopping-cart').click(function () {
-                var link = $(this).attr('href').replace('#!', '');
-                Analytics.trackEvent('Shopping Cart Link', 'Click', link);
-            });
-        };
-
-        var _gaFavorite = function() {
-            $('a.favorite').click(function () {
-                var link = $(this).attr('href').replace('#!', '');
-                Analytics.trackEvent('Favorite Link', 'Click', link);
-            });
-        };
-
-        this.all = function () {
-            _linkControl();
-            _gaExternalLinks();
-            _gaSelect();
-            _gaButton();
-            _gaFilters();
-            _gaShoppingCart();
-            _gaFavorite();
-        };
-    }
-
-    Events_Service.run = function () {
-        return new Events_Service();
-    };
-
-    return Events_Service;
-}
-
-angular
-    .module('app')
-    .factory('Events_Service', Events_Service);
-
-Events_Service.$inject = ['Analytics'];

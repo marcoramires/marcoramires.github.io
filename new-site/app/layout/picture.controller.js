@@ -5,22 +5,13 @@ angular
     .module('app')
     .controller('PictureController', PictureController);
 
-PictureController.$inject = ['$rootScope', '$scope', '$log', '$stateParams', '$state', '$ocLazyLoad', '$interval', 'Events_Service', 'Analytics'];
+PictureController.$inject = ['$rootScope', '$scope', '$log', '$stateParams', '$state', '$ocLazyLoad', '$interval', 'Events_Service', 'Analytics', 'DataService'];
 
-function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLazyLoad, $interval, Events_Service, Analytics) {
+function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLazyLoad, $interval, Events_Service, Analytics, DataService) {
     $log.log('> Picture Controller: ', this);
     // $log.log('> Picture Name: ', $stateParams.pictureName);
 
-    this.details = {
-        name: "yellow fin",
-        location: "Byron Bay",
-        dateTaken: "15/06/2016",
-        camera: '1/1000 F1.4 ISO100',
-        ref: 'IMG_22021'
-    };
-
     $scope.data = {
-        picture: this.details.name.toUpperCase(),
         availableOptions: [
             {id: '0', name: '12 x 8 inches - 30 x 20 cm', price: 25},
             {id: '1', name: '18 x 12 inches - 45 x 30 cm', price: 50},
@@ -121,11 +112,6 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
                 }
             },500);
         });
-    }
-
-    var _pictureName = $stateParams.pictureName;
-    if (_pictureName.replace('-', ' ').toLowerCase() !== this.details.name) {
-        $state.go('home', {location: 'replace'})
     }
 
     /* ----------------------------------------------
@@ -229,9 +215,15 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
      ------------------------------------------------*/
     angular.element(document).ready(function () {
         $('body').addClass('page-blog page-picture');
-        preloader();
-        navigation();
-        managePages();
-        Events_Service.run().all();
+        DataService.getItem('pictures', $stateParams.pictureName, "url").then(function (data) {
+            $scope.details = data;
+            if (data === undefined || $stateParams.pictureName.toLowerCase() !== $scope.details.url) {
+                $state.go('home', {location: 'replace'})
+            }
+            preloader();
+            navigation();
+            managePages();
+            Events_Service.run().all();
+        });
     });
 }
