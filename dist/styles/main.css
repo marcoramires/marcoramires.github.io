@@ -4583,7 +4583,8 @@ body {
 
 .animate-content {
   height: 100%;
-  opacity: 0; }
+  opacity: 0;
+  z-index: 1; }
   .animate-content.load-finish {
     -webkit-animation: FADE-IN 0.5s;
     -moz-animation: FADE-IN 0.5s;
