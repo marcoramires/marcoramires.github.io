@@ -4221,7 +4221,7 @@ body.comingsoon .primary-title {
 
 @media (min-width: 992px) and (max-width: 1024px) {
   .intro {
-    height: 100%; } }
+    height: 95%; } }
 
 @media (min-width: 768px) {
   .page-picture .blog-post-date {
