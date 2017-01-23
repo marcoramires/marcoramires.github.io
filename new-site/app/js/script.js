@@ -5,8 +5,31 @@
 ;(function () {
     'use strict';
     angular
-        .module('app', ['ui.router'])
-        .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
+        .module('app', ['ui.router', 'oc.lazyLoad', 'angular-google-analytics'])
+        .config(['$sceDelegateProvider', '$stateProvider', '$urlRouterProvider', 'AnalyticsProvider', function($sceDelegateProvider, $stateProvider, $urlRouterProvider, AnalyticsProvider) {
+
+            var _env = 'sandbox';
+            var _analytics = {
+                sandbox: 'UA-66126082-2',
+                production: 'UA-66126082-1'
+            };
+
+            AnalyticsProvider.setAccount(_analytics[_env])
+                // .trackPages(true)
+                .useECommerce(true, true)
+                .setPageEvent('$stateChangeSuccess')
+                .ignoreFirstPageLoad(true)
+                // .readFromRoute(true);
+                // .trackUrlParams(true)
+                // .setRemoveRegExp(/\?(.*)/); //removes query strings
+                .setCurrency('AUD');
+
+            $sceDelegateProvider.resourceUrlWhitelist([
+                // Allow same origin resource loads.
+                'self',
+                // Allow loading from our assets domain.  Notice the difference between * and **.
+                'https://marcoramires.imgix.net/**'
+            ]);
 
             /* Router - Angular UI Router */
             /* -------------------------- */
@@ -20,7 +43,7 @@
             var contactState = {
                 name: 'page-contact',
                 url: '/page-contact',
-                templateUrl: '../layout/default.html',
+                templateUrl: 'layout/default.html',
                 controller : 'DefaultController'
             };
             var galleryState = {
@@ -35,11 +58,17 @@
                 templateUrl: 'layout/default.html',
                 controller: 'DefaultController'
             };
+            var paypalState = {
+                name: 'page-paypal',
+                url: '/page-paypal',
+                templateUrl: 'layout/default.html',
+                controller: 'DefaultController'
+            };
             var pictureState = {
                 name: 'picture',
                 url: '/picture/:pictureName',
                 templateUrl: 'layout/picture.html',
-                controller: 'PictureController as picture'
+                controller: 'PictureController'
             };
             var blogState = {
                 name: 'blog',
@@ -59,13 +88,13 @@
             $stateProvider.state(pictureState);
             $stateProvider.state(blogState);
             $stateProvider.state(postState);
-        }])
-        .run(function($rootScope, $location) {
+            $stateProvider.state(paypalState);
+        }]).run(['$rootScope', 'Analytics', function($rootScope, Analytics) {
             $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-                console.info('[event] routeChangeStart...');
+                // console.info('[event] routeChangeStart...');
                 Pace.restart();
             });
-        });
+    }]);
 
     angular.element(document).ready(function() {
         angular.bootstrap('body', ['app']);

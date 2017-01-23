@@ -1155,7 +1155,7 @@ header {
   position: fixed;
   width: 100%;
   height: 100%;
-  z-index: 1;
+  z-index: 5;
   top: 100%;
   left: 0;
   -webkit-transition: all 0.5s;
@@ -2450,8 +2450,8 @@ body.comingsoon .primary-title {
 .page-blog .btn {
   width: calc(100% - 20px);
   float: none;
-  background-color: #1d78cb;
-  color: #fff;
+  //background-color: #1d78cb;
+  //color: #fff;
   height: 50px;
   margin: 0 0 35px;
   font-size: 1em;
@@ -3937,20 +3937,23 @@ body.comingsoon .primary-title {
   .header {
     margin: 0;
     font-weight: bold;
+    &.price {
+      font-size: 1.2em;
+    }
   }
   img {
     margin-bottom: 0;
   }
   h2 {
-    margin-top: 55px;
+    margin-top: 45px;
     margin-bottom: 25px;
   }
   hr {
-    margin-top: 20px;
+    margin-top: 30px;
+    max-width: 100%;
+    border-color: #d3d3d3;
   }
 }
-
-
 @media (max-width: 768px) {
   .intro {
     height: 85%;
@@ -3972,7 +3975,6 @@ body.comingsoon .primary-title {
     }
   }
 }
-
 @media (min-width: 768px) {
   .page-picture {
     .blog-post-date {
@@ -3991,7 +3993,148 @@ body.comingsoon .primary-title {
     }
   }
 }
+select {
+  border-radius: 0;
+  background: none;
+  width: 250px;
+  -webkit-appearance: none;
+  padding: 10px 20px;
+  display: block;
+  height: 56px;
+  font-weight: 300;
+  font-size: 1rem;
+  border: 1px solid #000;
+  margin: 0;
+}
+.plain-select {
+  margin: 0;
+}
+.plain-select:after{
+  content: "";
+  position: relative;
+  z-index: 1;
+  right: -220px;
+  top: -25px;
+  height: 0;
+  width: 0;
+  border-top: 5px solid #000;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  pointer-events: none;
+}
 
+.image-frame {
+  position: relative;
+  padding: 0;
+  display: block;
+  margin: 20px 0 0;
+
+  img {
+    margin: -52% 0 0;
+    position: absolute;
+    z-index: 1;
+    width: 55%;
+    left: 0;
+    display: block;
+
+    &:first-of-type {
+      position: relative;
+      margin: 0;
+      z-index: 2;
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+/* Review Page */
+.page-review {
+  .fa-spinner {
+    -webkit-animation-name: spin;
+    -webkit-animation-duration: 1000ms;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: spin;
+    -moz-animation-duration: 1000ms;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -ms-animation-name: spin;
+    -ms-animation-duration: 1000ms;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-timing-function: linear;
+    animation-name: spin;
+    animation-duration: 1000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+
+  @-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+  }
+  @-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+  }
+  @keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+  }
+}
+.page-review p {
+  margin: 10px;
+}
+.page-review .btn {
+  width: auto;
+}
+.page-review .section,
+.page-review .container-fluid,
+.page-review .container,
+.page-review .row,
+.page-review .content-section {
+  height: 100%;
+  text-align: center;
+}
+.page-review div[class*="col-"] {
+  height: auto;
+}
+@media (max-width: 768px) {
+  .page-review .content-section {
+    margin-top: 20px;
+  }
+}
+@media (min-width: 768px) {
+  .page-review .content-section > div {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+  }
+  .page-review div[class*="col-"] {
+    margin-top: 0;
+    height: 100%;
+  }
+}
+#paypal-button {
+  margin-left: 15px;
+}
+.page-review .change-order {
+  margin: 20px 0;
+  padding: 0 20px;
+  height: 35px;
+}
+.page-review {
+  .price {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+}
+
+.page-paypal img {
+  max-width: 10%;
+  margin-bottom: 10px;
+}
 
 /*------------------------------------------------------------------
 [8. Variations]
@@ -4090,7 +4233,7 @@ body.dark input[type=submit]:hover {
   background-image: url('../images/demo/blog/photo-post3.jpg');
 }
 #post2-intro-slider01 {
-  background-image: url('../images/site/test.jpg');
+  //background-image: url('../images/site/test.jpg');
 }
 #blog2-post-author1 {
   background-image: url('../images/demo/blog/author.jpg');
@@ -4262,39 +4405,6 @@ body {
 }
 .holder {
   display: none;
-}
-
-/* Photo Page */
-/* ---------- */
-
-select {
-  border-radius: 0;
-  background: none;
-  width: 250px;
-  -webkit-appearance: none;
-  padding: 10px 20px;
-  display: block;
-  height: 56px;
-  font-weight: 300;
-  font-size: 1rem;
-  border: 1px solid #000;
-  margin: 0;
-}
-.plain-select {
-  margin: 0;
-}
-.plain-select:after{
-  content: "";
-  position: relative;
-  z-index: 2;
-  right: -220px;
-  top: -25px;
-  height: 0;
-  width: 0;
-  border-top: 5px solid #000;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  pointer-events: none;
 }
 
 .animate-content {
