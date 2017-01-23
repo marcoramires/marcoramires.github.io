@@ -14,10 +14,12 @@ function DefaultController($timeout, $scope, $log, $location, Analytics, Events_
     var searchObject = $location.search();
     $scope.orderId = searchObject.paymentId;
 
+    // $scope.imageSizesTemplate = ['w=901&h=901', 'w=431&h=597', 'w=431&h=701', 'w=431&h=507', 'w=431&h=501', 'w=431&h=701', 'w=431&h=341', 'w=901&h=521', 'w=862&h=822', 'w=431&h=507', 'w=901&h=901', 'w=431&h=401', 'w=431&h=411', 'w=431&h=701', 'w=901&h=521', 'w=431&h=701', 'w=431&h=597', 'w=431&h=341'];
+    $scope.imageSizes = ['w=901&h=901'];
+
     DataService.getCollection('pictures').then(function (data) {
         $scope.pictures = data;
     });
-
 
     /* ----------------------------------------------
      P R E L O A D E R - TODO: Move to Service layer

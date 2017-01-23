@@ -176,7 +176,7 @@
                 <div id="grid-gallery">
                     <div ng-repeat="picture in pictures" ng-class="picture.filter" class="grid-item" data-src="{{picture.src}}">
                         <div class="grid-lr">
-                            <img ng-src="{{picture.src}}" alt="">
+                            <img ng-src="{{picture.src}}?{{imageSizes[$index]}}&fit=crop&crop=edges" alt="">
                         </div>
                         <ul class="gallery-links ontop">
                             <li><a class="shopping-cart" ui-sref="picture({pictureName: '{{picture.url}}'})"><i class="fa fa-shopping-cart"></i></a></li>

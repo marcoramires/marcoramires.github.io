@@ -6,7 +6,7 @@
     'use strict';
     angular
         .module('app', ['ui.router', 'oc.lazyLoad', 'angular-google-analytics'])
-        .config(['$stateProvider', '$urlRouterProvider', 'AnalyticsProvider', function($stateProvider, $urlRouterProvider, AnalyticsProvider) {
+        .config(['$sceDelegateProvider', '$stateProvider', '$urlRouterProvider', 'AnalyticsProvider', function($sceDelegateProvider, $stateProvider, $urlRouterProvider, AnalyticsProvider) {
 
             var _env = 'sandbox';
             var _analytics = {
@@ -23,6 +23,13 @@
                 // .trackUrlParams(true)
                 // .setRemoveRegExp(/\?(.*)/); //removes query strings
                 .setCurrency('AUD');
+
+            $sceDelegateProvider.resourceUrlWhitelist([
+                // Allow same origin resource loads.
+                'self',
+                // Allow loading from our assets domain.  Notice the difference between * and **.
+                'https://marcoramires.imgix.net/**'
+            ]);
 
             /* Router - Angular UI Router */
             /* -------------------------- */
