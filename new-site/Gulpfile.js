@@ -132,8 +132,6 @@ gulp.task('replace-dist', function () {
         .pipe(replace('scripts', 'dist/scripts'))
         .pipe(replace('styles/', 'dist/styles/'))
         .pipe(gulp.dest('.build/'));
-
-
 });
 
 gulp.task('build-release', ['replace-dist'], function () {

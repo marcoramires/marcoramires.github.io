@@ -207,6 +207,22 @@ function Events_Service (Analytics){
             });
         };
 
+        var _resizeAddressBar = function () {
+            var $w = $(window),
+                $background = $('.animate-content');
+
+            // Fix background image jump on mobile
+            if ((/Android|iPhone|iPad|iPod|BlackBerry/i).test(navigator.userAgent || navigator.vendor || window.opera)) {
+                $background.css({'top': 'auto', 'bottom': 0});
+                $w.resize(sizeBackground);
+                sizeBackground();
+            }
+
+            function sizeBackground() {
+                $background.height(screen.height);
+            }
+        };
+
         this.all = function () {
             _linkControl();
             _gaExternalLinks();
@@ -215,6 +231,7 @@ function Events_Service (Analytics){
             _gaFilters();
             _gaShoppingCart();
             _gaFavorite();
+            _resizeAddressBar();
         };
     }
 
