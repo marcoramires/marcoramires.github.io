@@ -26,6 +26,12 @@ gulp.task('serve', ['sass', 'styles-vendor', 'styles-plugins', 'js', 'js-plugins
     gulp.watch("app/styles/**/*.css", ['styles-vendor', 'styles-plugins']);
 });
 
+gulp.task('serve-dist', function() {
+    browserSync.init({
+        server: ['.build']
+    });
+});
+
 // create a task that ensures the `js` task is complete before
 // reloading browsers
 gulp.task('js-watch', ['js'], function (done) {
@@ -105,29 +111,39 @@ gulp.task('fonts', function () {
         .pipe(gulp.dest('.tmp/fonts'));
 });
 
+// Deployment task
+gulp.task('build-dist', ['sass', 'styles-vendor', 'styles-plugins', 'js', 'js-plugins', 'js-vendor', 'js-preload', 'images', 'fonts', 'app-data'], function() {
+    gulp.src(['.tmp/**/*', '!.tmp/images/demo/'])
+        .pipe(gulp.dest('.dist/'));
+});
+
 gulp.task('replace-dist', function () {
-    gulp.src(['.build/scripts/main.js'])
+    gulp.src(['.dist/scripts/main.js'])
         .pipe(replace('layout', '/dist/layout'))
         .pipe(replace('data/app', '/dist/data/app'))
         .pipe(replace('\'sandbox\'', '\'production\''))
-        .pipe(gulp.dest('../dist/scripts/'));
+        .pipe(gulp.dest('.build/dist/scripts/'));
 
     gulp.src(['app/layout/*.html'])
         .pipe(replace('images', '../../dist/images'))
-        .pipe(gulp.dest('.build/layout/'));
+        .pipe(gulp.dest('.build/dist/layout/'));
 
-    gulp.src(['.tmp/index.html'])
+    gulp.src(['index.html'])
         .pipe(replace('scripts', 'dist/scripts'))
         .pipe(replace('styles/', 'dist/styles/'))
+        .pipe(gulp.dest('.build/'));
+
+
+});
+
+gulp.task('build-release', ['replace-dist'], function () {
+    gulp.src(['.dist/**/*', '!.dist/scripts/main.js'])
+        .pipe(gulp.dest('.build/dist/'));
+});
+
+gulp.task('build-commit', ['replace-dist'], function () {
+    gulp.src(['.build/**/*'])
         .pipe(gulp.dest('../'));
 });
 
-// Deployment task
-gulp.task('build-dist', ['sass', 'styles-vendor', 'styles-plugins', 'js', 'js-plugins', 'js-vendor', 'js-preload', 'images', 'fonts', 'app-data'], function() {
 
-    gulp.src(['.tmp/**/*', '!.tmp/images/demo/**/*'])
-        .pipe(gulp.dest('.build'));
-
-    gulp.src(['index.html'])
-        .pipe(gulp.dest('.tmp'));
-});

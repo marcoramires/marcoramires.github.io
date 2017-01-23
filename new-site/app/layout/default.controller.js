@@ -395,7 +395,7 @@ function DefaultController($timeout, $scope, $log, $location, Analytics, Events_
             mainBanner();
             mobileFab();
             isotopeGrid();
-        }, 200);
+        }, 300);
         navigation();
         managePages();
         imageLayer();
