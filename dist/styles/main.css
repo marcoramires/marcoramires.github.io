@@ -4282,7 +4282,7 @@ select {
 
 /* Review Page */
 .page-review {
-  z-index: 0; }
+  z-index: -1; }
   .page-review.active {
     z-index: 5; }
   .page-review .fa-spinner {
@@ -4583,8 +4583,7 @@ body {
 
 .animate-content {
   height: 100%;
-  opacity: 0;
-  z-index: -1; }
+  opacity: 0; }
   .animate-content.load-finish {
     -webkit-animation: FADE-IN 0.5s;
     -moz-animation: FADE-IN 0.5s;

@@ -4049,7 +4049,7 @@ select {
 
 /* Review Page */
 .page-review {
-  z-index: 0;
+  z-index: -1;
   &.active {
     z-index: 5;
   }
@@ -4414,7 +4414,6 @@ body {
 .animate-content {
   height: 100%;
   opacity: 0;
-  z-index: -1;
 
   &.load-finish {
     -webkit-animation: FADE-IN 0.5s;
