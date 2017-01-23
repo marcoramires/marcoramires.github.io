@@ -249,9 +249,9 @@ function DefaultController($timeout, $scope, $log, $location, Analytics, Events_
     // $scope.imageSizesTemplate = ['w=901&h=901', 'w=431&h=597', 'w=431&h=701', 'w=431&h=507', 'w=431&h=501', 'w=431&h=701', 'w=431&h=341', 'w=901&h=521', 'w=862&h=822', 'w=431&h=507', 'w=901&h=901', 'w=431&h=401', 'w=431&h=411', 'w=431&h=701', 'w=901&h=521', 'w=431&h=701', 'w=431&h=597', 'w=431&h=341'];
     $scope.imageSizes = ['w=901&h=901'];
 
-    DataService.getCollection('pictures').then(function (data) {
-        $scope.pictures = data;
-    });
+    // DataService.getCollection('pictures').then(function (data) {
+    //     $scope.pictures = data;
+    // });
 
     /* ----------------------------------------------
      P R E L O A D E R - TODO: Move to Service layer
@@ -621,17 +621,20 @@ function DefaultController($timeout, $scope, $log, $location, Analytics, Events_
      ------------------------------------------------*/
     angular.element(document).ready(function() {
         $('body').removeClass('page-blog page-picture');
-        preloader();
-        //TODO: Move to directive
-        $timeout(function () {
-            mainBanner();
-            mobileFab();
-            isotopeGrid();
-        }, 300);
-        navigation();
-        managePages();
-        imageLayer();
-        Events_Service.run().all();
+        DataService.getCollection('pictures').then(function (data) {
+            $scope.pictures = data;
+            preloader();
+            //TODO: Move to directive
+            $timeout(function () {
+                mainBanner();
+                mobileFab();
+                isotopeGrid();
+            }, 100);
+            navigation();
+            managePages();
+            imageLayer();
+            Events_Service.run().all();
+        });
     });
 }
 /**
@@ -646,21 +649,6 @@ PictureController.$inject = ['$rootScope', '$scope', '$log', '$stateParams', '$s
 function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLazyLoad, $interval, Events_Service, Analytics, DataService) {
     $log.log('> Picture Controller: ', this);
     // $log.log('> Picture Name: ', $stateParams.pictureName);
-
-    DataService.getItem('pictures', $stateParams.pictureName, "url").then(function (data) {
-        $scope.details = data;
-        if (data === undefined || $stateParams.pictureName.toLowerCase() !== $scope.details.url) {
-            $state.go('home', {location: 'replace'})
-        }
-    });
-
-    // this.details = {
-    //     name: "yellow fin",
-    //     location: "Byron Bay",
-    //     dateTaken: "15/06/2016",
-    //     camera: '1/1000 F1.4 ISO100',
-    //     ref: 'IMG_22021'
-    // };
 
     $scope.data = {
         availableOptions: [
@@ -866,9 +854,15 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
      ------------------------------------------------*/
     angular.element(document).ready(function () {
         $('body').addClass('page-blog page-picture');
-        preloader();
-        navigation();
-        managePages();
-        Events_Service.run().all();
+        DataService.getItem('pictures', $stateParams.pictureName, "url").then(function (data) {
+            $scope.details = data;
+            if (data === undefined || $stateParams.pictureName.toLowerCase() !== $scope.details.url) {
+                $state.go('home', {location: 'replace'})
+            }
+            preloader();
+            navigation();
+            managePages();
+            Events_Service.run().all();
+        });
     });
 }

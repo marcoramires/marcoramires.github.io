@@ -11,21 +11,6 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
     $log.log('> Picture Controller: ', this);
     // $log.log('> Picture Name: ', $stateParams.pictureName);
 
-    DataService.getItem('pictures', $stateParams.pictureName, "url").then(function (data) {
-        $scope.details = data;
-        if (data === undefined || $stateParams.pictureName.toLowerCase() !== $scope.details.url) {
-            $state.go('home', {location: 'replace'})
-        }
-    });
-
-    // this.details = {
-    //     name: "yellow fin",
-    //     location: "Byron Bay",
-    //     dateTaken: "15/06/2016",
-    //     camera: '1/1000 F1.4 ISO100',
-    //     ref: 'IMG_22021'
-    // };
-
     $scope.data = {
         availableOptions: [
             {id: '0', name: '12 x 8 inches - 30 x 20 cm', price: 25},
@@ -230,9 +215,15 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
      ------------------------------------------------*/
     angular.element(document).ready(function () {
         $('body').addClass('page-blog page-picture');
-        preloader();
-        navigation();
-        managePages();
-        Events_Service.run().all();
+        DataService.getItem('pictures', $stateParams.pictureName, "url").then(function (data) {
+            $scope.details = data;
+            if (data === undefined || $stateParams.pictureName.toLowerCase() !== $scope.details.url) {
+                $state.go('home', {location: 'replace'})
+            }
+            preloader();
+            navigation();
+            managePages();
+            Events_Service.run().all();
+        });
     });
 }
