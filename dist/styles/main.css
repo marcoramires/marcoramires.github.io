@@ -4205,7 +4205,7 @@ body.comingsoon .primary-title {
 
 @media (max-width: 768px) {
   .intro {
-    height: 80%; }
+    height: 75%; }
   .post-whidout-sidebar:before {
     display: none; }
   .content-post.post-without-sidebar {
