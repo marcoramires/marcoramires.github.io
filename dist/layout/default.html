@@ -30,31 +30,31 @@
 <div class="animate-content">
     <!-- main slider -->
     <section class="slider-full">
-    <!-- START REVOLUTION SLIDER 5.0.7 fullwidth mode -->
-    <div id="rev_slider_wrapper" class="rev_slider_wrapper fullscreenbanner" data-alias="highlight-carousel16" style="margin:0px auto;background-color:#000000;padding:0px;margin-top:0px;margin-bottom:0px;">
-        <div id="rev_slider" class="rev_slider fullwidthabanner" style="display:none;" data-version="5.0.7">
-            <ul>
-                <!-- SLIDE  -->
-                <li data-index="rs-51" data-transition="slideoverhorizontal" data-slotamount="7" data-easein="default" data-easeout="default" data-masterspeed="1500" data-thumb="../../dist/images/site/slider-home/IMG_3180-320x160.jpg" data-rotate="0" data-fstransition="fade" data-fsmasterspeed="1000" data-fsslotamount="7" data-saveperformance="off" data-title="Title 1" data-description="Description 1" data-param1="1 / 2">
-                    <!-- MAIN IMAGE -->
-                    <img src="../../dist/images/site/slider-home/IMG_3180-1920x1080.jpg" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
-                    <!-- social links -->
-                    <ul class="social-links ontop">
-                        <li><a class="shopping-cart" ui-sref="picture({pictureName: 'yellow-fin'})"><i class="fa fa-shopping-cart"></i></a></li>
-                        <!--<li><a href="#"><i class="fa fa-heart"></i></a></li>-->
-                        <!--<li><a href="#"><i class="fa fa-share-alt"></i></a></li>-->
-                        <li><a href="https://www.instagram.com/marcoramires/" target="_blank"><i class="fa fa-instagram"></i></a></li>
-                        <li><a href="https://twitter.com/marcoramires" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                    </ul>
-                </li>
-            </ul>
-            <div class="tp-bannertimer tp-top" style="height: 5px; background-color: rgba(255, 255, 255, 0.5);"></div>
-        </div>
-    </div><!-- END REVOLUTION SLIDER -->
-    <div class="holder">
-        <button class="fab" data-src="../../dist/images/site/slider-home/IMG_3180-1920x1080.jpg"><span class="lg-fullscreen lg-icon"></span></button>
-    </div>
-</section><!--/.slider-full -->
+        <!-- START REVOLUTION SLIDER 5.0.7 fullwidth mode -->
+        <div id="rev_slider_wrapper" class="rev_slider_wrapper fullscreenbanner" data-alias="highlight-carousel16" style="margin:0px auto;background-color:#000000;padding:0px;margin-top:0px;margin-bottom:0px;">
+            <div id="rev_slider" class="rev_slider fullwidthabanner" style="display:none;" data-version="5.0.7">
+                <ul>
+                    <!-- SLIDE  -->
+                    <li ng-repeat="picture in pictures" data-index="{{$index}}" data-transition="slideoverhorizontal" data-slotamount="7" data-easein="default" data-easeout="default" data-masterspeed="1500" data-thumb="../../dist/images/site/slider-home/{{picture.ref}}-320x160.jpg" data-rotate="0" data-fstransition="fade" data-fsmasterspeed="1000" data-fsslotamount="7" data-saveperformance="off" data-title="{{picture.name}}" data-description="{{picture.description}}" data-param1="{{$index + 1}} / {{pictures.length}}">
+                        <!-- MAIN IMAGE -->
+                        <img ng-src="../../dist/images/site/slider-home/{{picture.ref}}-1920x1080.jpg" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
+                        <!-- social links -->
+                        <ul class="social-links ontop">
+                            <li><a class="shopping-cart" ui-sref="picture({pictureName: '{{picture.url}}'})"><i class="fa fa-shopping-cart"></i></a></li>
+                            <!--<li><a href="#"><i class="fa fa-heart"></i></a></li>-->
+                            <!--<li><a href="#"><i class="fa fa-share-alt"></i></a></li>-->
+                            <li><a href="https://www.instagram.com/marcoramires/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://twitter.com/marcoramires" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                        </ul>
+                        <div class="holder">
+                            <button class="fab"  data-src="{{picture.src}}"><span class="lg-fullscreen lg-icon"></span></button>
+                        </div>
+                    </li>
+                </ul>
+                <div class="tp-bannertimer tp-top" style="height: 5px; background-color: rgba(255, 255, 255, 0.5);"></div>
+            </div>
+        </div><!-- END REVOLUTION SLIDER -->
+    </section><!--/.slider-full -->
     <!-- show thumbnails button -->
     <div id="thumbsButton">v</div>
     <div class="layer-page page-about">
@@ -174,12 +174,12 @@
             <div class="row">
                 <!-- photo gallery -->
                 <div id="grid-gallery">
-                    <div class="grid-item surf" data-src="../../dist/images/site/slider-home/IMG_3180-1920x1080.jpg">
+                    <div ng-repeat="picture in pictures" ng-class="picture.filter" class="grid-item" data-src="{{picture.src}}">
                         <div class="grid-lr">
-                            <img src="../../dist/images/site/slider-home/IMG_3180-1920x1080.jpg" alt="">
+                            <img ng-src="{{picture.src}}?{{imageSizes[$index]}}&fit=crop&crop=edges" alt="">
                         </div>
                         <ul class="gallery-links ontop">
-                            <li><a class="shopping-cart" ui-sref="picture({pictureName: 'yellow-fin'})"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a class="shopping-cart" ui-sref="picture({pictureName: '{{picture.url}}'})"><i class="fa fa-shopping-cart"></i></a></li>
                             <li><a class="favorite" href="#"><i class="fa fa-heart"></i></a></li>
                         </ul>
                     </div>
