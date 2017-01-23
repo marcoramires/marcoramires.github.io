@@ -56,7 +56,7 @@ function Events_Service (Analytics){
 
         var _resizeAddressBar = function () {
             var $w = $(window),
-                $background = $('.animate-content, .left-menu.navbar');
+                $background = $('page-picture .animate-content');
 
             // Fix background image jump on mobile
             if ((/Android|iPhone|iPad|iPod|BlackBerry/i).test(navigator.userAgent || navigator.vendor || window.opera)) {
