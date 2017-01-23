@@ -4219,6 +4219,10 @@ body.comingsoon .primary-title {
     .content-post.post-without-sidebar .post-extra a {
       max-width: 100px; } }
 
+@media (max-width: 1024px) {
+  .intro {
+    height: 75%; } }
+
 @media (min-width: 768px) {
   .page-picture .blog-post-date {
     margin: 0;
