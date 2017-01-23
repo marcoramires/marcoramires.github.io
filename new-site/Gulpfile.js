@@ -122,9 +122,11 @@ gulp.task('replace-dist', function () {
 });
 
 // Deployment task
-gulp.task('build-dist', ['sass', 'styles-vendor', 'styles-plugins', 'js', 'js-plugins', 'js-vendor', 'js-preload', 'images', 'fonts'], function() {
+gulp.task('build-dist', ['sass', 'styles-vendor', 'styles-plugins', 'js', 'js-plugins', 'js-vendor', 'js-preload', 'images', 'fonts', 'app-data'], function() {
     gulp.src(['.build/**/*', '!.build/images/demo/**/*', '!.build/index.html'])
         .pipe(gulp.dest('../dist'));
+    gulp.src(['.tmp/data/**/*'])
+        .pipe(gulp.dest('../dist/data'));
     gulp.src(['.build/index.html'])
         .pipe(gulp.dest('../'));
 });
