@@ -10,5 +10,116 @@
     "filter": "surf",
     "src": "images/site/slider-home/IMG_3180.jpg",
     "isFeature": true
-  }
+  },
+  {
+    "ref": "IMG_2399",
+    "name": "Yellow Fin",
+    "description": "",
+    "url": "yellow-fin",
+    "location": "Byron Bay",
+    "dateTaken": "15/06/2016",
+    "camera": "f/1.4 1/500 50mm ISO100",
+    "filter": "surf",
+    "src": "images/site/slider-home/IMG_2399.jpg",
+    "isFeature": true
+  },  {
+  "ref": "IMG_2506",
+  "name": "Yellow Fin",
+  "description": "",
+  "url": "yellow-fin",
+  "location": "Byron Bay",
+  "dateTaken": "15/06/2016",
+  "camera": "f/1.4 1/500 50mm ISO100",
+  "filter": "surf",
+  "src": "images/site/slider-home/IMG_2506.jpg",
+  "isFeature": true
+},  {
+  "ref": "IMG_3254",
+  "name": "Yellow Fin",
+  "description": "",
+  "url": "yellow-fin",
+  "location": "Byron Bay",
+  "dateTaken": "15/06/2016",
+  "camera": "f/1.4 1/500 50mm ISO100",
+  "filter": "surf",
+  "src": "images/site/slider-home/IMG_3254.jpg",
+  "isFeature": true
+},  {
+  "ref": "IMG_3956",
+  "name": "Yellow Fin",
+  "description": "",
+  "url": "yellow-fin",
+  "location": "Byron Bay",
+  "dateTaken": "15/06/2016",
+  "camera": "f/1.4 1/500 50mm ISO100",
+  "filter": "surf",
+  "src": "images/site/slider-home/IMG_3956.jpg",
+  "isFeature": true
+},  {
+  "ref": "IMG_3963",
+  "name": "Yellow Fin",
+  "description": "",
+  "url": "yellow-fin",
+  "location": "Byron Bay",
+  "dateTaken": "15/06/2016",
+  "camera": "f/1.4 1/500 50mm ISO100",
+  "filter": "surf",
+  "src": "images/site/slider-home/IMG_3963.jpg",
+  "isFeature": true
+},  {
+  "ref": "IMG_4101",
+  "name": "Yellow Fin",
+  "description": "",
+  "url": "yellow-fin",
+  "location": "Byron Bay",
+  "dateTaken": "15/06/2016",
+  "camera": "f/1.4 1/500 50mm ISO100",
+  "filter": "surf",
+  "src": "images/site/slider-home/IMG_4101.jpg",
+  "isFeature": true
+},  {
+  "ref": "IMG_4189",
+  "name": "Yellow Fin",
+  "description": "",
+  "url": "yellow-fin",
+  "location": "Byron Bay",
+  "dateTaken": "15/06/2016",
+  "camera": "f/1.4 1/500 50mm ISO100",
+  "filter": "surf",
+  "src": "images/site/slider-home/IMG_4189.jpg",
+  "isFeature": true
+},  {
+  "ref": "IMG_4849",
+  "name": "Yellow Fin",
+  "description": "",
+  "url": "yellow-fin",
+  "location": "Byron Bay",
+  "dateTaken": "15/06/2016",
+  "camera": "f/1.4 1/500 50mm ISO100",
+  "filter": "surf",
+  "src": "images/site/slider-home/IMG_4849.jpg",
+  "isFeature": true
+},  {
+  "ref": "IMG_5479",
+  "name": "Yellow Fin",
+  "description": "",
+  "url": "yellow-fin",
+  "location": "Byron Bay",
+  "dateTaken": "15/06/2016",
+  "camera": "f/1.4 1/500 50mm ISO100",
+  "filter": "surf",
+  "src": "images/site/slider-home/IMG_5479.jpg",
+  "isFeature": true
+},  {
+  "ref": "IMG_6097",
+  "name": "Yellow Fin",
+  "description": "",
+  "url": "yellow-fin",
+  "location": "Byron Bay",
+  "dateTaken": "15/06/2016",
+  "camera": "f/1.4 1/500 50mm ISO100",
+  "filter": "surf",
+  "src": "images/site/slider-home/IMG_6097.jpg",
+  "isFeature": true
+}
 ]
