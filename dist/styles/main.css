@@ -4221,7 +4221,7 @@ body.comingsoon .primary-title {
 
 @media (min-width: 992px) and (max-width: 1024px) {
   .intro {
-    height: 84.5%; } }
+    height: 74%; } }
 
 @media (min-width: 768px) {
   .page-picture .blog-post-date {
@@ -4271,18 +4271,19 @@ select {
   display: block;
   margin: 20px 0 0; }
   .image-frame img {
-    margin: -52% 0 0;
+    margin: -51.5% 0 0;
     position: absolute;
     z-index: 1;
-    width: 55%;
-    left: 0;
+    width: 46%;
+    left: 5.5%;
     display: block; }
     .image-frame img:first-of-type {
       position: relative;
       margin: 0;
       z-index: 2;
       width: 100%;
-      height: auto; }
+      height: auto;
+      left: 0; }
 
 /* Review Page */
 .page-review {
