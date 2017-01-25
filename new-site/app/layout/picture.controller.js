@@ -13,12 +13,12 @@ function PictureController($rootScope, $scope, $log, $stateParams, $state, $ocLa
 
     $scope.data = {
         availableOptions: [
-            {id: '0', name: '12 x 8 inches - 30 x 20 cm', price: 25},
-            {id: '1', name: '18 x 12 inches - 45 x 30 cm', price: 50},
-            {id: '2', name: '24 x 16 inches - 60 x 40 cm', price: 75},
-            {id: '3', name: '30 x 20 inches - 75 x 50 cm', price: 130},
-            {id: '4', name: '36 x 24 inches - 92 x 60 cm', price: 180},
-            {id: '5', name: '45 x 34 inches - 114 x 76 cm', price: 250}
+            {id: '0', name: '12 x 8 inches - 30 x 20 cm', price: 35},   //Print Service $23.10($16.80) + 40% (cost unit: $27.93) + 30% (suggested price: $36.30)
+            {id: '1', name: '18 x 12 inches - 45 x 30 cm', price: 60},  //Print Service $42.00($27.30) + 40% (cost unit: $48.51) + 30% (suggested price: $63.00)
+            {id: '2', name: '24 x 16 inches - 60 x 40 cm', price: 85},  //Print Service $56.70($37.80) + 40% (cost unit: $66.15) + 30% (suggested price: $86.46)
+            {id: '3', name: '30 x 20 inches - 75 x 50 cm', price: 95},  //Print Service $67.20($39.90) + 40% (cost unit: $74.97) + 30% (suggested price: $97.46)
+            {id: '4', name: '36 x 24 inches - 92 x 60 cm', price: 140}, //Print Service $94.50($58.00) + 40% (cost unit: $106.75)+ 30% (suggested price: $138.77)
+            {id: '5', name: '45 x 34 inches - 114 x 76 cm', price: 215} //Print Service $146.00($90.00)+ 40% (cost unit: $165.2) + 30% (suggested price: $214.76)
         ]
     };
     $scope.payments = {
