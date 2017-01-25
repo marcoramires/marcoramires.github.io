@@ -4036,11 +4036,11 @@ select {
   margin: 20px 0 0;
 
   img {
-    margin: -52% 0 0;
+    margin: -51.5% 0 0;
     position: absolute;
     z-index: 1;
-    width: 55%;
-    left: 0;
+    width: 46%;
+    left: 5.5%;
     display: block;
 
     &:first-of-type {
@@ -4049,6 +4049,7 @@ select {
       z-index: 2;
       width: 100%;
       height: auto;
+      left: 0;
     }
   }
 }

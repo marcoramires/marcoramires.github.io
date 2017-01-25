@@ -132,10 +132,14 @@ gulp.task('replace-dist', function () {
         .pipe(replace('scripts', 'dist/scripts'))
         .pipe(replace('styles/', 'dist/styles/'))
         .pipe(gulp.dest('.build/'));
+
+    gulp.src(['.dist/data/app.pictures.json'])
+        .pipe(replace('images/site/slider-home/', 'https://marcoramires.imgix.net/slider-home/'))
+        .pipe(gulp.dest('.build/dist/data/'));
 });
 
 gulp.task('build-release', ['replace-dist'], function () {
-    gulp.src(['.dist/**/*', '!.dist/scripts/main.js'])
+    gulp.src(['.dist/**/*', '!.dist/scripts/main.js', '!.dist/data/app.pictures.json'])
         .pipe(gulp.dest('.build/dist/'));
 });
 
