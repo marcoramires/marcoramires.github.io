@@ -125,7 +125,7 @@ gulp.task('replace-dist', function () {
         .pipe(gulp.dest('.build/dist/scripts/'));
 
     gulp.src(['app/layout/*.html'])
-        .pipe(replace('images/site/', 'https://marcoramires.imgix.net/'))
+        .pipe(replace('images/site/', 'images/site/'))
         .pipe(gulp.dest('.build/dist/layout/'));
 
     gulp.src(['index.html'])
@@ -134,7 +134,7 @@ gulp.task('replace-dist', function () {
         .pipe(gulp.dest('.build/'));
 
     gulp.src(['.dist/data/app.pictures.json'])
-        .pipe(replace('images/site/slider-home/', 'https://marcoramires.imgix.net/slider-home/'))
+        .pipe(replace('images/site/slider-home/', 'images/site/slider-home/'))
         .pipe(gulp.dest('.build/dist/data/'));
 });
 

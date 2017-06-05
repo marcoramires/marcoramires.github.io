@@ -35,9 +35,9 @@
             <div id="rev_slider" class="rev_slider fullwidthabanner" style="display:none;" data-version="5.0.7">
                 <ul>
                     <!-- SLIDE  -->
-                    <li ng-repeat="picture in pictures" data-index="{{$index}}" data-transition="slideoverhorizontal" data-slotamount="7" data-easein="default" data-easeout="default" data-masterspeed="1500" data-thumb="https://marcoramires.imgix.net/slider-home/{{picture.ref}}.jpg" data-rotate="0" data-fstransition="fade" data-fsmasterspeed="1000" data-fsslotamount="7" data-saveperformance="off" data-title="{{picture.name}}" data-description="{{picture.description}}" data-param1="{{$index + 1}} / {{pictures.length}}">
+                    <li ng-repeat="picture in pictures" data-index="{{$index}}" data-transition="slideoverhorizontal" data-slotamount="7" data-easein="default" data-easeout="default" data-masterspeed="1500" data-thumb="images/site/slider-home/{{picture.ref}}.jpg" data-rotate="0" data-fstransition="fade" data-fsmasterspeed="1000" data-fsslotamount="7" data-saveperformance="off" data-title="{{picture.name}}" data-description="{{picture.description}}" data-param1="{{$index + 1}} / {{pictures.length}}">
                         <!-- MAIN IMAGE -->
-                        <img ng-src="https://marcoramires.imgix.net/slider-home/{{picture.ref}}.jpg" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
+                        <img ng-src="images/site/slider-home/{{picture.ref}}.jpg" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
                         <!-- social links -->
                         <ul class="social-links ontop">
                             <li><a class="shopping-cart" ui-sref="picture({pictureName: '{{picture.url}}'})"><i class="fa fa-shopping-cart"></i></a></li>
@@ -66,7 +66,7 @@
                     <div class="content-section">
                         <div>
                             <div class="image">
-                                <img src="https://marcoramires.imgix.net/about/about.jpg" alt="">
+                                <img src="images/site/about/about.jpg" alt="">
                                 <p class="author">Marco Ramires / Photographer</p>
                             </div>
                             <h3>ABOUT ME</h3>
@@ -196,7 +196,7 @@
                     <div class="col-sm-11 col-md-5 col-md-offset-3">
                         <div class="content-section">
                             <div>
-                                <img src="https://marcoramires.imgix.net/logo/logo-color.png" alt="">
+                                <img src="images/site/logo/logo-color.png" alt="">
                                 <h3>Thank You!</h3>
                                 <p>We received your order and will process it as soon as possible.</p>
                                 <hr>
