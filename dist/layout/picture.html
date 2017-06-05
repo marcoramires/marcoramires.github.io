@@ -48,7 +48,7 @@
                         <p class="blog-post-date block"><i class="icon fa fa-camera"></i>{{details.camera}}</p>
                         <p class="blog-post-date block">Ref: {{details.ref}}</p>
                         <div class="image-frame">
-                            <img src="images/site/iStock_Transparent.png?w=800" alt="">
+                            <img src="dist/images/site/iStock_Transparent.png?w=800" alt="">
                             <img ng-src="{{details.src}}" alt="{{details.description}}">
                         </div>
                         <h2>Buy this image</h2>
@@ -131,10 +131,10 @@
                             <div>
                                 <h3>Review Order</h3>
                                 <div class="image-frame">
-                                    <img src="images/site/iStock_Transparent.png?w=640" alt="">
+                                    <img src="dist/images/site/iStock_Transparent.png?w=640" alt="">
                                     <img ng-src="{{details.src}}" alt="{{details.description}}">
                                 </div>
-                                <!--<img src="images/site/test_b.jpg" alt="">-->
+                                <!--<img src="dist/images/site/test_b.jpg" alt="">-->
                                 <p>{{data.picture}} </p>
                                 <p>Print only:{{data.availableOptions[data.size].name}}</p>
                                 <p class="price" ng-show="data.size !== null">Total: {{data.availableOptions[data.size].price | currency: 'AUD$ ':0}}</p>
