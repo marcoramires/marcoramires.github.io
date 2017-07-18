@@ -550,11 +550,12 @@ function $$payPal() {
         sandbox: 'AX-MNu6chPspfWTp__Cb2JCpy9Sj9P2NTqC2sO_-j-Gajj_2R6ByPpT2-dMMp0FOZ2d25HJqwfdx4DhB',
         production: 'AbsV2ykBRbKcZGz-O-27Y8-jFMVQrgU8vQ7owgvB1afFMMcGYrPdMFrQVWgONmO8TnrUy4-V2n23IEj8'
     };
-    var _prodDescription = 'Print only: ' + $scope.data.picture + ' ' + $scope.data.availableOptions[$scope.data.size].name;
-    var _prodValue = $scope.data.availableOptions[$scope.data.size].price;
+    var _prodDescription = 'Print only: ' + $('#_ref').val() + ' ' + $('#_size').val();
+    var _prodValue = $('#_price').val();
     var _total = _prodValue;
+    var _cancelUrl = 'https://marcoramires.com' + $('#_returnUrl').val();
 
-    $rootScope.paypal = paypal.Button.render({
+    var $paypal = paypal.Button.render({
         env: _env, // Specify 'sandbox' for the test environment
         client: _client,
         payment: function () {
@@ -565,7 +566,7 @@ function $$payPal() {
                 },
                 redirect_urls: {
                     return_url: "https://marcoramires.com/#!/page-paypal",
-                    cancel_url: "https://marcoramires.com/#!/picture/yellow-fin"
+                    cancel_url: _cancelUrl
                 },
                 transactions: [
                     {
@@ -614,13 +615,12 @@ function $$payPal() {
 }
 
 function $$reviewOrder () {
-    $.get('https://www.paypalobjects.com/api/checkout.js')
+    $.getScript('https://www.paypalobjects.com/api/checkout.js')
         .done(function() {
             console.log('Paypal loaded!');
             $$payPal();
         }).then(function() {
-
-            console.log('Paypal loaded!');
+            $('.loading').hide();
     });
 }
 
@@ -629,6 +629,12 @@ function initPictures () {
         $('.header').show();
         $('.total-price').text('AUD$ ' + $(this).val());
         $('.print-size').text($(this).find('option:selected').text());
+
+        // Update Hidden Fields
+        $('#_price').val($(this).val());
+        $('#_size').val($(this).find('option:selected').text());
+        $('#_returnUrl').val();
+
         $('.open-layer').attr('disabled', false);
     });
 
@@ -654,6 +660,7 @@ function initPictures () {
     });
     $('.close-layer, .change-order').on('click', function (e) {
         $('#paypal-button').html('');
+        $('.loading').show();
         closeLayer();
     });
 }
