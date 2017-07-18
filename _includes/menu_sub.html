@@ -14,7 +14,7 @@
             <div class="close-nav"></div>
             <ul class="nav navbar-nav navbar-right">
                 {% for item in site.data.navigation.items %}
-                <li><a href="{{ item.url }}" class="open-layer" data-layer="{{ item.layer }}">{{ item.title }}</a></li>
+                <li><a href="{{ item.url }}">{{ item.title }}</a></li>
                 {% endfor %}
             </ul>
             <ul class="social-links">
