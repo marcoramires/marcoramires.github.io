@@ -658,6 +658,7 @@ function initPictures () {
 
         return false;
     });
+
     $('.close-layer, .change-order').on('click', function (e) {
         $('#paypal-button').html('');
         $('.loading').show();
