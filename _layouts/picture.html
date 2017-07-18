@@ -1,0 +1,212 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Marco Ramires | {{page.title}}</title>
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+    
+    <!-- vendor css -->
+    <link rel="stylesheet" href="../styles/vendor.css">
+    <!-- slider revolution css -->
+    <!--<link rel="stylesheet" href="../revolution/css/revolution.all.css">-->
+    <!-- main css -->
+    <link rel="stylesheet" href="../styles/main.css">
+    
+    <!-- Preload -->
+    <script src="../scripts/vendor/pace.min.js"></script>
+    <!-- Modernizr -->
+    <script src="../scripts/vendor/modernizr.js"></script>
+  </head>
+  <body class="new page-blog left-menu page-picture">
+    <!--[if lt IE 10]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- preloader -->    
+    <div id="layer-loade">
+      <p class="logo-intro">Shoot</p>
+    </div>
+
+    <!-- logo -->
+    <header>
+      <p class="logo"><a href="#" class="open-home"></a></p>
+    </header>
+
+    <!-- Static navbar --> 
+    <nav class="navbar"> <!-- navbar-default -->
+      <div class=""> <!-- container-fluid -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <div class="close-nav"></div>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="/#page-about" >About</a></li>
+            <li><a href="/#page-albums">Albums</a></li>
+            <li><a href="/#page-gallery">Gallery</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/#page-contact">Contact</a></li>
+          </ul>
+          <ul class="social-links">
+            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div><!--/.container-fluid -->
+    </nav>
+    
+    <!-- intro -->
+    <div class="intro">
+      <div class="image-cover menu-bottom" style="background-image: url('../images/site/pictures/{{page.ref}}-1920x1080.jpg');"></div>
+    </div>
+
+    <!-- post -->
+    <div class="section post-whidout-sidebar">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9 col-md-offset-3">
+            <div class="content-post post-without-sidebar">
+              <div class="post-extra">
+                <a href="" class="button-blog ico-share"></a>
+              </div>
+              <h1 class="primary-title text-left">{{page.title}}</h1>
+              <p class="blog-post-date block"><i class="icon fa fa-map-marker"></i>{{page.location}} - {{page.dateTaken}}</p>
+              <p class="blog-post-date block"><i class="icon fa fa-camera"></i>{{page.camera}}</p>
+              <p class="blog-post-date block">Ref: {{page.ref}}</p>
+
+              <div class="image-frame">
+                <img src="../images/site/iStock_Transparent.png?w=800" alt="">
+                <img src="../images/site/pictures/{{page.ref}}.jpg" alt="{{page.description}}">
+              </div>
+              <h2>Buy this image</h2>
+              <div class="plain-select">
+                <select name="ImageSize" id="ImageSize">
+                  <option value="" disabled="disabled" selected="selected">Select --</option>
+                  <option value="35">12 x 8 inches - 30 x 20 cm</option>
+                  <option value="60">18 x 12 inches - 45 x 30 cm</option>
+                  <option value="85">24 x 16 inches - 60 x 40 cm</option>
+                  <option value="95">30 x 20 inches - 75 x 50 cm</option>
+                  <option value="140">36 x 24 inches - 92 x 60 cm</option>
+                  <option value="215">45 x 34 inches - 114 x 76 cm</option>
+                </select>
+              </div>
+              <p class="header price">Total: <span class="total-price"></span></p>
+              <p class="header" ng-show="data.size !== null">* Frame not included.</p>
+              <p>Production time : 10 days (excluding shipping)</p>
+              <button class="btn btn-primary open-layer" data-layer="page-review" disabled>Order Now</button>
+              <!--<div id="paypal-button" ng-show="data.size !== null"></div>-->
+              <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam perferendis molestiae dolore quae mollitia placeat est amet similique, iure, consequatur possimus ipsa eius recusandae ex nostrum? Iste amet consequuntur magni. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci quaerat debitis earum et perspiciatis ipsum delectus minus suscipit, pariatur laboriosam nobis! Quas harum, delectus et unde in officia distinctio voluptatibus!</p>-->
+              <hr>
+              <h2>FAQ</h2>
+              <p class="header">Shipping costs</p>
+              <p>Free express shipping Australia-wide. Contact <a href="mailto:info@marcoramires.com">info@marcoramires.com</a> for other countries.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- pagination -->
+    <div class="section">
+      <div class="container container-full">
+        <div class="row row-no-gutter">
+          <div class="col-sm-6">
+            {% if page.previous.url and page.previous.categories contains "picture" %}
+            <div class="paginationblog includeimage oldpost">
+              <a href="{{page.previous.id}}">
+                <div class="banner">
+                  <div class="voffset160"></div>
+                </div>
+                <p class="info">
+                  <span class="title-pagination">{{page.previous.title}}</span>
+                </p>
+              </a>
+            </div>
+            {% endif %}
+          </div>
+          <div class="col-sm-6">
+            {% if page.next.url and page.next.categories contains "picture" %}
+            <div class="paginationblog includeimage newpost">
+              <a href="{{page.next.id}}">
+                <div class="banner">
+                  <div class="voffset160"></div>
+                </div>
+                <p class="info">
+                  <span class="title-pagination">{{page.next.title}}</span>
+                </p>
+              </a>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- contenct with us -->
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <ul class="social-links">
+              <li><a href="https://www.instagram.com/marcoramires/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+              <li>@marcoramires</li>
+              <li><a href="https://twitter.com/marcoramires" target="_blank"><i class="fa fa-twitter"></i></a></li>
+            </ul>
+            <p class="social-links">© 2017 All rights reserved. Please read our <a href="/terms-conditions/">terms &amp; conditions</a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="layer-page page-review">
+      <div class="section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-5 col-md-offset-3 col-lg-5 col-lg-offset-3 col-">
+              <div class="content-section">
+                <div>
+                  <h3>Review Order</h3>
+                  <div class="image-frame">
+                    <img src="../images/site/iStock_Transparent.png" alt="">
+                    <img src="../images/site/pictures/{{page.ref}}.jpg" alt="{{page.description}}">
+                  </div>
+                  <p>{{data.picture}} </p>
+                  <p>Print only: <span class="print-size"></span></p>
+                  <p class="price">Total: <span class="total-price"></span></p>
+                  <p>Available payments</p>
+                  <p>Loading <i class="fa fa-spinner spin"></i></p>
+                  <div id="paypal-button"></div>
+                  <button class="btn btn-default change-order">Change order</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
+
+    <!-- Vendor js -->
+    <script src="../scripts/vendor/vendor.js"></script>
+
+    <!-- Main js -->
+    <script src="../scripts/main.js"></script>
+    
+</body>
+</html>
