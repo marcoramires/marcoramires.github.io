@@ -1,0 +1,20 @@
+items:
+
+
+- title: Home
+  url: ../
+
+- title: About
+  url: ../#page-about
+  layer: page-about
+
+- title: Gallery
+  url: ../#page-gallery
+  layer: page-gallery
+
+- title: Blog
+  url: blog/
+
+- title: Contact
+  url: ../#page-contact
+  layer: page-contact
