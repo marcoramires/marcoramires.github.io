@@ -543,7 +543,7 @@ $(window).on('resize', function (e) {
                 P I C T U R E S
  ------------------------------------------------*/
 function $$payPal() {
-    var _env = 'sandbox';
+    var _env = 'production';
     var _client = {
         sandbox: 'AX-MNu6chPspfWTp__Cb2JCpy9Sj9P2NTqC2sO_-j-Gajj_2R6ByPpT2-dMMp0FOZ2d25HJqwfdx4DhB',
         production: 'AbsV2ykBRbKcZGz-O-27Y8-jFMVQrgU8vQ7owgvB1afFMMcGYrPdMFrQVWgONmO8TnrUy4-V2n23IEj8'
