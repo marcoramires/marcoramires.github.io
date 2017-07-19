@@ -21,11 +21,11 @@ function mainBanner() {
             revslider_showDoubleJqueryError('#rev_slider');
         } else {
             revapi16 = $('#rev_slider').show().revolution({
-                sliderType: 'carousel',
+                // sliderType: 'carousel',
                 jsFileLocation: '../revolution/js/',
                 sliderLayout: 'fullscreen',
                 dottedOverlay: 'none',
-                delay: 9000,
+                delay: 5000,
                 navigation: {
                     keyboardNavigation: 'off',
                     keyboard_direction: 'horizontal',
@@ -40,7 +40,6 @@ function mainBanner() {
                         swipe_direction: 'horizontal',
                         drag_block_vertical: false
                     },
-
                     arrows: {
                         style: 'arrowpag',
                         enable: true,
@@ -53,17 +52,16 @@ function mainBanner() {
                         left: {
                             h_align: 'left',
                             v_align: 'center',
-                            h_offset: 30,
+                            h_offset: 10,
                             v_offset: 0
                         },
                         right: {
                             h_align: 'right',
                             v_align: 'center',
-                            h_offset: 30,
+                            h_offset: 10,
                             v_offset: 0
                         }
                     },
-
                     tabs: {
                         style: 'hermes',
                         enable: true,
