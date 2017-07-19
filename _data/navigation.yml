@@ -13,7 +13,7 @@ items:
   layer: page-gallery
 
 - title: Blog
-  url: blog/
+  url: ../blog/
 
 - title: Contact
   url: ../#page-contact
