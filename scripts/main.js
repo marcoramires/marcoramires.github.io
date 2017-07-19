@@ -664,6 +664,70 @@ function initPictures () {
     });
 }
 
+/*----------------------------------------------
+     I M A G E   L A Y E R
+------------------------------------------------*/
+function imageLayer() {
+    $('.slotholder').each(function () {
+        $(this).after('<div class="img-lr"></div>');
+    });
+    $('.grid-lr').each(function () {
+        $(this).after('<div class="img-lr-grid"></div>');
+    });
+    console.log('* Image-Layer Done *');
+}
+function imageLayerGallery() {
+    $('.lg-img-wrap').each(function () {
+        $(this).after('<div class="img-lr"></div>');
+    });
+    console.log('* Image-Layer-Gallery Done *');
+}
+
+/* ---------------------------------------------
+M O B I L E  F A B
+------------------------------------------------*/
+function mobileFab () {
+    $('.fab').on('click', function() {
+        $(this).parent(".holder").addClass("is-expandend");
+
+        var $dy = $(this);
+        $dy.lightGallery({
+            dynamic: true,
+            dynamicEl: [{
+                "src":  $(this).attr('data-src')
+            }],
+            showThumbByDefault: !1,
+            cssEasing: 'cubic-bezier(.77,0,.175,1)',
+            easing: 'easeOutSine',
+            hideBarsDelay: 99999,
+            download: false,
+            zoom: false
+        });
+
+        $dy.on('onAfterOpen.lg',function(event){
+            imageLayerGallery();
+        });
+
+        $dy.on('onCloseAfter.lg',function(event){
+            $(this).parent(".holder").removeClass("is-expandend");
+        });
+
+        // Create a new tracking event with a value
+        // Analytics.trackEvent('Home Page', 'FAB (full-screen)', 'Yellow Fin', 1);
+    });
+
+    //TODO: Review this
+    setTimeout(function() {
+        $('.fab').fadeIn();
+    }, 1000);
+    setTimeout(function() {
+        $('.fab').addClass('animate');
+    }, 1500);
+
+    console.log('* Mobile-FAB Done *');
+}
+
+
 // DOM ready function
 (function ($) {
     prealoader();
@@ -679,5 +743,9 @@ function initPictures () {
     videoPlayer();
     managePages();
     initPictures()
+    imageLayer();
+    setTimeout(function () {
+        mobileFab();
+    }, 100);
 })(jQuery);
 //# sourceMappingURL=main.js.map
