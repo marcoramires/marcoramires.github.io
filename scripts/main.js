@@ -64,7 +64,7 @@ function mainBanner() {
                     },
                     tabs: {
                         style: 'hermes',
-                        enable: true,
+                        enable: false,
                         // width: 175,
                         // height: 140,
                         width: 320,
