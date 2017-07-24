@@ -2,9 +2,23 @@
 <html class="no-js" lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="description" content="">
+    <meta name="description" content="{{page.excerpt | remove: '<p>' | remove: '</p>' | remove: '<strong>' | remove: '</strong>' }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Shoot | Fullscreen Photography HTML Template</title>
+    <title>{{page.title}} | Marco Ramires Photography</title>
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="{{page.title}} | Marco Ramires Photography">
+    <meta property="og:description" content="{{page.excerpt | remove: '<p>' | remove: '</p>' | remove: '<strong>' | remove: '</strong>' }}">
+    <meta property="og:url" content="{{site.url}}{{page.id}}">
+    <meta property="og:site_name" content="Marco Ramires Photography">
+    <meta property="og:image" content="{{site.url}}/images/site/pictures/{{page.ref}}-1920x1080.jpg">
+    <meta property="og:updated_time" content="{{page.date}}">
+    <meta property="article:published_time" content="{{page.date}}">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@marcoramires">
+    <meta name="twitter:title" content="{{page.title}} | Marco Ramires Photography">
+    <meta name="twitter:description" content="{{page.excerpt | remove: '<p>' | remove: '</p>' | remove: '<strong>' | remove: '</strong>' }}">
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
@@ -12,7 +26,7 @@
     <!-- vendor css -->
     <link rel="stylesheet" href="../styles/vendor.css">
     <!-- slider revolution css -->
-    <link rel="stylesheet" href="../revolution/css/revolution.all.css">
+    <!--<link rel="stylesheet" href="../revolution/css/revolution.all.css">-->
     <!-- main css -->
     <link rel="stylesheet" href="../styles/main.css">
     
@@ -21,7 +35,7 @@
     <!-- Modernizr -->
     <script src="../scripts/vendor/modernizr.js"></script>
   </head>
-  <body class="page-blog left-menu">
+  <body class="new page-blog page-post left-menu">
     <!--[if lt IE 10]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -33,45 +47,16 @@
 
     <!-- logo -->
     <header>
-      <p class="logo"><a href="#" class="open-home">Shoot</a></p>
+      <!--<p class="logo"><a href="#" class="open-home">Shoot</a></p>-->
+      <p class="logo"><a href="#" class="open-home">MARCO RAMIRES | TOES ON THE NOES</a></p>
+
     </header>
 
-    <!-- Static navbar --> 
-    <nav class="navbar"> <!-- navbar-default -->
-      <div class=""> <!-- container-fluid -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Project name</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <div class="close-nav"></div>
-          <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="../index.html">Home</a></li>
-            <li><a href="../index.html#page-about" >About</a></li>
-            <li><a href="../index.html#page-albums">Albums</a></li>
-            <li><a href="../index.html#page-gallery">Gallery</a></li>
-            <li><a href="/blog">Blog</a></li>
-            <li><a href="../index.html#page-contact">Contact</a></li>
-          </ul>
-          <ul class="social-links">
-            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div><!--/.container-fluid -->
-    </nav>
-    
+    {% include menu_sub.html %}
+
     <!-- intro -->
     <div class="intro">
-      <div class="image-cover menu-bottom" id="post2-intro-slider01">
+      <div class="image-cover menu-bottom" style="background-image: url('../images/site/pictures/{{page.ref}}-1920x1080.jpg')">
       </div>
     </div>
 
@@ -79,129 +64,26 @@
     <div class="section post-whidout-sidebar">
       <div class="container">
         <div class="row">
-          <div class="col-md-9 col-md-offset-3">
+          <div class="col-md-10 col-md-offset-2">
             <div class="content-post post-without-sidebar">
 
               <div class="post-extra">
-                <div class="blog-post-author" id="blog2-post-author1"></div>
-                <a href="#" class="button-blog ico-comments"></a>
                 <a href="#" class="button-blog ico-share"></a>
               </div>
 
-              <p class="blog-post-date block">by John Doe on 15th june</p>
-              <h1 class="primary-title text-left">standard blog post with image gallery</h1>
-              <img src="images/demo/blog/photo-post1.jpg" alt="">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam perferendis molestiae dolore quae mollitia placeat est amet similique, iure, consequatur possimus ipsa eius recusandae ex nostrum? Iste amet consequuntur magni. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci quaerat debitis earum et perspiciatis ipsum delectus minus suscipit, pariatur laboriosam nobis! Quas harum, delectus et unde in officia distinctio voluptatibus!</p>
+              <h1 class="primary-title text-left">{{page.title}}</h1>
+              <p class="blog-post-date block">By {{page.author}} on {{page.date | date_to_string}}</p>
 
-              <p>Vivamus ultrices ullamcorper tortor, nec pharetra massa sollicitudin nec. Integer posuere lacus et blandit pulvinar. Ut id fermentum purus. Etiam eget lacinia libero. Nulla facilisi. Suspendisse at volutpat lectus, sit amet tempus nibh. Phasellus tempor at nulla quis iaculis. Suspendisse commodo nec urna sit amet ornare.</p>
+              {{page.content}}
 
-              <p>Nulla facilisi. Phasellus mi orci, pellentesque sed dui nec, interdum gravida est. Pellentesque quis accumsan urna. Praesent tincidunt consectetur porta. Fusce nec sagittis ipsum, at accumsan magna. Mauris eu diam enim. Pellentesque lobortis ornare.</p>
-              <p>libero a convallis lobortis, lectus mauris rhoncus est, vel pharetra sapien orci sed enim. Vestibulum congue, sem id cursus adipiscing, felis justo vehicula.</p>
-
-              <hr>
-
-              <h2>post sub heading</h2>
-
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam facilis necessitatibus eligendi expedita quod molestiae, voluptatibus quibusdam exercitationem ducimus. Possimus dolores, et explicabo aperiam neque. Quis aperiam quisquam officiis, ducimus. Et explicabo aperiam neque. Quis aperiam quisquam officiis, ducimus.</p>
-
-              
               <!-- intro comments -->
               <div class="intro-comments">
-                <div class="count-comments">
-                  <span class="number">10</span> comments
-                  <a href="#" class="leave-reply">leave a reply</a>
-                </div>
                 <ul class="share">
                   <li>share</li>
                   <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                   <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                  <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                 </ul>
               </div>
-              
-              <!-- comments -->
-              <div class="media">
-                <a class="pull-left" href="#">
-                  <div class="banner blog-post-author" id="post1-comments1"></div>
-                </a>
-                <div class="media-body">
-                  <h4 class="media-heading">
-                    07 June 2014
-                    <br>
-                    John Williams
-                  </h4>
-                  <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-                </div>
-                <hr>
-              </div>
-
-              <div class="media">
-                <a class="pull-left" href="#">
-                  <div class="banner blog-post-author" id="post1-comments2"></div>
-                </a>
-                <div class="media-body">
-                  <h4 class="media-heading">
-                    07 June 2014
-                    <br>
-                    John Williams
-                  </h4>
-                  <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-
-                  <!-- Nested Comment -->
-                  <div class="media">
-                    <a class="pull-left" href="#">
-                      <div class="banner blog-post-author" id="post1-comments3"></div>
-                    </a>
-                    <div class="media-body">
-                      <h4 class="media-heading">
-                        07 June 2014
-                        <br>
-                        John Williams
-                      </h4>
-                      <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-                    </div>
-                  </div>
-                  <!-- End Nested Comment -->
-                </div>
-                <hr>
-              </div>
-
-              <div class="media">
-                <a class="pull-left" href="#">
-                  <div class="banner blog-post-author" id="post1-comments4"></div>
-                </a>
-                <div class="media-body">
-                  <h4 class="media-heading">
-                    07 June 2014
-                    <br>
-                    John Williams
-                  </h4>
-                  <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-                </div>
-              </div>
-
-              <!-- form comments -->
-              <p class="title-form">post a reply</p>
-              <form class="comments-form">
-                    <div class="form-group inline">
-                      <label class="title small" for="name">Name</label>
-                      <input type="text" placeholder="Name" name="name" id="name" class="text name required">
-                    </div>
-                    
-                    <div class="form-group inline">
-                      <label class="title small" for="email">E-mail</label>
-                      <input type="email" placeholder="E-mail" name="email" id="email" class="text email required">
-                    </div>
-                    
-                    <div class="form-group">
-                      <label class="title small" for="message">Type your message</label>
-                      <textarea placeholder="Type your message" name="message" id="message" class="text area required" ></textarea>
-                    </div>
-
-                    <!-- <div class="formSent"><p><strong>Your Message Has Been Sent!</strong> Thank you for contacting us.</p></div> -->
-                    <input type="submit" value="Send message" class="btn rounded">  
-              </form>
-
 
             </div>
           </div>
@@ -214,61 +96,40 @@
       <div class="container container-full">
         <div class="row row-no-gutter">
           <div class="col-sm-6">
+            {% if page.previous.url and page.previous.categories contains "blog" %}
             <div class="paginationblog includeimage oldpost">
-              <a href="post3.html">
+              <a href="{{page.previous.id}}">
                 <div class="banner" id="post1-pagination-oldpost">
                   <div class="voffset160"></div>
                 </div>
                 <p class="info">
-                  <span class="date-pagination">07 June 2014</span>
-                  <span class="title-pagination">standard post with video background</span>
+                  <span class="date-pagination">{{page.previous.date | date_to_string}}</span>
+                  <span class="title-pagination">{{page.previous.title}}</span>
                 </p>
               </a>
             </div>
+            {% endif %}
           </div>
           <div class="col-sm-6">
+            {% if page.next.url and page.next.categories contains "blog" %}
             <div class="paginationblog includeimage newpost">
-              <a href="post3.html">
+              <a href="{{page.next.id}}">
                 <div class="banner" id="post1-pagination-newpost">
                   <div class="voffset160"></div>
                 </div>
                 <p class="info">
-                  <span class="date-pagination">07 June 2014</span>
-                  <span class="title-pagination">standard post with video background</span>
+                  <span class="date-pagination">{{page.next.date | date_to_string}}</span>
+                  <span class="title-pagination">{{page.next.title}}</span>
                 </p>
               </a>
             </div>
+            {% endif %}
           </div>
         </div>
       </div>
     </div>
 
-    <!-- contenct with us -->
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12"> 
-            <ul class="social-links">
-              <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-              <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-              <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-    <script>
-      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-      e.src='https://www.google-analytics.com/analytics.js';
-      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-      ga('create','UA-XXXXX-X');ga('send','pageview');
-    </script>
+    {% include footer.html %}
 
     <!-- jQuery -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>

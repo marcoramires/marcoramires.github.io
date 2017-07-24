@@ -6,20 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{page.title}}</title>
 
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{page.title}} | Marco Ramires Photography">
+    <meta property="og:description" content="{{page.description}}">
+    <meta property="og:url" content="{{site.url}}{{page.permalink}}">
+    <meta property="og:site_name" content="Marco Ramires Photography">
+    <meta property="og:image" content="{{site.url}}/images/site/pictures/{{page.image}}">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@marcoramires">
+    <meta name="twitter:title" content="{{page.title}}">
+    <meta name="twitter:description" content="{{page.description}}">
+
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
     
     <!-- vendor css -->
-    <link rel="stylesheet" href="../styles/vendor.css">
+    <link rel="stylesheet" href="{{site.baseurl}}/styles/vendor.css">
     <!-- slider revolution css -->
-    <link rel="stylesheet" href="../revolution/css/revolution.all.css">
+    <link rel="stylesheet" href="{{site.baseurl}}/revolution/css/revolution.all.css">
     <!-- main css -->
-    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="{{site.baseurl}}/styles/main.css">
     
     <!-- Preload -->
-    <script src="../scripts/vendor/pace.min.js"></script>
+    <script src="{{site.baseurl}}/scripts/vendor/pace.min.js"></script>
     <!-- Modernizr -->
-    <script src="../scripts/vendor/modernizr.js"></script>
+    <script src="{{site.baseurl}}/scripts/vendor/modernizr.js"></script>
   </head>
   <body class="new page-blog left-menu">
     <!--[if lt IE 10]>
@@ -40,7 +52,7 @@
     
     <!-- intro -->
     <div class="intro">
-      <div class="image-cover" style="background-image: url('../images/site/pictures/IMG_3180-1920x1080.jpg')">
+      <div class="image-cover" style="background-image: url('{{site.baseurl}}/images/site/pictures/{{page.image}}')">
         <div class="vcenter text-center">
           <div class="container">
             <div class="row">
@@ -56,106 +68,52 @@
 
     <div class="section">
       <div class="container container-full">
+        {% for post in paginator.posts %}
         <!-- post -->
         <div class="row row-no-gutter">
           <div class="col-md-6">
-            <div class="banner blog-2-image" id="blog-photo-post1"></div>
+            <div class="banner blog-2-image" style="background-image: url('{{site.baseurl}}/images/site/pictures/{{post.ref}}-1920x1080.jpg')"></div>
           </div>
           <div class="col-md-6">
             <div class="blog-2-text">
               <div class="vcenter blog-post-content">
                 <div class="blog-post-header">
-                  <p class="blog-post-date">07 June 2014  /  John Williams</p>
+                  <p class="blog-post-date">{{post.date | date_to_string}} / {{post.author}}</p>
                 </div>
                 <div class="voffset40"></div>
-                <h1 class="blog-post-title">standard blog post with image</h1>
+                <h1 class="blog-post-title">{{post.title}}</h1>
                 <div class="voffset20"></div>
-                <p class="blog-post-intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ac varius nisl. Vivamus sollicitudin imperdiet risus, non interdum justo posuere id. Nunc pellentesque ac nulla in blandit. Sed turpis orci, sodales non porta sit amet, euismod venenatis augue[...]</p>
+                <p class="blog-post-intro">{{post.excerpt | remove: '<p>' | remove: '</p>' }}</p>
                 <div class="voffset40"></div>
                 <ul class="post-share">
                   <li>share:</li>
                   <li><i class="fa fa-facebook"></i> facebook</li>
                   <li><i class="fa fa-twitter"></i> twitter</li>
-                  <li><i class="fa fa-google-plus"></i> google+</li>
-                  <li><i class="fa fa-instagram"></i> instagram</li>
                 </ul>
                 <div class="voffset50"></div>
-                <a href="post.html" class="readfull">read full article</a>
+                <a href="{{post.id}}" class="readfull">See full post & more photographs</a>
                 <div class="voffset50"></div>
               </div>
             </div>
           </div>
         </div>
-        <!-- post -->
-        <div class="row row-no-gutter">
-          <div class="col-md-6">
-            <div class="banner blog-2-image" id="blog-photo-post2"></div>
-          </div>
-          <div class="col-md-6">
-            <div class="blog-2-text">
-              <div class="vcenter blog-post-content">
-                <div class="blog-post-header">
-                  <p class="blog-post-date">07 June 2014  /  John Williams</p>
-                </div>
-                <div class="voffset40"></div>
-                <h1 class="blog-post-title">standard blog post with image</h1>
-                <div class="voffset20"></div>
-                <p class="blog-post-intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ac varius nisl. Vivamus sollicitudin imperdiet risus, non interdum justo posuere id. Nunc pellentesque ac nulla in blandit. Sed turpis orci, sodales non porta sit amet, euismod venenatis augue[...]</p>
-                <div class="voffset40"></div>
-                <ul class="post-share">
-                  <li>share:</li>
-                  <li><i class="fa fa-facebook"></i> facebook</li>
-                  <li><i class="fa fa-twitter"></i> twitter</li>
-                  <li><i class="fa fa-google-plus"></i> google+</li>
-                  <li><i class="fa fa-instagram"></i> instagram</li>
-                </ul>
-                <div class="voffset50"></div>
-                <a href="post.html" class="readfull">read full article</a>
-                <div class="voffset50"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- post -->
-        <div class="row row-no-gutter">
-          <div class="col-md-6">
-            <div class="banner blog-2-image" id="blog-photo-post3"></div>
-          </div>
-          <div class="col-md-6">
-            <div class="blog-2-text">
-              <div class="vcenter blog-post-content">
-                <div class="blog-post-header">
-                  <p class="blog-post-date">07 June 2014  /  John Williams</p>
-                </div>
-                <div class="voffset40"></div>
-                <h1 class="blog-post-title">standard blog post with image</h1>
-                <div class="voffset20"></div>
-                <p class="blog-post-intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ac varius nisl. Vivamus sollicitudin imperdiet risus, non interdum justo posuere id. Nunc pellentesque ac nulla in blandit. Sed turpis orci, sodales non porta sit amet, euismod venenatis augue[...]</p>
-                <div class="voffset40"></div>
-                <ul class="post-share">
-                  <li>share:</li>
-                  <li><i class="fa fa-facebook"></i> facebook</li>
-                  <li><i class="fa fa-twitter"></i> twitter</li>
-                  <li><i class="fa fa-google-plus"></i> google+</li>
-                  <li><i class="fa fa-instagram"></i> instagram</li>
-                </ul>
-                <div class="voffset50"></div>
-                <a href="post.html" class="readfull">read full article</a>
-                <div class="voffset50"></div>
-              </div>
-            </div>
-          </div>
-        </div>
+        {% endfor %}
 
+        {% if paginator.total_pages > 1 %}
         <!-- pagination -->
         <div class="row row-no-gutter">
           <div class="col-sm-6">
-            <p class="paginationblog oldpost">old posts</p>
+            {% if paginator.previous_page %}
+            <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}"><p class="paginationblog oldpost">old posts</p></a>
+            {% endif %}
           </div>
           <div class="col-sm-6">
-            <p class="paginationblog newpost">new posts</p>
+            {% if paginator.next_page %}
+            <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}"><p class="paginationblog newpost">new posts</p></a>
+            {% endif %}
           </div>
         </div>
+        {% endif %}
       </div>
     </div>
 
@@ -179,10 +137,10 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
 
     <!-- Vendor js -->
-    <script src="../scripts/vendor/vendor.js"></script>
+    <script src="{{site.baseurl}}/scripts/vendor/vendor.js"></script>
 
     <!-- Main js -->
-    <script src="../scripts/main.js"></script>
+    <script src="{{site.baseurl}}/scripts/main.js"></script>
     
 </body>
 </html>

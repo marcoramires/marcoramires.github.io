@@ -3943,6 +3943,11 @@ body.new.page-blog .logo a {
   text-indent: -999em;
   width: 40px;
 }
+
+body.new.page-post .logo a {
+  text-indent: 1.7em;
+  width: 100%;
+}
 body.new.left-menu .navbar .navbar-brand {
   display: block;
   border: 0;
@@ -3976,7 +3981,7 @@ body.new.left-menu .navbar .navbar-brand {
   color: #4e5b6c;
   margin-right: 5px;
 }
-.page-picture .primary-title {
+.page-picture .primary-title, .page-post .primary-title {
   margin: 20px 0 15px;
 }
 .page-picture .header {
@@ -4047,7 +4052,7 @@ body.new.left-menu .navbar .navbar-brand {
     color: #4e5b6c;
     margin-right: 5px;
   }
-  .page-picture .primary-title {
+  .page-picture .primary-title, .page-post .primary-title {
     display: inline-block;
     margin: 22px 10px 15px;
     line-height: 63px;
@@ -4235,7 +4240,6 @@ body.new .img-lr {
 //backface-visibility: hidden;
   transform: translate3d(0px, 0px, 0px);
 }
-
 body.new  .img-lr-grid {
   position: absolute;
   top: 0;
@@ -4308,6 +4312,35 @@ body.new  .img-lr-grid {
   .holder {
     display: none;
   }
+}
+
+/*------------------------------------------------------------------
+[Post]
+*/
+body.new.page-post .blog-post-date {
+  margin-bottom: 20px;
+}
+
+body.new.page-post p {
+margin-bottom: 25px;
+}
+
+body.new.page-post .post-image {
+  font-size: 16px;
+  line-height: 25px;
+  margin-bottom: 55px;
+}
+
+body.new.page-post .post-image img {
+  margin: 0;
+}
+
+body.new .blog-post-intro {
+  margin: 15px 0;
+}
+
+body.new .post-share {
+  margin: 15px 0;
 }
 
 

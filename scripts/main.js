@@ -727,6 +727,15 @@ function mobileFab () {
     console.log('* Mobile-FAB Done *');
 }
 
+/* ---------------------------------------------
+POST
+------------------------------------------------*/
+function postInit() {
+    $('.page-post .content-post img').each(function () {
+        $(this).parent().addClass('post-image');
+        $(this).parent().attr('data-source', $(this).prop('src'));
+    });
+}
 
 // DOM ready function
 (function ($) {
@@ -744,6 +753,7 @@ function mobileFab () {
     managePages();
     initPictures()
     imageLayer();
+    postInit();
     setTimeout(function () {
         mobileFab();
     }, 100);
