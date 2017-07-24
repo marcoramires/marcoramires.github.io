@@ -8,4 +8,3 @@ location: "Byron Bay"
 dateTaken: "15/06/2016"
 camera: "f/1.4 1/500 50mm ISO100"
 ---
-Contend goes here...
