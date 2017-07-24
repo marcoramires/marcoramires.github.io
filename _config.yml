@@ -27,21 +27,15 @@ github_username:  jekyll
 permalink: /:categories/:title.html
 
 # Pagination Settings
-pagination:
-  enabled: true
-  per_page: 5
-  permalink: '/blog/:num/'
-  title: ' - blog :num'
-  limit: 0
-  sort_field: 'date'
-  sort_reverse: true
+paginate: 2
+paginate_path: "/blog/:num/"
 
 # Build settings
 markdown: kramdown
 #theme: minima
 plugins:
   - jekyll-feed
-  - jekyll-paginate-v2
+  - jekyll-paginate
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
