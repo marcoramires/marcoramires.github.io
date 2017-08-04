@@ -3972,11 +3972,11 @@ body.new.left-menu .navbar .navbar-brand {
   }
 }
 
-/*@media (min-width: 768px) {*/
-  /*body.new .content-post.post-without-sidebar {*/
-    /*padding: 0 25px;*/
-  /*}*/
-/*}*/
+@media (min-width: 768px) {
+  body.new .content-post.post-without-sidebar {
+    padding: 0 25px;
+  }
+}
 @media (min-width: 992px) {
   body.new .content-post.post-without-sidebar {
     padding: 0 0 0 20px;
