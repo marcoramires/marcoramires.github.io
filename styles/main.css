@@ -3972,6 +3972,22 @@ body.new.left-menu .navbar .navbar-brand {
   }
 }
 
+/*@media (min-width: 768px) {*/
+  /*body.new .content-post.post-without-sidebar {*/
+    /*padding: 0 25px;*/
+  /*}*/
+/*}*/
+@media (min-width: 992px) {
+  body.new .content-post.post-without-sidebar {
+    padding: 0 0 0 20px;
+  }
+}
+@media (min-width: 1600px) {
+  body.new .content-post.post-without-sidebar {
+    padding: 0 0 0 20px;
+  }
+}
+
 .page-picture .blog-post-date {
   margin: 0;
   padding: 0 !important;
@@ -4321,8 +4337,12 @@ body.new.page-post .blog-post-date {
   margin-bottom: 20px;
 }
 
-body.new.page-post p {
-margin-bottom: 25px;
+body.new.page-post .content-post p {
+  font-size: 21px;
+}
+
+body.new.page-post .content-post p.blog-post-date {
+  font-size: 15px;
 }
 
 body.new.page-post .post-image {
