@@ -4085,15 +4085,8 @@ body.new.left-menu .navbar .navbar-brand {
   .page-picture .post-whidout-sidebar:before {
     display: none;
   }
-  .page-picture .content-post.post-without-sidebar {
-    top: 0;
-  }
   .page-picture .content-post.post-without-sidebar .post-extra {
-    margin-top: -119px;
-    left: -15px;
-    width: 100%;
-    height: 100px;
-    position: absolute;
+   display: none;
   }
   .page-picture .content-post.post-without-sidebar .post-extra a {
     max-width: 100px;
@@ -4383,68 +4376,50 @@ body.new  .img-lr-grid {
 [Post]
 */
 
-body.new.page-post .intro {
-  height: 70%;
-}
-
-body.new.page-post .blog-post-date {
-  margin-bottom: 20px;
-}
-
-body.new.page-post .blog-post-date {
-  margin-bottom: 20px;
-}
-
-body.new .content-post.post-without-sidebar .post-extra {
-  display: none;
-}
-
-body.new .post-whidout-sidebar:before {
-  display: none;
-}
-
-body.new.page-post .content-post .primary-title {
-  font-size: 35px;
-  margin-bottom: 0;
-}
-
-body.new.page-post .content-post p {
-  font-size: 21px;
-}
-
-body.new.page-post .content-post p.blog-post-date {
-  font-size: 15px;
-}
-
-body.new.page-post .post-image {
-  font-size: 16px;
-  line-height: 25px;
-  margin-bottom: 55px;
-}
-
-body.new.page-post .post-image img {
-  margin: 0;
-}
-
-body.new .blog-post-intro {
-  margin: 15px 0;
-}
-
-body.new .post-share {
-  margin: 15px 0;
-}
-
-@media (min-width: 768px) {
+@media (max-width: 768px) {
   body.new.page-post .intro {
-    height: 85%;
+    height: 70%;
   }
+  body.new.page-post .post-whidout-sidebar:before {
+    display: none;
+  }
+  body.new.page-post .content-post.post-without-sidebar .post-extra {
+    display: none;
+  }
+  body.new.page-post .content-post.post-without-sidebar .post-extra a {
+    max-width: 100px;
+  }
+  body.new.page-post .paginationblog.includeimage .info:before {
+    top: 18px;
+  }
+}
 
-  body.new .post-whidout-sidebar:before {
-    display: block;
+@media (min-width: 992px) and (max-width: 1024px) {
+  body.new.page-post .intro {
+    height: 74%;
   }
-  body.new .content-post.post-without-sidebar .post-extra {
-    display: block;
+}
+@media (min-width: 768px) {
+  body.new.page-post .primary-title {
+    display: inline-block;
+    margin: 22px 10px 15px;
+    line-height: 63px;
   }
+}
+
+body.new.page-post .blog-post-date {
+  margin: 0;
+  padding: 0 !important;
+}
+
+body.new.page-post .blog-post-date .icon {
+  font-size: 1.2em;
+  color: #4e5b6c;
+  margin-right: 5px;
+}
+
+body.new.page-post img {
+  margin-bottom: 0;
 }
 
 /*------------------------------------------------------------------
