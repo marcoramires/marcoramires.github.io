@@ -2985,27 +2985,25 @@ body.comingsoon .primary-title {
   background-position: center center;
 }
 .blog-2-image {
-  height: 350px;
+  height: 300px;
   background-size: cover;
   background-position: center center;
 }
+.blog-2-text {
+  height: 350px;
+  margin-bottom: 25px;
+}
+.blog-2-text .blog-post-header {
+  margin-top: 0;
+}
+
 @media (min-width: 768px) {
   .blog-2-image {
     height: 590px;
   }
-}
-.blog-2-text {
-  height: 700px;
-}
-.blog-2-text .blog-post-header {
-  margin-top: 50px;
-}
-@media (min-width: 768px) {
   .blog-2-text {
     height: 590px;
-  }
-  .blog-2-text .blog-post-header {
-    margin-top: 0;
+    margin-bottom: 0;
   }
 }
 .intro {
