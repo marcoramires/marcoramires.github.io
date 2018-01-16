@@ -2023,6 +2023,9 @@ form .form-group.inline {
 /*------------------------------------------------------------------
 [6.09 Post share]
 */
+.post-share  {
+  margin: 15px 0;
+}
 .post-share li {
   display: inline-block;
   font-size: 13px;
@@ -2457,7 +2460,7 @@ body.comingsoon .primary-title {
 @media (max-width: 991px) {
   .blog-post-date {
     width: calc(100% - 80px);
-    line-height: 22px;
+    line-height: 25px;
   }
 }
 @media (min-width: 768px) {
@@ -2514,8 +2517,8 @@ body.comingsoon .primary-title {
   content: "";
   display: block;
   width: 50px;
-  height: 2px;
-  margin: 31px 0 0 2px;
+  height: 1px;
+  margin: 14px 0 10px 2px;
   background-color: #000000;
 }
 .blog-post-intro {
@@ -2523,6 +2526,7 @@ body.comingsoon .primary-title {
   line-height: 23px;
   letter-spacing: 2px;
   font-family: 'Raleway', sans-serif;
+  margin: 20px 0;
 }
 @media (min-width: 1600px) {
   .blog-post-intro {
@@ -2540,7 +2544,7 @@ body.comingsoon .primary-title {
   content: "";
   display: inline-block;
   background-image: url('../images/arrow.png');
-  width: 15px;
+  width: 20px;
   height: 9px;
   background-size: contain;
   background-repeat: no-repeat;
@@ -4420,6 +4424,11 @@ body.new.page-post .blog-post-date .icon {
 
 body.new.page-post img {
   margin-bottom: 0;
+}
+
+body.new.page-post hr {
+  width: 50px;
+  margin: 14px 0 25px 2px;
 }
 
 /*------------------------------------------------------------------
