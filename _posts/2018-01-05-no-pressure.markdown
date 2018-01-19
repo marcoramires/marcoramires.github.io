@@ -2,7 +2,7 @@
 author: "Marco Ramires"
 layout: post
 title:  "No Pressure"
-date:   2018-01-05 17:20:00 +1000
+date:   2018-01-05 17:20:00
 categories: blog
 ref: "MWP22994"
 location: "Bondi Beach"
