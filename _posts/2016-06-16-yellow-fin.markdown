@@ -1,7 +1,7 @@
 ---
 layout: picture
 title:  "Yellow Fin"
-date:   2016-06-16 23:20:00+1100
+date:   2016-06-16
 categories: picture
 ref: "IMG_3180"
 location: "Byron Bay"

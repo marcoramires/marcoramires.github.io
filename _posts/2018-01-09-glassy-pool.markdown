@@ -2,7 +2,7 @@
 author: "Marco Ramires"
 layout: post
 title:  "Glassy Pool"
-date:   2018-01-19 6:20:00+1100
+date:   2018-01-19
 categories: blog
 ref: "MWP23537"
 location: "Bondi Beach"
