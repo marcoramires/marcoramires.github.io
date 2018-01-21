@@ -4,6 +4,7 @@ layout: post
 title:  "No Pressure"
 date:   2018-01-05
 categories: blog
+folder: "2018-01-05"
 ref: "MWP22994"
 location: "Bondi Beach"
 ---
@@ -12,11 +13,11 @@ location: "Bondi Beach"
 
 Enjoy! MR
 
-![Sample Image](../images/site/pictures/MWP23010.jpg)
+![Sample Image](../images/site/pictures/2018-01-05/MWP23010.jpg)
 ref: MWP23010
 
-![Sample Image](../images/site/pictures/MWP23002.jpg)
+![Sample Image](../images/site/pictures/2018-01-05/MWP23002.jpg)
 ref: MWP23002
 
-![Sample Image](../images/site/pictures/MWP22994.jpg)
+![Sample Image](../images/site/pictures/2018-01-05/MWP22994.jpg)
 ref: MWP22994

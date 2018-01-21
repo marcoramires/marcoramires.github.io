@@ -4,6 +4,7 @@ layout: post
 title:  "Glassy Pool"
 date:   2018-01-19
 categories: blog
+folder: "2018-01-19"
 ref: "MWP23537"
 location: "Bondi Beach"
 ---
