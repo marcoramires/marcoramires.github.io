@@ -24,5 +24,18 @@
     "filter": "surf",
     "src": "images/site/slider-home/IMG_3180.jpg",
     "isFeature": true
+  },
+  {
+    "index": 3,
+    "ref": "IMG_6109",
+    "name": "Mokolii Island",
+    "description": "",
+    "url": "mokolii-island",
+    "location": "Oahu - Hawaii",
+    "dateTaken": "10/12/2016",
+    "camera": "f/6.3 1/1000 100mm ISO400",
+    "filter": "nature",
+    "src": "images/site/slider-home/IMG_6109.jpg",
+    "isFeature": true
   }
 ]
