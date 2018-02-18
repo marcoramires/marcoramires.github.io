@@ -500,10 +500,13 @@ function isotopeGrid() {
         // lightbox
         $('#grid-gallery').lightGallery({
             selector: '.grid-item',
+            thumbnail: !1,
             showThumbByDefault: !1,
             cssEasing: 'cubic-bezier(.77,0,.175,1)',
             easing: 'easeOutSine',
-            hideBarsDelay: 99999
+            hideBarsDelay: 99999,
+            download: false,
+            zoom: false,
         });
     }
 }
