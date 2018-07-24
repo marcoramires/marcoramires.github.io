@@ -20,27 +20,20 @@
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
-    
+
     <!-- vendor css -->
     <link rel="stylesheet" href="styles/vendor.css">
-    <!-- slider revolution css -->
-    <link rel="stylesheet" href="revolution/css/revolution.all.css">
+
     <!-- main css -->
-    <link rel="stylesheet" href="styles/main.css">
-    
+    <link rel="stylesheet" href="/styles/main.css">
+
     <!-- Preload -->
     <script src="scripts/vendor/pace.min.js"></script>
-    <!-- Modernizr -->
-    <script src="scripts/vendor/modernizr.js"></script>
   </head>
-  <body class="new left-menu">
-    <!--[if lt IE 10]>
-      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+  <body>
 
     <!-- preloader -->
-    <div id="layer-loade">
-        <!--<p class="logo-intro">Shoot</p>-->
+    <div id="layer-loader">
         <div class="spinner">
             <div class="bounce1"></div>
             <div class="bounce2"></div>
@@ -48,213 +41,45 @@
         </div>
     </div>
 
-    <!-- logo -->
-    <header>
-      <!--<p class="logo"><a href="#" class="open-home">Shoot</a></p>-->
-      <p class="logo"><a href="#" class="open-home">MARCO RAMIRES | PHOTOGRAPHY</a></p>
+    {% include header.html %}
 
-    </header>
-
-    {% include menu.html %}
-
-    <!-- main slider -->
-    <section class="slider-full">
-        <!-- START REVOLUTION SLIDER 5.0.7 fullwidth mode -->
-        <div id="rev_slider_wrapper" class="rev_slider_wrapper fullscreenbanner" data-alias="highlight-carousel16" style="margin: 0 auto; background-color: #000000; padding: 0;">
-          <div id="rev_slider" class="rev_slider fullwidthabanner" style="display: none;" data-version="5.0.7">
-            <ul>
-                {% for picture in site.data.pictures %}
-                <li data-index="{{picture.index}}" data-transition="fade" data-masterspeed="0" data-thumb="images/site/slider-home/{{picture.ref}}.jpg" data-title="{{picture.name}}" data-description="{{picture.description}}" data-rotate="0" data-saveperformance="off" data-param1="{{picture.index}} / {{site.data.pictures.size}}">
-                    <!-- MAIN IMAGE -->
-                    <img src="images/site/slider-home/{{picture.ref}}.jpg" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
-                    <ul class="social-links ontop">
-                        <li><a class="shopping-cart" href="/picture/{{picture.url}}"><i class="fa fa-shopping-cart"></i></a></li>
-                        <!--<li><a href="#"><i class="fa fa-heart"></i></a></li>-->
-                        <!--<li><a href="#"><i class="fa fa-share-alt"></i></a></li>-->
-                        <li><a href="https://www.instagram.com/marcoramires/" target="_blank"><i class="fa fa-instagram"></i></a></li>
-                        <li><a href="https://twitter.com/marcoramires" target="_blank"><i class="fa fa-twitter"></i></a>
-                        </li>
-                    </ul>
-                    <div class="holder">
-                        <button class="fab"  data-src="{{picture.src}}"><span class="lg-fullscreen lg-icon"></span></button>
-                    </div>
-                </li>
-                {% endfor %}
-            </ul>
-            <div class="tp-bannertimer tp-top" style="height: 7px; background-color: rgba(255, 255, 255, 0.25);"></div>
-          </div>
-        </div><!-- END REVOLUTION SLIDER -->
-    </section><!--/.slider-full -->
-
-    <!-- show thumbnails button -->
-    <!--<div id="thumbsButton">v</div>-->
-
-    <div class="layer-page page-about">
-        <span class="close-layer">close</span>
-        <div class="section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                        <div class="content-section">
-                            <div>
-                                <h3>ABOUT ME</h3>
-                                <div class="image">
-                                    <img src="images/site/about/IMG_8401.jpg" alt="Marco Ramires">
-                                </div>
-                                <p><strong>Brazilian / Portuguese / Australian / Surfer / Inventor / Technologist / Programmer</strong></p>
-                                <p>My best friend once lent me a Pentax 35mm from his University and taught me how to capture light into film. The camera mechanism absolutely fascinated me and I was hooked.</p>
-                                <p>I thought... <i>"If my calculations are correct, when this baby hits 88 miles per hour... you're gonna see some serious shit."</i></p>
-                                <p>All the images you see on the site are for sale. For more information, or if you'd like to ask any questions about photography in general, please don't hesitate to contact me.</p>
-                                <p>- Marco Ramires</p>
-                                <p>ABN: [--]</p>
-                                <ul class="social-links">
-                                    <li><a href="https://www.instagram.com/marcoramires/" target="_blank"><i class="fa fa-instagram"></i></a></li>
-                                    <li><a href="https://twitter.com/marcoramires" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div><!--/.page-about -->
-
-    <div class="layer-page page-contact">
-        <span class="close-layer">close</span>
-        <div class="section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-11">
-                        <div class="content-section">
-                            <div>
-                                <h3>CONTACT ME</h3>
-                                <p class="subtitle">General Enquiries</p>
-                                <ul class="address">
-                                    <li>Email : info@marcoramires.com</li>
-                                    <li>Bondi Beach - NSW - Australia</li>
-                                </ul>
-                                <ul class="social-links">
-                                    <li><a href="https://www.instagram.com/marcoramires/" target="_blank"><i class="fa fa-instagram"></i></a></li>
-                                    <li><a href="https://twitter.com/marcoramires" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                                </ul>
-
-                                <!--<form action="mail.php" method="post" id="contactform" class="contact-form">-->
-                                <!--<div class="form-group inline">-->
-                                <!--<label class="title small" for="name">Name</label>-->
-                                <!--<input type="text" placeholder="Name" name="name" id="name" class="text name required">-->
-                                <!--</div>-->
-
-                                <!--<div class="form-group inline">-->
-                                <!--<label class="title small" for="email">E-mail</label>-->
-                                <!--<input type="email" placeholder="E-mail" name="email" id="email" class="text email required">-->
-                                <!--</div>-->
-
-                                <!--<div class="form-group">-->
-                                <!--<label class="title small" for="email">Subject</label>-->
-                                <!--<input type="text" placeholder="Subject" name="subject" id="subject" class="text subject required">-->
-                                <!--</div>-->
-
-                                <!--<div class="form-group">-->
-                                <!--<label class="title small" for="message">Type your message</label>-->
-                                <!--<textarea placeholder="Type your message" name="message" id="message" class="text area required" ></textarea>-->
-                                <!--</div>-->
-
-                                <!--&lt;!&ndash; <div class="formSent"><p><strong>Your Message Has Been Sent!</strong> Thank you for contacting us.</p></div> &ndash;&gt;-->
-                                <!--<input type="submit" value="Submit" class="btn rounded">-->
-                                <!--</form>-->
-                            </div>
-                        </div>
-                    </div>
-                    <!--<div class="col-sm-6">-->
-                    <!--<div class="content-section">-->
-                    <!--<div>-->
-                    <!--<div id="map"></div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                </div>
-            </div>
-        </div>
-    </div><!--/.page-contact -->
-
-    <div class="layer-page page-gallery">
-      <div class="section">
-        <div class="container-fluid">
-          <div class="row">    
-            <!-- photo gallery -->
-            <div id="grid-gallery">
-              <div class="grid-item publications" data-src="images/site/gallery/IMG_2844.jpg">
-                <img src="images/site/gallery/IMG_2844-901x901.jpg" alt="">
-              </div>
-              <div class="grid-item webdesign" data-src="images/site/gallery/MWP23075.jpg">
-                <img src="images/site/gallery/MWP23075-431x597.jpg" alt="">
-              </div>
-              <div class="grid-item illustration" data-src="images/site/gallery/IMG_2844.jpg">
-                <img src="images/site/gallery/IMG_2844-431x701.jpg" alt="">
-              </div>
-              <div class="grid-item photography" data-src="images/site/gallery/IMG_2844.jpg">
-                <img src="images/site/gallery/IMG_2844-431x507.jpg" alt="">
-              </div>
-              <div class="grid-item logos" data-src="images/site/gallery/IMG_2844.jpg">
-                <img src="images/site/gallery/IMG_2844-431x401.jpg" alt="">
-              </div>
-              <div class="grid-item vectors" data-src="images/site/gallery/IMG_2844.jpg">
-                <img src="images/site/gallery/IMG_2844-431x701.jpg" alt="">
-              </div>
-              <div class="grid-item illustration" data-src="images/site/gallery/IMG_2844.jpg">
-                <img src="images/site/gallery/IMG_2844-431x341.jpg" alt="">
-              </div>
-              <div class="grid-item webdesign" data-src="images/site/gallery/IMG_2844.jpg">
-                <img src="images/site/gallery/IMG_2844-901x521.jpg" alt="">
-              </div>
-              <div class="grid-item vectors" data-src="images/site/gallery/IMG_2844.jpg">
-                <img src="images/site/gallery/IMG_2844-862x822.jpg" alt="">
-              </div>
-              <div class="grid-item photography" data-src="images/site/gallery/IMG_2844.jpg">
-                <img src="images/site/gallery/IMG_2844-431x507.jpg" alt="">
-              </div>
-              <div class="grid-item publications" data-src="images/site/gallery/IMG_2844.jpg">
-                <img src="images/site/gallery/IMG_2844-901x901.jpg" alt="">
-              </div>
-              <div class="grid-item logos" data-src="images/site/gallery/IMG_2844.jpg">
-                <img src="images/site/gallery/IMG_2844-431x401.jpg" alt="">
-              </div>
-              <div class="grid-item webdesign" data-src="images/site/gallery/IMG_2844.jpg">
-                <img src="images/site/gallery/IMG_2844-431x411.jpg" alt="">
-              </div>
-              <div class="grid-item illustration" data-src="images/site/gallery/IMG_2844.jpg">
-                <img src="images/site/gallery/IMG_2844-431x701.jpg" alt="">
-              </div>
-              <div class="grid-item vectors" data-src="images/site/gallery/IMG_2844.jpg">
-                <img src="images/site/gallery/IMG_2844-901x521.jpg" alt="">
-              </div>
-              <div class="grid-item vectors" data-src="images/site/gallery/IMG_2844.jpg">
-                <img src="images/site/gallery/IMG_2844-431x701.jpg" alt="">
-              </div>
-              <div class="grid-item webdesign" data-src="images/site/gallery/IMG_2844.jpg">
-                <img src="images/site/gallery/IMG_2844-431x597.jpg" alt="">
-              </div>
-              <div class="grid-item illustration" data-src="images/site/gallery/IMG_2844.jpg">
-                <img src="images/site/gallery/IMG_2844-431x341.jpg" alt="">
-              </div>
-            </div><!--/#grid-gallery -->
-          </div>
+    <section class="content banner" style="background: url('../images/site/slider-home/IMG_3180.jpg') center center no-repeat; background-size: cover;">
+    </section>
+    <section class="content">
+      <div class="col-2" style="background: url('../images/site/slider-home/IMG_3180.jpg') center center no-repeat; background-size: cover;">
+      </div>
+      <div class="col-2">
+        <div class="block">
+          <h2>ABOUT ME</h2>
+          <p><strong>Brazilian / Portuguese / Australian / Surfer / Inventor / Technologist / Programmer</strong></p>
+          <p>My best friend once lent me a Pentax 35mm from his University and taught me how to capture light into film. The camera mechanism absolutely fascinated me and I was hooked.</p>
+          <p>I thought... <i>"If my calculations are correct, when this baby hits 88 miles per hour... you're gonna see some serious shit."</i></p>
+          <p>All the images you see on the site are for sale. For more information, or if you'd like to ask any questions about photography in general, please don't hesitate to contact me.</p>
+          <p>- Marco Ramires</p>
         </div>
       </div>
-    </div><!--/.page-gallery -->
-    
-    <!-- jQuery -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
+    </section>
 
-    <!-- RS5.3.0.2 Core JS Files -->
-    <script src="revolution/js/jquery.themepunch.tools.min.js?rev=5.0" type="text/javascript"></script>
-    <script src="revolution/js/jquery.themepunch.revolution.min.js?rev=5.0" type="text/javascript"></script>
-    <!-- RS5.3.0.2 Extensions Files -->
-    <script src="revolution/js/extensions/revolution.extensions.all.js"></script>
+    <section class="content">
+      <div>
+        <div class="block">
+          <h2>CONTACT ME</h2>
+          <p>General Enquiries</p>
+          <ul>
+            <li>Email : info@marcoramires.com</li>
+            <li>Bondi Beach - NSW - Australia</li>
+            <li><a href="https://twitter.com/marcoramires" target="_blank"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="https://www.instagram.com/marcoramires/" target="_blank"><i class="fa fa-instagram"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    {% include footer.html %}
 
     <!-- Vendor js -->
     <script src="scripts/vendor/vendor.js"></script>
-    
     <!-- Main js -->
     <script src="scripts/main.js"></script>
 
