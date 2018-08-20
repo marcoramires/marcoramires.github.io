@@ -1,14 +1,13 @@
 ---
-author: "Marco Ramires"
-layout: post
-title:  "Amsterdam Crush"
-date:   2018-02-17
+author:     "Marco Ramires"
+layout:     post
 categories: blog
-folder: "2018-02-17"
-ref: "IMG_3227"
-location: "Bondi Beach"
+title:      "Amsterdam Crush"
+date:       2018-02-17
+folder:     "2018-02-17"
+ref:        "IMG_3227"
+location:   "Bondi Beach"
 ---
-
 
 **Sometimes you just wish** you could stay a little longer in bed! 
 

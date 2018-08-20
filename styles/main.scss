@@ -1,7 +1,7 @@
 ---
 ---
 
-@import 'https://fonts.googleapis.com/css?family=Dosis:200,400,500|Raleway|Inconsolata';
+@import  url('https://fonts.googleapis.com/css?family=Dosis:200,400,500|Raleway|Inconsolata');
 
 @import "bourbon/bourbon";
 @import "base/base";
@@ -9,4 +9,5 @@
 @import "typography";
 @import "menu";
 @import "layout";
+@import "blog";
 @import "preloader";

@@ -1,20 +1,76 @@
-@mixin tablet {
-  @media screen and (max-width: 768px) {
+@mixin for-phones {
+  @media (min-width: 375px) {
+    @content;
+  }
+}
+
+@mixin for-phablets {
+  @media (min-width: 400px) {
+    @content;
+  }
+}
+
+@mixin for-tablet-portrait-up {
+  @media (min-width: 600px) {
+    @content;
+  }
+}
+
+@mixin for-tablet-landscape-up {
+  @media (min-width: 900px) {
+    @content;
+  }
+}
+
+@mixin for-desktop-up {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin for-big-desktop-up {
+  @media (min-width: 1800px) {
+    @content;
+  }
+}
+
+@mixin iPhoneX {
+  @media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
     @content;
   }
 }
 
 header {
-  height: 10vh;
+  height: 11vh;
   position: fixed;
   top: 0;
   background-color: white;
   width: 100%;
+
+  @include for-tablet-portrait-up {
+    height: 7.5vh;
+  }
+
+  @include for-tablet-landscape-up {
+    height: 10vh;
+  }
 }
 
 .logo {
   padding: 1.3em;
   margin: 0;
+
+  &.tablet {
+    display: none;
+  }
+
+  @include for-tablet-portrait-up {
+    display: none;
+
+    &.tablet {
+      display: block;
+    }
+  }
 }
 
 .logo a {
@@ -36,41 +92,34 @@ header {
   }
 }
 
-.banner, .content {
-  height: 100vh;
-}
+.image-cover {
+  background: no-repeat center center;
+  background-size: cover;
+  min-height: 32vh;
+  margin-top: 11vh;
 
-.content > div {
-  display: flex;
-  flex-flow: column wrap;
-  align-items: center;
-  justify-content: center;
-  float: left;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  z-index: 20;
-
-  &.col-2 {
-    width: 50%;
+  @include for-tablet-portrait-up {
+    min-height: 42vh;
+    margin-top: 7vh;
   }
 
-  &.col-3 {
-    width: 33%;
-  }
-
-  .block {
-    margin: 0 4em;
+  @include for-tablet-landscape-up {
+    min-height: 81vh;
   }
 }
 
-// responsive tablet view
-@include tablet {
-  header {
-    height: 17vh;
-  }
+footer {
+  padding: 15px 0;
+  font-size: 0.8rem;
+  text-align: center;
 
-  .banner, .content {
-    height: 83vh;
+  .social-links {
+    margin: 10px auto;
+
+    li {
+      font-size: 1.2rem;
+      margin: 0 10px;
+      display: inline-block;
+    }
   }
 }

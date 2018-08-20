@@ -1,6 +1,6 @@
 'use strict';
 
-/*---------------------------------------------- 
+/*----------------------------------------------
                P R E L O A D E R
 ------------------------------------------------*/
 
@@ -10,31 +10,8 @@ function prealoader() {
     });
 }
 
-function scrollify() {
-    $.scrollify({
-        section : ".content",
-        easing: "easeOutExpo",
-        scrollSpeed: 1000,
-        scrollbars: false,
-        setHeights: true,
-        updateHash: false,
-        touchScroll: true,
-        before: function (i, panels) {
-            var panel = panels[i];
-            var block = $(panel).find('.block');
-            $(block).addClass("animated fadeInUp");
-        },
-        after: function (i, panels) {
-            var panel = panels[i + 1];
-            var block = $(panel).find('.block');
-            $(block).removeClass("animated fadeInUp");
-        }
-    });
-}
-
-(function() {
-
-    var Menu = (function() {
+(function () {
+    var Menu = (function () {
         var burger = document.querySelector('.burger');
         var menu = document.querySelector('.menu');
         var menuList = document.querySelector('.menu__list');
@@ -43,7 +20,7 @@ function scrollify() {
 
         var active = false;
 
-        var toggleMenu = function() {
+        var toggleMenu = function () {
             if (!active) {
                 menu.classList.add('menu--active');
                 menuList.classList.add('menu__list--active');
@@ -67,11 +44,11 @@ function scrollify() {
             }
         };
 
-        var bindActions = function() {
+        var bindActions = function () {
             burger.addEventListener('click', toggleMenu, false);
         };
 
-        var init = function() {
+        var init = function () {
             bindActions();
         };
 
@@ -80,14 +57,10 @@ function scrollify() {
         };
 
     }());
-
     Menu.init();
-
 }());
-
 
 // DOM ready function
 (function ($) {
-    scrollify();
     prealoader();
 })(jQuery);
