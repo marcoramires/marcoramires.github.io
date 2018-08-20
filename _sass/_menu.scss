@@ -1,0 +1,185 @@
+$primary-color: #000000;
+
+@mixin easeOut {
+  transition: all .4s cubic-bezier(0.23, 1, 0.32, 1)
+}
+
+@mixin tablet {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.burger {
+  position: absolute;
+  z-index: 100;
+  right: 25px;
+  top: 25px;
+  cursor: pointer;
+  transform: rotateY(0);
+  @include easeOut;
+
+  &__patty {
+    width: 45px;
+    height: 3px;
+    margin: 0 0 10px 0;
+    background: black;
+    @include easeOut;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // transform burger into 'x'
+  &--close {
+    transform: rotate(180deg);
+
+    .burger__patty {
+      background: #ffffff;
+
+      &:nth-child(1) {
+        transform: rotate(45deg) translate(10px, 10px);
+      }
+      &:nth-child(2) {
+        opacity: 0;
+      }
+      &:nth-child(3) {
+        transform: rotate(-45deg) translate(9px, -8px);
+      }
+    }
+  }
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  visibility: hidden;
+  z-index: 80;
+
+  &--active {
+    visibility: visible;
+  }
+
+  &__brand,
+  &__list {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    float: left;
+    width: 50%;
+    height: 100vh;
+    overflow: hidden;
+    opacity: 0;
+    z-index: 1000;
+  }
+
+  &__list {
+    margin: 0;
+    padding: 0;
+    background: $primary-color;
+    list-style-type: none;
+    transform: translate3d(0, -100%, 0);
+    @include easeOut;
+
+    &--active {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+  }
+
+  &__brand {
+    background: mix(#ccc, $primary-color, 20);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    @include easeOut;
+    transform: translate3d(0, 100%, 0);
+
+    &--active {
+      transform: translate3d(0, 0, 0);
+      opacity: 0.8;
+    }
+  }
+
+  &__item {
+    transform: translate3d(500px, 0, 0);
+    @include easeOut;
+
+    &--active {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  &__link {
+    display: inline-block;
+    position: relative;
+    font-size: 30px;
+    padding: 15px 0;
+    font-weight: 300;
+    color: white;
+    text-decoration: none;
+    @include easeOut;
+
+    &:before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 10px;
+      height: 2px;
+      background: white;
+      transform: translateX(-50%);
+      @include easeOut;
+    }
+
+    &:hover {
+      color: white;
+      &:before {
+        width: 100%;
+      }
+    }
+  }
+
+  // add delay to each menu item
+  @for $x from 1 through 7 {
+    .menu__item:nth-child(#{$x}) {
+      transition-delay: $x * .1s;
+    }
+  }
+}
+
+// responsive tablet view
+@include tablet {
+  ul.menu__list,
+  div.menu__brand {
+    float: none;
+    width: 100%;
+    min-height: 0;
+
+    &--active {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .menu__list {
+    height: 100vh;
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  .menu__link {
+    font-size: 24px;
+  }
+
+  .menu__brand {
+    height: 0vh;
+    transform: translate3d(100%, 0, 0);
+  }
+}
