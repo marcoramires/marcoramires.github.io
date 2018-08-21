@@ -37,16 +37,36 @@ plugins:
   - jekyll-feed
   - jekyll-paginate
   - jekyll-sitemap
+  - jekyll-assets
+  - image_optim
+  - image_optim_pack
 
-sass:
-  sass_dir: _sass
-  style: compressed
+assets:
+  cache: false
+  sources:
+    - _assets/images
+    - _assets/scripts
+    - _assets/styles
+  plugins:
+    img:
+      optim:
+        preset:
+          cache_worker_digests: false
+          svgo: false
+          pngout: false
+          allow_lossy: true
+          jpegrecompress:
+            allow_lossy: true
+            quality: 3
+          jpegoptim:
+            allow_lossy: true
+            strip: all
+            max_quality: 85
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
 exclude:
-  - OLD-SITE
 #   - Gemfile.lock
 #   - node_modules
 #   - vendor/bundle/

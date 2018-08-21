@@ -13,11 +13,11 @@ location: "Bondi Beach"
 
 Enjoy! MR
 
-![Sample Image](../images/site/pictures/2018-01-05/MWP23010.jpg)
+{% asset blog/2018-01-05/MWP23010.jpg optim='preset' %}
 ref: MWP23010
 
-![Sample Image](../images/site/pictures/2018-01-05/MWP23002.jpg)
+{% asset blog/2018-01-05/MWP23002.jpg optim='preset' %}
 ref: MWP23002
 
-![Sample Image](../images/site/pictures/2018-01-05/MWP22994.jpg)
+{% asset blog/2018-01-05/MWP22994.jpg optim='preset' %}
 ref: MWP22994

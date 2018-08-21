@@ -21,11 +21,10 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
 
-    <!-- main css -->
-    <link rel="stylesheet" href="{{site.baseurl}}/styles/main.css">
-
     <!-- dns -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com/">
+
+    {% asset main.css %}
 </head>
 <body>
 
@@ -45,10 +44,10 @@
 {% include footer.html %}
 
 <!-- Vendor js -->
-<script src="{{site.baseurl}}/scripts/vendor/vendor.js"></script>
+{% asset vendor/vendor %}
 
 <!-- Main js -->
-<script src="{{site.baseurl}}/scripts/main.js"></script>
+{% asset main %}
 
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

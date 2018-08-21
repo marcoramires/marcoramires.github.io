@@ -21,34 +21,34 @@ I hope you all had a great weekend.
 
 ('≗Å≗') MR
 
-![Sample Image](../images/site/pictures/2018-02-17/IMG_3223.jpg)
+{% asset blog/2018-02-17/IMG_3223.jpg optim='preset' %}
 ref: IMG_3223
 
-![Sample Image](../images/site/pictures/2018-02-17/IMG_3227.jpg)
+{% asset blog/2018-02-17/IMG_3227.jpg optim='preset' %}
 ref: IMG_3227
 
-![Sample Image](../images/site/pictures/2018-02-17/MWP24088.jpg)
+{% asset blog/2018-02-17/MWP24088.jpg optim='preset' %}
 ref: MWP24088
 
-![Sample Image](../images/site/pictures/2018-02-17/IMG_3232.jpg)
+{% asset blog/2018-02-17/IMG_3232.jpg optim='preset' %}
 ref: IMG_3232
 
-![Sample Image](../images/site/pictures/2018-02-17/MWP24094.jpg)
+{% asset blog/2018-02-17/MWP24094.jpg optim='preset' %}
 ref: MWP24094
 
-![Sample Image](../images/site/pictures/2018-02-17/IMG_3262.jpg)
+{% asset blog/2018-02-17/IMG_3262.jpg optim='preset' %}
 ref: IMG_3262
 
-![Sample Image](../images/site/pictures/2018-02-17/MWP24127.jpg)
+{% asset blog/2018-02-17/MWP24127.jpg optim='preset' %}
 ref: MWP24127
 
-![Sample Image](../images/site/pictures/2018-02-17/IMG_3311.jpg)
+{% asset blog/2018-02-17/IMG_3311.jpg optim='preset' %}
 ref: IMG_3311
 
-![Sample Image](../images/site/pictures/2018-02-17/IMG_3282.jpg)
+{% asset blog/2018-02-17/IMG_3282.jpg optim='preset' %}
 ref: IMG_3282
-
-![Sample Image](../images/site/pictures/2018-02-17/IMG_3341.jpg)
+ 
+{% asset blog/2018-02-17/IMG_3341.jpg optim='preset' %} 
 ref: IMG_3341
 
 
