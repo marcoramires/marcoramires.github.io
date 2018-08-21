@@ -41,18 +41,30 @@
 }
 
 section.blog {
-  padding: 1rem;
+  padding: 0;
 
   @include for-desktop-up {
-    max-width: 1000px;
-    margin: 0 auto;
+    //max-width: 1000px;
+    //margin: 0 auto;
   }
 
   .post {
-    margin-top: 30px;
 
     &:first-of-type {
       margin-top: 11vh;
+    }
+
+    div {
+      display: flex;
+      height: 44.5vh;
+      width: 100%;
+      background: no-repeat center center;
+      background-size: cover;
+      flex-flow: column;
+
+      &:last-of-type {
+        padding: 1rem;
+      }
     }
   }
 }
