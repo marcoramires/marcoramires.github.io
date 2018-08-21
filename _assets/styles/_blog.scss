@@ -43,27 +43,41 @@
 section.blog {
   padding: 0;
 
-  @include for-desktop-up {
-    //max-width: 1000px;
-    //margin: 0 auto;
-  }
-
   .post {
+    display: flex;
+    flex-flow: column;
 
     &:first-of-type {
-      margin-top: 11vh;
+      margin-top: 10vh;
+      @include for-tablet-portrait-up {
+        margin-top: 7vh;
+      }
+    }
+
+    @include for-tablet-landscape-up {
+      flex-flow: row;
     }
 
     div {
       display: flex;
-      height: 44.5vh;
+      height: 45vh;
       width: 100%;
       background: no-repeat center center;
       background-size: cover;
       flex-flow: column;
+      overflow: hidden;
+      justify-content: center;
 
-      &:last-of-type {
-        padding: 1rem;
+      @include for-tablet-portrait-up {
+        height: 46.5vh;
+      }
+
+      &.description {
+        padding: 0 1rem;
+
+        @include for-tablet-portrait-up {
+          padding: 0 2rem;
+        }
       }
     }
   }

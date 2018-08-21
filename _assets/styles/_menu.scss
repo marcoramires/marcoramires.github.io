@@ -17,8 +17,8 @@ $primary-color: #000000;
 .burger {
   position: absolute;
   z-index: 100;
-  right: 25px;
-  top: 25px;
+  right: 1rem;
+  top: 1.3rem;
   cursor: pointer;
   transform: rotateY(0);
   @include easeOut;

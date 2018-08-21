@@ -48,7 +48,7 @@ header {
   width: 100%;
 
   @include for-tablet-portrait-up {
-    height: 7.5vh;
+    height: 7vh;
   }
 
   @include for-tablet-landscape-up {
@@ -57,8 +57,9 @@ header {
 }
 
 .logo {
-  padding: 1.3em;
   margin: 0;
+  padding-left: 1rem;
+  padding-top: 0.9rem;
 
   &.tablet {
     display: none;
@@ -82,9 +83,8 @@ header {
   text-align: left;
   letter-spacing: 4px;
   width: 100%;
-  line-height: 1.3em;
   text-decoration: none;
-  font-size: 1.8em;
+  font-size: 1.8rem;
   font-weight: 300;
 
   &.right {
@@ -104,20 +104,23 @@ header {
   }
 
   @include for-tablet-landscape-up {
-    min-height: 81vh;
+    min-height: 84vh;
   }
 }
 
 footer {
   padding: 15px 0;
-  font-size: 0.8rem;
   text-align: center;
+
+  p {
+    font-size: 0.8rem;
+  }
 
   .social-links {
     margin: 10px auto;
 
     li {
-      font-size: 1.2rem;
+      font-size: 1rem;
       margin: 0 10px;
       display: inline-block;
     }
