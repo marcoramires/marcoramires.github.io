@@ -43,10 +43,10 @@ plugins:
   - image_optim
   - image_optim_pack
 
-  jekyll_get:
-    - data: github
-      json: 'https://api.github.com/users/marcoramires/repos'
-      cache: false
+jekyll_get:
+  - data: github
+    json: 'https://api.github.com/users/marcoramires/repos'
+    cache: false
 
 assets:
   cache: false
