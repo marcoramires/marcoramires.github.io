@@ -68,3 +68,12 @@ section.blog {
     }
   }
 }
+
+section.post {
+  padding: 1rem;
+
+  @include for-desktop-up {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+}
