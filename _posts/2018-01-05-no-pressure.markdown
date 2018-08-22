@@ -7,6 +7,7 @@ categories: blog
 folder: "2018-01-05"
 ref: "MWP22994"
 location: "Bondi Beach"
+image: MWP22994-1920x1080.jpg
 ---
 
 **Very casual summer afternoon in Bondi Beach,** I took the chance to test new lenses and the new housing.
