@@ -7,7 +7,7 @@ date:       2018-02-17
 folder:     "2018-02-17"
 ref:        "IMG_3227"
 location:   "Bondi Beach"
-image: IMG_3227-1920x1080.jpg
+image: blog/2018-02-17/IMG_3227-1920x1080.jpg
 ---
 
 **Sometimes you just wish** you could stay a little longer in bed! 
