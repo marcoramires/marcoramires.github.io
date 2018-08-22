@@ -40,6 +40,9 @@
   }
 }
 
+body {
+}
+
 header {
   height: 11vh;
   position: fixed;
@@ -53,6 +56,34 @@ header {
 
   @include for-tablet-landscape-up {
     height: 10vh;
+  }
+}
+
+section {
+  &:first-of-type {
+    margin-top: 11vh;
+
+    @include for-tablet-portrait-up {
+      margin-top: 7vh;
+    }
+
+    @include for-tablet-landscape-up {
+      margin-top: 10vh;
+    }
+  }
+
+  &.image-cover {
+    background: no-repeat center center;
+    background-size: cover;
+    min-height: 32vh;
+
+    @include for-tablet-portrait-up {
+      min-height: 42vh;
+    }
+
+    @include for-tablet-landscape-up {
+      min-height: 81vh;
+    }
   }
 }
 
@@ -89,22 +120,6 @@ header {
 
   &.right {
     text-align: right;
-  }
-}
-
-.image-cover {
-  background: no-repeat center center;
-  background-size: cover;
-  min-height: 32vh;
-  margin-top: 11vh;
-
-  @include for-tablet-portrait-up {
-    min-height: 42vh;
-    margin-top: 7vh;
-  }
-
-  @include for-tablet-landscape-up {
-    min-height: 84vh;
   }
 }
 
