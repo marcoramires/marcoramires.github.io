@@ -72,6 +72,14 @@ section.blog {
       &.description {
         padding: 0 1rem;
 
+        a {
+          text-decoration: none;
+
+          &:hover, &:last-of-type {
+            text-decoration: underline;
+          }
+        }
+
         @include for-tablet-portrait-up {
           padding: 0 2rem;
         }

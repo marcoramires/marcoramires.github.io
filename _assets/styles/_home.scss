@@ -85,6 +85,14 @@ section.latest {
         padding: 0 1rem;
         text-align: center;
 
+        a {
+          text-decoration: none;
+
+          &:hover, &:last-of-type {
+            text-decoration: underline;
+          }
+        }
+
         @include for-tablet-portrait-up {
           padding: 0 2rem;
         }
