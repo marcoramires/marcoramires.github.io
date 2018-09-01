@@ -138,6 +138,11 @@ footer {
       font-size: 1rem;
       margin: 0 10px;
       display: inline-block;
+
+      img {
+        height: 20px;
+        vertical-align: middle;
+      }
     }
   }
 }
