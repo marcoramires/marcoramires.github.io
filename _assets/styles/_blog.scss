@@ -88,4 +88,50 @@ section.post {
     max-width: 1000px;
     margin: 0 auto;
   }
+
+  .post-links {
+    display: flex;
+    flex-flow: column;
+
+    @include for-desktop-up {
+      flex-direction: row;
+    }
+
+    a {
+      display: flex;
+      flex-direction: row;
+      background-color: #f0f0f0;
+      margin-bottom: 1rem;
+
+      &:hover {
+        background-color: #ebebeb;
+
+        img {
+         opacity: 0.9;
+        }
+      }
+
+      @include for-desktop-up {
+        width: 50%;
+
+        &:nth-child(even) {
+          flex-direction: row-reverse;
+        }
+      }
+
+      img {
+        width: 120px;
+        height: 80px;
+      }
+
+      p {
+        margin: 0 1rem;
+        font-size: 1.5rem;
+
+        span {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
 }

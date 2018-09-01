@@ -12,14 +12,18 @@ layout: default
     {{page.content}}
     <!-- pagination -->
     <hr>
-    {% if page.previous.url and page.previous.categories contains "blog" %}
-    <a href="{{page.previous.id}}">
-        <p><span>{{page.previous.date | date_to_string}}</span><span>{{page.previous.title}}</span></p>
-    </a>
-    {% endif %}
-    {% if page.next.url and page.next.categories contains "blog" %}
-    <a href="{{page.next.id}}">
-        <p><span>{{page.next.date | date_to_string}}</span><span>{{page.next.title}}</span></p>
-    </a>
-    {% endif %}
+    <div class="post-links">
+        {% if page.previous.url and page.previous.categories contains "blog" %}
+        <a href="{{page.previous.id}}">
+            {% asset '{{page.previous.image}}' optim='preset'%}
+            <p><span>{{page.previous.date | date_to_string}}</span><br/>{{page.previous.title}}</p>
+        </a>
+        {% endif %}
+        {% if page.next.url and page.next.categories contains "blog" %}
+        <a href="{{page.next.id}}">
+            {% asset '{{page.next.image}}' optim='preset'%}
+            <p><span>{{page.next.date | date_to_string}}</span><br/>{{page.next.title}}</p>
+        </a>
+        {% endif %}
+    </div>
 </section>
