@@ -57,7 +57,8 @@ GEM
       sprockets (>= 3.3, < 4.1.beta)
     jekyll-feed (0.10.0)
       jekyll (~> 3.3)
-    jekyll-paginate (1.1.0)
+    jekyll-paginate-v2 (2.0.0)
+      jekyll (~> 3.0)
     jekyll-sanity (1.2.0)
       jekyll (~> 3.1)
     jekyll-sass-converter (1.5.2)
@@ -116,7 +117,7 @@ DEPENDENCIES
   jekyll (= 3.5.0)
   jekyll-assets
   jekyll-feed (~> 0.6)
-  jekyll-paginate
+  jekyll-paginate-v2
   jekyll-sitemap
   json
   sass
@@ -124,4 +125,4 @@ DEPENDENCIES
   uglifier
 
 BUNDLED WITH
-   1.16.3
+   1.16.4
