@@ -12,7 +12,7 @@ image: blog/2018-10-09/IMG_7420-1920x1080.jpg
 
 **In celebration** of the daylight savings.
 
-For this specific shooting I hand in mind 'soft water' compositions in combination with warm tonality. Believe or not I have got a pair of sunglasses that replicates the exact effect I am trying to achieve here.
+For this specific shooting I had in mind 'soft water' compositions in combination with warm tonality. Believe or not I have got a pair of sunglasses that replicates the exact effect I am trying to achieve here.
 
 It's really warm in tonality and it gets quite foggy if not spotless cleaned. It brings me back to when I was in California and everything has that smooth yellowish tone... Add the palm trees and you are there!
 
