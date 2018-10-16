@@ -19,7 +19,6 @@ pagination:
             "title": "{{ post.title }}",
             "link": "{{ post.url }}"
         }
-        {% endfor %}]
-    },
+        {% endfor %}],
     "next_page": {% if paginator.next_page %}"{{ paginator.next_page_path | xml_escape }}"{% else %}null{% endif %}
 }
