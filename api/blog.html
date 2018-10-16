@@ -13,5 +13,13 @@ pagination:
         {%- endcapture -%}
         {{ posts_html | strip_newlines }}
     {%- endfor -%}",
+    "posts_detail": [{% for post in paginator.posts %}
+        {% if forloop.first != true %},{% endif %}
+        {
+            "title": "{{ post.title }}",
+            "link": "{{ post.url }}"
+        }
+        {% endfor %}]
+    },
     "next_page": {% if paginator.next_page %}"{{ paginator.next_page_path | xml_escape }}"{% else %}null{% endif %}
 }
