@@ -1,11 +1,11 @@
-<div class="post">
-    <div style="background-image: url({% asset blog/{{post.folder}}/{{post.ref}}-1920x1080.jpg @path optim='preset' %})"></div>
+<div class=\"post\">
+    <div style=\"background-image: url({% asset blog/{{post.folder}}/{{post.ref}}-1920x1080.jpg @path optim='preset' %})\"></div>
     <div>
-        <div class="description">
-            <a href="{{post.id}}"><h1>{{post.title}}</h1></a>
+        <div class=\"description\">
+            <a href=\"{{post.id}}\"><h1>{{post.title}}</h1></a>
             <p>{{post.date | date_to_string}} / {{post.author}}</p>
-            <a href="{{post.id}}"><p class="blog-post-intro">{{post.excerpt | remove: '<p>' | remove: '</p>' }}</p></a>
-            <a href="{{post.id}}">Full post & more photographs</a>
+            <a href=\"{{post.id}}\"><p class=\"blog-post-intro\">{{post.excerpt | remove: '<p>' | remove: '</p>'}}</p></a>
+            <a href=\"{{post.id}}\">Full post & more photographs</a>
         </div>
     </div>
 </div>

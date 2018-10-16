@@ -7,18 +7,16 @@ pagination:
 ---
 
 {
-    "posts": "{%- for post in paginator.posts -%}
-        {%- capture posts_html -%}
-            {% include components/post-card.html  %}
-        {%- endcapture -%}
-        {{ posts_html | strip_newlines }}
-    {%- endfor -%}",
-    "posts_detail": [{% for post in paginator.posts %}
-        {% if forloop.first != true %},{% endif %}
-        {
-            "title": "{{ post.title }}",
-            "link": "{{ post.url }}"
-        }
+    "posts": [{% for post in paginator.posts %}
+                {% if forloop.first != true %},{% endif %}
+                {
+                    "title": "{{ post.title }}",
+                    "link": "{{ post.url }}",
+                    "html": "{%- capture posts_html -%}
+                    {% include components/post-card.html  %}
+                    {%- endcapture -%}
+                    {{ posts_html | strip_newlines}}"
+                }
         {% endfor %}],
     "next_page": {% if paginator.next_page %}"{{ paginator.next_page_path | xml_escape }}"{% else %}null{% endif %}
 }
