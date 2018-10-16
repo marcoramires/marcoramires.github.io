@@ -1,41 +1,46 @@
 {
-    "posts": "<div class="post">    <div style="background-image: url(/assets/e13077-b52d6fbfa2815ba71f1af96e1e4e04107cd11c72be26d1f5ca46fa788b35c679.jpg)"></div>    <div>        <div class="description">            <a href="/blog/hidden-gems"><h1>Hidden Gems</h1></a>            <p>09 Oct 2018 / Marco Ramires</p>            <a href="/blog/hidden-gems"><p class="blog-post-intro"><strong>In celebration</strong> of the daylight savings.</p></a>            <a href="/blog/hidden-gems">Full post & more photographs</a>        </div>    </div></div><div class="post">    <div style="background-image: url(/assets/4fb572-5558ff98c06a7b59d6be6e5408856c4a47b8bd22e5d4c9f2d954344cdb23a462.jpg)"></div>    <div>        <div class="description">            <a href="/blog/sugarloaf-bay"><h1>Sugarloaf Bay</h1></a>            <p>12 Sep 2018 / Marco Ramires</p>            <a href="/blog/sugarloaf-bay"><p class="blog-post-intro"><strong>Split shots</strong> It’s a lot harder than you think.</p></a>            <a href="/blog/sugarloaf-bay">Full post & more photographs</a>        </div>    </div></div><div class="post">    <div style="background-image: url(/assets/cebe88-5f93c2978b8fe78abd25aafb80bbab7210f4879e7043ad0ac7fcf4ef77993596.jpg)"></div>    <div>        <div class="description">            <a href="/blog/tres-amigos"><h1>Tres Amigos</h1></a>            <p>08 Sep 2018 / Marco Ramires</p>            <a href="/blog/tres-amigos"><p class="blog-post-intro"><strong>It’s not always</strong> that you can take Mondays off.</p></a>            <a href="/blog/tres-amigos">Full post & more photographs</a>        </div>    </div></div><div class="post">    <div style="background-image: url(/assets/837399-bbc60f3535708a228c9be179956102c03ce9ac6005c2b93cfdb2a39c7a0f1fe0.jpg)"></div>    <div>        <div class="description">            <a href="/blog/amsterdan-crush"><h1>Amsterdam Crush</h1></a>            <p>17 Feb 2018 / Marco Ramires</p>            <a href="/blog/amsterdan-crush"><p class="blog-post-intro"><strong>Sometimes you just wish</strong> you could stay a little longer in bed!</p></a>            <a href="/blog/amsterdan-crush">Full post & more photographs</a>        </div>    </div></div><div class="post">    <div style="background-image: url(/assets/3dccb4-29374918dabac00f7dd1827efeaae85683a99653eee138856b2cc8e868bbc51f.jpg)"></div>    <div>        <div class="description">            <a href="/blog/glassy-pool"><h1>Glassy Pool</h1></a>            <p>19 Jan 2018 / Marco Ramires</p>            <a href="/blog/glassy-pool"><p class="blog-post-intro"><strong>What a beautiful morning!</strong> I was so bummed out for missing the sunrise yesterday.</p></a>            <a href="/blog/glassy-pool">Full post & more photographs</a>        </div>    </div></div><div class="post">    <div style="background-image: url(/assets/eadb0a-7d830adf684ca256f0ee9e1c23af75d36ff9dcf1f0fb9e229a731f617b41be9f.jpg)"></div>    <div>        <div class="description">            <a href="/blog/no-pressure"><h1>No Pressure</h1></a>            <p>05 Jan 2018 / Marco Ramires</p>            <a href="/blog/no-pressure"><p class="blog-post-intro"><strong>Very casual summer afternoon in Bondi Beach,</strong> I took the chance to test new lenses and the new housing.</p></a>            <a href="/blog/no-pressure">Full post & more photographs</a>        </div>    </div></div>",
-    "posts_detail": [
+    "posts": [
+                
+                {
+                    "title": "Hidden Gems",
+                    "link": "/blog/hidden-gems.html",
+                    "html": "<div class=\"post\">    <div style=\"background-image: url(/assets/e13077-b52d6fbfa2815ba71f1af96e1e4e04107cd11c72be26d1f5ca46fa788b35c679.jpg)\"></div>    <div>        <div class=\"description\">            <a href=\"/blog/hidden-gems\"><h1>Hidden Gems</h1></a>            <p>09 Oct 2018 / Marco Ramires</p>            <a href=\"/blog/hidden-gems\"><p class=\"blog-post-intro\"><strong>In celebration</strong> of the daylight savings.</p></a>            <a href=\"/blog/hidden-gems\">Full post & more photographs</a>        </div>    </div></div>"
+                }
         
-        {
-            "title": "Hidden Gems",
-            "link": "/blog/hidden-gems.html"
-        }
+                ,
+                {
+                    "title": "Sugarloaf Bay",
+                    "link": "/blog/sugarloaf-bay.html",
+                    "html": "<div class=\"post\">    <div style=\"background-image: url(/assets/4fb572-5558ff98c06a7b59d6be6e5408856c4a47b8bd22e5d4c9f2d954344cdb23a462.jpg)\"></div>    <div>        <div class=\"description\">            <a href=\"/blog/sugarloaf-bay\"><h1>Sugarloaf Bay</h1></a>            <p>12 Sep 2018 / Marco Ramires</p>            <a href=\"/blog/sugarloaf-bay\"><p class=\"blog-post-intro\"><strong>Split shots</strong> It’s a lot harder than you think.</p></a>            <a href=\"/blog/sugarloaf-bay\">Full post & more photographs</a>        </div>    </div></div>"
+                }
         
-        ,
-        {
-            "title": "Sugarloaf Bay",
-            "link": "/blog/sugarloaf-bay.html"
-        }
+                ,
+                {
+                    "title": "Tres Amigos",
+                    "link": "/blog/tres-amigos.html",
+                    "html": "<div class=\"post\">    <div style=\"background-image: url(/assets/cebe88-5f93c2978b8fe78abd25aafb80bbab7210f4879e7043ad0ac7fcf4ef77993596.jpg)\"></div>    <div>        <div class=\"description\">            <a href=\"/blog/tres-amigos\"><h1>Tres Amigos</h1></a>            <p>08 Sep 2018 / Marco Ramires</p>            <a href=\"/blog/tres-amigos\"><p class=\"blog-post-intro\"><strong>It’s not always</strong> that you can take Mondays off.</p></a>            <a href=\"/blog/tres-amigos\">Full post & more photographs</a>        </div>    </div></div>"
+                }
         
-        ,
-        {
-            "title": "Tres Amigos",
-            "link": "/blog/tres-amigos.html"
-        }
+                ,
+                {
+                    "title": "Amsterdam Crush",
+                    "link": "/blog/amsterdan-crush.html",
+                    "html": "<div class=\"post\">    <div style=\"background-image: url(/assets/837399-bbc60f3535708a228c9be179956102c03ce9ac6005c2b93cfdb2a39c7a0f1fe0.jpg)\"></div>    <div>        <div class=\"description\">            <a href=\"/blog/amsterdan-crush\"><h1>Amsterdam Crush</h1></a>            <p>17 Feb 2018 / Marco Ramires</p>            <a href=\"/blog/amsterdan-crush\"><p class=\"blog-post-intro\"><strong>Sometimes you just wish</strong> you could stay a little longer in bed!</p></a>            <a href=\"/blog/amsterdan-crush\">Full post & more photographs</a>        </div>    </div></div>"
+                }
         
-        ,
-        {
-            "title": "Amsterdam Crush",
-            "link": "/blog/amsterdan-crush.html"
-        }
+                ,
+                {
+                    "title": "Glassy Pool",
+                    "link": "/blog/glassy-pool.html",
+                    "html": "<div class=\"post\">    <div style=\"background-image: url(/assets/3dccb4-29374918dabac00f7dd1827efeaae85683a99653eee138856b2cc8e868bbc51f.jpg)\"></div>    <div>        <div class=\"description\">            <a href=\"/blog/glassy-pool\"><h1>Glassy Pool</h1></a>            <p>19 Jan 2018 / Marco Ramires</p>            <a href=\"/blog/glassy-pool\"><p class=\"blog-post-intro\"><strong>What a beautiful morning!</strong> I was so bummed out for missing the sunrise yesterday.</p></a>            <a href=\"/blog/glassy-pool\">Full post & more photographs</a>        </div>    </div></div>"
+                }
         
-        ,
-        {
-            "title": "Glassy Pool",
-            "link": "/blog/glassy-pool.html"
-        }
-        
-        ,
-        {
-            "title": "No Pressure",
-            "link": "/blog/no-pressure.html"
-        }
+                ,
+                {
+                    "title": "No Pressure",
+                    "link": "/blog/no-pressure.html",
+                    "html": "<div class=\"post\">    <div style=\"background-image: url(/assets/eadb0a-7d830adf684ca256f0ee9e1c23af75d36ff9dcf1f0fb9e229a731f617b41be9f.jpg)\"></div>    <div>        <div class=\"description\">            <a href=\"/blog/no-pressure\"><h1>No Pressure</h1></a>            <p>05 Jan 2018 / Marco Ramires</p>            <a href=\"/blog/no-pressure\"><p class=\"blog-post-intro\"><strong>Very casual summer afternoon in Bondi Beach,</strong> I took the chance to test new lenses and the new housing.</p></a>            <a href=\"/blog/no-pressure\">Full post & more photographs</a>        </div>    </div></div>"
+                }
         ],
     "next_page": null
 }
