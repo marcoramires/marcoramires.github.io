@@ -10,6 +10,18 @@ $primary-color: #000000;
   }
 }
 
+@mixin for-phones {
+  @media (min-width: 375px) {
+    @content;
+  }
+}
+
+@mixin for-large-phones {
+  @media (min-width: 414px) {
+    @content;
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -18,7 +30,7 @@ $primary-color: #000000;
   position: absolute;
   z-index: 100;
   right: 1rem;
-  top: 1.3rem;
+  top: 1rem;
   cursor: pointer;
   transform: rotateY(0);
   @include easeOut;
@@ -52,6 +64,10 @@ $primary-color: #000000;
         transform: rotate(-45deg) translate(9px, -8px);
       }
     }
+  }
+
+  @include for-phones {
+    top: 1.3rem;
   }
 }
 

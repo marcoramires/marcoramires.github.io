@@ -40,6 +40,23 @@
   }
 }
 
+@mixin for-ipad-pro-landscape {
+  /* Landscape */
+  /* Declare the same value for min- and max-width to avoid colliding with desktops */
+  /* Source: https://medium.com/connect-the-dots/css-media-queries-for-ipad-pro-8cad10e17106*/
+  @media only screen and (min-device-width: 1366px) and (max-device-width: 1366px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
+    @content;
+  }
+}
+
+@mixin for-ipad-pro-portrait { /* Portrait */
+  /* Declare the same value for min- and max-width to avoid colliding with desktops */
+  /* Source: https://medium.com/connect-the-dots/css-media-queries-for-ipad-pro-8cad10e17106*/
+  @media only screen and (min-device-width: 1024px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
+    @content;
+  }
+}
+
 body {
 }
 
@@ -50,12 +67,16 @@ header {
   background-color: white;
   width: 100%;
 
-  @include for-tablet-portrait-up {
-    height: 7vh;
+  @include iPhoneX {
+    height: 9vh;
   }
 
-  @include for-tablet-landscape-up {
+  @include for-phablets {
     height: 10vh;
+  }
+
+  @include for-tablet-portrait-up {
+    height: 75px;
   }
 }
 
@@ -63,12 +84,16 @@ section {
   &:first-of-type {
     margin-top: 11vh;
 
-    @include for-tablet-portrait-up {
-      margin-top: 7vh;
+    @include iPhoneX {
+      margin-top: 9vh;
     }
 
-    @include for-tablet-landscape-up {
+    @include for-phablets {
       margin-top: 10vh;
+    }
+
+    @include for-tablet-portrait-up {
+      margin-top: 75px;
     }
   }
 
@@ -90,7 +115,7 @@ section {
 .logo {
   margin: 0;
   padding-left: 1rem;
-  padding-top: 0.9rem;
+  padding-top: 0.7rem;
 
   &.tablet {
     display: none;
@@ -115,11 +140,15 @@ section {
   letter-spacing: 0.184211em;
   width: 100%;
   text-decoration: none;
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   font-weight: 700;
 
   &.right {
     text-align: right;
+  }
+
+  @include for-phones {
+    font-size: 2.2rem;
   }
 }
 
